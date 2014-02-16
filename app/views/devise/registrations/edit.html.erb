@@ -1,0 +1,21 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <%= form_email_field f, :email %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <i>(leave blank if you don't want to change it)</i>
+  <%= form_password_field f, :password %>
+
+  <%= form_password_field f, :password_confirmation %>
+
+  <i>(we need your current password to confirm your changes)</i>
+  <%= form_password_field f, :current_password %>
+
+  <%= f.submit "Update", class: 'btn btn-primary' %>
+<% end %>
