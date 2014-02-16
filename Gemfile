@@ -34,6 +34,9 @@ gem 'annotate'
 gem 'cancan'
 gem 'httparty'
 
+# Barcodes
+gem 'barcodes', git: "git://github.com/nudded/barcodes"
+
 # Authentication
 gem 'devise'
 
