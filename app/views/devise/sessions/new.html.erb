@@ -1,0 +1,14 @@
+<h2>Sign in</h2>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+  <%= form_email_field f, :email %>
+  <%= form_password_field f, :password %>
+
+  <% if devise_mapping.rememberable? -%>
+    <%= form_check_box f, :remember_me %>
+  <% end -%>
+
+  <%= f.submit "Sign in", class: "btn btn-primary" %>
+<% end %>
+
+<%= render "devise/shared/links" %>

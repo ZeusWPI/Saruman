@@ -40,7 +40,7 @@
             <li><%= mail_to "gandalf@zeus.ugent.be", "Send feedback" %></li>
             <% if user_signed_in? %>
             <li>
-              <a>Logged in as <%= current_user.display_name %></a>
+              <a>Logged in as <%= current_user.email %></a>
             </li>
             <% end %>
           </ul>
