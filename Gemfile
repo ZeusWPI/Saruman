@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -26,6 +26,26 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# add annotations of schema inside models
+gem 'annotate'
+
+# CanCan is used for authorization
+gem 'cancan'
+gem 'httparty'
+
+group :production, :deployment do
+  gem 'puma'
+end
+
+# Deployment
+gem 'capistrano', '~> 3.1'
+gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-rvm'
+
+group :production do
+  gem 'mysql2' # Database
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
