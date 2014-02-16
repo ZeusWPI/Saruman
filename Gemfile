@@ -34,6 +34,9 @@ gem 'annotate'
 gem 'cancan'
 gem 'httparty'
 
+# Authentication
+gem 'devise'
+
 group :production, :deployment do
   gem 'puma'
 end
