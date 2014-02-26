@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to partner.name, partner_path(partner)%></td>
+  <td><%= mail_to partner.email %></td>
+  <td>
+    <%= render "partners/actions", partner: partner %>
+  </td>
+</tr>

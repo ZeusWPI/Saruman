@@ -1,0 +1,10 @@
+<div id="edit-event-form">
+  <%= form_errors @partner %>
+  <%= form_for @partner do |f| %>
+
+    <%= form_text_field f, :name %>
+    <%= form_email_field f, :email %>
+
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  <% end %>
+</div>

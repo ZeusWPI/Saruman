@@ -40,6 +40,11 @@ gem 'barcodes', git: "git://github.com/nudded/barcodes"
 # Authentication
 gem 'devise'
 
+# Token authentication for the partners
+# gem 'simple_token_authentication' # Not yet before
+# https://github.com/gonzalo-bulnes/simple_token_authentication/issues/2 has
+# been merged
+
 group :production, :deployment do
   gem 'puma'
 end
