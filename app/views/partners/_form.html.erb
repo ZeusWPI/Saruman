@@ -1,10 +1,7 @@
-<div id="edit-event-form">
-  <%= form_errors @partner %>
-  <%= form_for @partner do |f| %>
-
-    <%= form_text_field f, :name %>
-    <%= form_email_field f, :email %>
-
-    <%= f.button :submit, class: 'btn btn-primary' %>
+<tr>
+  <%= form_for [object], remote: true do |f| %>
+    <td><%= f.text_field :name, class: 'form-control' %></td>
+    <td><%= f.email_field :email, class: 'form-control' %></td>
+    <td><input type="hidden" name="_method" value="<%= action %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
   <% end %>
-</div>
+</tr>

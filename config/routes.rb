@@ -12,7 +12,9 @@ Saruman::Application.routes.draw do
   root 'welcome#index'
 
   resources :partners do # Admin resources to display partners
-    get :resend
+    member do
+      get :resend
+    end
   end
 
   resources :partnercenters, only: :show # Token authenticable path for partners

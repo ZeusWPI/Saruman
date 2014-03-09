@@ -1,24 +1,21 @@
-<h1>Partners <%= link_to "Create new partner", new_partner_path, class: "btn btn-default" %></h1>
 <div class="row">
-  <div class="col-lg-12">
-    <% if @partners.blank? %>
-      <div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Notice!</strong> No partners found. You can
-        <%= link_to "create one here", new_partner_path %>.
+  <div class="col-sm-12">
+    <h3>Manage Partners</h3>
+
+      <div class="table-responsive">
+        <table class="table table-striped" id="table-partners">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th width="210">Actions</th>
+          </thead>
+          <tbody>
+            <%= render @partners %>
+            <%= render "partners/form", object: Partner.new, action: 'post', button_name: "Add Partner" %>
+          </tbody>
+        </table>
+        <div id='partner-errors' class='form-errors'>
+        </div>
       </div>
-    <% else %>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <th>Name</th>
-          <th>Email</th>
-          <th width="210">Actions</th>
-        </thead>
-        <%= render @partners %>
-      </table>
-    </div>
-    <% end %>
   </div>
 </div>
-<%= render "partners/delete_modal" %>

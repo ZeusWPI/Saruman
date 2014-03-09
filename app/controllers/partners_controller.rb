@@ -1,6 +1,5 @@
 class PartnersController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
 
   respond_to :html, :js
 
@@ -9,39 +8,33 @@ class PartnersController < ApplicationController
   end
 
   def show
-  end
-
-  def new
+    @partner = Partner.find params.require(:id)
   end
 
   def create
-    authorize! :create, Partner
-
     @partner = Partner.create params.require(:partner).permit(:name, :email)
-
     respond_with @partner
   end
 
   def edit
+    @partner = Partner.find params.require(:id)
+    respond_with @partner
   end
 
   def update
-    authorize! :update, @partner
-    if @partner.update params.require(:partner).permit(:name, :email)
-      flash.now[:success] = "Succesfully updated partner."
-    end
-
-    render action: :edit
+    @partner = Partner.find params.require(:id)
+    @partner.update params.require(:partner).permit(:name, :email)
+    respond_with @partner
   end
 
   def destroy
+    @partner = Partner.find params.require(:id)
     @partner.destroy
-    redirect_to action: :index
   end
 
   def resend
-    @partner = Partner.find params.require(:partner_id)
-    authorize! :show, @partner
-    PartnerMailer.send_token(@partner).deliver
+    partner = Partner.find params.require(:id)
+    PartnerMailer.send_token(partner).deliver
   end
+
 end
