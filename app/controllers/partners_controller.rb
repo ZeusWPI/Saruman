@@ -33,8 +33,8 @@ class PartnersController < ApplicationController
   end
 
   def resend
-    partner = Partner.find params.require(:id)
-    PartnerMailer.send_token(partner).deliver
+    @partner = Partner.find params.require(:id)
+    @partner.send_token
   end
 
 end

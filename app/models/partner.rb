@@ -18,6 +18,7 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
+#  sent                   :boolean
 #
 
 class Partner < ActiveRecord::Base
@@ -27,4 +28,15 @@ class Partner < ActiveRecord::Base
 
   validates :name, uniqueness: true
   validates :email, uniqueness: true
+
+  before_save do
+    self.sent = false if email_changed?
+    true
+  end
+
+  def send_token
+    self.sent = true
+    self.save
+    PartnerMailer.send_token(self).deliver
+  end
 end

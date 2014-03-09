@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217152209) do
+ActiveRecord::Schema.define(version: 20140309084234) do
 
   create_table "partners", force: true do |t|
     t.string   "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140217152209) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
+    t.boolean  "sent"
   end
 
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
