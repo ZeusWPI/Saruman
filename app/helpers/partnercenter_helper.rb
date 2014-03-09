@@ -1,0 +1,2 @@
+module PartnercenterHelper
+end

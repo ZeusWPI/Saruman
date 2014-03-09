@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+   </head>
+
+   <body>
+     <p>Sup <%= @partner.name %>,</p>
+
+     <p>You can log in <%= link_to "here", partnercenter_url(@partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %>.</p>
+
+     <p>Bai.</p>
+  </body>
+</html>

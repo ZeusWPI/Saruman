@@ -20,3 +20,7 @@ body {
 footer {
   text-align: center;
 }
+
+.nowrap {
+  white-space: nowrap;
+}
