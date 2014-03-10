@@ -10,6 +10,7 @@
 #  brought_back :integer
 #  created_at   :datetime
 #  updated_at   :datetime
+#  approved     :boolean
 #
 
 class Reservation < ActiveRecord::Base
