@@ -14,6 +14,8 @@ Saruman::Application.routes.draw do
     member do
       get :resend
     end
+
+    resources :reservations
   end
 
   resources :items
