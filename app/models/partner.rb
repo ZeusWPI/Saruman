@@ -26,8 +26,8 @@ class Partner < ActiveRecord::Base
 
   devise :timeoutable, :trackable
 
-  validates :name, uniqueness: true
-  validates :email, uniqueness: true
+  validates :name, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true
 
   before_save do
     self.sent = false if email_changed?

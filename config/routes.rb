@@ -1,5 +1,4 @@
 Saruman::Application.routes.draw do
-
   # Devise
   devise_for :partners
   devise_for :users, skip: [:registrations]
@@ -16,6 +15,8 @@ Saruman::Application.routes.draw do
       get :resend
     end
   end
+
+  resources :items
 
   resources :partnercenters, only: :show # Token authenticable path for partners
 end

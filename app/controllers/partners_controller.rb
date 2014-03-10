@@ -12,7 +12,7 @@ class PartnersController < ApplicationController
   end
 
   def create
-    @partner = Partner.create params.require(:partner).permit(:name, :email)
+    @partner = Partner.create partner_params
     respond_with @partner
   end
 
@@ -23,7 +23,7 @@ class PartnersController < ApplicationController
 
   def update
     @partner = Partner.find params.require(:id)
-    @partner.update params.require(:partner).permit(:name, :email)
+    @partner.update partner_params
     respond_with @partner
   end
 
@@ -35,6 +35,11 @@ class PartnersController < ApplicationController
   def resend
     @partner = Partner.find params.require(:id)
     @partner.send_token
+  end
+
+  private
+  def partner_params
+    params.require(:partner).permit(:name, :email)
   end
 
 end
