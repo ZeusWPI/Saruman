@@ -24,11 +24,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  barcode_data: MyString
-  email: MyString
+  name: VTK
+  barcode_data: 10
+  email: vtk@iets.com
 
 two:
-  name: MyString
-  barcode_data: MyString
-  email: MyString
+  name: HILOK
+  barcode_data: 100
+  email: hilok@nogwat.com
