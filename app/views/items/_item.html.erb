@@ -1,0 +1,11 @@
+<tr id="<%= dom_id(item) %>">
+  <td><%= item.name %></td>
+  <td><%= item.description %></td>
+  <td><%= number_with_precision item.price, precision: 2 %></td>
+  <td><%= item.quantity || 'Unlimited' %></td>
+  <td>
+    <div class="nowrap">
+    <%= render "items/actions", item: item %>
+    </div>
+  </td>
+</tr>
