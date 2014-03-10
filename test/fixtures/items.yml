@@ -14,11 +14,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyStringQ
-  description: MyStringB
-  price: 1
+  name: Tent
+  description: Tentjeuhs
+  price: 100
 
 two:
-  name: MyStringA
-  description: MyStringB
-  price: 1
+  name: Vat
+  description: 2 miljard lieter
+  price: 10

@@ -12,4 +12,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def self.verify_fixtures(clazz)
+    test "fixtures for #{clazz.name} should validate" do
+     clazz.all.map { |o|  assert o.valid?, o.inspect.to_s + "\n" + o.errors.full_messages.join("\n") }
+   end
+  end
 end
