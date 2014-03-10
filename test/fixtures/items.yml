@@ -14,11 +14,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyStringQ
-  description: MyStringB
+  name: MyString
+  description: MyString
   price: 1
 
 two:
-  name: MyStringA
-  description: MyStringB
+  name: MyString
+  description: MyString
   price: 1
