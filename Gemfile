@@ -46,6 +46,9 @@ gem 'paper_trail'
 # Token authentication for the partners
 gem 'simple_token_authentication'
 
+# Enums
+gem 'enumerize'
+
 group :production, :deployment do
   gem 'puma'
 end

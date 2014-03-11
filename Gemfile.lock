@@ -69,6 +69,8 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    enumerize (0.8.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
@@ -189,6 +191,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   devise
+  enumerize
   httparty
   jbuilder (~> 1.2)
   jquery-rails
