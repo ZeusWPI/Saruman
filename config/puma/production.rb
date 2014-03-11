@@ -6,7 +6,7 @@ daemonize
 
 preload_app!
 
-bind 'unix:///var/run/unicorn/puma.sock'
+bind 'unix:///var/run/unicorn/saruman.sock'
 
 on_restart do
   ENV['BUNDLE_GEMFILE'] = File.join('..', '..', 'current', 'Gemfile')
