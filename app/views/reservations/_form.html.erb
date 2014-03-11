@@ -1,0 +1,26 @@
+<tr>
+  <%= form_for [object.partner, object], remote: true do |f| %>
+    <td>
+      <% if button_name == 'Save' %>
+        <%= object.item.name %>
+      <% else %>
+        <%= f.collection_select :item_id, Item.all, :id, :name_with_price, {}, class: 'form-control' %>
+      <% end %>
+    </td>
+    <td><%= f.number_field :count, class: 'form-control' %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></td>
+    <%= javascript_tag do %>
+      var id = "#<%= dom_id(f.object) %>";
+      var inputs = $(id).parent().find('input');
+      $(id).parent().find('button').on('click', function(e) {
+        e.preventDefault();
+        $(id).append(inputs.clone());
+        $(id).append('<input type="hidden" name="_method" value="<%= action %>">');
+        $(id).submit();
+      });
+    <% end %>
+  <% end %>
+</tr>

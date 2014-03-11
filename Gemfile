@@ -40,6 +40,9 @@ gem 'barcodes', git: "git://github.com/nudded/barcodes"
 # Authentication
 gem 'devise'
 
+# Paper trail is supercool
+gem 'paper_trail'
+
 # Token authentication for the partners
 gem 'simple_token_authentication'
 

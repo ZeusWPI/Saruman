@@ -10,7 +10,7 @@
 #  brought_back :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  approved     :boolean
+#  approved     :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

@@ -24,6 +24,14 @@ class Item < ActiveRecord::Base
     write_attribute(:price, to_cents(value))
   end
 
+  def name_with_price
+    if price > 0
+      "#{name} - €#{'%0.2f' % price}"
+    else
+      name
+    end
+  end
+
   private
 
   def from_cents(value)

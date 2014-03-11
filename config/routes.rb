@@ -19,6 +19,4 @@ Saruman::Application.routes.draw do
   end
 
   resources :items
-
-  resources :partnercenters, only: :show # Token authenticable path for partners
 end

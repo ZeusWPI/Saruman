@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def euro(f)
-    "&euro;#{number_with_precision f, precision: 2}"
+    "€#{number_with_precision f, precision: 2}"
   end
 
   # Form helpers
