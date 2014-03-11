@@ -19,7 +19,7 @@ class Reservation < ActiveRecord::Base
 
   has_paper_trail
 
-  validates :item_id, uniqueness: true,  presence: true
+  validates :item_id, uniqueness: { scope: :partner_id },  presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
 
 end
