@@ -1,0 +1,2 @@
+<%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_partner_reservation_path(@partner, reservation), class: "btn btn-default btn-xs", remote: true %>
+<%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), partner_reservation_path(@partner, reservation), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>

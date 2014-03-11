@@ -14,9 +14,9 @@ Saruman::Application.routes.draw do
     member do
       get :resend
     end
+
+    resources :reservations
   end
 
   resources :items
-
-  resources :partnercenters, only: :show # Token authenticable path for partners
 end

@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id           :integer          not null, primary key
+#  item_id      :integer
+#  partner_id   :integer
+#  count        :integer
+#  fetched      :integer
+#  brought_back :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  approved     :boolean          default(FALSE)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 
+  partner_id: 
+  count: 1
+  fetched: 1
+  brought_back: 1
+
+two:
+  item_id: 
+  partner_id: 
+  count: 1
+  fetched: 1
+  brought_back: 1

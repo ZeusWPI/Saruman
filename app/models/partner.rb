@@ -29,6 +29,8 @@ class Partner < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
 
+  has_many :reservations
+
   before_save do
     self.sent = false if email_changed?
     true

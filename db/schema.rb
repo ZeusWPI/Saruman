@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309110233) do
+ActiveRecord::Schema.define(version: 20140311122115) do
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 20140309110233) do
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["email"], name: "index_partners_on_email", unique: true
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
+
+  create_table "reservations", force: true do |t|
+    t.integer  "item_id"
+    t.integer  "partner_id"
+    t.integer  "count"
+    t.integer  "fetched"
+    t.integer  "brought_back"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "approved",     default: false
+  end
+
+  add_index "reservations", ["item_id"], name: "index_reservations_on_item_id"
+  add_index "reservations", ["partner_id"], name: "index_reservations_on_partner_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
