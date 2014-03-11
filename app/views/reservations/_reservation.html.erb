@@ -3,12 +3,10 @@
   <td><%= reservation.count %></td>
   <td><%= number_with_precision reservation.item.price, precision: 2 %></td>
   <td><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></td>
-  <td><%= raw(approved reservation) %></td>
+  <td><%= raw(status reservation.status) %></td>
   <td>
     <div class="nowrap">
-      <% unless reservation.approved %>
-        <%= render "reservations/actions", reservation: reservation %>
-      <% end %>
+      <%= render "reservations/actions", reservation: reservation %>
     </div>
   </td>
 </tr>
