@@ -2,14 +2,14 @@
   <%= form_for object, remote: true do |f| %>
     <td><%= f.text_field :name, class: 'form-control' %></td>
     <td><%= f.email_field :email, class: 'form-control' %></td>
-    <td><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
+    <td><input type="hidden" name="_method" value="<%= action %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
     <%= javascript_tag do %>
       var id = "#<%= dom_id(f.object) %>";
       var inputs = $(id).parent().find('input');
       $(id).parent().find('button').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
-        $(id).append('<input type="hidden" name="_method" value="<%= action %>">');
+        $(id).append('');
         $(id).submit();
       });
     <% end %>
