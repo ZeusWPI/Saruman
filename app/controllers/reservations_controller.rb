@@ -1,10 +1,13 @@
 class ReservationsController < ApplicationController
-  acts_as_token_authentication_handler_for Partner
+
+  before_action :authenticate_partner!
 
   respond_to :html, :js
 
   def index
     @partner = Partner.find params.require(:partner_id)
+
+    authorize! :read, @partner
 
     @reservations = @partner.reservations
 

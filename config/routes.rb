@@ -12,6 +12,7 @@ Saruman::Application.routes.draw do
 
   resources :partners do # Admin resources to display partners
     member do
+      get 'sign_in', to: 'sign_in#sign_in_partner'
       get :resend
     end
 
