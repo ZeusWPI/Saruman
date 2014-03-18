@@ -19,7 +19,13 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
-  def after_sign_out_path_for(resource)
-    after_sign_in_path_for(resource)
+  def current_ability
+    if current_partner
+      @current_ability ||= Ability.new(current_partner)
+    else
+      @current_ability ||= Ability.new(current_user)
+    end
   end
+
+
 end
