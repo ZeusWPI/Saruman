@@ -2,11 +2,11 @@ module ReservationsHelper
 
   def status(s)
     if s.approved?
-      '<button class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"> Approved</span></button>'
+      '<span class="glyphicon glyphicon-ok"> Approved</span>'
     elsif s.pending?
-      '<button class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-refresh"> Pending</span></button>'
+      '<span class="glyphicon glyphicon-refresh"> Pending</span>'
     else
-      '<button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"> Disapproved</span></button>'
+      '<span class="glyphicon glyphicon-remove"> Disapproved</span>'
     end
   end
 

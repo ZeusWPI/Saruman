@@ -16,7 +16,12 @@ Saruman::Application.routes.draw do
       get :resend
     end
 
-    resources :reservations
+    resources :reservations do
+      member do
+        get :approve
+        get :disapprove
+      end
+    end
   end
 
   resources :items

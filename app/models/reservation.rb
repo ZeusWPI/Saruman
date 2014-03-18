@@ -16,13 +16,19 @@
 class Reservation < ActiveRecord::Base
   extend Enumerize
 
+  has_paper_trail
+
   belongs_to :item
   belongs_to :partner
 
   enumerize :status, in: { disapproved: 0, pending: 1, approved: 2 }
 
-  has_paper_trail
-
   validates :item_id, uniqueness: { scope: :partner_id },  presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
+
+  before_save :change_status
+
+  def change_status
+    self.status = :pending unless status_changed?
+  end
 end

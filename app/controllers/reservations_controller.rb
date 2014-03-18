@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
 
-  before_action :authenticate_partner!
+  before_action :authenticate_partner!, except: [:approve, :disapprove]
+  before_action :authenticate_user!, only: [:approve, :disapprove]
 
   respond_to :html, :js
 
@@ -17,12 +18,17 @@ class ReservationsController < ApplicationController
 
   def show
     @partner = Partner.find params.require(:partner_id)
+    authorize! :read, @partner
 
     @reservation = @partner.reservations.find params.require(:id)
+    authorize! :read, @reservation
   end
 
   def create
     @partner = Partner.find params.require(:partner_id)
+    authorize! :read, @partner
+    authorize! :create, Reservation
+
     item = Item.find params.require(:reservation).require(:item_id)
 
     @reservation = @partner.reservations.new reservation_params
@@ -52,6 +58,24 @@ class ReservationsController < ApplicationController
 
     @reservation = @partner.reservations.find params.require(:id)
     @reservation.destroy
+  end
+
+  def approve
+    @partner = Partner.find params.require(:partner_id)
+    @reservation = @partner.reservations.find params.require(:id)
+    authorize! :change_status, Reservation
+
+    @reservation.status = :approved
+    @reservation.save
+  end
+
+  def disapprove
+    @partner = Partner.find params.require(:partner_id)
+    @reservation = @partner.reservations.find params.require(:id)
+    authorize! :change_status, Reservation
+
+    @reservation.status = :disapproved
+    @reservation.save
   end
 
   private
