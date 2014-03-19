@@ -29,6 +29,6 @@ class Reservation < ActiveRecord::Base
   before_save :change_status
 
   def change_status
-    self.status = :pending unless status_changed?
+    self.status = :pending if count_changed?
   end
 end
