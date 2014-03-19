@@ -48,4 +48,32 @@ class ReservationsControllerTest < ActionController::TestCase
 
     assert_response :success
   end
+
+  test "should change status" do
+    sign_out partners(:vtk)
+    sign_in users(:tom)
+
+    assert @reservation.status.pending?
+
+    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
+    @reservation.reload
+    assert_response :success
+    assert @reservation.status.approved?
+
+    xhr :get, :disapprove, partner_id: partners(:vtk), id: @reservation
+    @reservation.reload
+    assert_response :success
+    assert @reservation.status.disapproved?
+  end
+
+  test "only users can change status" do
+    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
+    assert_response :unauthorized
+
+    sign_out partners(:vtk)
+    sign_in users(:tom)
+
+    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
+    assert_response :success
+  end
 end
