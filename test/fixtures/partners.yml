@@ -23,12 +23,16 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+vtk:
+  id: 1
   name: VTK
   barcode_data: 10
   email: vtk@iets.com
+  authentication_token: blargh
 
-two:
+hilok:
+  id: 2
   name: HILOK
   barcode_data: 100
   email: hilok@nogwat.com
+  authentication_token: blargh2
