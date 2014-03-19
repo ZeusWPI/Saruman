@@ -27,7 +27,7 @@ class Partner < ActiveRecord::Base
   devise :timeoutable, :trackable
 
   validates :name, uniqueness: true, presence: true
-  validates :email, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true, email: true
 
   has_many :reservations
 
