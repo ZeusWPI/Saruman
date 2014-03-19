@@ -4,7 +4,7 @@ class ItemsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @item = items(:one)
+    @item = items(:vat)
     sign_in users(:tom)
   end
 
@@ -21,19 +21,21 @@ class ItemsControllerTest < ActionController::TestCase
 
   test "should create item" do
     assert_difference 'Item.count', +1 do
-      post :create, item: { name: "Toolbox", description: "A generic toolbox", price: 35 }
+      xhr :post, :create, item: { name: "Toolbox", description: "A generic toolbox", price: 35 }
     end
 
-    assert_redirected_to item_path(assigns(:item))
+    assert_response :success
   end
 
   test "should get edit" do
     xhr :get, :edit, id: @item
+
     assert_response :success
   end
 
   test "should update item" do
     patch :update, id: @item, item: { description: @item.description, name: @item.name, price: @item.price }
+
     assert_redirected_to item_path(assigns(:item))
   end
 
@@ -44,4 +46,5 @@ class ItemsControllerTest < ActionController::TestCase
 
     assert_response :success
   end
+
 end

@@ -15,16 +15,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  item_id: 
-  partner_id: 
+vtk_tent:
+  item_id: 1
+  partner_id: 1
   count: 1
-  fetched: 1
-  brought_back: 1
 
-two:
-  item_id: 
-  partner_id: 
-  count: 1
-  fetched: 1
-  brought_back: 1
+hilok_tent:
+  item_id: 2
+  partner_id: 2
+  count: 5

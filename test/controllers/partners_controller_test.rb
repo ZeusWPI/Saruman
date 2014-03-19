@@ -21,19 +21,21 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should create partner" do
     assert_difference 'Partner.count', +1 do
-      post :create, partner: { name: "Zeus", email: "zeus@zeus.zeus" }
+      xhr :post, :create, partner: { name: "Zeus", email: "zeus@zeus.zeus" }
     end
 
-    assert_redirected_to partner_path(assigns(:partner))
+    assert_response :success
   end
 
   test "should get edit" do
     xhr :get, :edit, id: @partner
+
     assert_response :success
   end
 
   test "should update partner" do
     patch :update, id: @partner, partner: { name: "Zeus", email: "zeus@email.com" }
+
     assert_redirected_to partner_path(assigns(:partner))
   end
 
@@ -44,4 +46,13 @@ class PartnersControllerTest < ActionController::TestCase
 
     assert_response :success
   end
+
+  test "should get resend" do
+    assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      xhr :get, :resend, id: @partner
+    end
+
+    assert_response :success
+  end
+
 end
