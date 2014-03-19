@@ -14,21 +14,34 @@ class ItemsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:items)
   end
 
+  test "should show item" do
+    get :show, id: @item
+    assert_response :success
+  end
+
   test "should create item" do
-    assert_difference('Item.count') do
+    assert_difference 'Item.count', +1 do
       post :create, item: { name: "Toolbox", description: "A generic toolbox", price: 35 }
     end
 
     assert_redirected_to item_path(assigns(:item))
   end
 
-  test "should show item" do
-    get :show, id: @item
+  test "should get edit" do
+    xhr :get, :edit, id: @item
     assert_response :success
   end
 
   test "should update item" do
     patch :update, id: @item, item: { description: @item.description, name: @item.name, price: @item.price }
     assert_redirected_to item_path(assigns(:item))
+  end
+
+  test "should destroy item" do
+    assert_difference 'Item.count', -1 do
+      xhr :get, :destroy, id: @item
+    end
+
+    assert_response :success
   end
 end

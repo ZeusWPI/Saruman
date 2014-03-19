@@ -49,6 +49,9 @@ gem 'simple_token_authentication'
 # Enums
 gem 'enumerize'
 
+# Coverall
+gem 'coveralls', require: false
+
 group :production, :deployment do
   gem 'puma'
 end

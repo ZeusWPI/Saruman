@@ -14,21 +14,34 @@ class PartnersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:partners)
   end
 
+  test "should show partner" do
+    get :show, id: @partner
+    assert_response :success
+  end
+
   test "should create partner" do
-    assert_difference('Partner.count') do
+    assert_difference 'Partner.count', +1 do
       post :create, partner: { name: "Zeus", email: "zeus@zeus.zeus" }
     end
 
     assert_redirected_to partner_path(assigns(:partner))
   end
 
-  test "should show partner" do
-    get :show, id: @partner
+  test "should get edit" do
+    xhr :get, :edit, id: @partner
     assert_response :success
   end
 
-  test "should update item" do
+  test "should update partner" do
     patch :update, id: @partner, partner: { name: "Zeus", email: "zeus@email.com" }
     assert_redirected_to partner_path(assigns(:partner))
+  end
+
+  test "should destroy partner" do
+    assert_difference 'Partner.count', -1 do
+      xhr :get, :destroy, id: @partner
+    end
+
+    assert_response :success
   end
 end
