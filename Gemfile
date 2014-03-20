@@ -43,6 +43,9 @@ gem 'devise'
 # Paper trail is supercool
 gem 'paper_trail'
 
+# Errbit
+gem 'airbrake'
+
 # Token authentication for the partners
 gem 'simple_token_authentication'
 
