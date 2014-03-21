@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-striped" id="table-reservations">
+  <table class="table table-striped" <% if form %>id="table-reservations"<% end %>>
     <thead>
       <th>Item</th>
       <th>Count</th>
@@ -9,8 +9,10 @@
       <th width="210">Actions <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."></span></th>
     </thead>
     <tbody>
-      <%= render @reservations %>
-      <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+      <%= render reservations %>
+      <% if form %>
+        <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+      <% end %>
     </tbody>
   </table>
   <div id='reservation-errors' class='form-errors'>

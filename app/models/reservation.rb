@@ -18,6 +18,9 @@ class Reservation < ActiveRecord::Base
 
   has_paper_trail
 
+  scope :approved, -> { where(status: 2) }
+  scope :not_approved, -> { where.not(status: 2) }
+
   belongs_to :item
   belongs_to :partner
 

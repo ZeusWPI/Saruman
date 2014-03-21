@@ -11,8 +11,6 @@ class PartnersController < ApplicationController
   def show
     @partner = Partner.find params.require(:id)
     authorize! :read, @partner
-
-    @reservations = @partner.reservations
   end
 
   def create
