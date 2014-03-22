@@ -3,4 +3,6 @@
 <% else %>
   $('#item-errors').html('')
   $('#edit_<%= dom_id(@item) %>').parent().replaceWith("<%= j render @item %>");
+  var id = "#new_item";
+  var inputs = $(id).parent().find('input');
 <% end %>
