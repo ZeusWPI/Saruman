@@ -16,7 +16,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should show reservation" do
-    get :show, partner_id: partners(:vtk), id: @reservation
+    xhr :get, :show, partner_id: partners(:vtk), id: @reservation
 
     assert_response :success
   end
