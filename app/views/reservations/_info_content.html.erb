@@ -8,7 +8,7 @@
   <% @reservation.versions.each do |version| %>
     <tr>
       <td><%= version.event %></td>
-      <td><%= version.whodunnit.nil? ? @partner.email : User.find(version.whodunnit).email %></td>
+      <td><%= "#{User.find(version.whodunnit).name} (#{User.find(version.whodunnit).email})" %></td>
       <td><%= nice_time version.created_at %></td>
       <td>
         <ul class="no-margin no-padding">

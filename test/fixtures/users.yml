@@ -15,9 +15,30 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  authentication_token   :string(255)
+#  role                   :string(255)      default("partner")
+#  name                   :string(255)
+#  sent                   :boolean          default(TRUE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 tom:
+  id: 101
+  name: Tom
   email: silox@zeus.com
+  role: admin
+
+vtk:
+  id: 1
+  name: VTK
+  email: vtk@iets.com
+  authentication_token: blargh
+  role: partner
+
+hilok:
+  id: 2
+  name: HILOK
+  email: hilok@nogwat.com
+  authentication_token: blargh2
+  role: partner

@@ -11,7 +11,7 @@
           </thead>
           <tbody>
             <%= render @partners %>
-            <%= render "partners/form", object: Partner.new, action: 'post', button_name: "Add Partner" %>
+            <%= render "users/form", object: User.new, action: 'post', button_name: "Add Partner" %>
           </tbody>
         </table>
         <div id='partner-errors' class='form-errors'>

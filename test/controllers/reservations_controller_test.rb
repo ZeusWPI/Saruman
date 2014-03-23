@@ -5,76 +5,76 @@ class ReservationsControllerTest < ActionController::TestCase
 
   setup do
     @reservation = reservations(:vtk_tent)
-    sign_in partners(:vtk)
+    sign_in users(:vtk)
   end
 
   test "should get index" do
-    get :index, partner_id: partners(:vtk)
+    get :index, user_id: users(:vtk)
 
     assert_response :success
     assert_not_nil assigns(:reservations)
   end
 
   test "should show reservation" do
-    xhr :get, :show, partner_id: partners(:vtk), id: @reservation
+    xhr :get, :show, user_id: users(:vtk), id: @reservation
 
     assert_response :success
   end
 
   test "should create reservation" do
     assert_difference 'Reservation.count', +1 do
-      xhr :post, :create, partner_id: partners(:vtk), reservation: { item_id: 2, count: 5 }
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
     end
 
     assert_response :success
   end
 
   test "should get edit" do
-    xhr :get, :edit, partner_id: partners(:vtk), id: @reservation
+    xhr :get, :edit, user_id: users(:vtk), id: @reservation
 
     assert_response :success
   end
 
   test "should update reservation" do
-    xhr :patch, :update, partner_id: partners(:vtk), id: @reservation, reservation: { count: 10 }
+    xhr :patch, :update, user_id: users(:vtk), id: @reservation, reservation: { count: 10 }
 
     assert_response :success
   end
 
   test "should destroy reservation" do
     assert_difference 'Reservation.count', -1 do
-      xhr :get, :destroy, partner_id: partners(:vtk), id: @reservation
+      xhr :get, :destroy, user_id: users(:vtk), id: @reservation
     end
 
     assert_response :success
   end
 
   test "should change status" do
-    sign_out partners(:vtk)
+    sign_out users(:vtk)
     sign_in users(:tom)
 
     assert @reservation.status.pending?
 
-    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
+    xhr :get, :approve, user_id: users(:vtk), id: @reservation
     @reservation.reload
     assert_response :success
     assert @reservation.status.approved?
 
-    xhr :post, :disapprove, partner_id: partners(:vtk), disapprove: { id: @reservation.id, reason: "Too many items" }
+    xhr :post, :disapprove, user_id: users(:vtk), disapprove: { id: @reservation.id, reason: "Too many items" }
     @reservation.reload
     assert_response :success
     assert @reservation.status.disapproved?
     assert_equal @reservation.disapproval_message, "Too many items"
   end
 
-  test "only users can change status" do
-    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
-    assert_response :unauthorized
+  test "only admins can change status" do
+    xhr :get, :approve, user_id: users(:vtk), id: @reservation
+    assert_response :redirect
 
-    sign_out partners(:vtk)
+    sign_out users(:vtk)
     sign_in users(:tom)
 
-    xhr :get, :approve, partner_id: partners(:vtk), id: @reservation
+    xhr :get, :approve, user_id: users(:vtk), id: @reservation
     assert_response :success
   end
 end

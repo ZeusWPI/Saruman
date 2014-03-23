@@ -15,12 +15,40 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  authentication_token   :string(255)
+#  role                   :string(255)      default("partner")
+#  name                   :string(255)
+#  sent                   :boolean          default(TRUE)
 #
 
 class User < ActiveRecord::Base
+  ROLES = %w[admin partner]
+
+  acts_as_token_authenticatable
+
+  scope :admins, -> { where(role: 'admin') }
+  scope :partners, -> { where(role: 'partner') }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable,
          :rememberable, :trackable, :validatable,
          :registerable
+
+  has_many :reservations
+
+  validates :name, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true, email: true
+
+  before_save do
+    self.sent = false if email_changed?
+    true
+  end
+
+  def send_token
+    self.sent = true
+    self.save
+    PartnerMailer.send_token(self).deliver
+  end
+
 end

@@ -1,14 +1,12 @@
 class ReservationsController < ApplicationController
-
-  before_action :authenticate_partner!, except: [:approve, :disapprove, :show]
-  before_action :authenticate_user!, only: [:approve, :disapprove], expect: [:show]
+  before_action :authenticate_user!
 
   respond_to :html, :js
 
   def index
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
 
-    authorize! :read, @partner
+    authorize! :show, @partner
 
     @reservations = @partner.reservations
 
@@ -17,13 +15,15 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
     @reservation = @partner.reservations.find params.require(:id)
+
+    authorize! :show, @partner
   end
 
   def create
-    @partner = Partner.find params.require(:partner_id)
-    authorize! :read, @partner
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
     authorize! :create, Reservation
 
     item = Item.find params.require(:reservation).require(:item_id)
@@ -36,29 +36,36 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
 
     @reservation = @partner.reservations.find params.require(:id)
+    authorize! :update, @reservation
     respond_with @reservation
   end
 
   def update
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
 
     @reservation = @partner.reservations.find params.require(:id)
+    authorize! :update, @reservation
+
     @reservation.update reservation_params
     respond_with @reservation
   end
 
   def destroy
-    @partner = Partner.find params.require(:partner_id)
-
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
     @reservation = @partner.reservations.find params.require(:id)
+
+    authorize! :destroy, @reservation
     @reservation.destroy
   end
 
   def approve
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
     @reservation = @partner.reservations.find params.require(:id)
     authorize! :change_status, Reservation
 
@@ -68,9 +75,9 @@ class ReservationsController < ApplicationController
   end
 
   def disapprove
-    @partner = Partner.find params.require(:partner_id)
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
     @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
-
     authorize! :change_status, Reservation
 
     if params.require(:disapprove)[:reason].blank?

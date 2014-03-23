@@ -1,6 +1,5 @@
 Saruman::Application.routes.draw do
   # Devise
-  devise_for :partners
   devise_for :users, skip: [:registrations]
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
@@ -10,7 +9,7 @@ Saruman::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :partners do # Admin resources to display partners
+  resources :users do # Admin resources to display partners
     member do
       get 'sign_in', to: 'sign_in#sign_in_partner'
       get :resend
