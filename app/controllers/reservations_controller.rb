@@ -73,9 +73,14 @@ class ReservationsController < ApplicationController
 
     authorize! :change_status, Reservation
 
-    @reservation.status = :disapproved
-    @reservation.disapproval_message = params.require(:disapprove).require(:reason)
-    @reservation.save
+    if params.require(:disapprove)[:reason].blank?
+      flash.now[:error] = "Please enter a reason."
+    else
+      @reservation.status = :disapproved
+      @reservation.disapproval_message = params.require(:disapprove).require(:reason)
+      @reservation.save
+    end
+
   end
 
   private

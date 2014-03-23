@@ -7,6 +7,7 @@
       </div>
       <%= form_tag disapprove_partner_reservations_path(@partner), remote: true do %>
         <div class="modal-body">
+          <div id="flash-modal"></div>
           <div class="form-group">
             <input type="text" class="form-control" name="disapprove[reason]" id="disapprove-reason" placeholder="Reason">
           </div>
