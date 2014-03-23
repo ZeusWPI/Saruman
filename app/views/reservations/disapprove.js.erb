@@ -1,1 +1,3 @@
+$('#disapprove-modal').modal('hide');
 $('#<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
+$(".reservation-disapprove-tooltip").tooltip()

@@ -4,6 +4,15 @@
 #
 ready = ->
   $("#item-edit-tooltip").tooltip()
+  $(".reservation-disapprove-tooltip").tooltip()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+$(document).on "click", ".btn-disapprove", (e) ->
+  e.preventDefault()
+
+  _self = $(this);
+  $("#disapprove-id").val(_self.data('id'))
+
+  $(_self.attr('href')).modal('show');

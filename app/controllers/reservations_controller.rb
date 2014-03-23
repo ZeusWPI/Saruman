@@ -62,16 +62,19 @@ class ReservationsController < ApplicationController
     @reservation = @partner.reservations.find params.require(:id)
     authorize! :change_status, Reservation
 
+    @reservation.disapproval_message = nil
     @reservation.status = :approved
     @reservation.save
   end
 
   def disapprove
     @partner = Partner.find params.require(:partner_id)
-    @reservation = @partner.reservations.find params.require(:id)
+    @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
+
     authorize! :change_status, Reservation
 
     @reservation.status = :disapproved
+    @reservation.disapproval_message = params.require(:disapprove).require(:reason)
     @reservation.save
   end
 

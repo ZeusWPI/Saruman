@@ -19,7 +19,9 @@ Saruman::Application.routes.draw do
     resources :reservations do
       member do
         get :approve
-        get :disapprove
+      end
+      collection do
+        post :disapprove
       end
     end
   end
