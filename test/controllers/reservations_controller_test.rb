@@ -60,10 +60,11 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
     assert @reservation.status.approved?
 
-    xhr :get, :disapprove, partner_id: partners(:vtk), id: @reservation
+    xhr :post, :disapprove, partner_id: partners(:vtk), disapprove: { id: @reservation.id, reason: "Too many items" }
     @reservation.reload
     assert_response :success
     assert @reservation.status.disapproved?
+    assert_equal @reservation.disapproval_message, "Too many items"
   end
 
   test "only users can change status" do
