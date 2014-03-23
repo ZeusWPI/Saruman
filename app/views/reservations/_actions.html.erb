@@ -1,3 +1,4 @@
+<%= link_to raw('<i class="glyphicon glyphicon-comment"></i> History'), partner_reservation_path(reservation.partner, reservation), class: 'btn btn-xs btn-default', remote: true %>
 <% if can? :crud, reservation %>
   <% unless reservation.status.approved? %>
     <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_partner_reservation_path(@partner, reservation), class: "btn btn-default btn-xs", remote: true %>
