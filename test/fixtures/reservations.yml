@@ -2,15 +2,16 @@
 #
 # Table name: reservations
 #
-#  id           :integer          not null, primary key
-#  item_id      :integer
-#  partner_id   :integer
-#  count        :integer
-#  fetched      :integer
-#  brought_back :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  status       :integer          default(1)
+#  id                  :integer          not null, primary key
+#  item_id             :integer
+#  partner_id          :integer
+#  count               :integer
+#  fetched             :integer
+#  brought_back        :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  status              :integer          default(1)
+#  disapproval_message :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
