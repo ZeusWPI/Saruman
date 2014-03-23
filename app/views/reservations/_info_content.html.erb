@@ -1,0 +1,22 @@
+<table class="table table-responsive table-striped">
+  <tr>
+    <th>Action</th>
+    <th>By</th>
+    <th>At</th>
+    <th>Details</th>
+  </tr>
+  <% @reservation.versions.each do |version| %>
+    <tr>
+      <td><%= version.event %></td>
+      <td><%= version.whodunnit.nil? ? @partner.email : User.find(version.whodunnit).email %></td>
+      <td><%= nice_time version.created_at %></td>
+      <td>
+        <ul class="no-margin no-padding">
+          <% version.changeset.each do |name, change| %>
+            <%= raw("<li>#{nice_changeset(name, change)}</li>") %>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>

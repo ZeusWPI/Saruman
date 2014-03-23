@@ -16,7 +16,7 @@
 class Reservation < ActiveRecord::Base
   extend Enumerize
 
-  has_paper_trail
+  has_paper_trail only: [:count, :status]
 
   scope :approved, -> { where(status: 2) }
   scope :not_approved, -> { where.not(status: 2) }

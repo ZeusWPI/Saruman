@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
 
-  before_action :authenticate_partner!, except: [:approve, :disapprove]
-  before_action :authenticate_user!, only: [:approve, :disapprove]
+  before_action :authenticate_partner!, except: [:approve, :disapprove, :show]
+  before_action :authenticate_user!, only: [:approve, :disapprove], expect: [:show]
 
   respond_to :html, :js
 
@@ -18,10 +18,7 @@ class ReservationsController < ApplicationController
 
   def show
     @partner = Partner.find params.require(:partner_id)
-    authorize! :read, @partner
-
     @reservation = @partner.reservations.find params.require(:id)
-    authorize! :read, @reservation
   end
 
   def create
