@@ -67,10 +67,12 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_equal @reservation.disapproval_message, "Too many items"
   end
 
-  test "only admins can change status" do
+  test "partners can't change status" do
     xhr :get, :approve, user_id: users(:vtk), id: @reservation
     assert_response :redirect
+  end
 
+  test "only admins can change status" do
     sign_out users(:vtk)
     sign_in users(:tom)
 

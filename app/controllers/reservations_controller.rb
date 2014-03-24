@@ -67,7 +67,8 @@ class ReservationsController < ApplicationController
     @partner = User.partners.find params.require(:user_id)
     authorize! :show, @partner
     @reservation = @partner.reservations.find params.require(:id)
-    authorize! :change_status, Reservation
+    authorize! :change_status, @reservation
+
 
     @reservation.disapproval_message = nil
     @reservation.status = :approved
