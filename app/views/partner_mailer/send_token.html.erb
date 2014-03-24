@@ -7,7 +7,7 @@
    <body>
      <p>Sup <%= @partner.name %>,</p>
 
-     <p>You can log in <%= link_to "here", sign_in_partner_url(@partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %>.</p>
+     <p>You can log in <%= link_to "here", sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %>.</p>
 
      <p>Bai.</p>
   </body>

@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Disapprove reservation</h4>
       </div>
-      <%= form_tag disapprove_partner_reservations_path(@partner), remote: true do %>
+      <%= form_tag disapprove_user_reservations_path(@partner), remote: true do %>
         <div class="modal-body">
           <div id="flash-modal"></div>
           <div class="form-group">

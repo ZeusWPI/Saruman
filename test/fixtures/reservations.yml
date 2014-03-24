@@ -4,7 +4,7 @@
 #
 #  id                  :integer          not null, primary key
 #  item_id             :integer
-#  partner_id          :integer
+#  user_id             :integer
 #  count               :integer
 #  fetched             :integer
 #  brought_back        :integer
@@ -18,10 +18,10 @@
 
 vtk_tent:
   item_id: 1
-  partner_id: 1
+  user_id: 1
   count: 1
 
 hilok_tent:
   item_id: 2
-  partner_id: 2
+  user_id: 2
   count: 5

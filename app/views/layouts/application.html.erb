@@ -26,9 +26,9 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <% if user_signed_in? %>
+        <% if can? :read, User and can? :read, Item %>
           <ul class="nav navbar-nav">
-            <li><%= link_to "Partners", partners_path %></li>
+            <li><%= link_to "Partners", users_path %></li>
             <li><%= link_to "Items", items_path %></li>
           </ul>
         <% end %>

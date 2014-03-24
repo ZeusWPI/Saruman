@@ -4,7 +4,7 @@
 #
 #  id                  :integer          not null, primary key
 #  item_id             :integer
-#  partner_id          :integer
+#  user_id             :integer
 #  count               :integer
 #  fetched             :integer
 #  brought_back        :integer
@@ -23,11 +23,11 @@ class Reservation < ActiveRecord::Base
   scope :not_approved, -> { where.not(status: 2) }
 
   belongs_to :item
-  belongs_to :partner
+  belongs_to :user
 
   enumerize :status, in: { disapproved: 0, pending: 1, approved: 2 }
 
-  validates :item_id, uniqueness: { scope: :partner_id },  presence: true
+  validates :item_id, uniqueness: { scope: :user_id },  presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
 
   before_save :change_status

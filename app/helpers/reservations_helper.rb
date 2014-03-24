@@ -26,7 +26,11 @@ module ReservationsHelper
     when 'status'
       "Status changed from #{status_to_name(change[0])} to #{status_to_name(change[1])}"
     when 'count'
-      "Count changed from #{change[0]} to #{change[1]}"
+      if change[0].blank?
+        "Reserved #{pluralize change[1], 'item'}"
+      else
+        "Reserved count changed from #{change[0]} to #{change[1]}"
+      end
     end
   end
 

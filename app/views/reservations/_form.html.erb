@@ -1,5 +1,5 @@
 <tr>
-  <%= form_for [object.partner, object], remote: true do |f| %>
+  <%= form_for [object.user, object], remote: true do |f| %>
     <td>
       <% if button_name == 'Save' %>
         <%= object.item.name %>

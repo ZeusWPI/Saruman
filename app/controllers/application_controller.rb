@@ -19,13 +19,4 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
-  def current_ability
-    if current_partner
-      @current_ability ||= Ability.new(current_partner)
-    else
-      @current_ability ||= Ability.new(current_user)
-    end
-  end
-
-
 end
