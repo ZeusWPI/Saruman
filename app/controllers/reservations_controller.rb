@@ -69,10 +69,18 @@ class ReservationsController < ApplicationController
     @reservation = @partner.reservations.find params.require(:id)
     authorize! :change_status, @reservation
 
+    # If there already is an approved item with the same id; merge these
+    @duplicate = @partner.reservations.approved.find_by_item_id @reservation.item_id
+    unless @duplicate.nil?
+      @duplicate.count += @reservation.count
+      @duplicate.save
+      @reservation.destroy
+    else
+      @reservation.disapproval_message = nil
+      @reservation.status = :approved
+      @reservation.save
+    end
 
-    @reservation.disapproval_message = nil
-    @reservation.status = :approved
-    @reservation.save
   end
 
   def disapprove
