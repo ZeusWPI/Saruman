@@ -88,8 +88,8 @@ class ReservationsControllerTest < ActionController::TestCase
 
     xhr :get, :approve, user_id: users(:vtk), id: reservations(:vtk_stoel_unapproved)
     assert_response :success
-    assert_equal reservations(:vtk_stoel_approved).count, 8
     assert_not Reservation.exists? reservations(:vtk_stoel_unapproved)
+    assert_equal reservations(:vtk_stoel_approved).count, 8
   end
 
   test "don't add newly approved items to unapproved matches" do
@@ -102,35 +102,36 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
 
     # Tent remained the same
+    assert Reservation.exists? @pending
     assert_equal @pending.count, 1
     assert_equal @pending.status, 'pending'
-    assert Reservation.exists? @pending
 
     # Unapproved tent got approved, rest stays the same
     @unapproved.reload
+    assert Reservation.exists? @unapproved
     assert_equal @unapproved.count, 1
     assert_equal @unapproved.status, 'approved'
-    assert Reservation.exists? @unapproved
   end
 
   test "don't add newly approved items to approved matches from other partners" do
     sign_out users(:vtk)
     sign_in users(:tom)
 
-    @approved_vtk = reservations(:vtk_tent_approved)
-    @pending_hilok = reservations(:hilok_tent)
-    xhr :get, :approve, user_id: users(:hilok), id: @pending_hilok
+    @approved_vtk = reservations(:vtk_stoel_approved)
+    @pending_vlak = reservations(:vlak_stoel_pending)
+    xhr :get, :approve, user_id: users(:vlak), id: @pending_vlak
     assert_response :success
 
     # Tent remained the same
-    assert_equal @approved_vtk.count, 1
-    assert_equal @approved_vtk.status, 'approved'
+    @approved_vtk.reload
     assert Reservation.exists? @approved_vtk
+    assert_equal @approved_vtk.count, 4
+    assert_equal @approved_vtk.status, 'approved'
 
     # Unapproved tent got approved, rest stays the same
-    @pending_hilok.reload
-    assert_equal @pending_hilok.count, 5
-    assert_equal @pending_hilok.status, 'approved'
-    assert Reservation.exists? @pending_hilok
+    @pending_vlak.reload
+    assert Reservation.exists? @pending_vlak
+    assert_equal @pending_vlak.count, 1
+    assert_equal @pending_vlak.status, 'approved'
   end
 end
