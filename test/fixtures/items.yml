@@ -24,3 +24,9 @@ vat:
   name: Vat
   description: 2 miljard lieter
   price: 10
+
+stoel:
+  id: 3
+  name: Stoel
+  description: Om op te zitten!
+  price: 0

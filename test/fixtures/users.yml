@@ -42,3 +42,10 @@ hilok:
   email: hilok@nogwat.com
   authentication_token: blargh2
   role: partner
+
+vlak:
+ id: 3
+ name: VLAK
+ email: VLAK@VLAK.VLAK
+ authentication_token: sup
+ role: partner

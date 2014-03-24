@@ -27,12 +27,12 @@ class Reservation < ActiveRecord::Base
 
   enumerize :status, in: { disapproved: 0, pending: 1, approved: 2 }
 
-  validates :item_id, uniqueness: { scope: :user_id },  presence: true
+  validates :item_id, presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
 
   before_save :change_status
 
   def change_status
-    self.status = :pending if count_changed?
+    self.status = :pending if count_changed? and not self.status.approved?
   end
 end
