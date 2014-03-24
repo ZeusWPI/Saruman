@@ -1,1 +1,6 @@
-$('#<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
+<% if @duplicate.nil? %>
+  $('#<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
+<% else %>
+  $('#<%= dom_id(@duplicate) %>').replaceWith("<%= j render @duplicate %>");
+  $('#<%= dom_id(@reservation) %>').remove();
+<% end %>
