@@ -41,7 +41,9 @@ class ItemsController < ApplicationController
     @item = Item.find params.require(:id)
     authorize! :destroy, @item
 
-    @item.destroy
+    unless @item.reservations.any?
+      @item.destroy
+    end
   end
 
   private
