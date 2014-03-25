@@ -30,3 +30,8 @@ stoel:
   name: Stoel
   description: Om op te zitten!
   price: 0
+
+brood:
+  id: 4
+  name: Brood
+  price: 2

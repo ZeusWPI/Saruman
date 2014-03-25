@@ -4,7 +4,7 @@ class ItemsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @item = items(:vat)
+    @item = items(:brood)
     sign_in users(:tom)
   end
 
@@ -47,4 +47,11 @@ class ItemsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not destroy reversed item" do
+    assert_difference 'Item.count', 0 do
+      xhr :get, :destroy, id: items(:vat)
+    end
+
+    assert_response :success
+  end
 end

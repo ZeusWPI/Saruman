@@ -4,6 +4,7 @@
 
 ready = ->
   $("#quantity-tooltip").tooltip()
+  $("#actions-tooltip").tooltip()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
