@@ -6,3 +6,18 @@ Saruman [![Build Status](https://travis-ci.org/ZeusWPI/Saruman.png?branch=master
 Saruman is a material management tool where partners can reserve items from an inventory. There are 2 different roles: Inventory managers and partners. Inventory managers can add items to an inventory. They can create partners and assign reservable items to partners. Partners can follow a unique link to request items they can order.
 
 At an event, they can pick up the items at a pit by scanning their own barcode with the barcode of the item.
+
+### Current state
+* Admins can add partners
+* Admins can add items
+* Partners can log in using a unique link
+* Partners can reserve items
+* Admins can approve reservations
+* Admins can disapprove reservations and give feedback why
+* Partners can increase the count of an approved reservation by adding a new reservation for that item
+
+### Roadmap
+* Create a general overview of all reservations for admins
+* Create a configuration view where the name, email and deadline can be adjusted
+* Automize the "special requests"
+* Create a check-in and check-out system for the material pit
