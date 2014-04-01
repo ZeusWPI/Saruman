@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   acts_as_token_authenticatable
 
+  default_scope { order "name ASC" }
   scope :admins, -> { where(role: 'admin') }
   scope :partners, -> { where(role: 'partner') }
 
