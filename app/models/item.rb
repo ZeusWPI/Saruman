@@ -34,6 +34,16 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def name_with_descr_price
+    if price > 0 and not description.blank?
+      "#{name} - #{description} - €#{'%0.2f' % price}"
+    elsif description.blank?
+      name_with_price
+    else
+      "#{name} - #{description}"
+    end
+  end
+
   private
 
   def from_cents(value)
