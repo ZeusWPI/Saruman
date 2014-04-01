@@ -1,5 +1,6 @@
 <tr id="<%= dom_id(reservation) %>">
   <td><%= reservation.item.name %></td>
+  <td><%= reservation.item.description %></td>
   <td><%= reservation.count %></td>
   <td><%= number_with_precision reservation.item.price, precision: 2 %></td>
   <td><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></td>
