@@ -35,7 +35,7 @@ gem 'cancan'
 gem 'httparty'
 
 # Barcodes
-gem 'barcodes', git: "git://github.com/nudded/barcodes"
+#gem 'barcodes', git: "git://github.com/nudded/barcodes"
 
 # Authentication
 gem 'devise'
