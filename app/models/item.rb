@@ -13,6 +13,8 @@
 
 class Item < ActiveRecord::Base
 
+  default_scope { order "name ASC" }
+
   has_many :reservations
 
   validates :name, presence: true, uniqueness: true
