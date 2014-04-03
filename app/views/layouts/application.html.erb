@@ -37,7 +37,7 @@
           <div class="hidden-xs navbar-form navbar-right">
             <div class="form-group">
             <% if user_signed_in? %>
-              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
+              <%= link_to "Logout", destroy_user_session_path, class: "btn btn-default form-control", method: :delete %>
             <% else %>
               <%= link_to "Admin login", new_user_session_path, { id: 'login-button', class: "btn btn-success form-control", title: 'This is for admins only. Partners should log in using their personal link sent by email!', data: { toggle: 'tooltip', placement: 'bottom' } } %>
             <% end %>

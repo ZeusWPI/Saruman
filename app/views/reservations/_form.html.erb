@@ -4,9 +4,10 @@
       <% if button_name == 'Save' %>
         <%= object.item.name %>
       <% else %>
-        <%= f.collection_select :item_id, Item.all, :id, :name_with_price, {}, class: 'form-control' %>
+        <%= f.collection_select :item_id, Item.all, :id, :name_with_descr_price, {}, class: 'form-control' %>
       <% end %>
     </td>
+    <td></td>
     <td><%= f.number_field :count, class: 'form-control' %></td>
     <td></td>
     <td></td>
