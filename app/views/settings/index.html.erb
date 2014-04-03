@@ -1,0 +1,6 @@
+<%= form_for @settings do |f| %>
+  <%= form_email_field f, :email %>
+  <%= form_date_field f, :deadline, "deadline", datepicker_time(f.object.deadline) %>
+
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

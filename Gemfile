@@ -34,6 +34,9 @@ gem 'annotate'
 gem 'cancan'
 gem 'httparty'
 
+# Acts as singleton
+gem 'acts_as_singleton'
+
 # Barcodes
 #gem 'barcodes', git: "git://github.com/nudded/barcodes"
 
