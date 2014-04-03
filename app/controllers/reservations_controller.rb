@@ -19,7 +19,7 @@ class ReservationsController < ApplicationController
 
     @total_reservations = Reservation.approved.count
     @per_partner = Reservation.approved.joins(:item).joins(:user).group(:user).sum("items.price*reservations.count/100.0")
-    @per_partner.merge!(Reservation.approved.joins(:user).group(:user).count) {|h,nv,ov| [nv,ov]}
+    @per_partner.merge!(Reservation.approved.joins(:user).group(:user).count) { |k, nv, ov| [nv, ov] }
   end
 
   def show
