@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @items = Item.all
+    @items = Item.includes(:reservations)
     authorize! :read, Item
   end
 

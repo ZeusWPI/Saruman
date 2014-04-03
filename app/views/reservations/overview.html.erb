@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
-    <h3>Approved reservations</h3>
+    <h3>Item</h3>
     In the underlying list, a summary can be found of all the reserved approved items.
 
     <div class="table-responsive">
@@ -26,7 +26,33 @@
         </tbody>
       </table>
     </div>
-    <%= debug @blargh %>
+
+    <h3>Partner</h3>
+    A summery of total price per partner. Only approved items are taken into account! Click on the name of the partner to see his individual reservations.
+    <div class="table-responsive">
+      <table class="table table-striped" id="table-items">
+        <thead>
+          <th>Name</th>
+          <th>Reservations</th>
+          <th>Total price</th>
+        </thead>
+        <tbody>
+          <% @per_partner.each do |partner, info| %>
+            <% total_price, count = *info %>
+            <tr>
+              <td><%= link_to partner.name, partner %></td>
+              <td><%= count %></td>
+              <td><%= total_price %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <th>Totals:</th>
+            <th><%= @total_reservations %></th>
+            <th><%= number_with_precision @total_price, precision: 2 %></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </div>

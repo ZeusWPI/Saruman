@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @partner = User.partners.find params.require(:id)
+    @partner = User.partners.includes(reservations: :item).find params.require(:id)
 
     authorize! :read, @partner
   end
