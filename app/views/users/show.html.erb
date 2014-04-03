@@ -4,5 +4,8 @@
     <%= render "reservations/reservations", reservations: @partner.reservations, form: false %>
   </div>
 </div>
+
+<%= render "reservations/statistics" %>
+
 <%= render partial: 'reservations/info_modal' %>
 <%= render partial: 'users/disapprove_modal' %>
