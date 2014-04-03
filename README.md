@@ -15,9 +15,14 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * Admins can approve reservations
 * Admins can disapprove reservations and give feedback why
 * Partners can increase the count of an approved reservation by adding a new reservation for that item
+* Partners can see a short overview of their costs, admins can see general reports
 
 ### Roadmap
-* Create a general overview of all reservations for admins
 * Create a configuration view where the name, email and deadline can be adjusted
 * Automize the "special requests"
 * Create a check-in and check-out system for the material pit
+
+### Contributors
+* Tom Naessens
+* Felix Van der Jeugt
+* Toon Willems
