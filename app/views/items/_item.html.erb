@@ -2,10 +2,14 @@
   <td><%= item.name %></td>
   <td><%= item.description %></td>
   <td><%= number_with_precision item.price, precision: 2 %></td>
-  <%# <td><%= item.quantity || 'Unlimited' %1></td> %>
-  <td>
-    <div class="nowrap">
-    <%= render "items/actions", item: item %>
-    </div>
-  </td>
+  <% if defined? quantity %>
+    <td><%= quantity %></td>
+    <td><%= number_with_precision quantity*item.price, precision: 2 %></td>
+  <% else %>
+    <td>
+      <div class="nowrap">
+      <%= render "items/actions", item: item %>
+      </div>
+    </td>
+  <% end %>
 </tr>

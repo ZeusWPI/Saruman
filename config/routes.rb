@@ -26,4 +26,5 @@ Saruman::Application.routes.draw do
   end
 
   resources :items
+  get 'reservations/overview', to: 'reservations#overview'
 end

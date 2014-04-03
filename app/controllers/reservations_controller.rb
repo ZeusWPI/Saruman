@@ -8,10 +8,18 @@ class ReservationsController < ApplicationController
 
     authorize! :show, @partner
 
-    @reservations = @partner.reservations
+    @reservations = @partner.reservations.includes(:item)
+  end
 
-    @price = 0
-    @reservations.each { |r| @price += r.count*r.item.price }
+  def overview
+    authorize! :manage, Reservation
+    @reservations = Reservation.approved.group(:item).sum(:count)
+    @total_quantity = Reservation.approved.sum(:count)
+    @total_price = Reservation.approved.joins(:item).sum("reservations.count*items.price/100.0")
+
+    @total_reservations = Reservation.approved.count
+    @per_partner = Reservation.approved.joins(:item).joins(:user).group(:user).sum("items.price*reservations.count/100.0")
+    @per_partner.merge!(Reservation.approved.joins(:user).group(:user).count) { |k, nv, ov| [nv, ov] }
   end
 
   def show

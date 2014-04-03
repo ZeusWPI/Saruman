@@ -1,1 +1,2 @@
 $("#<%= dom_id(@reservation) %>").replaceWith("<%= j render 'reservations/form', object: @reservation, action: 'put', button_name: 'Save' %>")
+$('#price-statistics').replaceWith("<%= j render 'reservations/statistics' %>");

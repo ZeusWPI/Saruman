@@ -1,0 +1,25 @@
+<div id="price-statistics">
+  <h3>Price statistics</h3>
+  <table class="table table-striped table-hover table-nonfluid">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Total price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success">
+        <th>Approved:</th>
+        <td><%= number_with_precision @partner.reservations.approved.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+      </tr>
+      <tr class="warning">
+        <th>Unapproved:</th>
+        <td><%= number_with_precision @partner.reservations.not_approved.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+      </tr>
+      <tr>
+        <th>Total:</th>
+        <td><%= number_with_precision @partner.reservations.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

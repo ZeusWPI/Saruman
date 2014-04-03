@@ -3,5 +3,6 @@
 <% else %>
   $('#disapprove-modal').modal('hide');
   $('#<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
+  $('#price-statistics').replaceWith("<%= j render 'reservations/statistics' %>");
   $(".reservation-disapprove-tooltip").tooltip();
 <% end %>

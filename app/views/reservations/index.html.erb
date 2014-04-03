@@ -10,5 +10,9 @@
     <%= render "reservations/reservations", reservations: @reservations.not_approved, form: true %>
   </div>
 </div>
+
 Special requests? <%= mail_to "info@12urenloop.be", "Let us know" %>!
+
+<%= render "reservations/statistics" %>
+
 <%= render partial: 'reservations/info_modal' %>
