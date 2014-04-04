@@ -11,8 +11,7 @@ class ReservationsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index, user_id: users(:vtk)
 
-    assert_response :success
-    assert_not_nil assigns(:reservations)
+    assert_response :redirect
   end
 
   test "should show reservation" do

@@ -17,6 +17,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should show user" do
     get :show, id: @user
     assert_response :success
+    assert_not_nil assigns(:partner)
   end
 
   test "should create user" do

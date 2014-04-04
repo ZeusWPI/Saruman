@@ -9,11 +9,17 @@ class Ability
       when 'admin'
         # Admins can manage all
         can :manage, :all
+
       when 'partner'
         # Partners can only show their user
         can :show, User, id: user.id
-        # And crud their own registrations
-        can :crud, Reservation, user_id: user.id
+
+        # And crud their own registrations if there is no deadline or the
+        # deadline hasn't expired yet
+        can :crud, Reservation do |r|
+          r.user.id == user.id and (Settings.instance.deadline.blank? or Settings.instance.deadline >= DateTime.now)
+        end
+
       end
     end
   end

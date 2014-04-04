@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-striped" <% if form %>id="table-reservations"<% end %>>
+  <table class="table table-striped" id="table-reservations">
     <thead>
       <th>Item</th>
       <th>Item description</th>
@@ -11,9 +11,7 @@
     </thead>
     <tbody>
       <%= render reservations %>
-      <% if form %>
-        <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
-      <% end %>
+      <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
     </tbody>
   </table>
   <div id='reservation-errors' class='form-errors'>
