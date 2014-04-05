@@ -17,7 +17,7 @@
         <tr class="warning">
           <td colspan="7">
             <span class="label label-warning">Warning!</span>
-            The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed. Contact <%= mail_to Settings.instance.email %> to alter or add reservations.
+            The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed. Contact <%= mail_to Settings.instance.email || "fillmein@noreply.com" %> to alter or add reservations.
           </td>
         </tr>
       <% end %>

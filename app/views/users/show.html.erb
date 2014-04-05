@@ -6,7 +6,7 @@
 </div>
 
 <% unless can? :manage, :all %>
-  Special requests? <%= mail_to "info@12urenloop.be", "Let us know" %>!
+  Special requests? <%= mail_to Settings.instance.email || "fillmein@noreply.com", "Let us know!" %>!
 <% end %>
 
 <%= render "reservations/statistics" %>
