@@ -4,14 +4,6 @@ class ReservationsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @partner = User.partners.find params.require(:user_id)
-
-    authorize! :show, @partner
-
-    @reservations = @partner.reservations.includes(:item)
-  end
-
-  def overview
     authorize! :manage, Reservation
     @reservations = Reservation.approved.group(:item).sum(:count)
     @total_quantity = Reservation.approved.sum(:count)
@@ -88,7 +80,6 @@ class ReservationsController < ApplicationController
       @reservation.status = :approved
       @reservation.save
     end
-
   end
 
   def disapprove

@@ -30,7 +30,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Partners", users_path %></li>
             <li><%= link_to "Items", items_path %></li>
-            <li><%= link_to "Report", reservations_overview_path %></li>
+            <li><%= link_to "Report", reservations_path %></li>
           </ul>
         <% end %>
 
@@ -79,6 +79,9 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
+          <% if can? :manage, :all and Settings.instance.email.blank? %>
+            <div class="alert alert-danger"><strong>Warning!</strong> No emailadress has been set. <%= link_to "Fill in a contact email here", settings_path, { class: "alert-link" } %>. Ignoring this settings will cause the application to malfunction.</div>
+          <% end %>
           <%= render partial: 'flash' %>
           <%= yield %>
         </div>

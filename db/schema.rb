@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140403212833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-    t.date     "deadline"
+    t.datetime "deadline"
   end
 
   create_table "users", force: true do |t|

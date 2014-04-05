@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-striped" <% if form %>id="table-reservations"<% end %>>
+  <table class="table table-striped" id="table-reservations">
     <thead>
       <th>Item</th>
       <th>Item description</th>
@@ -11,8 +11,15 @@
     </thead>
     <tbody>
       <%= render reservations %>
-      <% if form %>
+      <% if can? :create, Reservation %>
         <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+      <% else %>
+        <tr class="warning">
+          <td colspan="7">
+            <span class="label label-warning">Warning!</span>
+            The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed. Contact <%= mail_to Settings.instance.email || "fillmein@noreply.com" %> to alter or add reservations.
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

@@ -11,8 +11,7 @@ class ReservationsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index, user_id: users(:vtk)
 
-    assert_response :success
-    assert_not_nil assigns(:reservations)
+    assert_response :redirect
   end
 
   test "should show reservation" do
@@ -29,6 +28,35 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "shouldnt create reservation after deadline" do
+    Settings.instance.update_attributes! deadline: DateTime.now - 1
+
+    assert_difference 'Reservation.count', +0 do
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
+    end
+
+    assert_response :redirect
+
+    ability = Ability.new(users :vtk)
+    assert ability.cannot? :create, Reservation
+  end
+
+  test "admins can edit reservations after deadline" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    Settings.instance.update_attributes! deadline: DateTime.now - 1
+
+    assert_difference 'Reservation.count', +1 do
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
+    end
+
+    assert_response :success
+
+    ability = Ability.new(users :tom)
+    assert ability.can? :create, Reservation
+  end
+
   test "should get edit" do
     xhr :get, :edit, user_id: users(:vtk), id: @reservation
 
@@ -43,12 +71,38 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_equal @reservation.count, 10
   end
 
+  test "shouldnt update reservation after deadline" do
+    Settings.instance.update_attributes! deadline: DateTime.now - 1
+
+    ability = Ability.new(users :vtk)
+    assert ability.cannot? :update, @reservation
+
+    xhr :patch, :update, user_id: users(:vtk), id: @reservation, reservation: { count: 10 }
+
+    assert_response :redirect
+    @reservation.reload
+    assert_equal @reservation.count, 1
+  end
+
   test "should destroy reservation" do
     assert_difference 'Reservation.count', -1 do
       xhr :get, :destroy, user_id: users(:vtk), id: @reservation
     end
 
     assert_response :success
+  end
+
+  test "shouldnt destroy reservation after deadline" do
+    Settings.instance.update_attributes! deadline: DateTime.now - 1
+
+    ability = Ability.new(users :vtk)
+    assert ability.cannot? :destroy, @reservation
+
+    assert_difference 'Reservation.count', 0 do
+      xhr :get, :destroy, user_id: users(:vtk), id: @reservation
+    end
+
+    assert_response :redirect
   end
 
   test "should change status" do

@@ -7,13 +7,13 @@
    <body>
      <p>Beste <%= @partner.name %>,</p>
 
-         <p>Wij, het 12urenloop comite, zouden u graag uitnodigen voor de 12urenloop als loopkring. Zoals elk jaar kunnen jullie bij ons terecht voor al jullie bestellingen. Klik op onderstaande link om in te loggen en je bestelling te plaatsen. Houd deze pagina in het oog zodat jullie op de hoogte blijven van nieuwe items, aanvaarde of onaanvaarde bestellingen ...</p>
+     <p>Wij, het 12urenloop comite, zouden u graag uitnodigen voor de 12urenloop als loopkring. Zoals elk jaar kunnen jullie bij ons terecht voor al jullie bestellingen. Klik op onderstaande link om in te loggen en je bestelling te plaatsen. Houd deze pagina in het oog zodat jullie op de hoogte blijven van nieuwe items, aanvaarde of onaanvaarde bestellingen ...</p>
 
-         <p><%= link_to sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token), sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %></p>
+     <p><%= link_to sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token), sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %></p>
 
-         <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to "info@12urenloop.be", "info@12urenloop.be" %>.</p>
+     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
 
-         <p>Met vriendelijke groet,<br />Het 12urenloop comite</p>
+     <p>Met vriendelijke groet,<br />Het 12urenloop comite</p>
 
   </body>
 </html>
