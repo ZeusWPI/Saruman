@@ -11,7 +11,16 @@
     </thead>
     <tbody>
       <%= render reservations %>
-      <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+      <% if can? :create, Reservation %>
+        <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+      <% else %>
+        <tr class="warning">
+          <td colspan="7">
+            <span class="label label-warning">Warning!</span>
+            The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed. Contact <%= mail_to Settings.instance.email %> to alter or add reservations.
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
   <div id='reservation-errors' class='form-errors'>

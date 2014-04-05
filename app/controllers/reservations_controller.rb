@@ -80,7 +80,6 @@ class ReservationsController < ApplicationController
       @reservation.status = :approved
       @reservation.save
     end
-
   end
 
   def disapprove

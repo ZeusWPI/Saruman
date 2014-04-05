@@ -16,8 +16,10 @@ class Ability
 
         # And crud their own registrations if there is no deadline or the
         # deadline hasn't expired yet
-        can :crud, Reservation do |r|
-          r.user.id == user.id and (Settings.instance.deadline.blank? or Settings.instance.deadline >= DateTime.now)
+        can :create, Reservation if Settings.instance.deadline.blank? || Settings.instance.deadline >= DateTime.now
+
+        can [:update, :destroy], Reservation do |r|
+          r.user.id == user.id && can?(:create, Reservation)
         end
 
       end

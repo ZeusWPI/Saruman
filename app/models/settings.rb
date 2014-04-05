@@ -11,4 +11,6 @@
 
 class Settings < ActiveRecord::Base
   acts_as_singleton
+
+  validates :email, presence: true, email: true
 end
