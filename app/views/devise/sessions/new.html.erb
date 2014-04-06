@@ -1,4 +1,6 @@
 <h2>Sign in</h2>
+<div class="alert alert-info">Partners sign in using the link sent by email.</div>
+
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
   <%= form_email_field f, :email %>
