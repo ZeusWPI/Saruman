@@ -30,6 +30,7 @@
         <% if can? :manage, :all %>
             <li><%= link_to "Partners", users_path %></li>
             <li><%= link_to "Items", items_path %></li>
+            <li><%= link_to "Scan", scan_path %></li>
             <li><%= link_to "Report", reservations_path %></li>
         <% elsif current_user %>
             <li><%= link_to "Reservations", user_path(current_user) %></li>
