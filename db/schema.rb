@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424212754) do
+ActiveRecord::Schema.define(version: 20140424221655) do
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20140424212754) do
     t.datetime "updated_at"
     t.integer  "status",              default: 1
     t.text     "disapproval_message"
+    t.integer  "picked_up_count",     default: 0
+    t.integer  "brought_back_count",  default: 0
   end
 
   add_index "reservations", ["item_id"], name: "index_reservations_on_item_id"

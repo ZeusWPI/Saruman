@@ -12,6 +12,8 @@
 #  updated_at          :datetime
 #  status              :integer          default(1)
 #  disapproval_message :text
+#  picked_up_count     :integer          default(0)
+#  brought_back_count  :integer          default(0)
 #
 
 class Reservation < ActiveRecord::Base
