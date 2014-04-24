@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/nudded/barcodes
+  revision: a990e2b596025f5414f820f15c84b99e9eaf416b
+  specs:
+    barcodes (0.0.11)
+      prawn
+      rmagick
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -103,7 +111,11 @@ GEM
     paper_trail (3.0.1)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
+    pdf-core (0.2.5)
     polyglot (0.3.4)
+    prawn (1.0.0)
+      pdf-core (~> 0.2.2)
+      ttfunk (~> 1.1.1)
     puma (2.8.1)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -128,6 +140,7 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.2)
     sass (3.2.18)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -173,6 +186,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.1.1)
     turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.39)
@@ -189,6 +203,7 @@ DEPENDENCIES
   acts_as_singleton
   airbrake
   annotate
+  barcodes!
   cancan
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)

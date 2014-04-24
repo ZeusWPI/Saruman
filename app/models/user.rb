@@ -19,9 +19,11 @@
 #  role                   :string(255)      default("partner")
 #  name                   :string(255)
 #  sent                   :boolean          default(TRUE)
+#  barcode                :string(255)
+#  barcode_data           :string(255)
 #
 
-class User < ActiveRecord::Base
+class User < Barcoded
   ROLES = %w[admin partner]
 
   acts_as_token_authenticatable
