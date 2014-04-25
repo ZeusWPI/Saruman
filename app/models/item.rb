@@ -13,7 +13,8 @@
 #  barcode_data :string(255)
 #
 
-class Item < Barcoded
+class Item < ActiveRecord::Base
+  include Barcodable
 
   default_scope { order "name ASC" }
 

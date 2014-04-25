@@ -23,7 +23,9 @@
 #  barcode_data           :string(255)
 #
 
-class User < Barcoded
+class User < ActiveRecord::Base
+  include Barcodable
+
   ROLES = %w[admin partner]
 
   acts_as_token_authenticatable
