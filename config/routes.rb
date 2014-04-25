@@ -13,6 +13,8 @@ Saruman::Application.routes.draw do
     member do
       get 'sign_in', to: 'sign_in#sign_in_partner'
       get :resend
+      get :send_barcode
+      get :get_barcode
     end
 
     resources :reservations do

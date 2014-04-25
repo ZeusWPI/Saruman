@@ -4,4 +4,5 @@
 <% else %>
   <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send login link'), resend_user_path(user), class: 'btn btn-xs btn-warning', remote: true %>
 <% end %>
+<%= link_to raw('<i class="glyphicon glyphicon-barcode"></i> Send barcode'), send_barcode_user_path(user), class: 'btn btn-xs btn-default', remote: true %>
 <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), user_path(user), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>

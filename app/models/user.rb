@@ -56,4 +56,8 @@ class User < ActiveRecord::Base
     PartnerMailer.send_token(self).deliver
   end
 
+  def send_barcode
+    PartnerMailer.send_barcode(self).deliver
+  end
+
 end
