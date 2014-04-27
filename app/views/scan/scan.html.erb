@@ -3,7 +3,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <strong>Warning!</strong>
     <% if @reservation %>
-      <%= @partner.name %> <strong>already picked up</strong> <%= @reservation.picked_up_count %> items and has only reserved <%= @reservation.count %>. This reservation can be force added, which can result in extra costs.
+      <%= @partner.name %> <strong>already picked up</strong> <%= @reservation.picked_up_count %>x <%= @item.name %> and has only reserved <%= @reservation.count %>. This reservation can be force added, which can result in extra costs.
     <% else %>
       <%= @partner.name %> has <strong>no approved reservations for this item</strong>. This reservation can be force added, which can result in extra costs.
     <% end %>
