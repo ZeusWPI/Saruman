@@ -45,7 +45,7 @@ class ScanController < ApplicationController
   end
 
   def check_in(params)
-    flash.now[:notice] = "Checking in!"
+    flash.now[:notice] = "#{Partner}"
   end
 
   def check_out(params)

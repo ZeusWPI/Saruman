@@ -2,11 +2,11 @@ module ReservationsHelper
 
   def status(s)
     if s.approved?
-      '<span class="glyphicon glyphicon-ok"> Approved</span>'
+      '<span class="glyphicon glyphicon-ok" title="Approved"></span>'
     elsif s.pending?
-      '<span class="glyphicon glyphicon-refresh"> Pending</span>'
+      '<span class="glyphicon glyphicon-refresh" title="Pending"></span>'
     else
-      '<span class="glyphicon glyphicon-remove"> Disapproved</span>'
+      '<span class="glyphicon glyphicon-remove" title="Disapproved"></span>'
     end
   end
 
@@ -31,6 +31,10 @@ module ReservationsHelper
       else
         "Reserved count changed from #{change[0]} to #{change[1]}"
       end
+    when 'picked_up_count'
+      "Picked up #{change[1] - change[0]}"
+    when 'brought_back_count'
+      "Brought #{change[1] - change[0]} back"
     end
   end
 

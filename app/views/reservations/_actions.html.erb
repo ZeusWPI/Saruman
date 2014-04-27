@@ -1,17 +1,17 @@
 <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> History'), user_reservation_path(reservation.user, reservation), class: 'btn btn-xs btn-default', remote: true %>
 <% if can? :crud, reservation %>
   <% unless reservation.status.approved? %>
-    <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_user_reservation_path(@partner, reservation), class: "btn btn-default btn-xs", remote: true %>
-    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), user_reservation_path(@partner, reservation), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+    <%= link_to raw('<span class="glyphicon glyphicon-edit" title="Edit"></span>'), edit_user_reservation_path(@partner, reservation), class: "btn btn-default btn-xs", remote: true %>
+    <%= link_to raw('<span class="glyphicon glyphicon-trash" title="Delete"></span>'), user_reservation_path(@partner, reservation), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
   <% end %>
 <% end %>
 <% if can? :change_status, reservation %>
   |
   <% unless reservation.status.approved? %>
-    <%= link_to raw('<span class="glyphicon glyphicon-ok"></span> Approve'), approve_user_reservation_path(@partner, reservation), class: "btn btn-success btn-xs", remote: true %>
+    <%= link_to raw('<span class="glyphicon glyphicon-ok" title="Approve"></span>'), approve_user_reservation_path(@partner, reservation), class: "btn btn-success btn-xs", remote: true %>
   <% end %>
   <% unless reservation.status.disapproved? %>
-    <%= link_to raw('<i class="glyphicon glyphicon-remove"></i> Disapprove'), '#disapprove-modal', { class: 'btn btn-xs btn-danger btn-disapprove', data: { id: reservation.id } } %>
+    <%= link_to raw('<span class="glyphicon glyphicon-remove" title="Disapprove"></span>'), '#disapprove-modal', { class: 'btn btn-xs btn-danger btn-disapprove', data: { id: reservation.id } } %>
   <% end %>
 <% end %>
 
