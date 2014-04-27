@@ -37,6 +37,7 @@ vtk:
   email: vtk@iets.com
   authentication_token: blargh
   role: partner
+  barcode: 1337
 
 hilok:
   id: 2

@@ -87,7 +87,7 @@ class ScanController < ApplicationController
       flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. He has #{reservation.picked_up_count - reservation.brought_back_count}x #{@item.name} remaining."
     else
       # No reservations: display a warning
-      flash[:warning] = "#{@partner.name} does not have a reservation for this item."
+      flash[:warning] = "#{@partner.name} does not has a reservation for this item."
     end
   end
 
