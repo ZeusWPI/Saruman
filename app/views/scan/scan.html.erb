@@ -2,6 +2,7 @@
   <div class="col-sm-4">
     <%= form_tag check_path, url: check_path, remote: false do %>
         <label>Action:</label><br />
+        <p>Checking out: giving the partner the item. Checking in: receive an item from a partner. Don't check in items that have been used such as empty barrels, this is only for items such as lights, boxes, etc.!</p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary btn-lg btn-action active">
             <input type="radio" name="scan[options]" id="options" value="out" checked><span class="glyphicon glyphicon-log-out"></span> Check out
@@ -13,12 +14,12 @@
 
         <div class="form-group">
           <label for="partner_code">Partner code:</label>
-          <input class="form-control" id="partner_code" name="scan[partner_code]" type="text" autofocus>
+          <input class="form-control" id="partner_code" name="scan[partner_code]" type="text" value="0745040253596" autofocus>
         </div>
 
         <div class="form-group">
           <label for="item_code">Item barcode:</label>
-          <input class="form-control" id="item_code" name="scan[item_code]" type="text">
+          <input class="form-control" id="item_code" name="scan[item_code]" type="text" value="7552543154076">
         </div>
 
         <div class="form-group">
