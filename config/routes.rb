@@ -30,7 +30,7 @@ Saruman::Application.routes.draw do
   resources :settings
   resources :items
 
-  get 'scan', to: 'scan#index'
-  post 'scan', to: 'scan#scan'
+  get 'scan', to: 'scan#scan'
+  post 'check', to: 'scan#check'
   get 'reservations', to: 'reservations#index'
 end
