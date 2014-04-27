@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
+    <h2><%= @partner.name %></h2>
     <h3>Manage reservations</h3>
     <%= render "reservations/reservations", reservations: @partner.reservations %>
   </div>
@@ -10,6 +11,7 @@
 <% end %>
 
 <%= render "reservations/statistics" %>
+<%= render "users/barcode" %>
 
 <%= render partial: 'reservations/info_modal' %>
 <%= render partial: 'users/disapprove_modal' %>

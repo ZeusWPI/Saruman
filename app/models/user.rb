@@ -19,9 +19,13 @@
 #  role                   :string(255)      default("partner")
 #  name                   :string(255)
 #  sent                   :boolean          default(TRUE)
+#  barcode                :string(255)
+#  barcode_data           :string(255)
 #
 
 class User < ActiveRecord::Base
+  include Barcodable
+
   ROLES = %w[admin partner]
 
   acts_as_token_authenticatable
@@ -50,6 +54,10 @@ class User < ActiveRecord::Base
     self.sent = true
     self.save
     PartnerMailer.send_token(self).deliver
+  end
+
+  def send_barcode
+    PartnerMailer.send_barcode(self).deliver
   end
 
 end

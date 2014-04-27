@@ -13,6 +13,8 @@ Saruman::Application.routes.draw do
     member do
       get 'sign_in', to: 'sign_in#sign_in_partner'
       get :resend
+      get :send_barcode
+      get :get_barcode
     end
 
     resources :reservations do
@@ -27,5 +29,9 @@ Saruman::Application.routes.draw do
 
   resources :settings
   resources :items
+
+  get 'scan', to: 'scan#scan'
+  post 'check', to: 'scan#check'
+  post 'force', to: 'scan#force'
   get 'reservations', to: 'reservations#index'
 end

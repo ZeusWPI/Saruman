@@ -56,6 +56,23 @@ class UsersController < ApplicationController
     @partner.send_token
   end
 
+  def send_barcode
+    @partner = User.partners.find params.require(:id)
+    authorize! :read, @partner
+
+    @partner.send_barcode
+  end
+
+  def get_barcode
+    @partner = User.partners.find params.require(:id)
+    authorize! :read, @partner
+
+    barcode = Barcodes.create('EAN13', data: @partner.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
+    barcode_pdf = Barcodes::Renderer::Pdf.new(barcode).render
+
+    send_data barcode_pdf, :filename => "barcode.pdf", :type => "application/pdf"
+  end
+
   private
   def partner_params
     params.require(:user).permit(:name, :email)

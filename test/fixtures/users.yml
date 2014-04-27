@@ -19,6 +19,8 @@
 #  role                   :string(255)      default("partner")
 #  name                   :string(255)
 #  sent                   :boolean          default(TRUE)
+#  barcode                :string(255)
+#  barcode_data           :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -35,6 +37,7 @@ vtk:
   email: vtk@iets.com
   authentication_token: blargh
   role: partner
+  barcode: 1337
 
 hilok:
   id: 2

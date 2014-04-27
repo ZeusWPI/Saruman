@@ -6,7 +6,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  email      :string(255)
-#  deadline   :date
+#  deadline   :datetime
 #
 
 instance:

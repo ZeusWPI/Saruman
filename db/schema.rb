@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403212833) do
+ActiveRecord::Schema.define(version: 20140424221655) do
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140403212833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity"
+    t.string   "barcode"
+    t.string   "barcode_data"
   end
 
   create_table "reservations", force: true do |t|
@@ -32,6 +34,8 @@ ActiveRecord::Schema.define(version: 20140403212833) do
     t.datetime "updated_at"
     t.integer  "status",              default: 1
     t.text     "disapproval_message"
+    t.integer  "picked_up_count",     default: 0
+    t.integer  "brought_back_count",  default: 0
   end
 
   add_index "reservations", ["item_id"], name: "index_reservations_on_item_id"
@@ -61,6 +65,8 @@ ActiveRecord::Schema.define(version: 20140403212833) do
     t.string   "role",                   default: "partner"
     t.string   "name"
     t.boolean  "sent",                   default: true
+    t.string   "barcode"
+    t.string   "barcode_data"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"

@@ -4,6 +4,8 @@
   <td><%= reservation.count %></td>
   <td><%= number_with_precision reservation.item.price, precision: 2 %></td>
   <td><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></td>
+  <td><%= reservation.picked_up_count %></td>
+  <td><%= reservation.brought_back_count %></td>
   <td>
     <%= raw(status reservation.status) %>
     <% if reservation.status.disapproved? %>

@@ -2,16 +2,19 @@
 #
 # Table name: items
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :string(255)
-#  price       :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  quantity    :integer
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  description  :string(255)
+#  price        :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  quantity     :integer
+#  barcode      :string(255)
+#  barcode_data :string(255)
 #
 
 class Item < ActiveRecord::Base
+  include Barcodable
 
   default_scope { order "name ASC" }
 
