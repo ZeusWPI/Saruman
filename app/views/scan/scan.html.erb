@@ -1,25 +1,56 @@
+<% if @display_force %>
+  <div class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Warning!</strong>
+    <% if @reservation %>
+      <%= @partner.name %> <strong>already picked up</strong> <%= @reservation.picked_up_count %> items and has only reserved <%= @reservation.count %>. This reservation can be force added, which can result in extra costs.
+    <% else %>
+      <%= @partner.name %> has <strong>no approved reservations for this item</strong>. This reservation can be force added, which can result in extra costs.
+    <% end %>
+
+    <%= form_tag force_path, url: force_path, remote: false do %>
+      <%= hidden_field_tag 'force[partner_id]', @partner.id %>
+      <%= hidden_field_tag 'force[item_id]', @item.id %>
+      <%= hidden_field_tag 'force[count]', @count %>
+      <%= submit_tag "Force add this pick up", class: 'btn btn-warning' %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-sm-4">
     <%= form_tag check_path, url: check_path, remote: false do %>
         <label>Action:</label><br />
-        <p>Checking out: giving the partner the item. Checking in: receive an item from a partner. Don't check in items that have been used such as empty barrels, this is only for items such as lights, boxes, etc.!</p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary btn-lg btn-action active">
-            <input type="radio" name="scan[options]" id="options" value="out" checked><span class="glyphicon glyphicon-log-out"></span> Check out
+            <input type="radio" name="scan[options]" id="options" value="out" checked><span class="glyphicon glyphicon-log-out"></span> Pick up
           </label>
           <label class="btn btn-default btn-lg btn-action">
-            <input type="radio" name="scan[options]" id="options" value="in"><span class="glyphicon glyphicon-log-in"></span> Check in
+            <input type="radio" name="scan[options]" id="options" value="in"><span class="glyphicon glyphicon-log-in"></span> Bring back
           </label>
         </div><br /><br />
 
-        <div class="form-group">
-          <label for="partner_code">Partner code:</label>
-          <input class="form-control" id="partner_code" name="scan[partner_code]" type="text" value="0745040253596" autofocus>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label for="partner_code">Partner code:</label>
+              <input class="form-control" id="partner_code" name="scan[partner_code]" type="text" autofocus>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <strong>OR</strong>
+          </div>
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label for="partner_id">Partner:</label>
+              <%= collection_select :scan, :partner_id, User.partners, :id, :name, {include_blank: ''}, class: 'form-control' %>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="item_code">Item barcode:</label>
-          <input class="form-control" id="item_code" name="scan[item_code]" type="text" value="7552543154076">
+          <label for="item_id">Item:</label>
+          <%= collection_select :scan, :item_id, Item.all, :id, :name_with_descr_price, {include_blank: ''}, class: 'form-control' %>
         </div>
 
         <div class="form-group">

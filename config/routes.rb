@@ -32,5 +32,6 @@ Saruman::Application.routes.draw do
 
   get 'scan', to: 'scan#scan'
   post 'check', to: 'scan#check'
+  post 'force', to: 'scan#force'
   get 'reservations', to: 'reservations#index'
 end
