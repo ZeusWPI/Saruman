@@ -1,4 +1,4 @@
-<tr id="<%= dom_id(reservation) %>">
+<tr class="<%= if can? :manage, :all then (reservation.picked_up_count <= reservation.brought_back_count) ? 'success' : 'danger' end %>" id="<%= dom_id(reservation) %>">
   <td><%= reservation.item.name %></td>
   <td><%= reservation.item.description %></td>
   <td><%= reservation.count %></td>
