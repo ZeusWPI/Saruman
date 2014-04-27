@@ -89,8 +89,18 @@ class ScanControllerTest < ActionController::TestCase
   end
 
   test "should be able to force add items to existing reservations" do
+    post :force, force: { partner_id: users(:vtk).id, item_id: 3, count: 104 }
+    assert_response :redirect
+    assert_not_nil flash[:notice]
+    assert(flash[:notice].include? "Increased the existing reservation with")
+    assert_not_nil Reservation.find_by_count(104)
   end
 
   test "should be able to force add items by creating new reservations" do
+    post :force, force: { partner_id: users(:vtk).id, item_id: 1, count: 100 }
+    assert_response :redirect
+    assert_not_nil flash[:notice]
+    assert(flash[:notice].include? "Created a new reservation for 100x Tent")
+    assert_not_nil Reservation.find_by_count(100)
   end
 end
