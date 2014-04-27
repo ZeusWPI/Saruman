@@ -7,6 +7,11 @@ class ScanControllerTest < ActionController::TestCase
     sign_in users(:tom)
   end
 
+  test "should get index" do
+    get :scan
+    assert_response :success
+  end
+
   test "should fill in all fields" do
     post :check, scan: { partner_code: '', item_id: '', count: '', options: 'out' }
     assert_response :redirect
