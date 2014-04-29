@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
   def get_barcode
     @partner = User.partners.find params.require(:id)
-    authorize! :read, @partner
+    authorize! :show, @partner
 
     barcode = Barcodes.create('EAN13', data: @partner.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
     barcode_pdf = Barcodes::Renderer::Pdf.new(barcode).render
