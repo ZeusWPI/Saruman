@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true, email: true
 
+  before_create :generate_barcode
+
   before_save do
     self.sent = false if email_changed?
     true
