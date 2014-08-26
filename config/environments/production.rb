@@ -66,7 +66,7 @@ Saruman::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Mail settings
-  config.action_mailer.default_url_options = { host: 'materiaal.12urenloop.be' }
+  config.action_mailer.default_url_options = { host: 'materiaal.studentkickoff.be' }
   config.action_mailer.smtp_settings = { enable_starttls_auto: false }
 
 
