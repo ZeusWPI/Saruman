@@ -23,7 +23,7 @@
       $(id).parent().find('input[type="submit"]').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
-        $(id).append("<input type'hidden' name='reservation[item_id]' value='" + select.val() + "'>");
+        $(id).append("<input type='hidden' name='reservation[item_id]' value='" + select.val() + "'>");
         $(id).append('<input type="hidden" name="_method" value="<%= action %>">');
         $(id).submit();
       });
