@@ -10,5 +10,6 @@
 #
 
 instance:
+  name: Student Kick-Off
   email: info@12urenloop.be
   deadline: <%= DateTime.now + 1 %>
