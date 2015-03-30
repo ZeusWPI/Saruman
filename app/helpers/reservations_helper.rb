@@ -1,7 +1,14 @@
 module ReservationsHelper
 
   def row_colour(r)
-    if not Settings.instance.deadline.nil? and Settings.instance.deadline < DateTime.now then (r.picked_up_count <= r.brought_back_count) ? 'success' : 'danger'
+    # Are we after the deadline?
+    if not Settings.instance.deadline.nil? and Settings.instance.deadline < DateTime.now
+      if (r.picked_up_count <= r.brought_back_count)
+        'success'
+      else
+        'danger'
+      end
+    # Reservation phase:
     else
       if r.status.approved?
         'success'
