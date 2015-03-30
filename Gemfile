@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -44,7 +44,7 @@ gem 'barcodes', git: "git://github.com/nudded/barcodes"
 gem 'devise'
 
 # Paper trail is supercool
-gem 'paper_trail'
+gem 'paper_trail', '~> 4.0.0.beta'
 
 # Errbit
 gem 'airbrake'

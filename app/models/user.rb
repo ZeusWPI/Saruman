@@ -55,11 +55,11 @@ class User < ActiveRecord::Base
   def send_token
     self.sent = true
     self.save
-    PartnerMailer.send_token(self).deliver
+    PartnerMailer.send_token(self).deliver_now
   end
 
   def send_barcode
-    PartnerMailer.send_barcode(self).deliver
+    PartnerMailer.send_barcode(self).deliver_now
   end
 
 end

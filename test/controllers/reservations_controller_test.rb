@@ -142,7 +142,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
     xhr :get, :approve, user_id: users(:vtk), id: reservations(:vtk_stoel_unapproved)
     assert_response :success
-    assert_not Reservation.exists? reservations(:vtk_stoel_unapproved)
+    assert_not Reservation.exists? reservations(:vtk_stoel_unapproved).id
     assert_equal reservations(:vtk_stoel_approved).count, 8
   end
 
@@ -156,13 +156,13 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
 
     # Tent remained the same
-    assert Reservation.exists? @pending
+    assert Reservation.exists? @pending.id
     assert_equal @pending.count, 1
     assert_equal @pending.status, 'pending'
 
     # Unapproved tent got approved, rest stays the same
     @unapproved.reload
-    assert Reservation.exists? @unapproved
+    assert Reservation.exists? @unapproved.id
     assert_equal @unapproved.count, 1
     assert_equal @unapproved.status, 'approved'
   end
@@ -178,13 +178,13 @@ class ReservationsControllerTest < ActionController::TestCase
 
     # Tent remained the same
     @approved_vtk.reload
-    assert Reservation.exists? @approved_vtk
+    assert Reservation.exists? @approved_vtk.id
     assert_equal @approved_vtk.count, 4
     assert_equal @approved_vtk.status, 'approved'
 
     # Unapproved tent got approved, rest stays the same
     @pending_vlak.reload
-    assert Reservation.exists? @pending_vlak
+    assert Reservation.exists? @pending_vlak.id
     assert_equal @pending_vlak.count, 1
     assert_equal @pending_vlak.status, 'approved'
   end

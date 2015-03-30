@@ -1,5 +1,18 @@
 module ReservationsHelper
 
+  def row_colour(r)
+    if not Settings.instance.deadline.nil? and Settings.instance.deadline < DateTime.now then (r.picked_up_count <= r.brought_back_count) ? 'success' : 'danger'
+    else
+      if r.status.approved?
+        'success'
+      elsif r.status.pending?
+        'warning'
+      else
+        'danger'
+      end
+    end
+  end
+
   def status(s)
     if s.approved?
       '<span class="glyphicon glyphicon-ok" title="Approved"></span>'
