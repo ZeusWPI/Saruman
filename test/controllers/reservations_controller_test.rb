@@ -22,7 +22,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test "should create reservation" do
     assert_difference 'Reservation.count', +1 do
-      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 }
     end
 
     assert_response :success
@@ -32,7 +32,7 @@ class ReservationsControllerTest < ActionController::TestCase
     Settings.instance.update_attributes! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +0 do
-      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 }
     end
 
     assert_response :redirect
@@ -48,7 +48,7 @@ class ReservationsControllerTest < ActionController::TestCase
     Settings.instance.update_attributes! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +1 do
-      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: 2, count: 5 }
+      xhr :post, :create, user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 }
     end
 
     assert_response :success
@@ -188,4 +188,22 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_equal @pending_vlak.count, 1
     assert_equal @pending_vlak.status, 'approved'
   end
+
+  test "should be able to revert normal pick up" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    @approved_vtk = reservations(:vtk_stoel_approved)
+
+  end
+
+  test "should be able to revert forced increasing pick up" do
+  end
+
+  test "should be able to revert forced new pick up" do
+  end
+
+  test "should be able to revert bringback" do
+  end
+
 end

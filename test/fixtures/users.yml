@@ -26,13 +26,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 tom:
-  id: 101
   name: Tom
   email: silox@zeus.com
   role: admin
 
 vtk:
-  id: 1
   name: VTK
   email: vtk@iets.com
   authentication_token: blargh
@@ -40,14 +38,12 @@ vtk:
   barcode: 1337
 
 hilok:
-  id: 2
   name: HILOK
   email: hilok@nogwat.com
   authentication_token: blargh2
   role: partner
 
 vlak:
- id: 3
  name: VLAK
  email: VLAK@VLAK.VLAK
  authentication_token: sup
