@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id                  :integer          not null, primary key
+#  item_id             :integer
+#  user_id             :integer
+#  count               :integer
+#  fetched             :integer
+#  brought_back        :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  status              :integer          default(1)
+#  disapproval_message :text
+#  picked_up_count     :integer          default(0)
+#  brought_back_count  :integer          default(0)
+#
+
 require 'test_helper'
 
 class ReservationTest < ActiveSupport::TestCase

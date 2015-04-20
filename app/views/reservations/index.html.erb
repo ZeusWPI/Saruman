@@ -4,6 +4,8 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#items" data-toggle="tab">Per items</a></li>
       <li><a href="#partners" data-toggle="tab">Per partner</a></li>
+      <li><a href="#partner_barcodes" data-toggle="tab">Partner barcodes</a></li>
+      <li><a href="#item_barcodes" data-toggle="tab">Item barcodes</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -64,6 +66,14 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div class="tab-pane" id="partner_barcodes">
+        <%= render partial: 'barcode_overview', locals: { model: User.partners } %>
+      </div>
+
+      <div class="tab-pane" id="item_barcodes">
+        <%= render partial: 'barcode_overview', locals: { model: Item.all } %>
       </div>
 
     </div>

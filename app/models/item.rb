@@ -23,6 +23,8 @@ class Item < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  before_create :generate_barcode
+
   def price
     from_cents read_attribute(:price)
   end
