@@ -46,6 +46,9 @@ gem 'devise'
 # Paper trail is supercool
 gem 'paper_trail', '~> 4.0.0.beta'
 
+# Paperclip for barcode attachments
+gem "paperclip", "~> 4.2"
+
 # Errbit
 gem 'airbrake'
 

@@ -2,6 +2,6 @@
 <% model.each do |m| %>
   <div class="col-md-6">
     <h4><%= m.name %></h4>
-    <%= render partial: 'barcode', locals: { data: m.barcode_data } %>
+    <%= image_tag m.barcode_img.url %>
   </div>
 <% end %>
