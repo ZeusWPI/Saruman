@@ -10,7 +10,6 @@ module Barcodable
       url: '/system/:hash.:extension',
       hash_secret: Rails.application.secrets.paperclip_secret
     }
-    base.validates_attachment_presence :barcode_img, attachment_presence: true
     base.validates_attachment_content_type :barcode_img, content_type: /\Aimage\/.*\Z/
   end
 
@@ -21,11 +20,13 @@ module Barcodable
     self.barcode = calculated_barcode.caption_data
 
     # Paperclip it
-    Barcodes::Renderer::Image.new(calculated_barcode).render('barcode.png')
+    tmpfile = Tempfile.new(%w(barcode .png))
+    Barcodes::Renderer::Image.new(calculated_barcode).render(tmpfile.path)
 
-    f = File.open('barcode.png')
-    self.barcode_img = f
-    f.close
+    self.barcode_img = tmpfile
+
+    tmpfile.close
+    tmpfile.unlink
   end
 
 end

@@ -4,11 +4,13 @@ class AddBarcodeImgToItemsAndPartners < ActiveRecord::Migration
   def set_barcode_img(m)
     barcode = Barcodes.create('EAN13', data: m.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
 
-    tmpfile = Tempfile.new('barcode.png')
-    Barcodes::Renderer::Image.new(barcode).render(tmpfile)
-    tmpfile.rewind
+    tmpfile = Tempfile.new(%w(barcode .png))
+    Barcodes::Renderer::Image.new(barcode).render(tmpfile.path)
+
     m.barcode_img = tmpfile
+
     tmpfile.close
+    tmpfile.unlink
 
     m.save
   end
