@@ -7,6 +7,7 @@
 #  updated_at :datetime
 #  email      :string(255)
 #  deadline   :datetime
+#  name       :string(255)
 #
 
 class Settings < ActiveRecord::Base
