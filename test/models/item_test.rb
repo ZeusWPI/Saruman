@@ -17,7 +17,14 @@ require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
   verify_fixtures Item
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "should generate barcode" do
+    i = Item.new
+    i.name = "Ding"
+    i.price = 0
+    i.save!
+
+    assert_not_nil i.barcode
+    assert_not_nil i.barcode_data
+  end
 end
