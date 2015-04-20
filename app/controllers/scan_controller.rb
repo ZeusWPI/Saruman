@@ -38,21 +38,21 @@ class ScanController < ApplicationController
     @reservation = @partner.reservations.approved.find_by_item_id @item.id
     if @reservation
       # Item found: increase and picked up count
-      flash[:notice] = "Increased the existing reservation with #{@reservation.picked_up_count + @count - @reservation.count}x #{@item.name}."
+      flash[:notice] = "Increased the existing reservation with #{@reservation.picked_up_count + @count - @reservation.count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_user_reservation_path(@partner, @reservation)}."
 
       @reservation.count = @reservation.picked_up_count + @count
       @reservation.picked_up_count = @reservation.picked_up_count + @count
       @reservation.save
     else
-      # No approved reservation for this item: add a new one
-      flash[:notice] = "Created a new reservation for #{@count}x #{@item.name}."
-
       @reservation = @partner.reservations.new
       @reservation.count = @count
       @reservation.picked_up_count = @count
       @reservation.item = @item
       @reservation.status = :approved
       @reservation.save
+
+      # No approved reservation for this item: add a new one
+      flash[:notice] = "Created a new reservation for #{@count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_user_reservation_path(@partner, @reservation)}."
     end
 
     redirect_to action: :scan
@@ -84,7 +84,7 @@ class ScanController < ApplicationController
       reservation.save
 
       # Notice the partner how many items he has left
-      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. He has #{reservation.picked_up_count - reservation.brought_back_count}x #{@item.name} remaining."
+      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. He has #{reservation.picked_up_count - reservation.brought_back_count}x #{@item.name} remaining. #{view_context.link_to 'Revert this checkin', revert_user_reservation_path(@partner, reservation)}."
     else
       # No reservations: display a warning
       flash[:warning] = "#{@partner.name} does not has a reservation for this item."
@@ -108,7 +108,7 @@ class ScanController < ApplicationController
         @reservation.save
 
         # Notice the partner how many items he is allowed to pick up
-        flash[:notice] = "#{@partner.name} picked up #{@count}x #{@item.name}. He has still #{@reservation.count - @reservation.picked_up_count}x #{@item.name} remaining to pick up."
+        flash[:success] = "#{@partner.name} picked up #{@count}x #{@item.name}. He has still #{@reservation.count - @reservation.picked_up_count}x #{@item.name} remaining to pick up. #{view_context.link_to 'Revert this checkout', revert_user_reservation_path(@partner, @reservation)}."
         redirect_to action: :scan
       end
     else
