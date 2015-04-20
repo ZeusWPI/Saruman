@@ -194,16 +194,70 @@ class ReservationsControllerTest < ActionController::TestCase
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_stoel_approved)
+    @approved_vtk.picked_up_count = 4
+    @approved_vtk.save
 
+    @approved_vtk.reload
+    assert @approved_vtk.picked_up_count == 4
+    assert @approved_vtk.count == 4
+
+    get :revert, user_id: users(:vtk), id: @approved_vtk
+    assert_response :redirect
+
+    @approved_vtk.reload
+    assert @approved_vtk.picked_up_count == 0
   end
 
   test "should be able to revert forced increasing pick up" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    @approved_vtk = reservations(:vtk_stoel_approved)
+    @approved_vtk.count = 6
+    @approved_vtk.picked_up_count = 6
+    @approved_vtk.save
+
+    @approved_vtk.reload
+    assert @approved_vtk.picked_up_count == 6
+    assert @approved_vtk.count == 6
+
+    get :revert, user_id: users(:vtk), id: @approved_vtk
+    assert_response :redirect
+
+    @approved_vtk.reload
+    assert @approved_vtk.picked_up_count == 0
+    assert @approved_vtk.count == 4
   end
 
   test "should be able to revert forced new pick up" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    @approved_vtk = reservations(:vtk_stoel_approved)
+
+    assert_difference 'Reservation.count', -1, 'A Reservation should be destroyed' do
+      get :revert, user_id: users(:vtk), id: @approved_vtk
+    end
+
+    assert_response :redirect
   end
 
   test "should be able to revert bringback" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    @approved_vtk = reservations(:vtk_vat_approved_picked_up)
+    @approved_vtk.brought_back_count = 2
+    @approved_vtk.save
+
+    @approved_vtk.reload
+    assert @approved_vtk.brought_back_count == 2
+
+    get :revert, user_id: users(:vtk), id: @approved_vtk
+    assert_response :redirect
+
+    @approved_vtk.reload
+    assert @approved_vtk.brought_back_count == 0
   end
 
 end

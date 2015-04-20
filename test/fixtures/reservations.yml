@@ -52,3 +52,10 @@ vtk_stoel_unapproved:
   user: vtk
   count: 4
   status: 0
+
+vtk_vat_approved_picked_up:
+  item: vat
+  user: vtk
+  count: 4
+  picked_up_count: 2
+  status: 2
