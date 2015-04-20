@@ -69,31 +69,11 @@
       </div>
 
       <div class="tab-pane" id="partner_barcodes">
-        <h3>Partner barcodes</h3>
-        <% User.partners.each do |p| %>
-          <div class="col-md-6">
-            <h4><%= p.name %></h4>
-            <%
-              barcode = Barcodes.create('EAN13', data: p.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
-              rendered = Barcodes::Renderer::Image.new(barcode).render
-            %>
-            <img src="data:image/png;base64,<%= Base64.encode64 rendered %>" />
-          </div>
-        <% end %>
+        <%= render partial: 'barcode_overview', locals: { model: User.partners } %>
       </div>
 
       <div class="tab-pane" id="item_barcodes">
-        <h3>Item barcodes</h3>
-        <% Item.all.each do |i| %>
-          <div class="col-md-6">
-            <h4><%= i.name %></h4>
-            <%
-              barcode = Barcodes.create('EAN13', data: i.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
-              rendered = Barcodes::Renderer::Image.new(barcode).render
-            %>
-            <img src="data:image/png;base64,<%= Base64.encode64 rendered %>" />
-          </div>
-        <% end %>
+        <%= render partial: 'barcode_overview', locals: { model: Item.all } %>
       </div>
 
     </div>
