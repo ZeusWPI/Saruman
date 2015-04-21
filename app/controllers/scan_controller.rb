@@ -8,23 +8,41 @@ class ScanController < ApplicationController
     authorize! :manage, :all
   end
 
+  def list_items
+    authorize! :manage, :all
+    render json: Item.all
+  end
+
+  def list_partners
+    authorize! :manage, :all
+    render json: User.partners
+  end
+
   def check
     authorize! :manage, :all
 
-    if blanks(params)
+    if blanks params
       flash[:error] = "Please fill in all fields."
       redirect_to action: :scan
-    else
-      @partner = User.partners.find_by_barcode(params.require(:scan)[:partner_code]) || User.partners.find_by_id(params.require(:scan)[:partner_id])
-      @item = Item.find_by_id params.require(:scan)[:item_id]
-
-      if @partner and @item
-        process_check
-      else
-        flash[:error] = "The item or partner does not exist."
-        redirect_to action: :scan
-      end
+      return
     end
+
+    partner_barcode = params.require(:scan)[:partner].rstrip.split.last
+    item_barcode = params.require(:scan)[:item].rstrip.split.last
+
+    @partner = User.partners.find_by_barcode partner_barcode
+    @item = Item.find_by_barcode item_barcode
+
+    if @partner and @item
+      process_check
+    else
+      flash[:error] = "The item or partner does not exist."
+      redirect_to action: :scan
+    end
+  end
+
+  def blanks(params)
+    params.require(:scan)[:partner].blank? or params.require(:scan)[:item].blank? or params.require(:scan)[:count].blank?
   end
 
   def force
@@ -69,10 +87,6 @@ class ScanController < ApplicationController
     else
       check_out params.require(:scan)
     end
-  end
-
-  def blanks(params)
-    (params.require(:scan)[:partner_code].blank? and params.require(:scan)[:partner_id].blank?) or params.require(:scan)[:item_id].blank? or params.require(:scan)[:count].blank?
   end
 
   def check_in(params)

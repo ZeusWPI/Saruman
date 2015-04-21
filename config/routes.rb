@@ -31,8 +31,13 @@ Saruman::Application.routes.draw do
   resources :settings
   resources :items
 
-  get 'scan', to: 'scan#scan'
-  post 'check', to: 'scan#check'
-  post 'force', to: 'scan#force'
+  scope "/scan" do
+    get 'scan', to: 'scan#scan'
+    get 'list_partners', to: 'scan#list_partners'
+    get 'list_items', to: 'scan#list_items'
+    post 'check', to: 'scan#check'
+    post 'force', to: 'scan#force'
+  end
+
   get 'reservations', to: 'reservations#index'
 end

@@ -30,27 +30,16 @@
           </label>
         </div><br /><br />
 
-        <div class="row">
-          <div class="col-sm-5">
-            <div class="form-group">
-              <label for="partner_code">Partner code:</label>
-              <input class="form-control" id="partner_code" name="scan[partner_code]" type="text" autofocus>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <strong>OR</strong>
-          </div>
-          <div class="col-sm-5">
-            <div class="form-group">
-              <label for="partner_id">Partner:</label>
-              <%= collection_select :scan, :partner_id, User.partners, :id, :name, {include_blank: ''}, class: 'form-control' %>
-            </div>
-          </div>
+        <div class="form-group typeahead-scan">
+          <label for="partner">Partner:</label>
+          <input required type="text" class="form-control typeahead"
+            placeholder="Start searching by entering a name or barcode" name="scan[partner]" id="partner">
         </div>
 
-        <div class="form-group">
-          <label for="item_id">Item:</label>
-          <%= collection_select :scan, :item_id, Item.all, :id, :name_with_descr_price, {include_blank: ''}, class: 'form-control' %>
+        <div class="form-group typeahead-scan">
+          <label for="item">Item:</label>
+          <input required type="text" class="form-control typeahead"
+            placeholder="Start searching by entering a name or barcode" name="scan[item]" id="item">
         </div>
 
         <div class="form-group">
@@ -63,3 +52,91 @@
     </div>
   </div>
 </div>
+
+<script>
+// Partners
+var partners = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'barcode'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '<%= list_partners_path %>'
+});
+
+partners.initialize();
+
+$('#partner').typeahead(
+    {
+        hint: true,
+        highlight: true,
+        minLength: 1,
+        autoselect: true
+    },
+    {
+        name: 'partner',
+        displayKey: function(partner) {
+          return partner.name + ' - ' + partner.barcode;
+        },
+        source: partners.ttAdapter(),
+        templates: {
+            suggestion: function(item) {
+                var container = $('<div/>');
+                var name = $('<span/>', {
+                    class: "typeahead-scan-name",
+                    text: item.name
+                });
+                var barcode = $('<span/>', {
+                    class: "typeahead-scan-barcode",
+                    text: item.barcode
+                });
+                return container.append(name).append(barcode);
+            }
+        }
+    }
+).bind("typeahead:selected", function(obj, datum, name) {
+  $('#item').focus();
+}).bind("typeahead:autocompleted", function(obj, datum, name) {
+  $('#item').focus();
+});
+
+// Items
+var items = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'barcode'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '<%= list_items_path %>'
+});
+
+items.initialize();
+
+$('#item').typeahead(
+    {
+        hint: true,
+        highlight: true,
+        minLength: 1,
+        autoselect: true
+    },
+    {
+        name: 'items',
+        displayKey: function(item) {
+          return item.name + ' - ' + item.barcode;
+        },
+        source: items.ttAdapter(),
+        templates: {
+            suggestion: function(item) {
+                var container = $('<div/>');
+                var name = $('<span/>', {
+                    class: "typeahead-scan-name",
+                    text: item.name
+                });
+                var barcode = $('<span/>', {
+                    class: "typeahead-scan-barcode",
+                    text: item.barcode
+                });
+                return container.append(name).append(barcode);
+            }
+        }
+    }
+).bind("typeahead:selected", function(obj, datum, name) {
+  $('#count').focus();
+}).bind("typeahead:autocompleted", function(obj, datum, name) {
+  $('#count').focus();
+});
+</script>
