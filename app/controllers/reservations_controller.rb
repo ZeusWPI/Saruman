@@ -95,7 +95,26 @@ class ReservationsController < ApplicationController
       @reservation.disapproval_message = params.require(:disapprove).require(:reason)
       @reservation.save
     end
+  end
 
+  def revert
+    authorize! :manage, :all
+
+    @reservation = Reservation.find params.require(:id)
+
+    # If the previous version is nil; there was a force create
+    if @reservation.previous_version.nil?
+      # Delete it
+      @reservation.destroy
+    else
+      # Restore the previous version
+      @reservation = @reservation.previous_version
+      @reservation.save
+    end
+
+    flash[:notice] = "Scan has been reverted."
+
+    redirect_to scan_path
   end
 
   private
