@@ -1,3 +1,28 @@
 // Place all the styles related to the scan controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.typeahead-scan {
+  .typeahead-scan-name {
+    float: left;
+  }
+
+  .typeahead-scan-barcode {
+    color: #777;
+    float: right;
+  }
+
+  .tt-highlight {
+    color: #3276B1;
+    text-decoration: none;
+  }
+
+  .tt-cursor {
+      background-color: #eee;
+    }
+
+    .tt-suggestion {
+      overflow: hidden;
+    }
+  }
+

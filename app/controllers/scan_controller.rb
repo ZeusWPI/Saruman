@@ -8,6 +8,16 @@ class ScanController < ApplicationController
     authorize! :manage, :all
   end
 
+  def list_items
+    authorize! :manage, :all
+    render json: Item.all
+  end
+
+  def list_partners
+    authorize! :manage, :all
+    render json: User.partners
+  end
+
   def check
     authorize! :manage, :all
 
