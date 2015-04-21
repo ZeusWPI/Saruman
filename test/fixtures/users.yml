@@ -35,16 +35,18 @@ vtk:
   email: vtk@iets.com
   authentication_token: blargh
   role: partner
-  barcode: 1337
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 hilok:
   name: HILOK
   email: hilok@nogwat.com
   authentication_token: blargh2
   role: partner
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 vlak:
- name: VLAK
- email: VLAK@VLAK.VLAK
- authentication_token: sup
- role: partner
+  name: VLAK
+  email: VLAK@VLAK.VLAK
+  authentication_token: sup
+  role: partner
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
