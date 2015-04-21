@@ -93,6 +93,8 @@ $('#partner').typeahead(
     }
 ).bind("typeahead:selected", function(obj, datum, name) {
   $('#item').focus();
+}).bind("typeahead:autocompleted", function(obj, datum, name) {
+  $('#item').focus();
 });
 
 // Items
@@ -133,6 +135,8 @@ $('#item').typeahead(
         }
     }
 ).bind("typeahead:selected", function(obj, datum, name) {
+  $('#count').focus();
+}).bind("typeahead:autocompleted", function(obj, datum, name) {
   $('#count').focus();
 });
 </script>
