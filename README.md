@@ -1,5 +1,5 @@
-Saruman [![Build Status](https://travis-ci.org/ZeusWPI/Saruman.png?branch=master)](https://travis-ci.org/ZeusWPI/Saruman) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Saruman/badge.png?branch=master)](https://coveralls.io/r/ZeusWPI/Saruman?branch=master) [![Code Climate](https://codeclimate.com/github/ZeusWPI/Saruman.png)](https://codeclimate.com/github/ZeusWPI/Saruman)
-=======
+# [Saruman](http://materiaal.12urenloop.be) [![Code Climate](https://codeclimate.com/github/ZeusWPI/Saruman/badges/gpa.svg)](https://codeclimate.com/github/ZeusWPI/Saruman) [![Travis CI](https://travis-ci.org/ZeusWPI/Saruman.svg)](https://travis-ci.org/ZeusWPI/Saruman) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Saruman/badge.svg?branch=master&service=github)](https://coveralls.io/github/ZeusWPI/Saruman?branch=master)
+
 ![Saruman the white](http://25.media.tumblr.com/tumblr_m26l1xbEev1qb9ftxo1_500.gif)
 
 
