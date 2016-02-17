@@ -17,7 +17,7 @@
 #= require_tree .
 
 ready = ->
-  $("#login-button").tooltip()
+  $("[data-toggle=tooltip]").tooltip()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
