@@ -13,7 +13,14 @@
 require 'test_helper'
 
 class SettingsTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "expired? to return correct value" do
+    Settings.instance.update_attributes deadline: nil
+    assert_not Settings.instance.expired?
+
+    Settings.instance.update_attributes deadline: DateTime.now + 10.minutes
+    assert_not Settings.instance.expired?
+
+    Settings.instance.update_attributes deadline: DateTime.now - 10.minutes
+    assert Settings.instance.expired?
+  end
 end

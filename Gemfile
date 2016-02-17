@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'annotate'
 
 # CanCan is used for authorization
-gem 'cancan'
+gem 'cancancan'
 gem 'httparty'
 
 # Acts as singleton

@@ -15,4 +15,8 @@ class Settings < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, presence: true, email: true
+
+  def expired?
+    !deadline.blank? && deadline < DateTime.now
+  end
 end
