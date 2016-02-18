@@ -12,7 +12,7 @@ class Ability
 
     when 'partner'
       # Partners can only show their user
-      can :show, User, id: user.id
+      can :show, user
 
       # And crud their own registrations if there is no deadline or the
       # deadline hasn't expired yet
