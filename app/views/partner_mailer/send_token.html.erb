@@ -7,13 +7,13 @@
    <body>
      <p>Beste <%= @partner.name %>,</p>
 
-     <p>Wij, de <%= Settings.instance.name || "fillmein" %>, zouden u graag uitnodigen voor de <%= Settings.instance.name || "fillmein" %>. Zoals elk jaar kunnen jullie bij ons terecht voor al jullie bestellingen. Klik op onderstaande link om in te loggen en je bestelling te plaatsen. Houd deze pagina in het oog zodat jullie op de hoogte blijven van nieuwe items, aanvaarde of onaanvaarde bestellingen ...</p>
+     <p>Wij, de <%= Settings.instance.organisation_name || "fillmein" %>, zouden u graag uitnodigen voor de <%= Settings.instance.event_name || "fillmein" %>. Zoals elk jaar kunnen jullie bij ons terecht voor al jullie bestellingen. Klik op onderstaande link om in te loggen en je bestelling te plaatsen. Houd deze pagina in het oog zodat jullie op de hoogte blijven van nieuwe items, aanvaarde of onaanvaarde bestellingen ...</p>
 
      <p><%= link_to sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token), sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %></p>
 
      <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
 
-     <p>Met vriendelijke groet,<br />De <%= Settings.instance.name || "fillmein" %></p>
+     <p>Met vriendelijke groet,<br />De <%= Settings.instance.organisation_name || "fillmein" %></p>
 
   </body>
 </html>
