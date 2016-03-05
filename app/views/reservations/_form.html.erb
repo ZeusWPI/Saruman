@@ -1,32 +1,18 @@
-<tr>
-  <%= form_for [object.user, object], remote: true do |f| %>
-    <td>
-      <% if button_name == 'Save' %>
-        <%= object.item.name %>
-      <% else %>
-        <%= f.collection_select :item_id, Item.all, :id, :name_with_descr_price, {}, class: 'form-control' %>
-      <% end %>
-    </td>
-    <td></td>
-    <td class="col-lg-1"><%= f.number_field :count, size: 4, class: 'form-control' %></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></td>
-    <%= javascript_tag do %>
-      var id = "#<% if button_name == 'Save' %>edit_<% end %><%= dom_id(f.object) %>";
-      var inputs = $(id).parent().find('input');
-      var select = $(id).parent().find('select');
-
-      $(id).parent().find('input[type="submit"]').on('click', function(e) {
-        e.preventDefault();
-        $(id).append(inputs.clone());
-        $(id).append("<input type='hidden' name='reservation[item_id]' value='" + select.val() + "'>");
-        $(id).append('<input type="hidden" name="_method" value="<%= action %>">');
-        $(id).submit();
-      });
+<%= form_for [object.user, object], remote: true,
+  html: { class: "tr new_reservation" } do |f| %>
+  <span class="td">
+    <% if button_name == 'Save' %>
+      <%= object.item.name %>
+    <% else %>
+      <%= f.collection_select :item_id, Item.where(category: category), :id, :name_with_descr_price, {}, class: 'form-control' %>
     <% end %>
-  <% end %>
-</tr>
+  </span>
+  <span class="td"></span>
+  <span class="td"><%= f.number_field :count, size: 4, class: 'form-control' %></span>
+  <span class="td"></span>
+  <span class="td"></span>
+  <span class="td"></span>
+  <span class="td"></span>
+  <span class="td"></span>
+  <span class="td"><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></td>
+<% end %>

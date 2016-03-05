@@ -1,20 +1,20 @@
-<tr class="<%= row_colour(reservation) %>" id="<%= dom_id(reservation) %>">
-  <td><%= reservation.item.name %></td>
-  <td><%= reservation.item.description %></td>
-  <td><%= reservation.count %></td>
-  <td><%= number_with_precision reservation.item.price, precision: 2 %></td>
-  <td><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></td>
-  <td><%= reservation.picked_up_count %></td>
-  <td><%= reservation.brought_back_count %></td>
-  <td>
+<div class="tr <%= row_colour(reservation) %>" id="<%= dom_id(reservation) %>">
+  <span class="td"><%= reservation.item.name %></span>
+  <span class="td"><%= reservation.item.description %></span>
+  <span class="td"><%= reservation.count %></span>
+  <span class="td"><%= number_with_precision reservation.item.price, precision: 2 %></span>
+  <span class="td"><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></span>
+  <span class="td"><%= reservation.picked_up_count %></span>
+  <span class="td"><%= reservation.brought_back_count %></span>
+  <span class="td">
     <%= raw(status reservation.status) %>
     <% if reservation.status.disapproved? %>
       <span class="glyphicon glyphicon-question-sign reservation-disapprove-tooltip" data-toggle="tooltip" data-placement="top" title="<%= reservation.disapproval_message %>"></span>
     <% end %>
-  </td>
-  <td>
+  </span>
+  <span class="td">
     <div class="nowrap">
       <%= render "reservations/actions", reservation: reservation %>
     </div>
-  </td>
-</tr>
+  </span>
+</div>

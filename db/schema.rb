@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420190121) do
+ActiveRecord::Schema.define(version: 20160303212948) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name",                     limit: 255
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150420190121) do
     t.string   "barcode_img_content_type"
     t.integer  "barcode_img_file_size"
     t.datetime "barcode_img_updated_at"
+    t.integer  "category"
   end
 
   create_table "reservations", force: :cascade do |t|

@@ -5,5 +5,5 @@
   $('#new_reservation')[0].reset();
 
   <%# break advanced deliberately, how we currently do it will not continue working! %>
-  $('#table-reservations tr:last').before('<%= escape_javascript render @reservation %>')
+  $('#table-reservations-<%= @reservation.item.category %> .tr:last').before('<%= escape_javascript render @reservation %>')
 <% end %>
