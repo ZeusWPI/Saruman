@@ -4,7 +4,4 @@
   $('#reservation-errors').html('')
   $('#edit_<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
   $('#price-statistics').replaceWith("<%= j render 'reservations/statistics' %>");
-  var id = "#new_reservation";
-  var inputs = $(id).parent().find('input');
-  var select = $(id).parent().find('select');
 <% end %>
