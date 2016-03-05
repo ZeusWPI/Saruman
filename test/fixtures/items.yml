@@ -21,23 +21,27 @@
 
 tent:
   name: Tent
+  category: materiaal
   description: Tentjeuhs
   price: 100
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 vat:
   name: Vat
+  category: drank
   description: 2 miljard lieter
   price: 10
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 stoel:
   name: Stoel
+  category: materiaal
   description: Om op te zitten!
   price: 0
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 brood:
   name: Brood
+  category: drank
   price: 2
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>

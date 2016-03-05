@@ -21,7 +21,8 @@ class ItemsControllerTest < ActionController::TestCase
 
   test "should create item" do
     assert_difference 'Item.count', +1 do
-      xhr :post, :create, item: { name: "Toolbox", description: "A generic toolbox", price: 35 }
+      xhr :post, :create, item: { name: "Toolbox", description: "A generic toolbox",
+                                  category: "materiaal", price: 35 }
     end
 
     assert_response :success
