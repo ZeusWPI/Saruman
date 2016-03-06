@@ -1,20 +1,20 @@
 <div class="table-responsive">
-  <table class="table table-striped" id="table-reservations">
-    <thead>
-      <th>Item</th>
-      <th>Item description</th>
-      <th>Count</th>
-      <th>Price</th>
-      <th>Total</th>
-      <th>Picked up</th>
-      <th>Brought back</th>
-      <th>Status</th>
-      <th width="210">Actions <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."></span></th>
-    </thead>
-    <tbody>
+  <div class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
+    <div class="thead">
+      <span class="th">Item</span>
+      <span class="th">Item description</span>
+      <span class="th">Count</span>
+      <span class="th">Price</span>
+      <span class="th">Total</span>
+      <span class="th">Picked up</span>
+      <span class="th">Brought back</span>
+      <span class="th">Status</span>
+      <span class="th" width="210">Actions <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."></span></span>
+    </div>
+    <div class="tbody">
       <%= render reservations %>
       <% if can? :create, Reservation %>
-        <%= render "reservations/form", object: @partner.reservations.new, action: 'post', button_name: "Add reservation" %>
+        <%= render "reservations/form", object: @partner.reservations.new, category: category, action: 'post', button_name: "Add reservation" %>
       <% else %>
         <tr class="warning">
           <td colspan="7">
@@ -23,8 +23,8 @@
           </td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
   <div id='reservation-errors' class='form-errors'>
   </div>
 </div>

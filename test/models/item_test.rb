@@ -25,6 +25,7 @@ class ItemTest < ActiveSupport::TestCase
   test "should generate barcode" do
     i = Item.new
     i.name = "Ding"
+    i.category = "materiaal"
     i.price = 0
     i.save!
 

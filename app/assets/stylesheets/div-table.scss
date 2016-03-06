@@ -1,0 +1,48 @@
+.table {
+  display: table;
+
+  .thead {
+    display: table-header-group;
+  }
+
+  .tbody {
+    display: table-row-group;
+  }
+
+  .tr {
+    display: table-row;
+  }
+
+  .th {
+    font-weight: bold;
+  }
+
+  .th, .td {
+    display: table-cell;
+  }
+}
+
+.table > .tbody > .tr {
+  &.danger > .td {
+    background-color: #f2dede;
+  }
+
+  &.success > .td {
+    background-color: #dff0d8;
+  }
+
+  &.warning > .td {
+    background-color: #fcf8e3;
+  }
+
+  &.active > .td {
+    background-color: #f5f5f5;
+  }
+
+  & > .td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+  }
+}
