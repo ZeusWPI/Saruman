@@ -1,16 +1,16 @@
-<tr id="<%= dom_id(item) %>">
-  <td><%= item.name %></td>
-  <td><%= item.description %></td>
-  <td><%= number_with_precision item.price, precision: 2 %></td>
-  <td><%= item.category %></td>
+<div class="tr" id="<%= dom_id(item) %>">
+  <span class="td"><%= item.name %></span>
+  <span class="td"><%= item.description %></span>
+  <span class="td"><%= number_with_precision item.price, precision: 2 %></span>
+  <span class="td"><%= item.category %></span>
   <% if defined? quantity %>
-    <td><%= quantity %></td>
-    <td><%= number_with_precision quantity*item.price, precision: 2 %></td>
+    <span class="td"><%= quantity %></span>
+    <span class="td"><%= number_with_precision quantity*item.price, precision: 2 %></span>
   <% else %>
-    <td>
+    <span class="td">
       <div class="nowrap">
-      <%= render "items/actions", item: item %>
+        <%= render "items/actions", item: item %>
       </div>
-    </td>
+    </span>
   <% end %>
-</tr>
+</div>

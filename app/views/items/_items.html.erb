@@ -1,15 +1,15 @@
 <div class="table-responsive">
-  <table class="table table-striped" id="table-items">
-    <thead>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th width="210">Actions <span id="actions-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Reserved items can not be deleted. Remove the reservations first."></span></th>
-    </thead>
-    <tbody>
+  <div class="table table-striped" id="table-items">
+    <div class="thead">
+      <span class="th">Name</span>
+      <span class="th">Description</span>
+      <span class="th">Price</span>
+      <span class="th">Category</span>
+      <span class="th" width="210">Actions <span id="actions-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Reserved items can not be deleted. Remove the reservations first."></span></span>
+    </div>
+    <div class="tbody">
       <%= render @items %>
       <%= render "items/form", object: Item.new, action: 'post', button_name: "Add item" %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>
