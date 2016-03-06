@@ -17,4 +17,8 @@ class Settings < ActiveRecord::Base
   validates :organisation_name, presence: true
   validates :event_name, presence: true
   validates :email, presence: true, email: true
+
+  def expired?
+    !deadline.blank? && deadline < DateTime.now
+  end
 end

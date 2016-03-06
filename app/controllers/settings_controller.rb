@@ -11,6 +11,7 @@ class SettingsController < ApplicationController
   end
 
   private
+
   def settings_params
     params.require(:settings).permit(:organisation_name, :event_name, :email, :deadline)
   end
