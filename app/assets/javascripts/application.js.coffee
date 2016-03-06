@@ -14,10 +14,7 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require twitter/typeahead.min
+#= require bootstrap.min
+#= require bootstrap-datetimepicker.min
+#= require format-date
 #= require_tree .
-
-ready = ->
-  $("[data-toggle=tooltip]").tooltip()
-
-$(document).ready(ready)
-$(document).on('page:load', ready)
