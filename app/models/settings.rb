@@ -2,17 +2,23 @@
 #
 # Table name: settings
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime
-#  updated_at :datetime
-#  email      :string(255)
-#  deadline   :datetime
-#  name       :string(255)
+#  id                :integer          not null, primary key
+#  created_at        :datetime
+#  updated_at        :datetime
+#  email             :string(255)
+#  deadline          :datetime
+#  event_name        :string(255)
+#  organisation_name :string           default(""), not null
 #
 
 class Settings < ActiveRecord::Base
   acts_as_singleton
 
-  validates :name, presence: true
+  validates :organisation_name, presence: true
+  validates :event_name, presence: true
   validates :email, presence: true, email: true
+
+  def self.instance
+    @settings ||= first || create
+  end
 end

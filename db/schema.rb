@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303212948) do
+ActiveRecord::Schema.define(version: 20160303232824) do
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",                     limit: 255
-    t.string   "description",              limit: 255
+    t.string   "name"
+    t.string   "description"
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity"
-    t.string   "barcode",                  limit: 255
-    t.string   "barcode_data",             limit: 255
+    t.string   "barcode"
+    t.string   "barcode_data"
     t.string   "barcode_img_file_name"
     t.string   "barcode_img_content_type"
     t.integer  "barcode_img_file_size"
@@ -49,30 +49,31 @@ ActiveRecord::Schema.define(version: 20160303212948) do
   create_table "settings", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",      limit: 255
+    t.string   "email"
     t.datetime "deadline"
-    t.string   "name",       limit: 255
+    t.string   "event_name"
+    t.string   "organisation_name", default: "", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                    limit: 255, default: "",        null: false
-    t.string   "encrypted_password",       limit: 255, default: "",        null: false
-    t.string   "reset_password_token",     limit: 255
+    t.string   "email",                    default: "",        null: false
+    t.string   "encrypted_password",       default: "",        null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0,         null: false
+    t.integer  "sign_in_count",            default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",       limit: 255
-    t.string   "last_sign_in_ip",          limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "authentication_token",     limit: 255
-    t.string   "role",                     limit: 255, default: "partner"
-    t.string   "name",                     limit: 255
-    t.boolean  "sent",                                 default: true
-    t.string   "barcode",                  limit: 255
-    t.string   "barcode_data",             limit: 255
+    t.string   "authentication_token"
+    t.string   "role",                     default: "partner"
+    t.string   "name"
+    t.boolean  "sent",                     default: true
+    t.string   "barcode"
+    t.string   "barcode_data"
     t.string   "barcode_img_file_name"
     t.string   "barcode_img_content_type"
     t.integer  "barcode_img_file_size"
@@ -84,10 +85,10 @@ ActiveRecord::Schema.define(version: 20160303212948) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",      limit: 255, null: false
-    t.integer  "item_id",                    null: false
-    t.string   "event",          limit: 255, null: false
-    t.string   "whodunnit",      limit: 255
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
+    t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
     t.text     "object_changes"
