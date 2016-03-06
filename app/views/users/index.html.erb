@@ -3,19 +3,18 @@
     <h3>Manage Partners</h3>
 
       <div class="table-responsive">
-        <table class="table table-striped" id="table-partners">
-          <thead>
-            <th>Name</th>
-            <th>Email</th>
-            <th width="210">Actions</th>
-          </thead>
-          <tbody>
+        <div class="table table-striped" id="table-partners">
+          <div class="thead">
+            <span class="th">Name</span>
+            <span class="th">Email</span>
+            <span class="th">Actions</span>
+          </div>
+          <div class="tbody">
             <%= render @partners %>
-            <%= render "users/form", object: User.new, action: 'post', button_name: "Add Partner" %>
-          </tbody>
-        </table>
-        <div id='partner-errors' class='form-errors'>
+            <%= render "users/form", object: User.new, button_name: "Add Partner" %>
+          </div>
         </div>
+        <div id='partner-errors' class='form-errors'></div>
       </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
     <div class="tbody">
       <%= render reservations %>
       <% if can? :create, Reservation %>
-        <%= render "reservations/form", object: @partner.reservations.new, category: category, action: 'post', button_name: "Add reservation" %>
+        <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
       <% else %>
         <tr class="warning">
           <td colspan="7">
