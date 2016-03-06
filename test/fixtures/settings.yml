@@ -2,15 +2,17 @@
 #
 # Table name: settings
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime
-#  updated_at :datetime
-#  email      :string(255)
-#  deadline   :datetime
-#  name       :string(255)
+#  id                :integer          not null, primary key
+#  created_at        :datetime
+#  updated_at        :datetime
+#  email             :string(255)
+#  deadline          :datetime
+#  event_name        :string(255)
+#  organisation_name :string           default(""), not null
 #
 
 instance:
-  name: Student Kick-Off
+  organisation_name: Student Kick-Off
+  event_name: Student Kick-Off
   email: info@12urenloop.be
   deadline: <%= DateTime.now + 1 %>
