@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
   has_many :reservations
 
   validates :name, uniqueness: true, presence: true
-  validates :email, uniqueness: true, presence: true, email: true
 
   before_save do
     self.sent = false if email_changed?
