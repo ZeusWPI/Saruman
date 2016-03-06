@@ -1,12 +1,29 @@
 .table {
   display: table;
+  border-collapse: collapse;
 
   .thead {
     display: table-header-group;
+
+    .tr .th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #ddd;
+    }
+
+    &:first-child > .tr:first-child > .th {
+      border-top: 0;
+    }
   }
 
   .tbody {
     display: table-row-group;
+  }
+
+  .thead > .tr > .th, .tbody > .tr > .td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
   }
 
   .tr {
@@ -40,9 +57,11 @@
   }
 
   & > .td {
-    padding: 8px;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+  }
+}
+
+.table-striped > .tbody > .tr:nth-child(odd) {
+  & > .td, & > .th {
+    background-color: #f9f9f9;
   }
 }

@@ -1,6 +1,7 @@
 <div class="table-responsive">
   <div class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
     <div class="thead">
+      <div class="tr">
       <span class="th">Item</span>
       <span class="th">Item description</span>
       <span class="th">Count</span>
@@ -10,6 +11,7 @@
       <span class="th">Brought back</span>
       <span class="th">Status</span>
       <span class="th" width="210">Actions <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."></span></span>
+      </div>
     </div>
     <div class="tbody">
       <%= render reservations %>
