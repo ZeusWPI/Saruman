@@ -39,6 +39,12 @@
   }
 }
 
+.table-striped > .tbody > .tr:nth-child(odd) {
+  & > .td, & > .th {
+    background-color: #f9f9f9;
+  }
+}
+
 .table > .tbody > .tr {
   &.danger > .td {
     background-color: #f2dede;
@@ -57,11 +63,5 @@
   }
 
   & > .td {
-  }
-}
-
-.table-striped > .tbody > .tr:nth-child(odd) {
-  & > .td, & > .th {
-    background-color: #f9f9f9;
   }
 }
