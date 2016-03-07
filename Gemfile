@@ -55,9 +55,6 @@ gem 'airbrake'
 # Token authentication for the partners
 gem 'simple_token_authentication'
 
-# Enums
-gem 'enumerize'
-
 # Coverall
 gem 'coveralls', require: false
 

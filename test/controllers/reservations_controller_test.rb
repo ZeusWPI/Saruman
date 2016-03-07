@@ -109,17 +109,17 @@ class ReservationsControllerTest < ActionController::TestCase
     sign_out users(:vtk)
     sign_in users(:tom)
 
-    assert @reservation.status.pending?
+    assert @reservation.pending?
 
     xhr :get, :approve, user_id: users(:vtk), id: @reservation
     @reservation.reload
     assert_response :success
-    assert @reservation.status.approved?
+    assert @reservation.approved?
 
     xhr :post, :disapprove, user_id: users(:vtk), disapprove: { id: @reservation.id, reason: "Too many items" }
     @reservation.reload
     assert_response :success
-    assert @reservation.status.disapproved?
+    assert @reservation.disapproved?
     assert_equal @reservation.disapproval_message, "Too many items"
   end
 

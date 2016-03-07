@@ -6,13 +6,13 @@ class ReservationsHelperTest < ActionView::TestCase
     r = reservations(:vtk_tent)
 
     r.status = :approved
-    assert_match(/Approved/, status(r.status))
+    assert_match(/Approved/, status(r))
 
     r.status = :pending
-    assert_match(/Pending/, status(r.status))
+    assert_match(/Pending/, status(r))
 
     r.status = :disapproved
-    assert_match(/Disapproved/, status(r.status))
+    assert_match(/Disapproved/, status(r))
   end
 
 end

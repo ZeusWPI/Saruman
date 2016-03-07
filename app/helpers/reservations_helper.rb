@@ -3,7 +3,7 @@ module ReservationsHelper
   def row_colour(r)
     # Are we after the deadline?
     if not Settings.instance.deadline.nil? and Settings.instance.deadline < DateTime.now
-      if r.status.approved?
+      if r.approved?
         if (r.picked_up_count <= r.brought_back_count)
           'success'
         else
@@ -14,9 +14,9 @@ module ReservationsHelper
       end
     # Reservation phase:
     else
-      if r.status.approved?
+      if r.approved?
         'success'
-      elsif r.status.pending?
+      elsif r.pending?
         'warning'
       else
         'danger'
@@ -24,24 +24,13 @@ module ReservationsHelper
     end
   end
 
-  def status(s)
-    if s.approved?
+  def status(r)
+    if r.approved?
       '<span class="glyphicon glyphicon-ok" title="Approved"></span>'
-    elsif s.pending?
+    elsif r.pending?
       '<span class="glyphicon glyphicon-refresh" title="Pending"></span>'
     else
       '<span class="glyphicon glyphicon-remove" title="Disapproved"></span>'
-    end
-  end
-
-  def status_to_name(s)
-    case s
-    when 0
-      'disapproved'
-    when 1
-      'pending'
-    when 2
-      'approved'
     end
   end
 

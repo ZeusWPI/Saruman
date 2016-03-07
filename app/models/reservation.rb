@@ -17,17 +17,12 @@
 #
 
 class Reservation < ActiveRecord::Base
-  extend Enumerize
-
   has_paper_trail only: [:count, :status, :picked_up_count, :brought_back_count]
-
-  scope :approved, -> { where(status: 2) }
-  scope :not_approved, -> { where.not(status: 2) }
 
   belongs_to :item
   belongs_to :user
 
-  enumerize :status, in: { disapproved: 0, pending: 1, approved: 2 }
+  enum status: %w(disapproved pending approved)
 
   validates :item_id, presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
@@ -35,6 +30,6 @@ class Reservation < ActiveRecord::Base
   before_save :change_status
 
   def change_status
-    self.status = :pending if count_changed? and not self.status.approved?
+    self.status = :pending if count_changed? and not self.approved?
   end
 end
