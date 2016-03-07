@@ -24,7 +24,7 @@ class Reservation < ActiveRecord::Base
 
   enum status: %w(disapproved pending approved)
 
-  validates :item_id, presence: true
+  validates :item, presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
 
   before_save :change_status
