@@ -19,7 +19,7 @@
     display: table-row-group;
   }
 
-  .thead > .tr > .th, .tbody > .tr > .td {
+  .thead > .tr > .th, .tbody > .tr > .th, .tbody > .tr > .td {
     padding: 8px;
     line-height: 1.428571429;
     vertical-align: top;
@@ -60,8 +60,5 @@
 
   &.active > .td {
     background-color: #f5f5f5;
-  }
-
-  & > .td {
   }
 }

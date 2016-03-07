@@ -15,27 +15,31 @@
         In the underlying list, a summary can be found of all the reserved approved items.
 
         <div class="table-responsive">
-          <table class="table table-striped" id="table-items">
-            <thead>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price per item</th>
-              <th>Quantity</th>
-              <th>Total Price</th>
-            </thead>
-            <tbody>
+          <div class="table table-striped" id="table-items">
+            <div class="thead">
+              <div class="tr">
+                <span class="th">Name</span>
+                <span class="th">Description</span>
+                <span class="th">Price per item</span>
+                <span class="th">Category</span>
+                <span class="th">Quantity</span>
+                <span class="th">Total Price</span>
+              </div>
+            </div>
+            <div class="tbody">
               <% @reservations.each do |item, quantity| %>
                 <%= render item, quantity: quantity %>
               <% end %>
-              <tr>
-                <th>Totals:</th>
-                <th></th>
-                <th></th>
-                <th><%= @total_quantity %></th>
-                <th><%= number_with_precision @total_price, precision: 2 %></th>
-              </tr>
-            </tbody>
-          </table>
+              <div class="tr">
+                <span class="th">Totals:</span>
+                <span class="th"></span>
+                <span class="th"></span>
+                <span class="th"></span>
+                <span class="th"><%= @total_quantity %></span>
+                <span class="th"><%= number_with_precision @total_price, precision: 2 %></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
