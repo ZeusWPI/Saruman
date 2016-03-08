@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :registerable
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
 
   validates :name, uniqueness: true, presence: true
 
