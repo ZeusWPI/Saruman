@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-sm-12">
     <h3>Manage items</h3>
-    <%= render "items/items", items: @items %>
+    <% Item.categories.each do |k, c| %>
+      <%= render "items/items", items: @items.where(category: c), category: c %>
+    <% end %>
     <div id='item-errors' class='form-errors'>
     </div>
   </div>

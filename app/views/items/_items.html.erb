@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <div class="table table-striped" id="table-items">
+  <div class="table table-striped" id="table-items-<%= Item.categories.key category %>">
     <div class="thead">
       <div class="tr">
         <span class="th">Name</span>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="tbody">
-      <%= render @items %>
+      <%= render items %>
       <%= render "items/form", object: Item.new, button_name: "Add item" %>
     </div>
   </div>
