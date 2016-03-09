@@ -28,7 +28,7 @@ class Item < ActiveRecord::Base
   validates :price,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :category, presence: true
 
-  enum category: %w[drank materiaal]
+  enum category: %w[drank materiaal tenten]
 
   def price
     from_cents read_attribute(:price)
