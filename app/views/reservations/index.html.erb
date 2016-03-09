@@ -11,36 +11,37 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane active" id="items">
-        <h3>Item</h3>
+        <h3>Items</h3>
         In the underlying list, a summary can be found of all the reserved approved items.
 
-        <div class="table-responsive">
-          <div class="table table-striped" id="table-items">
-            <div class="thead">
-              <div class="tr">
-                <span class="th">Name</span>
-                <span class="th">Description</span>
-                <span class="th">Price per item</span>
-                <span class="th">Category</span>
-                <span class="th">Quantity</span>
-                <span class="th">Total Price</span>
+        <% Item.categories.each do |k,c| %>
+          <h4><%= k %></h4>
+          <div class="table-responsive">
+            <div class="table table-striped" id="table-items">
+              <div class="thead">
+                <div class="tr">
+                  <span class="th">Name</span>
+                  <span class="th">Description</span>
+                  <span class="th">Price per item</span>
+                  <span class="th">Quantity</span>
+                  <span class="th">Total Price</span>
+                </div>
               </div>
-            </div>
-            <div class="tbody">
-              <% @reservations.each do |item, quantity| %>
-                <%= render item, quantity: quantity %>
-              <% end %>
-              <div class="tr">
-                <span class="th">Totals:</span>
-                <span class="th"></span>
-                <span class="th"></span>
-                <span class="th"></span>
-                <span class="th"><%= @total_quantity %></span>
-                <span class="th"><%= number_with_precision @total_price, precision: 2 %></span>
+              <div class="tbody">
+                <% @reservations.category(c).sum(:picked_up_count).each do |item, quantity| %>
+                  <%= render item, quantity: quantity %>
+                <% end %>
+                <div class="tr">
+                  <span class="th">Totals:</span>
+                  <span class="th"></span>
+                  <span class="th"></span>
+                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) %></span>
+                  <span class="th"><%= number_with_precision @total_quantity.category(c).sum_picked_up, precision: 2 %></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
 
       <div class="tab-pane" id="partners">
@@ -65,7 +66,7 @@
               <tr>
                 <th>Totals:</th>
                 <th><%= @total_reservations %></th>
-                <th><%= number_with_precision @total_price, precision: 2 %></th>
+                <th><%= number_with_precision @total_quantity.joins(:item).sum_picked_up, precision: 2 %></th>
               </tr>
             </tbody>
           </table>

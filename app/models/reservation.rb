@@ -33,6 +33,14 @@ class Reservation < ActiveRecord::Base
     self.status = :pending if count_changed? and not self.approved?
   end
 
+  def self.category c
+    joins(:item).where("items.category = ?", c)
+  end
+
+  def self.sum_picked_up
+    sum("reservations.picked_up_count*items.price/100.0")
+  end
+
   def approve
     @duplicate = self.user.reservations.approved.find_by_item_id self.item_id
     if @duplicate.nil?
