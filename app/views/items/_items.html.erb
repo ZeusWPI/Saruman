@@ -1,17 +1,17 @@
+<h4><%= category.humanize %></h4>
 <div class="table-responsive">
-  <div class="table table-striped" id="table-items-<%= Item.categories.key category %>">
+  <div class="table table-striped" id="table-items-<%= category %>">
     <div class="thead">
       <div class="tr">
         <span class="th">Name</span>
         <span class="th">Description</span>
         <span class="th">Price</span>
-        <span class="th">Category</span>
         <span class="th" width="210">Actions <span id="actions-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Reserved items can not be deleted. Remove the reservations first."></span></span>
       </div>
     </div>
     <div class="tbody">
       <%= render items %>
-      <%= render "items/form", object: Item.new, button_name: "Add item" %>
+      <%= render "items/form", object: Item.new, category: category %>
     </div>
   </div>
 </div>

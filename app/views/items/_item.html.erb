@@ -2,7 +2,6 @@
   <span class="td"><%= item.name %></span>
   <span class="td"><%= item.description %></span>
   <span class="td"><%= number_with_precision item.price, precision: 2 %></span>
-  <span class="td"><%= item.category %></span>
   <% if defined? quantity %>
     <span class="td"><%= quantity %></span>
     <span class="td"><%= number_with_precision quantity*item.price, precision: 2 %></span>

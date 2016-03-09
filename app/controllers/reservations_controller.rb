@@ -71,14 +71,14 @@ class ReservationsController < ApplicationController
 
     # If there already is an approved item with the same id; merge these
     @duplicate = @partner.reservations.approved.find_by_item_id @reservation.item_id
-    unless @duplicate.nil?
-      @duplicate.count += @reservation.count
-      @duplicate.save
-      @reservation.destroy
-    else
+    if @duplicate.nil?
       @reservation.disapproval_message = nil
       @reservation.status = :approved
       @reservation.save
+    else
+      @duplicate.count += @reservation.count
+      @duplicate.save
+      @reservation.destroy
     end
   end
 

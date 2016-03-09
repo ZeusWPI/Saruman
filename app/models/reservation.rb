@@ -32,4 +32,17 @@ class Reservation < ActiveRecord::Base
   def change_status
     self.status = :pending if count_changed? and not self.approved?
   end
+
+  def approve
+    @duplicate = self.user.reservations.approved.find_by_item_id self.item_id
+    if @duplicate.nil?
+      self.disapproval_message = nil
+      self.status = :approved
+      self.save
+    else
+      self.count += @duplicate.count
+      self.save
+      @duplicate.destroy
+    end
+  end
 end

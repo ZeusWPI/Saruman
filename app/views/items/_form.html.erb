@@ -2,6 +2,6 @@
   <span class="td"><%= f.text_field :name, class: 'form-control' %></span>
   <span class="td"><%= f.text_field :description, class: 'form-control' %></span>
   <span class="td"><%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %></span>
-  <span class="td"><%= f.select :category, Item.categories.keys, { include_blank: true }, { class: 'form-control' } %></span>
-  <span class="td"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></span>
+  <%= f.hidden_field :category, value: category %>
+  <span class="td"><%= f.button "Add #{category}", class: 'btn btn-sm btn-primary' %></span>
 <% end %>
