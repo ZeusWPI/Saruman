@@ -23,19 +23,19 @@
                   <span class="th">Name</span>
                   <span class="th">Description</span>
                   <span class="th">Price per item</span>
-                  <span class="th">Quantity</span>
+                  <span class="th">Picked Up/Reserved</span>
                   <span class="th">Total Price</span>
                 </div>
               </div>
               <div class="tbody">
-                <% @reservations.category(c).sum(:picked_up_count).each do |item, quantity| %>
-                  <%= render item, quantity: quantity %>
+                <% Reservation.approved.joins(:item).category(c).select("(SUM('reservations'.'picked_up_count' - 'reservations'.'brought_back_count')) AS gone, SUM('reservations'.'count') AS count, 'items'.*, 'reservations'.*").group(:item_id).each do |res| %>
+                  <%= render res.item, picked_up: res.gone, reserved: res.count %>
                 <% end %>
                 <div class="tr">
                   <span class="th">Totals:</span>
                   <span class="th"></span>
                   <span class="th"></span>
-                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) %></span>
+                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) %>/<%= @total_quantity.category(c).sum(:count) %></span>
                   <span class="th"><%= number_with_precision @total_quantity.category(c).sum_picked_up, precision: 2 %></span>
                 </div>
               </div>

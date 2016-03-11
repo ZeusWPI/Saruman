@@ -15,6 +15,7 @@
 #  barcode_img_content_type :string
 #  barcode_img_file_size    :integer
 #  barcode_img_updated_at   :datetime
+#  category                 :integer
 #
 
 require 'test_helper'
