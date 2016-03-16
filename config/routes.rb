@@ -24,6 +24,7 @@ Saruman::Application.routes.draw do
       end
       collection do
         post :disapprove
+        post :approve_all
       end
     end
   end

@@ -5,6 +5,11 @@
     <% Item.categories.each do |k, c| %>
       <%= render "reservations/reservations", reservations: @partner.reservations.joins(:item).where("items.category = ?", c), category: c %>
     <% end %>
+
+    <% if can? :manage, :all %>
+      <%= button_to "Approve all", approve_all_user_reservations_path(@partner),
+        class: "btn btn-primary", data: { confirm: "This will approve all pending reservations for this user." } %>
+    <% end %>
   </div>
 </div>
 
