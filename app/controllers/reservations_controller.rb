@@ -81,6 +81,20 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def approve_all
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
+    @reservations = @partner.reservations.pending
+
+    unless @reservations.empty?
+      authorize! :change_status, @reservations.first
+      @reservations.map(&:approve)
+    end
+
+    flash[:success] = "Approved!"
+    redirect_to @partner
+  end
+
   def disapprove
     @partner = User.partners.find params.require(:user_id)
     authorize! :show, @partner
@@ -117,6 +131,7 @@ class ReservationsController < ApplicationController
   end
 
   private
+
   def reservation_params
     params.require(:reservation).permit(:count)
   end

@@ -42,15 +42,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def approve
-    @duplicate = self.user.reservations.approved.find_by_item_id self.item_id
-    if @duplicate.nil?
+    duplicate = self.user.reservations.approved.find_by_item_id self.item_id
+    if duplicate.nil?
       self.disapproval_message = nil
       self.status = :approved
       self.save
     else
-      self.count += @duplicate.count
-      self.save
-      @duplicate.destroy
+      duplicate.count += self.count
+      duplicate.save
+      self.destroy
     end
   end
 end

@@ -123,6 +123,28 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_equal @reservation.disapproval_message, "Too many items"
   end
 
+  test "partners can't approve_all" do
+    xhr :post, :approve_all, user_id: users(:vtk)
+    assert_response :redirect
+    assert_not_equal Reservation.where(user_id: users(:vtk)).pending.size, 0
+  end
+
+  test "only admins can approve_all" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    xhr :post, :approve_all, user_id: users(:vtk)
+    assert_response :redirect
+  end
+
+  test "approve_all reservations should approve them" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    xhr :post, :approve_all, user_id: users(:vtk)
+    assert_equal Reservation.where(user_id: users(:vtk)).pending.size, 0
+  end
+
   test "partners can't change status" do
     xhr :get, :approve, user_id: users(:vtk), id: @reservation
     assert_response :redirect
