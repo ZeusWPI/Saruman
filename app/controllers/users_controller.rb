@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 
   respond_to :html, :js
 
-  before_action :set_partner, only: [:edit, :update, :destroy, :resend, :send_barcode, :get_barcode]
+  before_action :set_partner, only: [:edit, :update, :destroy,
+                                     :resend, :send_barcode,
+                                     :get_barcode, :send_bill]
 
   def index
     @partners = @users.partners
@@ -68,6 +70,13 @@ class UsersController < ApplicationController
     barcode_pdf = Barcodes::Renderer::Pdf.new(barcode).render
 
     send_data barcode_pdf, filename: "barcode.pdf", type: "application/pdf"
+  end
+
+  def send_bill
+    authorize! :read, :partner
+
+    PartnerMailer.send_bill(@partner).deliver_now
+    redirect_to @partner, notice: "Bill sent"
   end
 
   private

@@ -1,0 +1,44 @@
+#pdf {
+  #header {
+    position: relative;
+    overflow: hidden;
+
+    #header-left {
+      float: left;
+      width: 200px;
+
+      img {
+        max-width: 200px;
+        max-height: 200px
+      }
+    }
+
+    #header-right {
+      float: right;
+      width: 400px;
+      text-align: right;
+    }
+
+    span {
+      font-size: 18px;
+      display: block;
+    }
+  }
+
+  .item-name {
+    display: block;
+  }
+
+  .item-description {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .price {
+    text-align: right;
+  }
+
+  #total-price {
+    text-align: right;
+  }
+}
