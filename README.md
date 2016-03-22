@@ -26,3 +26,4 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * Tom Naessens
 * Felix Van der Jeugt
 * Toon Willems
+* Benjamin Cousaert
