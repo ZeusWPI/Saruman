@@ -15,6 +15,7 @@ Saruman::Application.routes.draw do
       get :resend
       get :send_barcode
       get :get_barcode
+      get :send_bill
     end
 
     resources :reservations do

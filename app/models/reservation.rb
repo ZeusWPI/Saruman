@@ -40,6 +40,11 @@ class Reservation < ActiveRecord::Base
     sum("reservations.picked_up_count*items.price/100.0")
   end
 
+  def self.sum_of_picked_up
+    joins(:item).pluck(:picked_up_count, :brought_back_count, :'items.price')
+      .inject(0) { |sum, (pi, br, pr)| sum + (pi - br) * pr } / 100.0
+  end
+
   def approve
     duplicate = self.user.reservations.approved.find_by_item_id self.item_id
     if duplicate.nil?

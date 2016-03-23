@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+    <%= wicked_pdf_stylesheet_link_tag "bootstrap.min" %>
+  </head>
+  <body id="pdf">
+    <div class="container">
+    <div id="header">
+      <div id="header-left">
+        <%= wicked_pdf_image_tag 'Logo.jpg' %>
+      </div>
+      <div id="header-right">
+        <span>
+          <b>12urenloopcomité 2016</b>
+        </span>
+        <span>Hoveniersberg 24, 9000 Gent</span>
+        <span><%= mail_to "info@12urenloop.be" %></span>
+      </div>
+    </div>
+    <div>
+      <h2>
+        Factuur voor <%= @partner.name %>
+      </h2>
+
+      Naar aanleiding van de <%= Settings.instance.event_name %> hebben jullie 
+      verschillende items bij ons gereserveerd en afgehaald.
+      Hieronder vindt u hiervoor de rekening.
+
+      <h3>Details</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Amount</th>
+            <th class="price">Price per item</th>
+            <th class="price">Total</th>
+          </tr>
+        </thead>
+        <% Item.categories.each do |k,c| %>
+          <thead>
+            <tr>
+              <th colspan=4>
+                <%= content_tag :h5, k %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reservations.category(c).each do |res| %>
+              <% picked_up = res.picked_up_count - res.brought_back_count %>
+              <tr>
+                <td>
+                  <span class="item-name"><%= res.item.name %></span>
+                  <span class="item-description"><%= res.item.description %></span>
+                </td>
+                <td>
+                  <%= picked_up %>
+                </td>
+                <td class="price">
+                  <%= euro res.item.price %>
+                </td>
+                <td class="price">
+                  <%= euro picked_up * res.item.price %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+
+      <div class="row">
+        <div id="total-per-cat" class="col-md-3">
+          <h3>Per categorie</h3>
+          <table class="table">
+            <% Item.categories.each do |k,c| %>
+              <tr>
+                <td><%= k %></td>
+                <td class="price"><%= euro @reservations.category(c).sum_of_picked_up %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+
+        <div id="total-price" class="col-md-3 col-md-offset-6">
+          <h3>Total: <%= euro @reservations.sum_of_picked_up %></h3>
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
+
