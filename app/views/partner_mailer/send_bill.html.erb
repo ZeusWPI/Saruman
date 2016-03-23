@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+   </head>
+
+   <body>
+     <p>Beste <%= @partner.name %>,</p>
+
+     <p>In bijlage vinden jullie een factuur voor het materiaal dat jullie gebruikt hebben op de <%= Settings.instance.event_name %>.</p>
+
+     <p>Als u vragen hierover heeft, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
+
+     <p>Met vriendelijke groet,<br />De <%= Settings.instance.organisation_name || "fillmein" %></p>
+  </body>
+</html>
