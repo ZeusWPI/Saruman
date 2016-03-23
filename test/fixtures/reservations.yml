@@ -6,7 +6,6 @@
 #  item_id             :integer
 #  user_id             :integer
 #  count               :integer
-#  fetched             :integer
 #  brought_back        :integer
 #  created_at          :datetime
 #  updated_at          :datetime

@@ -5,9 +5,9 @@
 #  id                :integer          not null, primary key
 #  created_at        :datetime
 #  updated_at        :datetime
-#  email             :string(255)
+#  email             :string
 #  deadline          :datetime
-#  event_name        :string(255)
+#  event_name        :string
 #  organisation_name :string           default(""), not null
 #
 
