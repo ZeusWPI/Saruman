@@ -2,7 +2,7 @@
   $('#reservation-errors').html("<%= escape_javascript form_errors(@reservation) %>");
 <% else %>
   $('#reservation-errors').html('');
-  $('#new_reservation')[0].reset();
+  $('#table-reservations-<%= @reservation.item.category %> #new_reservation')[0].reset();
 
   <%# break advanced deliberately, how we currently do it will not continue working! %>
   $('#table-reservations-<%= @reservation.item.category %> .tr:last').before('<%= escape_javascript render @reservation %>')
