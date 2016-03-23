@@ -20,7 +20,7 @@ class PartnerMailer < ActionMailer::Base
     @partner = partner
     @reservations = @partner.reservations.approved
 
-    pdf = render_to_string pdf: 'bill.pdf', template: 'users/send_bill.pdf.erb', layout: false
+    pdf = WickedPdf.new.pdf_from_string(render_to_string pdf: 'bill.pdf', template: 'users/send_bill.pdf.erb', layout: false)
     attachments['bill.pdf'] = pdf
 
     mail to: "#{partner.name} <#{partner.email}>", subject: "Bill for #{partner.name}"

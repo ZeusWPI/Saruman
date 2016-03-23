@@ -74,6 +74,9 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-rbenv'
+
+  # Mails
+  gem "letter_opener"
 end
 
 group :production do
