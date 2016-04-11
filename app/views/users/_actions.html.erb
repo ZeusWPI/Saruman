@@ -1,3 +1,7 @@
+<%= link_to scan_user_path(user), class: "btn btn-xs btn-default" do %>
+  <span class="glyphicon glyphicon-log-out"></span>
+  Scan
+<% end %>
 <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_user_path(user), class: "btn btn-default btn-xs", remote: true %>
 <% if user.sent %>
   <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_user_path(user), class: 'btn btn-xs btn-default', remote: true %>

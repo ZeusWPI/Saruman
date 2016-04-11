@@ -18,11 +18,19 @@
   }
 
   .tt-cursor {
-      background-color: #eee;
-    }
-
-    .tt-suggestion {
-      overflow: hidden;
-    }
+    background-color: #eee;
   }
 
+  .tt-suggestion {
+    overflow: hidden;
+  }
+}
+
+.tr span.glyphicon.glyphicon-exclamation-sign {
+  display: none;
+  vertical-align: text-top;
+}
+
+.tr.alert span.glyphicon.glyphicon-exclamation-sign {
+  display: inline-block;
+}
