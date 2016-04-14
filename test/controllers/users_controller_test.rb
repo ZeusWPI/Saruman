@@ -96,4 +96,21 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "fds" do
+    post :process_scan, id: users(:vtk), scan: { scan_items_attributes: {
+      "0": { reservation: reservations(:vtk_tent), pick_up: 1 }
+    } }
+
+    assert_equal 1, reservations(:vtk_tent).reload.picked_up_count
+  end
+
+  test "should be successful" do
+    post :process_scan, id: users(:vtk), scan: { scan_items_attributes: {
+      "0": { reservation: reservations(:vtk_tent), pick_up: 1 }
+    } }
+
+    assert_response :redirect
+    assert_no_match(/picked up/, response.body)
+  end
+
 end
