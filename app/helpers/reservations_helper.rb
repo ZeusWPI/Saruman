@@ -37,7 +37,7 @@ module ReservationsHelper
   def nice_changeset(name, change)
     case name
     when 'status'
-      "Status changed from #{status_to_name(change[0])} to #{status_to_name(change[1])}"
+      "Status changed from #{change[0]} to #{change[1]}"
     when 'count'
       if change[0].blank?
         "Reserved #{pluralize change[1], 'item'}"
