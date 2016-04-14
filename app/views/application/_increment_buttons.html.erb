@@ -4,7 +4,7 @@
       <span class="glyphicon glyphicon-minus"></span>
     </button>
   </span>
-  <%= f.number_field field, class: %w[form-control input-number], min: 0 %>
+  <%= f.number_field field, class: %w[form-control input-number], min: 0, data: { warning: warning } %>
   <span class="input-group-btn">
     <button type="button" class="btn btn-default btn-number" data-increment="1" >
       <span class="glyphicon glyphicon-plus"></span>

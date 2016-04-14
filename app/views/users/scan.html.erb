@@ -31,10 +31,10 @@
                       <span class="glyphicon glyphicon-exclamation-sign"></span>
                     </span>
                     <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :pick_up, f: ff %>
+                      <%= render 'increment_buttons', field: :pick_up, f: ff, warning: true %>
                     </div>
                     <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :bring_back, f: ff %>
+                      <%= render 'increment_buttons', field: :bring_back, f: ff, warning: false %>
                     </div>
                     <span class="td"><%= reservation.brought_back_count %></span>
                   </div>

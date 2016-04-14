@@ -8,12 +8,13 @@ ready = ->
     )
     input.val newVal
 
-    tr = input.closest '.tr'
-    leftover = parseInt tr.find('.leftover').val()
-    if newVal > leftover
-      tr.addClass 'alert'
-    else
-      tr.removeClass 'alert'
+    if input.data('warning')
+      tr = input.closest '.tr'
+      leftover = parseInt tr.find('.leftover').val()
+      if newVal > leftover
+        tr.addClass 'alert'
+      else
+        tr.removeClass 'alert'
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
