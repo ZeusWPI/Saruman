@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   def process_scan
     @scan = Scan.new scan_params
     if @scan.save
-      flash[:notice] = "#{@partner.name} picked up some items."
+      flash[:notice] = "#{@partner.name} #{@scan.notification}."
       redirect_to users_path
     else
       render :scan

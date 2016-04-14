@@ -4,6 +4,7 @@ class Scan
   include ActiveModel::Model
   include ActiveModel::Conversion
   include ActiveModel::Validations
+  include ActionView::Helpers::TextHelper
 
   attr_accessor :scan_items, :partner
 
@@ -38,6 +39,31 @@ class Scan
   def valid?
     super && scan_items.map(&:valid?).all?
   end
+
+  def notification
+    helpers = [
+      notification_helper("picked up", :pick_up),
+      notification_helper("brought back", :bring_back)
+    ].compact
+
+    if helpers.empty?
+      "No changes"
+    else
+      helpers.to_sentence
+    end
+  end
+
+  private
+
+  def notification_helper verb, method
+    items = @scan_items.select{ |si| si.send(method)> 0 }.map{ |si| pluralize(si.send(method), si.reservation.item.name) }
+
+    if items.empty?
+      nil
+    else
+      [verb, items.to_sentence].join ' '
+    end
+  end
 end
 
 class ScanItem
@@ -53,6 +79,14 @@ class ScanItem
     super attr
     @pick_up    ||= 0
     @bring_back ||= 0
+  end
+
+  def pick_up= i
+    @pick_up = i.to_i
+  end
+
+  def bring_back= i
+    @bring_back = i.to_i
   end
 
   def reservation= id
