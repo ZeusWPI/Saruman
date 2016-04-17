@@ -96,7 +96,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "fds" do
+  test "test process multiple scans" do
     post :process_scan, id: users(:vtk), scan: { scan_items_attributes: {
       "0": { reservation: reservations(:vtk_tent), pick_up: 1 }
     } }
