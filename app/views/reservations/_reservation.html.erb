@@ -2,8 +2,6 @@
   <span class="td"><%= reservation.item.name %></span>
   <span class="td"><%= reservation.item.description %></span>
   <span class="td"><%= reservation.count %></span>
-  <span class="td"><%= number_with_precision reservation.item.price, precision: 2 %></span>
-  <span class="td"><%= number_with_precision reservation.item.price*reservation.count, precision: 2 %></span>
   <span class="td"><%= reservation.picked_up_count %></span>
   <span class="td"><%= reservation.brought_back_count %></span>
   <span class="td">

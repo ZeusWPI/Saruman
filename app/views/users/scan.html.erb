@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2><%= @partner.name %></h2>
+    <h3>Manage reservations</h3>
+    <%= form_for @scan, url: process_scan_user_path(@partner) do |f| %>
+      <%= f.submit "Confirm", class: "btn btn-default btn-lg" %>
+      <% Item.categories.each do |k, c| %>
+        <div class="table-responsive">
+          <div class="table table-striped" id="table-reservations-<%= Item.categories.key c %>">
+            <div class="thead">
+              <div class="tr">
+                <span class="th">Item</span>
+                <span class="th">Item description</span>
+                <span class="th">Picked up/Reserved</span>
+                <span class="th">Pick up</span>
+                <span class="th">Bring back</span>
+                <span class="th">Brought back</span>
+              </div>
+            </div>
+            <div class="tbody">
+              <%= f.fields_for :scan_items, @scan.scan_items do |ff| %>
+                <% reservation = ff.object.reservation %>
+                <% if reservation.item.category == k %>
+                  <%= ff.hidden_field :reservation, value: reservation.id %>
+                  <div class="tr" id="<%= dom_id(reservation) %>">
+                    <%= ff.hidden_field :leftover, value: reservation.count - reservation.picked_up_count, class: "leftover" %>
+                    <span class="td"><%= reservation.item.name %></span>
+                    <span class="td"><%= reservation.item.description %></span>
+                    <span class="td">
+                      <%= reservation.picked_up_count %>/<%= reservation.count %>
+                      <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    </span>
+                    <div class="td td-btn-group">
+                      <%= render 'increment_buttons', field: :pick_up, f: ff, warning: true %>
+                    </div>
+                    <div class="td td-btn-group">
+                      <%= render 'increment_buttons', field: :bring_back, f: ff, warning: false %>
+                    </div>
+                    <span class="td"><%= reservation.brought_back_count %></span>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -77,6 +77,7 @@ group :development do
 
   # Mails
   gem "letter_opener"
+  gem 'web-console', '~> 3.0'
 end
 
 group :production do
