@@ -37,7 +37,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.sum_picked_up
-    sum("reservations.picked_up_count*items.price/100.0")
+    sum("(reservations.picked_up_count - reservations.brought_back_count)*items.price/100.0")
   end
 
   def self.sum_of_picked_up

@@ -35,7 +35,7 @@
                   <span class="th">Totals:</span>
                   <span class="th"></span>
                   <span class="th"></span>
-                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) %>/<%= @total_quantity.category(c).sum(:count) %></span>
+                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) - @total_quantity.category(c).sum(:brought_back_count) %>/<%= @total_quantity.category(c).sum(:count) %></span>
                   <span class="th"><%= number_with_precision @total_quantity.category(c).sum_picked_up, precision: 2 %></span>
                 </div>
               </div>
