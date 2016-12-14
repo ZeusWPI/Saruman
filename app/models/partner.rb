@@ -23,8 +23,27 @@
 #
 
 class Partner < ActiveRecord::Base
+  default_scope { order "name ASC" }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  validates :name, uniqueness: true, presence: true
+
+  before_save do
+    self.sent = false if email_changed?
+    true
+  end
+
+  def send_token
+    self.sent = true
+    self.save
+    PartnerMailer.send_token(self).deliver_now
+  end
+
+  def send_barcode
+    PartnerMailer.send_barcode(self).deliver_now
+  end
 end

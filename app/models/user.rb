@@ -18,28 +18,8 @@
 #
 
 class User < ActiveRecord::Base
-  default_scope { order "name ASC" }
-
   devise :database_authenticatable, :recoverable,
          :rememberable, :trackable, :validatable
 
   has_many :reservations, dependent: :destroy
-
-  validates :name, uniqueness: true, presence: true
-
-  before_save do
-    self.sent = false if email_changed?
-    true
-  end
-
-  def send_token
-    self.sent = true
-    self.save
-    PartnerMailer.send_token(self).deliver_now
-  end
-
-  def send_barcode
-    PartnerMailer.send_barcode(self).deliver_now
-  end
-
 end

@@ -2,7 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    return unless user
+    can :manage, :all
+    return #unless user
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
     case user.role

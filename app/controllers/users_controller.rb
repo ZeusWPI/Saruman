@@ -10,7 +10,7 @@ class UsersController < ApplicationController
                                      :scan, :process_scan]
 
   def index
-    @partners = @users.partners
+    @partners = Partner.all
   end
 
   def show
