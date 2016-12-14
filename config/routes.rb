@@ -1,4 +1,5 @@
 Saruman::Application.routes.draw do
+  devise_for :partners
   # Devise
   devise_for :users, skip: [:registrations]
   as :user do
