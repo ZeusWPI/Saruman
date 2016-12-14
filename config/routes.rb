@@ -1,14 +1,19 @@
 Saruman::Application.routes.draw do
   devise_for :partners
-  # Devise
-  devise_for :users, skip: [:registrations]
-  as :user do
-    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+
+  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_scope :user do
+    unauthenticated :user do
+      root to: 'devise/sessions#new'
+    end
   end
+  # as :user do
+    # get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    # put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  # end
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  # root 'devise/sessions#new'
 
   resources :users do # Admin resources to display partners
     member do

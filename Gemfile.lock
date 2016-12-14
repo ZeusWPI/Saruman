@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/doabit/semantic-ui-sass.git
+  revision: b51eed21bcdf9a918414d8ef1b57a43a783e0a39
+  specs:
+    semantic-ui-sass (2.2.6.0)
+      sass (>= 3.2)
+
+GIT
   remote: git://github.com/nudded/barcodes
   revision: a990e2b596025f5414f820f15c84b99e9eaf416b
   specs:
@@ -56,7 +63,6 @@ GEM
     arel (6.0.2)
     bcrypt (3.1.10)
     builder (3.2.2)
-    cancancan (1.13.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -269,7 +275,6 @@ DEPENDENCIES
   airbrake
   annotate
   barcodes!
-  cancancan
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
   capistrano-rbenv
@@ -288,6 +293,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   sass-rails (~> 4.0.0)
   sdoc
+  semantic-ui-sass!
   simple_token_authentication
   sqlite3
   therubyracer
@@ -298,4 +304,4 @@ DEPENDENCIES
   wicked_pdf
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

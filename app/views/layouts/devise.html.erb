@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html id='devise-html'>
+  <head>
+    <title>Saruman</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="ui container">
+      <h1>Saruman</h1>
+
+      <%= yield %>
+
+      <%= render 'layouts/footer' %>
+    </div>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </body>
+</html>

@@ -1,16 +1,20 @@
-<h2>Sign in</h2>
-<div class="alert alert-info">Partners sign in using the link sent by email.</div>
+<div class='ui centered grid'>
+  <div class='eleven wide column sign-in-jumbotron'>
+    Welcome to Saruman, an event material management service brought
+    to you by <a href='http://zeus.ugent.be/' target='_blank'>Zeus WPI</a>
+    and <a href='http://www.fkgent.be/' target='_blank'>FaculteitenKonvent Gent</a>.
+  </div>
+</div>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-  <%= form_email_field f, :email %>
-  <%= form_password_field f, :password %>
-
-  <% if devise_mapping.rememberable? -%>
-    <%= form_check_box f, :remember_me %>
-  <% end -%>
-
-  <%= f.submit "Sign in", class: "btn btn-primary" %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class='ui divided centered grid'>
+  <div class='right floated six wide column'>
+    <div class='sign-in-content'>
+      <%= render 'sign_in' %>
+    </div>
+  </div>
+  <div class='left floated six wide column'>
+    <div class='sign-in-content'>
+      <%= render 'partners' %>
+    </div>
+  </div>
+</div>

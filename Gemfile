@@ -30,8 +30,6 @@ gem 'jbuilder', '~> 1.2'
 # add annotations of schema inside models
 gem 'annotate'
 
-# CanCan is used for authorization
-gem 'cancancan'
 gem 'httparty'
 
 # Acts as singleton
@@ -94,3 +92,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Css Framework
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'

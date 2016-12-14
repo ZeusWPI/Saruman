@@ -9,22 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require devise
+ *= require general
  */
 
-body {
-  padding-top: 80px;
-}
-
-.table-nonfluid {
-  width: auto !important;
-}
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-footer {
-  text-align: center;
-}
-
-.nowrap {
-  white-space: nowrap;
-}
+@import "semantic-ui";
