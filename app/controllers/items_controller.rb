@@ -1,11 +1,13 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-
-  respond_to :html, :js
 
   def index
-    @items = @items.includes(:reservations)
+    @items = Item.all
+  end
+
+  def barcodes
+    @barcodes = Item.all
+    render 'barcodes/barcodes'
   end
 
   def show

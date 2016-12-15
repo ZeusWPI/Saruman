@@ -1,10 +1,15 @@
-<div class="row">
-  <div class="col-sm-12">
-    <h3>Manage items</h3>
-    <% Item.categories.each do |k, c| %>
-      <%= render "items/items", items: @items.where(category: c), category: k %>
-    <% end %>
-    <div id='item-errors' class='form-errors'>
-    </div>
-  </div>
-</div>
+<%= render 'header' %>
+
+<table class='ui very basic striped celled table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'items/item_row', collection: @items, as: :item %>
+  </tbody>
+</table>

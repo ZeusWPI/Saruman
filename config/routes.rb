@@ -12,19 +12,21 @@ Saruman::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :items do
+    collection do
+      get :barcodes
+    end
+  end
   resources :partners do
     collection do
       get :barcodes
     end
   end
+  resources :users
   # as :user do
     # get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     # put 'users' => 'devise/registrations#update', :as => 'user_registration'
   # end
-
-  # You can have the root of your site routed with "root"
-  # root 'devise/sessions#new'
 
   resources :users do # Admin resources to display partners
     member do
@@ -50,7 +52,6 @@ Saruman::Application.routes.draw do
   end
 
   resources :settings
-  resources :items
 
   scope "/scan" do
     get 'scan', to: 'scan#scan'

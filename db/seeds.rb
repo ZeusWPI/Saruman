@@ -6,7 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create email: "benjamin.cousaert@12urenloop.be", password: "password"
-Partner.create email: "benjamin.cousaert@12urenloop.be", name: "benji"
-Partner.create email: "benjamin.cousaert@13urenloop.be", name: "don"
-Partner.create email: "benjamin.cousaert@14urenloop.be", name: "elo"
+# User.create email: "benjamin.cousaert@12urenloop.be", password: "password"
+
+# Partner.create email: "benjamin.cousaert@12urenloop.be", name: "benji"
+# Partner.create email: "benjamin.cousaert@13urenloop.be", name: "don"
+# Partner.create email: "benjamin.cousaert@14urenloop.be", name: "elo"
+
+Item.create name: 'Fanta', description: '24x50cl', price: 350, category: 0
+Item.create name: 'Brandblusapparaat', description: '', price: 0, category: 1

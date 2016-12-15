@@ -1,0 +1,8 @@
+<tr>
+  <td><%= item.name %></td>
+  <td><%= item.description %></td>
+  <td><%= number_with_precision item.price, precision: 2 %></td>
+  <td>
+    <%= link_to 'Remove', item_path(item), method: :delete, class: 'negative ui button' %>
+  </td>
+</tr>

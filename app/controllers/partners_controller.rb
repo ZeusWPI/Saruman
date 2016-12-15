@@ -6,7 +6,8 @@ class PartnersController < ApplicationController
   end
 
   def barcodes
-    @partners = Partner.all
+    @barcodes = Partner.all
+    render 'barcodes/barcodes'
   end
 
   def show
