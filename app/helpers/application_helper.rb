@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def active_link_to body, url
+    link_to_unless_current body, url, class: 'ui item' do
+      link_to body, url, class: 'ui active item'
+    end
+  end
 
   # Prettify helpers
   def nice_time(f)

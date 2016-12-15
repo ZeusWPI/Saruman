@@ -1,15 +1,14 @@
-<div class='ui secondary pointing fluid menu'>
-  <h2 class='ui header'>Users</h2>
-</div>
+<%= render 'header' %>
 
 <table class='ui very basic striped celled table'>
   <thead>
     <tr>
       <th>Email</th>
+      <th>Name</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <%= render partial: 'users/user_row', collection: @users, as: :user %>
+    <%= render partial: 'partners/partner_row', collection: @partners, as: :partner %>
   </tbody>
 </table>

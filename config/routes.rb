@@ -11,6 +11,13 @@ Saruman::Application.routes.draw do
       root to: 'dashboard#show', as: :user_root
     end
   end
+
+  resources :users
+  resources :partners do
+    collection do
+      get :barcodes
+    end
+  end
   # as :user do
     # get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     # put 'users' => 'devise/registrations#update', :as => 'user_registration'

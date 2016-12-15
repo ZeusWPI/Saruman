@@ -1,0 +1,14 @@
+<%= render 'header' %>
+
+<% @partners.each do |partner| %>
+  <div class='five wide column'>
+    <div class='card'>
+      <div class='content'>
+        <%= image_tag partner.barcode_img.url %>
+      </div>
+      <div class='extra content'>
+        <h3><%= partner.name %></h3>
+      </div>
+    </div>
+  </div>
+<% end %>

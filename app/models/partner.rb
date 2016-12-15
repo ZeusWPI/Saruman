@@ -23,12 +23,13 @@
 #
 
 class Partner < ActiveRecord::Base
+  include Barcodable
+
   default_scope { order "name ASC" }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :registerable, :trackable
 
   validates :name, uniqueness: true, presence: true
 

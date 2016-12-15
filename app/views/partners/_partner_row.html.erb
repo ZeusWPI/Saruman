@@ -1,0 +1,7 @@
+<tr>
+  <td><%= partner.email %></td>
+  <td><%= partner.name %></td>
+  <td>
+    <%= link_to 'Remove', partner_path(partner), method: :delete, class: 'negative ui button' %>
+  </td>
+</tr>

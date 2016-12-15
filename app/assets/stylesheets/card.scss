@@ -1,0 +1,25 @@
+.card {
+  background: rgb(255, 255, 255);
+  border-radius: 0.25em;
+  box-shadow: rgb(212, 212, 213) 0px 1px 3px 0px, rgb(212, 212, 213) 0px 0px 0px 1px;
+
+  .content {
+    padding: 1em;
+    border-bottom-width: initial;
+    border-style: solid none none;
+    border-top: 1px solid rgba(34, 36, 38, 0.0980392);
+
+    &:first-child {
+      border-top-style: none;
+      border-top-width: none;
+    }
+  }
+
+  .extra {
+    border-top: 1px solid rgba(0,0,0,.05)!important;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
