@@ -3,10 +3,10 @@
   Scan
 <% end %>
 <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_user_path(user), class: "btn btn-default btn-xs", remote: true %>
-<% if user.sent %>
-  <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_user_path(user), class: 'btn btn-xs btn-default', remote: true %>
-<% else %>
+<%# <% if user.sent %> %>
+  <%# <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_user_path(user), class: 'btn btn-xs btn-default', remote: true %> %>
+<%# <% else %> %>
   <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send login link'), resend_user_path(user), class: 'btn btn-xs btn-warning', remote: true %>
-<% end %>
+<%# <% end %> %>
 <%= link_to raw('<i class="glyphicon glyphicon-barcode"></i> Send barcode'), send_barcode_user_path(user), class: 'btn btn-xs btn-default', remote: true %>
 <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), user_path(user), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>

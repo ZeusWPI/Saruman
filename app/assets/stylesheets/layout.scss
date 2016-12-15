@@ -1,0 +1,13 @@
+.ui.left.fixed.vertical.inverted.menu {
+  padding-left: 0;
+  padding-right: 0;
+  @media only screen and (min-width: 992px) {
+    display: block;
+  }
+}
+
+.ui.main.grid {
+  left: 18.75%;
+  position: relative;
+  width: 81.25%;
+}

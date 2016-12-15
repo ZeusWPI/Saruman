@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource only: [:index, :create]
+  # load_and_authorize_resource only: [:index, :create]
 
   respond_to :html, :js
 
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
                                      :scan, :process_scan]
 
   def index
-    @partners = Partner.all
+    @users = User.all
   end
 
   def show

@@ -6,6 +6,10 @@ Saruman::Application.routes.draw do
     unauthenticated :user do
       root to: 'devise/sessions#new'
     end
+
+    authenticated :user do
+      root to: 'dashboard#show', as: :user_root
+    end
   end
   # as :user do
     # get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
