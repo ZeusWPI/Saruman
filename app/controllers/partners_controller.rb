@@ -1,6 +1,20 @@
 class PartnersController < ApplicationController
   before_filter :authenticate_user!
 
+  def new
+    @partner = Partner.new
+  end
+
+  def create
+    @partner = Partner.new partner_params
+
+    if @partner.save
+      redirect_to partners_path
+    else
+      render :new
+    end
+  end
+
   def index
     @partners = Partner.all
   end
@@ -13,14 +27,6 @@ class PartnersController < ApplicationController
   def show
     @partner = User.partners.includes(reservations: :item).find params.require(:id)
     authorize! :show, @partner
-  end
-  def create
-    @partner = @user
-    @partner.role = "partner"
-    @partner.password = (0...8).map { (65 + rand(26)).chr }.join
-    @partner.save
-
-    respond_with @partner
   end
 
   def edit
@@ -91,9 +97,8 @@ class PartnersController < ApplicationController
   private
 
   def partner_params
-    params.require(:user).permit(:name, :email)
+    params.require(:partner).permit(:name, :email)
   end
-  alias_method :user_params, :partner_params
 
   def scan_params
     params.require(:scan).permit(scan_items_attributes: [ :reservation, :pick_up, :bring_back ]).merge({ partner: @partner })

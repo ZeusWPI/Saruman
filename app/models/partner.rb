@@ -27,11 +27,10 @@ class Partner < ActiveRecord::Base
 
   default_scope { order "name ASC" }
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :registerable, :trackable
+  devise :trackable
 
-  validates :name, uniqueness: true, presence: true
+  validates :name,  uniqueness: true, presence: true
+  validates :email, uniqueness: true, format: Devise.email_regexp
 
   before_save do
     self.sent = false if email_changed?

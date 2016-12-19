@@ -1,0 +1,20 @@
+<%= render 'header' %>
+
+<div class='padded card'>
+  <h3>General info</h3>
+
+  <%= form_for @partner, html: { class: 'ui form' } do |f| %>
+
+    <div class='field'>
+      <%= f.label :email %>
+      <%= f.text_field :email, placeholder: :email %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: :password %>
+    </div>
+
+    <%= f.submit 'Create', class: 'fluid ui button' %>
+  <% end %>
+</div>
