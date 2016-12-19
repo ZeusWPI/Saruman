@@ -3,6 +3,10 @@
   border-radius: 0.25em;
   box-shadow: rgb(212, 212, 213) 0px 1px 3px 0px, rgb(212, 212, 213) 0px 0px 0px 1px;
 
+  &.padded {
+    padding: 20px;
+  }
+
   .content {
     padding: 1em;
     border-bottom-width: initial;

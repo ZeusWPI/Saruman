@@ -1,0 +1,25 @@
+<%= render 'header' %>
+
+<div class='padded card'>
+  <h3>General info</h3>
+
+  <%= form_for @user, html: { class: 'ui form' } do |f| %>
+
+    <div class='field'>
+      <%= f.label :email %>
+      <%= f.text_field :email, placeholder: :email %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: :password %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, placeholder: :password_confirmation %>
+    </div>
+
+    <%= f.submit 'Create', class: 'fluid ui button' %>
+  <% end %>
+</div>
