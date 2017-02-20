@@ -21,7 +21,7 @@ Saruman::Application.routes.draw do
   resources :users
 
   namespace :psc do
-    get '/sign_in/:token', controller: :partners
+    get '/sign_in/:token', controller: :partners, action: :token
   end
 
   # as :user do
