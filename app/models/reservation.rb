@@ -19,17 +19,17 @@ class Reservation < ActiveRecord::Base
   has_paper_trail only: [:count, :status, :picked_up_count, :brought_back_count]
 
   belongs_to :item
-  belongs_to :user
+  belongs_to :partner
 
   enum status: %w(disapproved pending approved)
 
-  validates :item, presence: true
+  validates :item,  presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }
 
   before_save :change_status
 
   def change_status
-    self.status = :pending if count_changed? and not self.approved?
+    self.status = :pending if count_changed? && !approved?
   end
 
   def self.category c

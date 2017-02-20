@@ -12,17 +12,18 @@ Saruman::Application.routes.draw do
     end
   end
 
-  resources :items do
-    collection do
-      get :barcodes
-    end
+  concern :barcodes do
+    get :barcodes, on: :collection
   end
-  resources :partners do
-    collection do
-      get :barcodes
-    end
-  end
+
+  resources :items,    concerns: :barcodes
+  resources :partners, concerns: :barcodes
   resources :users
+
+  namespace :psc do
+    get '/sign_in/:token', controller: :partners
+  end
+
   # as :user do
     # get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     # put 'users' => 'devise/registrations#update', :as => 'user_registration'
