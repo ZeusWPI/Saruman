@@ -16,6 +16,7 @@ Saruman::Application.routes.draw do
     get :barcodes, on: :collection
   end
 
+  resources :categories
   resources :items,    concerns: :barcodes
   resources :partners, concerns: :barcodes
   resources :users

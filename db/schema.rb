@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213200538) do
+ActiveRecord::Schema.define(version: 20170220130325) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       default: "", null: false
+    t.date     "deadline",                null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -26,7 +33,7 @@ ActiveRecord::Schema.define(version: 20161213200538) do
     t.string   "barcode_img_content_type"
     t.integer  "barcode_img_file_size"
     t.datetime "barcode_img_updated_at"
-    t.integer  "category"
+    t.integer  "category_id"
   end
 
   create_table "partners", force: :cascade do |t|

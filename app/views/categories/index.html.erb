@@ -1,0 +1,13 @@
+<%= render 'header' %>
+
+<table class='ui very basic striped celled table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'categories/category_row', collection: @categories, as: :category %>
+  </tbody>
+</table>

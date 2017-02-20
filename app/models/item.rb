@@ -23,13 +23,12 @@ class Item < ActiveRecord::Base
 
   default_scope { order "name ASC" }
 
-  has_many :reservations
+  has_many   :reservations
+  belongs_to :category
 
   validates :name,     presence: true, uniqueness: true
   validates :price,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :category, presence: true
-
-  enum category: %w[drank materiaal tenten]
 
   def price
     from_cents read_attribute(:price)
