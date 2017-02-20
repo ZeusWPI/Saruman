@@ -29,8 +29,9 @@ class Partner < ActiveRecord::Base
 
   devise :trackable
 
-  validates :name,  uniqueness: true, presence: true
-  validates :email, uniqueness: true, format: Devise.email_regexp
+  validates :name,                 uniqueness: true, presence: true
+  validates :email,                uniqueness: true, format: Devise.email_regexp
+  validates :authentication_token, uniqueness: true, presence: true
 
   before_save do
     self.sent = false if email_changed?
