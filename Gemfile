@@ -94,3 +94,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'axlsx'
+gem 'axlsx_rails'

@@ -95,6 +95,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def excel
+    authorize! :manage, Reservation
+    @reservations = Reservation.joins(:item).joins(:user).group_by(&:user)
+  end
+
   private
 
   def partner_params

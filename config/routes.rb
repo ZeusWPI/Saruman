@@ -20,6 +20,10 @@ Saruman::Application.routes.draw do
       post :process_scan
     end
 
+    collection do
+      post :excel
+    end
+
     resources :reservations do
       member do
         get :approve
