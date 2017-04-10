@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 @reservations.each do |partner, reservations|
-  wb.add_worksheet(name: partner.name) do |sheet|
+  wb.add_worksheet(name: partner.name.truncate(25)) do |sheet|
     sheet.add_row ["Item","Price","Verbruikt", "Gereserveerd", "Totale prijs"]
 
     reservations.each do |r|
