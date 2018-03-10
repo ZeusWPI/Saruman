@@ -1,4 +1,4 @@
-<% if can? :update, reservation %>
+<% if can? :change_status, reservation %>
   <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> History'), user_reservation_path(reservation.user, reservation), class: 'btn btn-xs btn-default', remote: true %>
 <% end %>
 <% if can? :update, reservation and can? :destroy, reservation %>
