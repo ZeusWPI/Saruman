@@ -1,4 +1,6 @@
-<%= link_to raw('<i class="glyphicon glyphicon-comment"></i> History'), user_reservation_path(reservation.user, reservation), class: 'btn btn-xs btn-default', remote: true %>
+<% if can? :update, reservation %>
+  <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> History'), user_reservation_path(reservation.user, reservation), class: 'btn btn-xs btn-default', remote: true %>
+<% end %>
 <% if can? :update, reservation and can? :destroy, reservation %>
   <% unless reservation.approved? %>
     <%= link_to raw('<span class="glyphicon glyphicon-edit" title="Edit"></span>'), edit_user_reservation_path(@partner, reservation), class: "btn btn-default btn-xs", remote: true %>
