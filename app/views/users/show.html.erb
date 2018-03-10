@@ -2,6 +2,7 @@
   <div class="col-sm-12">
     <h2><%= @partner.name %></h2>
     <h3>Manage reservations</h3>
+    <h3>Alle prijzen zijn steeds exclusief btw!</h3>
     <% Item.categories.each do |k, c| %>
       <%= render "reservations/reservations", reservations: @partner.reservations.joins(:item).where("items.category = ?", c), category: c %>
     <% end %>
