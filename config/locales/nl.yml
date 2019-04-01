@@ -9,6 +9,7 @@ nl:
     - vrijdag
     - zaterdag
     month_names:
+    -
     - januari
     - februari
     - maart
