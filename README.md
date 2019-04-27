@@ -26,6 +26,7 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ```bash
 cat rbenv_install_patch.txt | rbenv install --patch 2.2.2
+gem install bundler -v 1.11.2
 ```
 
 ### Contributors
