@@ -22,6 +22,12 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * Automize the "special requests"
 * Create a check-in and check-out system for the material pit
 
+### Installation
+
+```bash
+cat rbenv_install_patch.txt | rbenv install --patch 2.2.2
+```
+
 ### Contributors
 * Tom Naessens
 * Felix Van der Jeugt
