@@ -29,6 +29,10 @@ cat rbenv_install_patch.txt | rbenv install --patch 2.2.2
 gem install bundler -v 1.11.2
 ```
 
+On second thought, nevermind. A lot of dependencies no longer build on modern systems.
+The (hacky) solution is to clone the repo on another account on the server, and then
+run `cap deploy production` from that account.
+
 ### Contributors
 * Tom Naessens
 * Felix Van der Jeugt
