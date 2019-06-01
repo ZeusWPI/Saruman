@@ -1,6 +1,10 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
+  # Sets the current_user taking the action so paper trail versions have their
+  # whodunnit set
+  before_action :set_paper_trail_whodunnit
+
   respond_to :html, :js
 
   def index
