@@ -4,7 +4,7 @@
 set :application, 'Saruman'
 set :repo_url, 'git@github.com:ZeusWPI/Saruman.git'
 
-set :branch, 'master'
+set :branch, '66/update-ruby-and-rails'
 set :deploy_to, '/home/saruman/production'
 
 # Default branch is :master
