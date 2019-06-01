@@ -1,4 +1,4 @@
-Saruman::Application.routes.draw do
+Rails.application.routes.draw do
   # Devise
   devise_for :users, skip: [:registrations]
   as :user do

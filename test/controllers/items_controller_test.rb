@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @item = items(:brood)
@@ -15,34 +15,34 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should show item" do
-    get :show, id: @item
+    get :show, params: { id: @item }
     assert_response :success
   end
 
   test "should create item" do
     assert_difference 'Item.count', +1 do
-      xhr :post, :create, item: { name: "Toolbox", description: "A generic toolbox",
-                                  category: "materiaal", price: 35 }
+      post :create, xhr: true, params: { item: { name: "Toolbox", description: "A generic toolbox",
+                                  category: "materiaal", price: 35 } }
     end
 
     assert_response :success
   end
 
   test "should get edit" do
-    xhr :get, :edit, id: @item
+    get :edit, xhr: true, params: { id: @item }
 
     assert_response :success
   end
 
   test "should update item" do
-    patch :update, id: @item, item: { description: @item.description, name: @item.name, price: @item.price }
+    patch :update, params: { id: @item, item: { description: @item.description, name: @item.name, price: @item.price } }
 
     assert_redirected_to item_path(assigns(:item))
   end
 
   test "should destroy item" do
     assert_difference 'Item.count', -1 do
-      xhr :get, :destroy, id: @item
+      get :destroy, xhr: true, params: { id: @item }
     end
 
     assert_response :success
@@ -50,7 +50,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test "should not destroy reversed item" do
     assert_difference 'Item.count', 0 do
-      xhr :get, :destroy, id: items(:vat)
+      get :destroy, xhr: true, params: { id: items(:vat) }
     end
 
     assert_response :success

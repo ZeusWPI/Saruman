@@ -15,7 +15,7 @@
 #  brought_back_count  :integer          default(0)
 #
 
-class Reservation < ActiveRecord::Base
+class Reservation < ApplicationRecord
   has_paper_trail only: [:count, :status, :picked_up_count, :brought_back_count]
 
   belongs_to :item

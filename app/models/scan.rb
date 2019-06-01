@@ -90,6 +90,6 @@ class ScanItem
   end
 
   def reservation= id
-    @reservation = Reservation.find id
+    @reservation = Reservation.find_by_id(id)
   end
 end

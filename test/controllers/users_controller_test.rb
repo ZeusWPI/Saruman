@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @user = users(:vtk)
@@ -15,7 +15,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should show user" do
-    get :show, id: @user
+    get :show, params: { id: @user }
     assert_response :success
     assert_not_nil assigns(:partner)
   end
@@ -24,7 +24,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:tom)
     sign_in users(:vtk)
 
-    get :show, id: users(:vtk)
+    get :show, params: { id: users(:vtk) }
     assert_response :success
     assert_not_nil assigns(:partner)
   end
@@ -33,7 +33,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:tom)
     sign_in users(:vtk)
 
-    get :show, id: users(:hilok)
+    get :show, params: { id: users(:hilok) }
     assert_response :redirect
   end
 
@@ -43,7 +43,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out users(:tom)
     sign_in users(:vtk)
 
-    get :show, id: users(:vtk)
+    get :show, params: { id: users(:vtk) }
     assert_response :success
     assert_not_nil assigns(:partner)
     assert_match(/The deadline for reservations/, response.body)
@@ -53,7 +53,7 @@ class UsersControllerTest < ActionController::TestCase
   test "dont show warning for admins after deadline" do
     Settings.instance.update_attributes! deadline: DateTime.now - 1
 
-    get :show, id: users(:vtk)
+    get :show, params: { id: users(:vtk) }
     assert_response :success
     assert_not_nil assigns(:partner)
     assert_no_match(/The deadline for reservations/, response.body)
@@ -62,27 +62,27 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference 'User.count', +1 do
-      xhr :post, :create, user: { name: "Zeus", email: "zeus@zeus.zeus" }
+      post :create, xhr: true, params: { user: { name: "Zeus", email: "zeus@zeus.zeus" } }
     end
 
     assert_response :success
   end
 
   test "should get edit" do
-    xhr :get, :edit, id: @user
+    get :edit, xhr: true, params: { id: @user }
 
     assert_response :success
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { name: "Zeus", email: "zeus@email.com" }
+    patch :update, params: { id: @user, user: { name: "Zeus", email: "zeus@email.com" } }
 
     assert user_path(assigns(:partner))
   end
 
   test "should destroy user" do
     assert_difference 'User.count', -1 do
-      xhr :get, :destroy, id: @user
+      get :destroy, xhr: true, params: { id: @user }
     end
 
     assert_response :success
@@ -90,27 +90,31 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get resend" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, id: @user
+      get :resend, xhr: true, params: { id: @user }
     end
 
     assert_response :success
   end
 
   test "test process multiple scans" do
-    post :process_scan, id: users(:vtk), scan: { scan_items_attributes: {
-      "0": { reservation: reservations(:vtk_tent), pick_up: 1 },
-      "1": { reservation: reservations(:vtk_stoel_approved), pick_up: 2 }
-    } }
+    post :process_scan, params: {
+      id: users(:vtk), scan: { scan_items_attributes: {
+        "0": { reservation: reservations(:vtk_tent), pick_up: 1 },
+        "1": { reservation: reservations(:vtk_stoel_approved), pick_up: 2 }
+      } }
+    }
 
     assert_equal 1, reservations(:vtk_tent).reload.picked_up_count
     assert_equal 2, reservations(:vtk_stoel_approved).reload.picked_up_count
   end
 
   test "should be successful" do
-    post :process_scan, id: users(:vtk), scan: { scan_items_attributes: {
-      "0": { reservation: reservations(:vtk_tent), pick_up: 1 },
-      "1": { reservation: reservations(:vtk_stoel_approved), pick_up: 2 }
-    } }
+    post :process_scan, params: {
+      id: users(:vtk), scan: { scan_items_attributes: {
+        "0": { reservation: reservations(:vtk_tent), pick_up: 1 },
+        "1": { reservation: reservations(:vtk_stoel_approved), pick_up: 2 }
+      } }
+    }
 
     assert_response :redirect
     assert_no_match(/picked up/, response.body)
