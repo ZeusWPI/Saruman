@@ -17,5 +17,7 @@ module Saruman
     # the framework and any gems in your application.
     #
     config.time_zone = 'Brussels'
+
+    Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end
