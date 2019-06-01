@@ -27,7 +27,7 @@
 #  barcode_img_updated_at   :datetime
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Barcodable
 
   ROLES = %w[admin partner]

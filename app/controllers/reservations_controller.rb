@@ -116,12 +116,12 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find params.require(:id)
 
     # If the previous version is nil; there was a force create
-    if @reservation.previous_version.nil?
+    if @reservation.paper_trail.previous_version.nil?
       # Delete it
       @reservation.destroy
     else
       # Restore the previous version
-      @reservation = @reservation.previous_version
+      @reservation = @reservation.paper_trail.previous_version
       @reservation.save
     end
 

@@ -18,7 +18,7 @@
 #  category                 :integer
 #
 
-class Item < ActiveRecord::Base
+class Item < ApplicationRecord
   include Barcodable
 
   default_scope { order "name ASC" }

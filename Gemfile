@@ -1,16 +1,18 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '5.2.3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
+
+gem 'bootsnap'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -25,7 +27,7 @@ gem 'twitter-typeahead-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 # add annotations of schema inside models
 gem 'annotate'
@@ -38,16 +40,16 @@ gem 'httparty'
 gem 'acts_as_singleton'
 
 # Barcodes
-gem 'barcodes', git: "git://github.com/nudded/barcodes"
+gem 'barcodes', git: 'git://github.com/nudded/barcodes'
 
 # Authentication
 gem 'devise'
 
 # Paper trail is supercool
-gem 'paper_trail', '~> 4.0.0.beta'
+gem 'paper_trail'
 
 # Paperclip for barcode attachments
-gem "paperclip", "~> 4.3"
+gem 'paperclip'
 
 # Errbit
 gem 'airbrake'
@@ -67,21 +69,28 @@ end
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.6'
 
   # Deployment
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rvm'
   gem 'capistrano-rbenv'
+  gem 'capistrano-rvm'
 
   # Mails
-  gem "letter_opener"
+  gem 'letter_opener'
   gem 'web-console', '~> 3.0'
+
+  # Rails 5 goodies
+  gem 'listen'
 end
 
 group :production do
   gem 'mysql2' # Database
+end
+
+group :test do
+  gem 'rails-controller-testing' # assigns helper
 end
 
 group :doc do

@@ -11,7 +11,7 @@
 #  organisation_name :string           default(""), not null
 #
 
-class Settings < ActiveRecord::Base
+class Settings < ApplicationRecord
   acts_as_singleton
 
   validates :organisation_name, presence: true
