@@ -40,7 +40,10 @@ gem 'httparty'
 gem 'acts_as_singleton'
 
 # Barcodes
-gem 'barcodes', git: 'git://github.com/nudded/barcodes'
+#gem 'barcodes', git: 'git://github.com/nudded/barcodes'
+gem 'chunky_png'
+gem 'barby'
+
 
 # Authentication
 gem 'devise'

@@ -10,8 +10,8 @@ class PartnerMailer < ActionMailer::Base
   def send_barcode(partner)
     @partner = partner
 
-    barcode = Barcodes.create('EAN13', data: partner.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
-    attachments.inline['barcode.png'] = Barcodes::Renderer::Image.new(barcode).render
+    calculated_barcode = Barby::EAN13.new(partner.barcode_data)
+    attachments.inline['barcode.png'] = calculated_barcode.to_png(xdim: 3)
 
     mail to: "#{partner.name} <#{partner.email}>", subject: "Scanpost barcode for #{partner.name}"
   end

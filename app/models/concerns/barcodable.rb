@@ -1,3 +1,8 @@
+require 'barby'
+require 'barby/barcode/ean_13'
+require 'barby/outputter/png_outputter'
+
+
 module Barcodable
   require 'tempfile'
 
@@ -16,12 +21,14 @@ module Barcodable
   def generate_barcode
     # Create it
     self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
-    calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
-    self.barcode = calculated_barcode.caption_data
+    calculated_barcode = Barby::EAN13.new(self.barcode_data)
+    self.barcode = calculated_barcode.data_with_checksum
 
     # Paperclip it
     tmpfile = Tempfile.new(%w(barcode .png))
-    Barcodes::Renderer::Image.new(calculated_barcode).render(tmpfile.path)
+    File.open(tmpfile.path, 'wb') do |f|
+      f.write calculated_barcode.to_png(xdim: 3)
+    end
 
     self.barcode_img = tmpfile
 
