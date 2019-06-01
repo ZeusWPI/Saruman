@@ -1,9 +1,11 @@
 class SettingsController < ApplicationController
   def index
+    authorize! :manage, Settings
     @settings = Settings.instance
   end
 
   def update
+    authorize! :manage, Settings
     @settings = Settings.instance
     @settings.update settings_params
 
