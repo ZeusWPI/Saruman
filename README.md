@@ -22,16 +22,15 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * Automize the "special requests"
 * Create a check-in and check-out system for the material pit
 
-### Installation
+### Local installation
+* Clone this repository
+* Make sure Ruby 2.6.3 and Bundler 2.0 or higher are installed
+* Run `bundle install`
+* Run `rails s`
+* Visit `http://localhost:3000`
 
-```bash
-cat rbenv_install_patch.txt | rbenv install --patch 2.2.2
-gem install bundler -v 1.11.2
-```
-
-On second thought, nevermind. A lot of dependencies no longer build on modern systems.
-The (hacky) solution is to clone the repo on another account on the server, and then
-run `cap deploy production` from that account.
+### Deploy update to server
+Push the updates to master, make sure you have SSH access to the server and just run `cap production deploy` in your local Saruman directory
 
 ### Contributors
 * Tom Naessens
