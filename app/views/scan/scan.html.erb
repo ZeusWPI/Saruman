@@ -58,7 +58,10 @@
 var partners = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.nonword('name', 'barcode'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '<%= list_partners_path %>'
+    prefetch:  {
+      url: '<%= list_partners_path %>',
+      cache: false,
+    }
 });
 
 partners.initialize();
@@ -101,7 +104,10 @@ $('#partner').typeahead(
 var items = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.nonword('name', 'barcode'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '<%= list_items_path %>'
+    prefetch:  {
+      url: '<%= list_items_path %>',
+      cache: false,
+    }
 });
 
 items.initialize();
