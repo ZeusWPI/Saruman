@@ -1,4 +1,4 @@
-class AddBarcodeToAllItems < ActiveRecord::Migration
+class AddBarcodeToAllItems < ActiveRecord::Migration[4.2]
   def change
     Item.all.each do |i|
       if i.barcode.nil?

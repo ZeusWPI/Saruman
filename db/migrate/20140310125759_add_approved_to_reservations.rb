@@ -1,4 +1,4 @@
-class AddApprovedToReservations < ActiveRecord::Migration
+class AddApprovedToReservations < ActiveRecord::Migration[4.2]
   def change
     add_column :reservations, :approved, :boolean
   end

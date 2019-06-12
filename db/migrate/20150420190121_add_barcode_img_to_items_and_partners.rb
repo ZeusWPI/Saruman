@@ -1,4 +1,4 @@
-class AddBarcodeImgToItemsAndPartners < ActiveRecord::Migration
+class AddBarcodeImgToItemsAndPartners < ActiveRecord::Migration[4.2]
   require 'tempfile'
 
   def set_barcode_img(m)

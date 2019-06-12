@@ -1,4 +1,4 @@
-class AddBarcodeDataToItemsAndPartners < ActiveRecord::Migration
+class AddBarcodeDataToItemsAndPartners < ActiveRecord::Migration[4.2]
   def change
     add_column :items, :barcode, :string
     add_column :items, :barcode_data, :string
