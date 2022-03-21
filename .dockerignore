@@ -1,0 +1,10 @@
+/.bundle
+
+log/*.log
+tmp
+
+public/system
+
+Dockerfile
+README.*
+data

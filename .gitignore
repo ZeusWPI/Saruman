@@ -27,3 +27,9 @@ public/system
 config/database.yml
 config/initializers/secret_token.rb
 
+# docker-compose data directory
+data/
+
+node_modules
+
+public/assets
