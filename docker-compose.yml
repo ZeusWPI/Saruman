@@ -11,7 +11,7 @@ services:
       MYSQL_DATABASE: saruman
       MYSQL_USER: saruman
       MYSQL_PASSWORD: password
-      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
   saruman:
     build:
       context: .
@@ -20,8 +20,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      RAILS_SERVE_STATIC_FILES: true
-      RAILS_LOG_TO_STDOUT: true
+      RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_LOG_TO_STDOUT: "true"
     depends_on:
       - mysql
     links:
