@@ -32,6 +32,34 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 ### Deploy update to server
 Push the updates to master, make sure you have SSH access to the server and just run `cap production deploy` in your local Saruman directory
 
+### Docker
+
+Before Saruman can be run the first time, the migrations need to be run on the
+database, you can use the example docker-compose file and execute the following
+steps:
+
+```sh
+# Start the database
+docker-compose up -d mysql
+
+# Find the ip of the database in the docker network
+docker network inspect saruman_default | jq '.[0].Containers[] | select(.Name == "saruman-mysql-1") | .IPv4Address [:-3]'
+
+# Change the host ip in the production config
+vim config/database.yml
+
+# Run the migrations
+RAILS_ENV=production bundle exec rails db:migrate
+
+# Change the host ip back to 'mysql'
+vim config/database.yml
+
+# Bring up Saruman
+docker-compose up -d
+```
+
+After this, you can just use `docker-compose up -d` to run the application.
+
 ### Contributors
 * Tom Naessens
 * Felix Van der Jeugt
