@@ -13,7 +13,7 @@ WickedPdf.config = {
   # one of the wkhtmltopdf-binary family of gems.
   # exe_path: '/usr/local/bin/wkhtmltopdf',
   #   or
-  exe_path: '/home/saruman/production/current/wkhtmltopdf.sh'
+  exe_path: '/usr/bin/wkhtmltopdf'
 
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)

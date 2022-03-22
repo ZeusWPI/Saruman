@@ -64,8 +64,13 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "saruman_#{Rails.env}"
 
   # Mail settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "mailserver.example.com",
+    port: 25,
+    enable_starttls_auto: false
+  }
   config.action_mailer.default_url_options = { host: 'materiaal.12urenloop.be' }
-  config.action_mailer.smtp_settings = { enable_starttls_auto: false }
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

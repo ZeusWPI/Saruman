@@ -12,7 +12,7 @@ module Barcodable
     base.before_create :generate_barcode
 
     base.has_attached_file :barcode_img, {
-      url: '/system/:hash.:extension',
+      # url: '/system/:hash.:extension',
       hash_secret: Rails.application.secrets.paperclip_secret
     }
     base.validates_attachment_content_type :barcode_img, content_type: /\Aimage\/.*\Z/

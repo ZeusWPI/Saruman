@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div class="tbody">
-                <% Reservation.approved.joins(:item).category(c).select("(SUM(reservations.picked_up_count) - SUM(reservations.brought_back_count)) AS gone, SUM(reservations.count) AS total_count, items.*, reservations.*").group(:item_id).each do |res| %>
+                <% Reservation.approved.joins(:item).category(c).select("(SUM(reservations.picked_up_count) - SUM(reservations.brought_back_count)) AS gone, SUM(reservations.count) AS total_count, items.*, reservations.item_id").group(:item_id).each do |res| %>
                   <%= render res.item, picked_up: res.gone, reserved: res.total_count %>
                 <% end %>
                 <div class="tr">
