@@ -1,41 +1,37 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby "2.7.8"
+ruby "3.2.2"
 
 # Dotenv, first
 gem 'dotenv-rails'
 
-# Bundler
-gem 'bundler', '>= 2.4.10'
+gem 'bundler', '>= 2.4.11'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.8.1'
+gem 'rails', '7.0.4.3'
 
-# Use SCSS for stylesheets
-gem 'sass-rails'
-
+# Bootsnap makes booting snappy
 gem 'bootsnap'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'mini_racer'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 # Typeahead
 gem 'twitter-typeahead-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# Frontend stuff
+gem "cssbundling-rails", "~> 1.1"
+gem "jsbundling-rails"
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
+# Tubro-rails makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbo-rails'
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
 
 # add annotations of schema inside models
 gem 'annotate'
@@ -52,6 +48,7 @@ gem 'acts_as_singleton'
 gem 'barcodes'
 gem 'chunky_png'
 gem 'barby'
+gem 'matrix'
 
 # Authentication
 gem 'devise'
@@ -60,7 +57,7 @@ gem 'devise'
 gem 'paper_trail'
 
 # Paperclip for barcode attachments
-gem 'paperclip'
+gem 'kt-paperclip'
 
 # Sentry (actually glitchtip)
 gem 'sentry-rails'
@@ -70,6 +67,9 @@ gem 'simple_token_authentication'
 
 # Send bills
 gem 'wicked_pdf'
+
+# Database
+gem 'mysql2'
 
 group :production, :deployment do
   gem 'puma'
@@ -84,14 +84,15 @@ group :development do
 
   # Mails
   gem 'letter_opener'
-  gem 'web-console', '~> 3.0'
+  gem 'web-console'
 
   # Rails 5 goodies
   gem 'listen'
 end
 
-group :production do
-  gem 'mysql2' # Database
+group :development, :test do
+  gem 'rails_style', github: 'ZeusWPI/rails_style'
+  gem 'rubocop-minitest'
 end
 
 group :test do
@@ -102,11 +103,3 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-gem 'axlsx'
-gem 'axlsx_rails'

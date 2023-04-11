@@ -1,10 +1,10 @@
 <%= form_errors(@settings) %>
 
-<%= form_for @settings do |f| %>
+<%= form_for @settings, url: settings_path do |f| %>
   <%= form_text_field f, :organisation_name %>
   <%= form_text_field f, :event_name %>
   <%= form_email_field f, :email %>
-  <%= form_date_field f, :deadline, "deadline", datepicker_time(f.object.deadline) %>
+  <%= form_date_field f, :deadline %>
 
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

@@ -38,8 +38,8 @@ module ApplicationHelper
     render partial: "form_email_field", locals: {f: f, tag: tag}
   end
 
-  def form_date_field(f, tag, id, value)
-    render partial: "form_date_field", locals: {f: f, tag: tag, id: id, value: value}
+  def form_date_field(f, tag)
+    render partial: "form_date_field", locals: {f: f, tag: tag}
   end
 
   def form_number_field(f, tag)

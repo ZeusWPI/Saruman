@@ -2,102 +2,94 @@
 <html>
   <head>
     <title>Saruman</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge">
+
     <%= render partial: "layouts/ga" if Rails.env.production? %>
     <%= render partial: "layouts/favicon" %>
 
     <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "Saruman", root_path, class: 'navbar-brand' %>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav">
-        <% if can? :manage, :all %>
-            <li><%= link_to "Partners", users_path %></li>
-            <li><%= link_to "Items", items_path %></li>
-            <li><%= link_to "Scan", scan_path %></li>
-            <li><%= link_to "Report", reservations_path %></li>
-        <% elsif current_user %>
-            <li><%= link_to "Reservations", user_path(current_user) %></li>
-        <% end %>
-          </ul>
-
-          <div class="hidden-xs navbar-form navbar-right">
-            <div class="form-group">
-            <% if user_signed_in? %>
-              <%= link_to "Logout", destroy_user_session_path, class: "btn btn-default form-control", method: :delete %>
-            <% else %>
-              <%= link_to "Admin login", new_user_session_path, { id: 'login-button', class: "btn btn-success form-control", title: 'This is for admins only. Partners should log in using their personal link sent by email!', data: { toggle: 'tooltip', placement: 'bottom' } } %>
-            <% end %>
-            </div>
-          </div>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= mail_to "saruman@zeus.ugent.be", "Send feedback" %></li>
-            <% if user_signed_in? %>
-              <% if can? :crud, User %>
-                <li><%= link_to "Settings", settings_path %></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as <%= current_user.name %> (<%= current_user.email %>) <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "Edit password", edit_user_registration_path %></li>
-                  </ul>
-                </li>
-              <% else %>
-                <li><a>Logged in as <%= current_user.name %> (<%= current_user.email %>)</a></li>
-              <% end %>
-            <% end %>
-          </ul>
-
-          <div class="visible-xs navbar-form">
-            <div class="form-group">
-            <% if user_signed_in? %>
-              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control" %>
-            <% else %>
-              <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
-            <% end %>
-            </div>
-          </div>
-
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.navbar-collapse -->
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+  <header class="p-3 text-bg-dark">
     <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Saruman"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <% if can? :manage, :all %>
+            <li><%= link_to "Partners", users_path, class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Items", items_path, class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Scan", scan_path, class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Report", reservations_path, class: "nav-link px-2 text-white" %></li>
+          <% elsif current_user %>
+            <li><%= link_to "Reservations", user_path(current_user), class: "nav-link px-2 text-white" %></li>
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= mail_to "saruman@zeus.ugent.be", "Send feedback" %></li>
+          <% if user_signed_in? %>
+            <% if can? :crud, User %>
+              <li><%= link_to "Settings", settings_path %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as <%= current_user.name %> (<%= current_user.email %>) <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Edit password", edit_user_registration_path %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li><a>Logged in as <%= current_user.name %> (<%= current_user.email %>)</a></li>
+            <% end %>
+          <% end %>
+        </ul>
+
+        <div class="text-end">
+          <% if user_signed_in? %>
+            <%= button_to "Logout", destroy_user_session_path, class: "btn btn-outline-light me-2", method: :delete %>
+          <% else %>
+            <%= button_to "Admin login", new_user_session_path, { id: 'login-button', class: "btn btn-warning", title: 'This is for admins only. Partners should log in using their personal link sent by email!', data: { toggle: 'tooltip', placement: 'bottom' } } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
       <div class="row">
         <div class="col-xs-12">
           <% if can? :manage, :all and (!Settings.instance.valid?) %>
-            <div class="alert alert-danger"><strong>Warning!</strong> No name or emailadress has been set. <%= link_to "Fill in a name and contact email here", settings_path, { class: "alert-link" } %>. Ignoring this settings will cause the application to malfunction.</div>
+            <div class="alert alert-danger" role="alert"><strong>Warning!</strong> No name or emailadress has been set. <%= link_to "Fill in a name and contact email here", settings_path, { class: "alert-link" } %>. Ignoring this settings will cause the application to malfunction.</div>
           <% end %>
           <%= render partial: 'flash' %>
           <%= yield %>
         </div>
       </div>
-    </div>
+    </main>
+  </div>
 
-    <hr>
-
-    <footer>
-      <p>&copy; <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> 2014-<%= Time.current.year %></p>
+  <div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      </ul>
+      <p class="text-center text-body-secondary">&copy; <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> 2014-<%= Time.current.year %></p>
     </footer>
-  </div> <!-- /container -->
+  </div>
 
 </body>
 </html>

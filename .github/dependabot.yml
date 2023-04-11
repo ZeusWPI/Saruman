@@ -11,6 +11,16 @@ updates:
   target-branch: tom-bump-all-the-things
   reviewers:
   - TomNaessens
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "11:00"
+    timezone: Europe/Brussels
+  open-pull-requests-limit: 10
+  reviewers:
+  - TomNaessens
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
