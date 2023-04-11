@@ -1,1 +1,4 @@
 database: docker compose -f docker-compose.dev.yml up
+web: PORT=3000 bundle exec rails s
+js: yarn build:dev --watch
+css: yarn build:css --watch

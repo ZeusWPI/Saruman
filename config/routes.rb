@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :settings
+  resources :settings, only: [:index, :update]
   resources :items
 
   scope "/scan" do

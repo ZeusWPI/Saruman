@@ -1,7 +1,4 @@
-<div class="form-group">
-  <%= f.label tag %>:
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    <%= f.text_field tag, class: 'form-control', id: id, value: value %>
-  </div>
+<div class="mb3">
+  <%= f.label tag, class: "form-label" %>
+  <%= f.text_field tag, type: "date", class: 'form-control' %>
 </div>
