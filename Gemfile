@@ -14,9 +14,6 @@ gem 'rails', '7.0.4.3'
 # Bootsnap makes booting snappy
 gem 'bootsnap'
 
-# Typeahead
-gem 'twitter-typeahead-rails'
-
 # Frontend stuff
 gem "cssbundling-rails", "~> 1.1"
 gem "jsbundling-rails"

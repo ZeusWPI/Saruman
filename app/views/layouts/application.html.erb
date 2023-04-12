@@ -40,7 +40,7 @@
           <li><%= mail_to "saruman@zeus.ugent.be", "Send feedback" %></li>
           <% if user_signed_in? %>
             <% if can? :crud, User %>
-              <li><%= link_to "Settings", settings_path %></li>
+              <li><%= link_to "Settings", edit_setting_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as <%= current_user.name %> (<%= current_user.email %>) <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -69,7 +69,7 @@
       <div class="row">
         <div class="col-xs-12">
           <% if can? :manage, :all and (!Settings.instance.valid?) %>
-            <div class="alert alert-danger" role="alert"><strong>Warning!</strong> No name or emailadress has been set. <%= link_to "Fill in a name and contact email here", settings_path, { class: "alert-link" } %>. Ignoring this settings will cause the application to malfunction.</div>
+            <div class="alert alert-danger" role="alert"><strong>Warning!</strong> No name or emailadress has been set. <%= link_to "Fill in a name and contact email here", edit_setting_path, { class: "alert-link" } %>. Ignoring this settings will cause the application to malfunction.</div>
           <% end %>
           <%= render partial: 'flash' %>
           <%= yield %>

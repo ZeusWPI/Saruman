@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require twitter/typeahead.min
 //= require bootstrap.min
-//= require bootstrap-datetimepicker.min
 //= require format-date
 //= require_tree .

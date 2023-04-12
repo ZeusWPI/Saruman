@@ -1,7 +1,0 @@
-<% if @reservation.errors.any? %>
-  $('#reservation-errors').html("<%= escape_javascript form_errors(@reservation) %>")
-<% else %>
-  $('#reservation-errors').html('')
-  $('#edit_<%= dom_id(@reservation) %>').replaceWith("<%= j render @reservation %>");
-  $('#price-statistics').replaceWith("<%= j render 'reservations/statistics' %>");
-<% end %>

@@ -1,10 +1,12 @@
+<h1>Settings</h1>
+
 <%= form_errors(@settings) %>
 
-<%= form_for @settings, url: settings_path do |f| %>
+<%= form_with model: @settings, url: setting_path, method: :put do |f| %>
   <%= form_text_field f, :organisation_name %>
   <%= form_text_field f, :event_name %>
   <%= form_email_field f, :email %>
   <%= form_date_field f, :deadline %>
 
-  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>

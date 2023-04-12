@@ -1,9 +1,7 @@
-<div class="tr" id="<%= dom_id(user) %>">
-  <span class="td"><%= link_to user.name, user_path(user)%></span>
-  <span class="td"><%= mail_to user.email %></span>
-  <span class="td">
-    <div class="nowrap">
+<tr id="<%= dom_id(user) %>">
+  <td><%= link_to user.name, user_path(user)%></td>
+  <td><%= mail_to user.email %></td>
+  <td>
     <%= render "users/actions", user: user %>
-    </div>
-  </span>
-</div>
+  </td>
+</tr>

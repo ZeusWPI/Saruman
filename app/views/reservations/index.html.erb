@@ -1,12 +1,24 @@
-<div class="row">
-  <div class="col-sm-12">
+<!-- Tabs -->
+<ul class="nav nav-pills mb-3" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#items" type="button" role="tab" aria-controls="pills-items" aria-selected="true">Per items</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#partners" type="button" role="tab" aria-controls="pills-partners" aria-selected="false">Per partner</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#partner-barcodes" type="button" role="tab" aria-controls="pills-partner-barcodes" aria-selected="false">Partner barcodes</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#item-barcodes" type="button" role="tab" aria-controls="pills-item-barcodes" aria-selected="false">Item barcodes</button>
+  </li>
+</ul>
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#items" data-toggle="tab">Per items</a></li>
-      <li><a href="#partners" data-toggle="tab">Per partner</a></li>
-      <li><a href="#partner_barcodes" data-toggle="tab">Partner barcodes</a></li>
-      <li><a href="#item_barcodes" data-toggle="tab">Item barcodes</a></li>
-    </ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="items">
+    <h3>Items</h3>
+    In the underlying list, a summary can be found of all the reserved approved items.
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -16,79 +28,80 @@
 
         <table class="table table-responsive table-striped" id="table-items">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Reserved</th>
-              <th>Total reserved price</th>
-              <th>Picked up</th>
-              <th>Returned</th>
-              <th>Usage cost</th>
-              <th>Missing</th>
-              <th>Deposit cost</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Reserved</th>
+            <th>Total reserved price</th>
+            <th>Picked up</th>
+            <th>Returned</th>
+            <th>Usage cost</th>
+            <th>Missing</th>
+            <th>Deposit cost</th>
+          </tr>
           </thead>
 
           <tbody>
-            <% Item.categories.each do |k, c| %>
-              <%- @category_reservations = @approved_reservations.category(c) %>
+          <% Item.categories.each do |k, c| %>
+            <%- @category_reservations = @approved_reservations.category(c) %>
 
-              <tr>
-                <th colspan="8" class="center">
-                  <h4><%= k.capitalize %></h4>
-                </th>
-              </tr>
+            <tr>
+              <th colspan="8" class="center">
+                <h4><%= k.capitalize %></h4>
+              </th>
+            </tr>
 
-              <% @category_reservations.joins(:item).select("
+            <% @category_reservations.joins(:item).select("
                   reservations.item_id,
                   SUM(reservations.count) AS reserved,
                   SUM(reservations.picked_up_count) AS picked_up,
                   SUM(reservations.returned_unused_count) AS returned_unused,
                   SUM(reservations.returned_used_count) AS returned_used
                 ").group(:item_id).each do |res| %>
-                <tr>
-                  <td><%= res.item %></td>
-                  <td><%= res.reserved %></td>
-                  <td><%= euro(res.reserved * res.item.price) %></td>
-                  <td><%= res.picked_up %></td>
-                  <td><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
-                  <td><%= euro((res.picked_up - res.returned_unused) * res.item.price) %></td>
-                  <td><%= res.picked_up - res.returned_unused - res.returned_used %></td>
-                  <td><%= euro(res.item.deposit * (res.picked_up - res.returned_unused - res.returned_used)) %></td>
-                </tr>
-              <% end %>
-              <%= render partial: 'totals', locals: { reservations: @category_reservations } %>
+              <tr>
+                <td><%= res.item %></td>
+                <td><%= res.reserved %></td>
+                <td><%= euro(res.reserved * res.item.price) %></td>
+                <td><%= res.picked_up %></td>
+                <td><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
+                <td><%= euro((res.picked_up - res.returned_unused) * res.item.price) %></td>
+                <td><%= res.picked_up - res.returned_unused - res.returned_used %></td>
+                <td><%= euro(res.item.deposit * (res.picked_up - res.returned_unused - res.returned_used)) %></td>
+              </tr>
             <% end %>
+            <%= render partial: 'totals', locals: { reservations: @category_reservations } %>
+          <% end %>
 
-            <tr>
-              <th colspan="8">
-                <h4>Total</h4>
-              </th>
-            </tr>
-            <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
+          <tr>
+            <th colspan="8">
+              <h4>Total</h4>
+            </th>
+          </tr>
+          <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
 
           </tbody>
         </table>
       </div>
+    </div>
 
-      <div class="tab-pane" id="partners">
-        <h3>Partner</h3>
-        A summary of total price per partner. Only approved items are taken into account! Click on the name of the partner to see their individual reservations.
-        <div class="table-responsive">
-          <table class="table table-striped" id="table-items">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reserved</th>
-                <th>Total reserved price</th>
-                <th>Picked up</th>
-                <th>Returned</th>
-                <th>Usage cost</th>
-                <th>Missing</th>
-                <th>Deposit cost</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
+    <div class="tab-pane" id="partners">
+      <h3>Partner</h3>
+      A summary of total price per partner. Only approved items are taken into account! Click on the name of the partner to see their individual reservations.
+      <div class="table-responsive">
+        <table class="table table-striped" id="table-items">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Reserved</th>
+            <th>Total reserved price</th>
+            <th>Picked up</th>
+            <th>Returned</th>
+            <th>Usage cost</th>
+            <th>Missing</th>
+            <th>Deposit cost</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
               users.*,
               SUM(reservations.count) as reserved,
               SUM(reservations.count * items.price / 100) as total_reserved_price,
@@ -98,30 +111,28 @@
               SUM(reservations.returned_used_count) AS returned_used,
               SUM((reservations.picked_up_count - reservations.returned_unused_count - reservations.returned_used_count) * items.deposit / 100) as outstanding_deposit
             ').each do |partner| %>
-              <tr>
-                <td><%= link_to partner.name, user_path(partner) %></td>
-                <td><%= partner.reserved %></td>
-                <td><%= euro(partner.total_reserved_price) %></td>
-                <td><%= partner.picked_up %></td>
-                <td><%= partner.returned_unused + partner.returned_used %> (<%= partner.returned_used %> used, <%= partner.returned_unused %> unused)</td>
-                <td><%= euro(partner.used_price) %></td>
-                <td><%= partner.picked_up - partner.returned_unused - partner.returned_used %></td>
-                <td><%= euro(partner.outstanding_deposit) %></td>
-              </tr>
-            <% end %>
-            <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
+            <tr>
+              <td><%= link_to partner.name, user_path(partner) %></td>
+              <td><%= partner.reserved %></td>
+              <td><%= euro(partner.total_reserved_price) %></td>
+              <td><%= partner.picked_up %></td>
+              <td><%= partner.returned_unused + partner.returned_used %> (<%= partner.returned_used %> used, <%= partner.returned_unused %> unused)</td>
+              <td><%= euro(partner.used_price) %></td>
+              <td><%= partner.picked_up - partner.returned_unused - partner.returned_used %></td>
+              <td><%= euro(partner.outstanding_deposit) %></td>
+            </tr>
+          <% end %>
+          <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
           </table>
-        </div>
       </div>
+    </div>
 
-      <div class="tab-pane" id="partner_barcodes">
-        <%= render partial: 'barcode_overview', locals: { model: User.partners.ordered_by_name } %>
-      </div>
+    <div class="tab-pane" id="partner_barcodes">
+      <%= render partial: 'barcode_overview', locals: { model: User.partners } %>
+    </div>
 
-      <div class="tab-pane" id="item_barcodes">
-        <%= render partial: 'barcode_overview', locals: { model: Item.all } %>
-      </div>
-
+    <div class="tab-pane" id="item_barcodes">
+      <%= render partial: 'barcode_overview', locals: { model: Item.all } %>
     </div>
   </div>
 </div>

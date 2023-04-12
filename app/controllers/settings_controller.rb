@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  def index
+  def show
     authorize! :manage, Settings
     @settings = Settings.instance
   end
@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
     @settings = Settings.instance
     @settings.update settings_params
 
-    render :index
+    redirect_to action: :show
   end
 
   private
