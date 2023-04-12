@@ -1,11 +1,9 @@
-<div class="tr" id="<%= dom_id(item) %>">
-  <span class="td"><%= item.name %></span>
-  <span class="td"><%= item.description %></span>
-  <span class="td"><%= euro item.price %></span>
-  <span class="td"><%= euro item.deposit %></span>
-  <span class="td">
-    <div class="nowrap">
-      <%= render "items/actions", item: item %>
-    </div>
-  </span>
-</div>
+<tr>
+  <td><%= item.name %></td>
+  <td><%= item.description %></td>
+  <td><%= number_with_precision item.price, precision: 2 %></td>
+  <td><%= number_with_precision item.deposit, precision: 2 %></td>
+  <td>
+    <%= render "items/actions", item: item %>
+  </td>
+</tr>

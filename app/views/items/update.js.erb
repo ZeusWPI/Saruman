@@ -1,8 +1,0 @@
-<% if @item.errors.any? %>
-  $('#item-errors').html("<%= escape_javascript form_errors(@item) %>")
-<% else %>
-  $('#item-errors').html('')
-  $('#edit_<%= dom_id(@item) %>').replaceWith("<%= j render @item %>");
-  var id = "#new_item";
-  var inputs = $(id).parent().find('input');
-<% end %>

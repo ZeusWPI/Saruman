@@ -24,7 +24,7 @@
                 <% reservation = ff.object.reservation %>
                 <% if reservation.item.category == k %>
                   <%= ff.hidden_field :reservation, value: reservation.id %>
-                  <div class="tr" id="<%= dom_id(reservation) %>">
+                  <tr id="<%= dom_id(reservation) %>">
                     <%= ff.hidden_field :leftover, value: reservation.count - reservation.picked_up_count, class: "leftover" %>
                     <span class="td"><%= reservation.item.name %></span>
                     <span class="td"><%= reservation.item.description %></span>

@@ -1,21 +1,22 @@
 <div class="row">
   <div class="col-sm-12">
+    <h3>Add Partner</h3>
+    <%= render "users/form", object: User.new, button_name: "Add Partner" %>
     <h3>Manage Partners</h3>
     <%= button_to 'Excel Export', excel_users_path(format: :xlsx), class: 'btn btn-default' %>
       <div class="table-responsive">
-        <div class="table table-striped" id="table-partners">
-          <div class="thead">
-            <div class="tr">
-              <span class="th">Name</span>
-              <span class="th">Email</span>
-              <span class="th">Actions</span>
-            </div>
-          </div>
-          <div class="tbody">
+        <table class="table table-striped" id="table-partners">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
             <%= render @partners %>
-            <%= render "users/form", object: User.new, button_name: "Add Partner" %>
-          </div>
-        </div>
+          </tbody>
+        </table>
         <div id='partner-errors' class='form-errors'></div>
       </div>
   </div>

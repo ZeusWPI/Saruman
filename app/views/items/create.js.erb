@@ -1,9 +1,0 @@
-<% if @item.errors.any? %>
-  $('#item-errors').html("<%= escape_javascript form_errors(@item) %>");
-<% else %>
-  $('#item-errors').html('');
-  $('#table-items-<%= @item.category %>').find('#new_item')[0].reset();
-
-  <%# break advanced deliberately, how we currently do it will not continue working! %>
-  $('#table-items-<%= @item.category %> .tr:last').before('<%= escape_javascript render @item %>')
-<% end %>

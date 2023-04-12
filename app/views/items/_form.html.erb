@@ -1,8 +1,8 @@
-<%= form_for [object], remote: true, html: { class: 'tr' } do |f| %>
-  <span class="td"><%= f.text_field :name, class: 'form-control' %></span>
-  <span class="td"><%= f.text_field :description, class: 'form-control' %></span>
-  <span class="td"><%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %></span>
-  <span class="td"><%= f.text_field :deposit, value: number_with_precision(f.object.deposit, precision: 2), class: 'form-control', placeholder: "0.00" %></span>
+<%= form_for [object] do |f| %>
+  <%= form_text_field f, :name %>
+  <%= form_text_field f, :description %>
+  <%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %>
+  <%= f.text_field :deposit, value: number_with_precision(f.object.deposit, precision: 2), class: 'form-control', placeholder: "0.00" %>
   <%= f.hidden_field :category, value: category %>
-  <span class="td"><%= f.button button_name(object, category), class: 'btn btn-sm btn-primary' %></span>
+  <%= f.button button_name(object, category), class: 'btn btn-sm btn-primary' %>
 <% end %>
