@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "3.2.2"
+ruby "2.7.8"
 
 # Dotenv, first
 gem 'dotenv-rails'
@@ -10,10 +10,6 @@ gem 'bundler', '>= 2.4.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.8.1'
-
-# Workaround: gems/globalid-0.4.2/lib/global_id/uri/gid.rb:176:in `<module:URI>': uninitialized class variable @@schemes in URI (NameError)
-# Remove when Rails 
-gem 'globalid', '~> 1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
