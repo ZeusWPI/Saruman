@@ -307,7 +307,6 @@ DEPENDENCIES
   coffee-rails
   devise
   dotenv-rails
-  globalid (~> 1.0)
   httparty
   jbuilder
   jquery-rails
@@ -331,7 +330,7 @@ DEPENDENCIES
   wicked_pdf
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 2.7.8p225
 
 BUNDLED WITH
-   2.4.12
+   2.4.11
