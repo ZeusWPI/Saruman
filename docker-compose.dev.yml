@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb:10.8
+    volumes:
+      - db_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    environment:
+      MYSQL_ROOT_PASSWORD: strong-password
+      MYSQL_DATABASE: saruman
+      MYSQL_USER: saruman
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  db-test:
+    image: mariadb:10.8
+    volumes:
+      - db-test_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    environment:
+      MYSQL_ROOT_PASSWORD: strong-password
+      MYSQL_DATABASE: saruman-test
+      MYSQL_USER: saruman
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+
+volumes:
+  db_data:
+  db-test_data:
