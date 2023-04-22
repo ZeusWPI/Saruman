@@ -24,11 +24,13 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ### Local installation
 * Clone this repository
-* Make sure the Ruby version defined in `.ruby-version` 
+* Make sure the Ruby version defined in `.ruby-version` is installed (using `asfd`, just run `asdf install`) 
 * Run `bundle install`
 * Run `bin/dev` to start a database docker image
-* Run `rails s` to start the Rails server
+* Run `bundle exec rake db:seed` to set up some basic data
+* Run `bundle exec rails s` to start the Rails server
 * Visit `http://localhost:3000`
+* Sign in using `saruman@zeus.ugent.be` and `thewhite` as password
 
 ### Deploy update to server
 Push the updates to master, make sure you have SSH access to the server and just run `cap production deploy` in your local Saruman directory
