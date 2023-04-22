@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource only: [:index, :create]
 
-  respond_to :html, :js
-
   before_action :set_partner, only: [:edit, :update, :destroy,
                                      :resend, :send_barcode,
                                      :get_barcode, :download_bill, :send_bill,
@@ -18,27 +16,37 @@ class UsersController < ApplicationController
     authorize! :show, @partner
   end
 
+  def new
+    @partner = User.partners.build
+    authorize! :new, @partner
+  end
+
   def create
     @partner = @user
     @partner.role = "partner"
     @partner.password = (0...8).map { (65 + rand(26)).chr }.join
-    @partner.save
 
-    respond_with @partner
+    if @partner.save
+      flash[:success] = "Partner #{@partner.name} created!"
+      redirect_to action: :index
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
     authorize! :update, @partner
-
-    respond_with @partner
   end
 
   def update
     authorize! :update, @partner
 
-    @partner.update partner_params
-
-    respond_with @partner
+    if @partner.update(partner_params)
+      flash[:success] = "Partner #{@partner.name} updated!"
+      redirect_to action: :index
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -105,6 +113,11 @@ class UsersController < ApplicationController
   def excel
     authorize! :manage, Reservation
     @reservations = Reservation.joins(:item).joins(:user).group_by(&:user)
+  end
+
+  rescue_from Settings::SettingsNotCompleteError do
+    flash[:error] = "Fill in the Application Settings first."
+    redirect_to action: :index
   end
 
   private

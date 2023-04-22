@@ -1,3 +1,5 @@
+<h3>Scan</h3>
+
 <% if @display_force %>
   <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,24 +44,30 @@
         </div>
       </div>
 
-      <div class="form-group typeahead-scan">
-        <label for="partner">Partner:</label>
-        <input required type="text" class="form-control typeahead" autofocus
-               placeholder="Start searching by entering a name or barcode" name="scan[partner]" id="partner">
+      <div class="mb-3">
+        <label for="partner">Partner</label>
+        <%= select_tag 'scan[partner]',
+          options_for_select(User.partners.all.order(:name).map { |u| ["#{u.name} (#{u.barcode})", u.id] }),
+          include_blank: true,
+          class: "form-control",
+          data: { controller: 'select', placeholder: "Start searching by entering a name or barcode" } %>
       </div>
 
-      <div class="form-group typeahead-scan">
-        <label for="item">Item:</label>
-        <input required type="text" class="form-control typeahead"
-               placeholder="Start searching by entering a name or barcode" name="scan[item]" id="item">
+      <div class="mb-3">
+        <label for="partner">Item</label>
+        <%= select_tag 'scan[item]',
+          options_for_select(Item.all.order(:name).map { |i| ["#{i.name} (#{i.barcode})", i.id] }),
+          include_blank: true,
+          class: "form-control",
+          data: { controller: 'select', placeholder: "Start searching by entering a name or barcode" } %>
       </div>
 
-      <div class="form-group">
-        <label for="count">Amount:</label>
+      <div class="mb-3">
+        <label for="count">Amount</label>
         <input class="form-control" id="count" name="scan[count]" type="number" value="1">
       </div>
 
-      <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+      <%= submit_tag 'Scan', class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>

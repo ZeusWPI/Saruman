@@ -54,13 +54,11 @@ class User < ApplicationRecord
   end
 
   def send_token
-    self.sent = true
-    self.save
     PartnerMailer.send_token(self).deliver_now
+    self.update!(sent: true)
   end
 
   def send_barcode
     PartnerMailer.send_barcode(self).deliver_now
   end
-
 end

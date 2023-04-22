@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  rescue_from Settings::SettingsNotCompleteError do
+    flash[:error] = "Fill in the Application Settings first."
+    redirect_to root_path
+  end
+
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end

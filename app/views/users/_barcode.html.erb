@@ -1,3 +1,5 @@
-<h3>Barcode</h3>
+<h4>Barcode</h4>
 Print this barcode and bring it with you <strong>on paper</strong>!<br />
-<%= link_to raw("<span class='glyphicon glyphicon-barcode'></span> Get barcode"), get_barcode_user_path(@partner, format: :pdf), class: "btn btn-lg btn-default" %>
+<%= link_to get_barcode_user_path(@partner), class: "btn btn-secondary" do %>
+  <i class='bi bi-upc'></i> Get barcode
+<% end %>

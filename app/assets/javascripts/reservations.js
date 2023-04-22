@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('ready turbo:load', function() {
   $(document).on("click", ".btn-disapprove", function(e) {
     e.preventDefault();
 

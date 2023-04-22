@@ -1,23 +1,10 @@
 class ScanController < ApplicationController
-
   before_action :authenticate_user!
-
-  respond_to :html, :js
 
   def scan
     authorize! :manage, :all
 
     @option = params[:option]&.to_sym || :out
-  end
-
-  def list_items
-    authorize! :manage, :all
-    render json: Item.all
-  end
-
-  def list_partners
-    authorize! :manage, :all
-    render json: User.partners
   end
 
   def check
@@ -111,6 +98,8 @@ class ScanController < ApplicationController
       # No reservations: display a warning
       flash[:warning] = "#{@partner.name} does not has a reservation for this item."
     end
+
+    redirect_to action: :scan
   end
 
   def check_out(params)
