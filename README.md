@@ -33,7 +33,18 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * Sign in using `saruman@zeus.ugent.be` and `thewhite` as password
 
 ### Deploy update to server
-Push the updates to master, make sure you have SSH access to the server and just run `cap production deploy` in your local Saruman directory
+* Push the updates to master
+* SSH into the server
+* `cd` into the `Saruman` directory
+* Stash current changes (`git stash`)
+* Pull master: `git pull`
+* Unstash current changes (`git stash pop`)
+* Run `docker-compose down && docker-compose up -d --build`
+
+### Debug on the server
+* SSH into the server
+* run `docker exec -it saruman_saruman_1 /bin/bash`
+* run `RAILS_ENV=production bundle exec rails console`
 
 ### Docker
 
