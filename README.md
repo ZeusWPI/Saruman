@@ -46,6 +46,13 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 * run `docker exec -it saruman_saruman_1 /bin/bash`
 * run `RAILS_ENV=production bundle exec rails console`
 
+### Snippets
+
+#### Add an admin user
+```ruby
+User.create!(name: 'Your name', email: 'your email', password: 'your super duper secure password', role: :admin)
+```
+
 ### Docker
 
 Before Saruman can be run the first time, the migrations need to be run on the
