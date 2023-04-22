@@ -68,6 +68,9 @@ gem 'wicked_pdf'
 # Database
 gem 'mysql2'
 
+# Inline svgs
+gem 'inline_svg'
+
 group :production, :deployment do
   gem 'puma'
 end

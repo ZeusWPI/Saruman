@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('ready turbo:load', function() {
   $('#new_scan').submit(function(e) {
     const tr = $('.tr.alert');
     if (tr.length > 0) {

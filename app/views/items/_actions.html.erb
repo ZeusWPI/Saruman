@@ -1,4 +1,4 @@
-<%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_item_path(item), class: "btn btn-default btn-xs", remote: true %>
+<%= link_to raw('<i class="bi bi-pencil"></i> Edit'), edit_item_path(item), class: "btn btn-light btn-sm", remote: true %>
 <% unless item.reservations.any? %>
-  <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), item_path(item), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+  <%= link_to raw('<i class="bi bi-trash"></i> Delete'), item_path(item), class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
 <% end %>

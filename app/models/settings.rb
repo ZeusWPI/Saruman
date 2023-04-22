@@ -18,7 +18,13 @@ class Settings < ApplicationRecord
   validates :event_name, presence: true
   validates :email, presence: true, email: true
 
+  class SettingsNotCompleteError < StandardError; end
+
   def expired?
     !deadline.blank? && deadline < DateTime.now
+  end
+
+  def complete?
+    email.present? && event_name.present? && organisation_name.present?
   end
 end

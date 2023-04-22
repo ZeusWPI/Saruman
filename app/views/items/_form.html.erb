@@ -1,8 +1,8 @@
 <%= form_for [object] do |f| %>
   <%= form_text_field f, :name %>
   <%= form_text_field f, :description %>
-  <%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %>
-  <%= f.text_field :deposit, value: number_with_precision(f.object.deposit, precision: 2), class: 'form-control', placeholder: "0.00" %>
+  <%= form_price_field f, :price, value: number_with_precision(f.object.price, precision: 2) %>
+  <%= form_price_field f, :deposit, value: number_with_precision(f.object.deposit, precision: 2) %>
   <%= f.hidden_field :category, value: category %>
-  <%= f.button button_name(object, category), class: 'btn btn-sm btn-primary' %>
+  <%= f.button button_name(object, category), class: 'btn btn-primary' %>
 <% end %>

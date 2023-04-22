@@ -7,15 +7,17 @@
    <body>
      <p>Beste <%= @partner.name %>,</p>
      <p>Via onderstaande link is het mogelijk drank te bestellen voor <%= Settings.instance.event_name %>.
-     De deadline hiervoor ligt op <%= I18n.l Settings.instance.deadline, format: "%A %d %B %Y om %Hu%M", locale: :nl %>.
+     <% if Settings.deadline.present? %>
+       De deadline hiervoor ligt op <%= I18n.l Settings.instance.deadline, format: "%A %d %B %Y om %Hu%M", locale: :nl %>.
+     <% end %>
      Houd deze pagina zeker in het oog om op de hoogte te blijven van nieuwe items en aanvaarde bestellingen.</p>
 
      <% sign_in_url = sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %>
      <p><%= link_to sign_in_url, sign_in_url %></p>
 
-     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
+     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email %>.</p>
 
-     <p>Met vriendelijke groet,<br /><%= Settings.instance.organisation_name || "fillmein" %></p>
+     <p>Met vriendelijke groet,<br /><%= Settings.instance.organisation_name %></p>
 
   </body>
 </html>

@@ -1,8 +1,8 @@
 <tr>
   <td><%= item.name %></td>
   <td><%= item.description %></td>
-  <td><%= number_with_precision item.price, precision: 2 %></td>
-  <td><%= number_with_precision item.deposit, precision: 2 %></td>
+  <td><%= euro item.price %></td>
+  <td><%= euro item.deposit %></td>
   <td>
     <%= render "items/actions", item: item %>
   </td>

@@ -15,9 +15,9 @@
 
      <p><strong>Vergeet deze email niet af te printen en mee te brengen. Zonder deze barcode kan er geen materiaal worden opgehaald. Het is niet voldoende deze barcode op een elektronisch apparaat te tonen; onze scanners kunnen dit niet lezen.</strong><p>
 
-     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
+     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email %>.</p>
 
-     <p>Met vriendelijke groet,<br />De <%= Settings.instance.organisation_name || "fillmein" %></p>
+     <p>Met vriendelijke groet,<br />De <%= Settings.instance.organisation_name %></p>
 
   </body>
 </html>

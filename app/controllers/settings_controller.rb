@@ -9,6 +9,8 @@ class SettingsController < ApplicationController
     @settings = Settings.instance
     @settings.update settings_params
 
+    flash[:success] = "Settings updated successfully!"
+
     redirect_to action: :show
   end
 

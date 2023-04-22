@@ -1,12 +1,25 @@
-<%= link_to scan_user_path(user), class: "btn btn-xs btn-default" do %>
-  <span class="glyphicon glyphicon-log-out"></span>
-  Scan
+<%= link_to scan_user_path(user), class: "btn btn-light btn-sm" do %>
+  <i class="bi bi-upc-scan"></i> Scan
 <% end %>
-<%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_user_path(user), class: "btn btn-default btn-xs", remote: true %>
+
 <% if user.sent %>
-  <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_user_path(user), class: 'btn btn-xs btn-default', remote: true %>
+  <%= link_to  resend_user_path(user), class: 'btn btn-light btn-sm' do %>
+    <i class="bi bi-repeat"></i> Resend login link
+  <% end %>
 <% else %>
-  <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send login link'), resend_user_path(user), class: 'btn btn-xs btn-warning', remote: true %>
+  <%= link_to resend_user_path(user), class: 'btn btn-warning btn-sm' do %>
+    <i class="bi bi-envelope"></i> Send login link
+  <% end %>
 <% end %>
-<%= link_to raw('<i class="glyphicon glyphicon-barcode"></i> Send barcode'), send_barcode_user_path(user), class: 'btn btn-xs btn-default', remote: true %>
-<%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), user_path(user), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+
+<%= link_to send_barcode_user_path(user), class: 'btn btn-light btn-sm' do %>
+  <i class="bi bi-upc"></i> Send barcode
+<% end %>
+
+<%= link_to edit_user_path(user), class: "btn btn-secondary btn-sm" do %>
+  <i class="bi bi-pencil"></i> Edit
+<% end %>
+
+<%= link_to user_path(user), class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'}, method: :delete  do %>
+  <i class="bi bi-trash"></i> Delete
+<% end %>

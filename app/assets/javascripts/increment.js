@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('ready turbo:load', function() {
   $('[data-increment]').on('click', function() {
     const button = $(this);
     const input = button.parent().parent().find('input[type=number]');

@@ -1,25 +1,29 @@
-<div class="row">
-  <div class="col-sm-12">
-    <h2><%= @partner.name %></h2>
-    <h3>Manage reservations</h3>
-    <h4>Alle prijzen zijn steeds exclusief btw!</h4>
-    <% Item.categories.each do |k, c| %>
-      <%= render "reservations/reservations", reservations: @partner.reservations.ordered_by_item_name.joins(:item).where("items.category = ?", c), category: c %>
-    <% end %>
+<h2><%= @partner.name %></h2>
+<h3>Manage reservations</h3>
 
-    <% if can? :manage, :all %>
-      <%= button_to "Approve all", approve_all_user_reservations_path(@partner),
-        class: "btn btn-primary", data: { confirm: "This will approve all pending reservations for this user." } %>
-    <% end %>
-  </div>
+<div class="alert alert-info" role="alert">
+  Alle prijzen zijn steeds <strong>exclusief</strong> btw!
 </div>
 
-<% unless can? :manage, :all %>
-  Special requests? <%= mail_to Settings.instance.email || "fillmein@noreply.com", "Let us know!" %>!
+<% Item.categories.each do |k, c| %>
+  <%= render "reservations/reservations", reservations: @partner.reservations.joins(:item).where("items.category = ?", c), category: c %>
 <% end %>
 
+<% if can? :manage, :all %>
+  <%= button_to approve_all_user_reservations_path(@partner),
+    class: "btn btn-primary", data: { confirm: "This will approve all pending reservations for this user." }  do %>
+    <i class="bi bi-check2-all"></i> Approve all
+  <% end %>
+<% end %>
+<hr>
+<% if Settings.instance.complete? %>
+  Special requests? <%= mail_to Settings.instance.email, "Let us know" %>!
+<% end %>
+<hr>
 <%= render "reservations/statistics" %>
+<hr>
 <%= render "users/barcode" %>
+<hr>
 <%= render "users/billing" if can? :manage, :partner %>
 
 <%= render partial: 'reservations/info_modal' %>

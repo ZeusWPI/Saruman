@@ -1,34 +1,27 @@
-<div class="bg-dark text-secondary px-4 py-5 text-center">
-  <div class="py-5">
-    <h1 class="display-5 fw-bold text-white">Welcome!</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="fs-5 mb-4">Welcome to Saruman, an event material management service brought to you by <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> and <a href="http://www.fkgent.be/" target="_blank">FaculteitenKonvent Gent</a>.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-        <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
-      </div>
-    </div>
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Saruman</h1>
+    <p class="col-md-8 fs-4">
+      Welcome to Saruman, an event material management service for the 12urenloop, brought to you by <a href="https://zeus.ugent.be/" target="_blank" class="link-secondary">Zeus WPI</a>,
+      <a href="https://12urenloop.be" target="_blank" class="link-secondary">12urenloop</a> and <a href="https://www.fkgent.be/" target="_blank" class="link-secondary">FaculteitenKonvent Gent</a>.</p>
   </div>
 </div>
 
-<div class="container-index">
-  <div class="jumbotron">
-    <h1>Welcome!</h1>
-    <p></p>
+<div class="row align-items-md-stretch">
+  <div class="col-md-6">
+    <div class="h-100 p-5 text-bg-dark rounded-3">
+      <h2>Partners</h2>
+      <p>Partners can log in using the unique link sent to their e-mail address.</p>
+    </div>
   </div>
-
-  <div class="row marketing">
-    <div class="col-lg-6">
-      <h4>Admins</h4>
+  <div class="col-md-6">
+    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+      <h2>Admins</h2>
       <p>
         Admins can add partners and items. They can also approve or disapprove requests partners make.
-        Admins can log in <%= link_to "here", new_user_session_path %> with their given credentials.
+        Admins can log in with their given credentials.
       </p>
-    </div>
-
-    <div class="col-lg-6">
-      <h4>Partners</h4>
-      <p>Partners can log in using the unique link sent to their e-mailadress.</p>
+      <%= button_to "Admin sign in", new_user_session_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 </div>
