@@ -11,6 +11,10 @@ gem 'bundler', '>= 2.4.10'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.8.1'
 
+# Workaround: gems/globalid-0.4.2/lib/global_id/uri/gid.rb:176:in `<module:URI>': uninitialized class variable @@schemes in URI (NameError)
+# Remove when Rails 
+gem 'globalid', '~> 1.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails'
 
@@ -53,7 +57,6 @@ gem 'barcodes'
 gem 'chunky_png'
 gem 'barby'
 
-
 # Authentication
 gem 'devise'
 
@@ -68,9 +71,6 @@ gem 'sentry-rails'
 
 # Token authentication for the partners
 gem 'simple_token_authentication'
-
-# Coverall
-gem 'coveralls', require: false
 
 # Send bills
 gem 'wicked_pdf'
