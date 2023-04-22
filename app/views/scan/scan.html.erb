@@ -12,6 +12,7 @@
       <%= hidden_field_tag 'force[partner_id]', @partner.id %>
       <%= hidden_field_tag 'force[item_id]', @item.id %>
       <%= hidden_field_tag 'force[count]', @count %>
+      <%= hidden_field_tag 'force[option]', @option %>
       <%= submit_tag "Force add this pick up", class: 'btn btn-warning' %>
     <% end %>
   </div>
@@ -22,11 +23,11 @@
     <%= form_tag check_path, url: check_path, remote: false do %>
         <label>Action:</label><br />
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary btn-lg btn-action active">
-            <input type="radio" name="scan[options]" id="options" value="out" checked><span class="glyphicon glyphicon-log-out"></span> Pick up
+          <label id="out" class="btn btn-lg btn-action <% if @option == :out || @option.nil? %>active btn-primary<% else %>btn-default<% end %>">
+            <input type="radio" name="scan[options]" id="options" value="out" <% if @option == :out || @option.nil? %>checked<% end %>><span class="glyphicon glyphicon-log-out"></span> Pick up
           </label>
-          <label class="btn btn-default btn-lg btn-action">
-            <input type="radio" name="scan[options]" id="options" value="in"><span class="glyphicon glyphicon-log-in"></span> Bring back
+          <label id="in" class="btn btn-lg btn-action <% if @option == :in %>active btn-primary<% else %>btn-default<% end %>">
+            <input type="radio" name="scan[options]" id="options" value="in" <% if @option == :in %>checked<% end %>><span class="glyphicon glyphicon-log-in"></span> Bring back
           </label>
         </div><br /><br />
 

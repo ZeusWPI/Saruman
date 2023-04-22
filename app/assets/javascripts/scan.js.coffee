@@ -6,6 +6,8 @@ ready = ->
   $(".btn-action").click (e) ->
     $(".btn-action").removeClass("btn-primary").addClass("btn-default")
     $(this).addClass("btn-primary")
+    window.history.replaceState(null, null, "?option=" + $(this).attr('id'))
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+$(document).on('turbolinks:load', ready)
