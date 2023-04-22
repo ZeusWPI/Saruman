@@ -118,6 +118,7 @@ class ReservationsController < ApplicationController
     authorize! :manage, :all
 
     @reservation = Reservation.find params.require(:id)
+    @option = params[:option]&.to_sym || :out
 
     # If the previous version is nil; there was a force create
     if @reservation.paper_trail.previous_version.nil?
@@ -131,7 +132,7 @@ class ReservationsController < ApplicationController
 
     flash[:notice] = "Scan has been reverted."
 
-    redirect_to scan_path
+    redirect_to scan_path(option: @option)
   end
 
   private
