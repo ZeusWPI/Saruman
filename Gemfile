@@ -1,5 +1,13 @@
 source 'https://rubygems.org'
 
+ruby "3.2.2"
+
+# Dotenv, first
+gem 'dotenv-rails'
+
+# Bundler
+gem 'bundler', '>= 2.4.10'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.3'
 
@@ -55,8 +63,8 @@ gem 'paper_trail'
 # Paperclip for barcode attachments
 gem 'paperclip'
 
-# Errbit
-gem 'airbrake'
+# Sentry (actually glitchtip)
+gem 'sentry-rails'
 
 # Token authentication for the partners
 gem 'simple_token_authentication'

@@ -24,9 +24,10 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ### Local installation
 * Clone this repository
-* Make sure Ruby 2.6.3 and Bundler 2.0 or higher are installed
+* Make sure the Ruby version defined in `.ruby-version` 
 * Run `bundle install`
-* Run `rails s`
+* Run `bin/dev` to start a database docker image
+* Run `rails s` to start the Rails server
 * Visit `http://localhost:3000`
 
 ### Deploy update to server
