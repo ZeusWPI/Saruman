@@ -23,7 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -80,9 +80,6 @@ group :production, :deployment do
 end
 
 group :development do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~> 1.3.6'
-
   # Deployment
   gem "capistrano", "~> 3.11", require: false
   gem "capistrano-rails", "~> 1.4", require: false
