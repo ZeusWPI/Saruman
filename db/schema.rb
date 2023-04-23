@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2016_03_23_201608) do
+ActiveRecord::Schema.define(version: 2023_04_23_181347) do
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "price"
@@ -26,24 +26,25 @@ ActiveRecord::Schema.define(version: 2016_03_23_201608) do
     t.bigint "barcode_img_file_size"
     t.datetime "barcode_img_updated_at"
     t.integer "category"
+    t.integer "deposit", default: 0
   end
 
-  create_table "reservations", force: :cascade do |t|
+  create_table "reservations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "item_id"
     t.integer "user_id"
     t.integer "count"
-    t.integer "brought_back"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "status", default: 1
     t.text "disapproval_message"
     t.integer "picked_up_count", default: 0
-    t.integer "brought_back_count", default: 0
+    t.integer "returned_unused_count", default: 0
+    t.integer "returned_used_count", default: 0
     t.index ["item_id"], name: "index_reservations_on_item_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "email"
@@ -52,7 +53,7 @@ ActiveRecord::Schema.define(version: 2016_03_23_201608) do
     t.string "organisation_name", default: "", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(version: 2016_03_23_201608) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false

@@ -16,6 +16,7 @@
 #  barcode_img_file_size    :bigint
 #  barcode_img_updated_at   :datetime
 #  category                 :integer
+#  deposit                  :integer
 #
 
 class Item < ApplicationRecord
@@ -27,9 +28,19 @@ class Item < ApplicationRecord
 
   validates :name,     presence: true, uniqueness: true
   validates :price,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :deposit,  presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :category, presence: true
 
   enum category: %w[drank materiaal]
+
+  def to_s
+    [
+      name,
+      description.present? ? description : nil,
+      "€#{'%0.2f' % price}",
+      "(€#{'%0.2f' % deposit})"
+    ].compact.join(" - ")
+  end
 
   def price
     from_cents read_attribute(:price)
@@ -39,22 +50,16 @@ class Item < ApplicationRecord
     write_attribute(:price, to_cents(value))
   end
 
-  def name_with_price
-    if price > 0
-      "#{name} - €#{'%0.2f' % price}"
-    else
-      name
-    end
+  def deposit
+    from_cents read_attribute(:deposit)
   end
 
-  def name_with_descr_price
-    if price > 0 and not description.blank?
-      "#{name} - #{description} - €#{'%0.2f' % price}"
-    elsif description.blank?
-      name_with_price
-    else
-      "#{name} - #{description}"
-    end
+  def deposit=(value)
+    write_attribute(:deposit, to_cents(value))
+  end
+
+  def total_price
+    price + deposit
   end
 
   private

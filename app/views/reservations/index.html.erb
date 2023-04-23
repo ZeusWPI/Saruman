@@ -14,61 +14,102 @@
         <h3>Items</h3>
         In the underlying list, a summary can be found of all the reserved approved items.
 
-        <% Item.categories.each do |k,c| %>
-          <h4><%= k %></h4>
-          <div class="table-responsive">
-            <div class="table table-striped" id="table-items">
-              <div class="thead">
-                <div class="tr">
-                  <span class="th">Name</span>
-                  <span class="th">Description</span>
-                  <span class="th">Price per item</span>
-                  <span class="th">Picked Up/Reserved</span>
-                  <span class="th">Total Price</span>
-                </div>
-              </div>
-              <div class="tbody">
-                <% Reservation.approved.joins(:item).category(c).select("(SUM(reservations.picked_up_count) - SUM(reservations.brought_back_count)) AS gone, SUM(reservations.count) AS total_count, items.*, reservations.item_id").group(:item_id).each do |res| %>
-                  <%= render res.item, picked_up: res.gone, reserved: res.total_count %>
-                <% end %>
-                <div class="tr">
-                  <span class="th">Totals:</span>
-                  <span class="th"></span>
-                  <span class="th"></span>
-                  <span class="th"><%= @total_quantity.category(c).sum(:picked_up_count) - @total_quantity.category(c).sum(:brought_back_count) %>/<%= @total_quantity.category(c).sum(:count) %></span>
-                  <span class="th"><%= number_with_precision @total_quantity.category(c).sum_picked_up, precision: 2 %></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <table class="table table-responsive table-striped" id="table-items">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reserved</th>
+              <th>Total reserved price</th>
+              <th>Picked up</th>
+              <th>Returned</th>
+              <th>Price used</th>
+              <th>Missing</th>
+              <th>Outstanding deposit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% Item.categories.each do |k, c| %>
+              <%- @category_reservations = @approved_reservations.category(c) %>
+
+              <tr>
+                <th colspan="8" class="center">
+                  <h4><%= k.capitalize %></h4>
+                </th>
+              </tr>
+
+              <% @category_reservations.joins(:item).select("
+                  reservations.item_id,
+                  SUM(reservations.count) AS reserved,
+                  SUM(reservations.picked_up_count) AS picked_up,
+                  SUM(reservations.returned_unused_count) AS returned_unused,
+                  SUM(reservations.returned_used_count) AS returned_used
+                ").group(:item_id).each do |res| %>
+                <tr>
+                  <td><%= res.item %></td>
+                  <td><%= res.reserved %></td>
+                  <td><%= euro(res.reserved * res.item.price) %></td>
+                  <td><%= res.picked_up %></td>
+                  <td><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
+                  <td><%= euro((res.picked_up - res.returned_unused) * res.item.price) %></td>
+                  <td><%= res.picked_up - res.returned_unused - res.returned_used %></td>
+                  <td><%= euro(res.item.deposit * (res.picked_up - res.returned_unused - res.returned_used)) %></td>
+                </tr>
+              <% end %>
+              <%= render partial: 'totals', locals: { reservations: @category_reservations } %>
+            <% end %>
+
+            <tr>
+              <th colspan="8">
+                <h4>Total</h4>
+              </th>
+            </tr>
+            <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
+
+          </tbody>
+        </table>
       </div>
 
       <div class="tab-pane" id="partners">
         <h3>Partner</h3>
-        A summery of total price per partner. Only approved items are taken into account! Click on the name of the partner to see his individual reservations.
+        A summary of total price per partner. Only approved items are taken into account! Click on the name of the partner to see their individual reservations.
         <div class="table-responsive">
           <table class="table table-striped" id="table-items">
             <thead>
-              <th>Name</th>
-              <th>Reservations</th>
-              <th>Total price</th>
+              <tr>
+                <th>Name</th>
+                <th>Reserved</th>
+                <th>Total reserved price</th>
+                <th>Picked up</th>
+                <th>Returned</th>
+                <th>Price used</th>
+                <th>Missing</th>
+                <th>Outstanding deposit</th>
+              </tr>
             </thead>
             <tbody>
-              <% @per_partner.each do |partner, info| %>
-                <% total_price, count = *info %>
-                <tr>
-                  <td><%= link_to partner.name, partner %></td>
-                  <td><%= count %></td>
-                  <td><%= total_price %></td>
-                </tr>
-              <% end %>
+            <% User.unscoped.partners.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
+              users.*,
+              SUM(reservations.count) as reserved,
+              SUM(reservations.count * items.price / 100) as total_reserved_price,
+              SUM(reservations.picked_up_count) as picked_up,
+              SUM(reservations.returned_unused_count) AS returned_unused,
+              SUM((reservations.picked_up_count - reservations.returned_unused_count) * items.price / 100) as used_price,
+              SUM(reservations.returned_used_count) AS returned_used,
+              SUM((reservations.picked_up_count - reservations.returned_unused_count - reservations.returned_used_count) * items.deposit / 100) as outstanding_deposit
+            ').each do |partner| %>
               <tr>
-                <th>Totals:</th>
-                <th><%= @total_reservations %></th>
-                <th><%= number_with_precision @total_quantity.joins(:item).sum_picked_up, precision: 2 %></th>
+                <td><%= link_to partner.name, user_path(partner) %></td>
+                <td><%= partner.reserved %></td>
+                <td><%= euro(partner.total_reserved_price) %></td>
+                <td><%= partner.picked_up %></td>
+                <td><%= partner.returned_unused + partner.returned_used %> (<%= partner.returned_used %> used, <%= partner.returned_unused %> unused)</td>
+                <td><%= euro(partner.used_price) %></td>
+                <td><%= partner.picked_up - partner.returned_unused - partner.returned_used %></td>
+                <td><%= euro(partner.outstanding_deposit) %></td>
               </tr>
-            </tbody>
+            <% end %>
+            <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
           </table>
         </div>
       </div>

@@ -264,22 +264,39 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test "should be able to revert bringback" do
+  test "should be able to revert unused return" do
     sign_out users(:vtk)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_vat_approved_picked_up)
-    @approved_vtk.brought_back_count = 2
-    @approved_vtk.save
+    @approved_vtk.returned_unused_count = 2
+    @approved_vtk.save!
 
     @approved_vtk.reload
-    assert @approved_vtk.brought_back_count == 2
+    assert @approved_vtk.returned_unused_count == 2
 
     get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
     assert_response :redirect
 
     @approved_vtk.reload
-    assert @approved_vtk.brought_back_count == 0
+    assert @approved_vtk.returned_unused_count == 0
   end
 
+  test "should be able to revert used return" do
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    @approved_vtk = reservations(:vtk_vat_approved_picked_up)
+    @approved_vtk.returned_used_count = 2
+    @approved_vtk.save!
+
+    @approved_vtk.reload
+    assert @approved_vtk.returned_used_count == 2
+
+    get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+    assert_response :redirect
+
+    @approved_vtk.reload
+    assert @approved_vtk.returned_used_count == 0
+  end
 end

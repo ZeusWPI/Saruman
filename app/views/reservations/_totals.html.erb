@@ -1,0 +1,10 @@
+<tr>
+  <th>Totals:</th>
+  <th><%= reservations.sum(:count) %></th>
+  <th><%= euro reservations.joins(:item).sum('items.price * reservations.count / 100') %></th>
+  <th><%= reservations.sum(:picked_up_count) %></th>
+  <th><%= reservations.sum(:returned_used_count) + reservations.sum(:returned_unused_count) %> (<%= reservations.sum(:returned_used_count) %> used, <%= reservations.sum(:returned_unused_count) %> unused)</th>
+  <th><%= euro(reservations.joins(:item).sum('items.price * (reservations.picked_up_count - reservations.returned_unused_count) / 100')) %></th>
+  <th><%= reservations.sum(:picked_up_count) - reservations.sum(:returned_used_count) - reservations.sum(:returned_unused_count) %></th>
+  <th><%= euro(reservations.joins(:item).sum('items.deposit * (reservations.picked_up_count - reservations.returned_unused_count - reservations.returned_used_count) / 100')) %></th>
+</tr>

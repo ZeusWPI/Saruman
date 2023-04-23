@@ -2,17 +2,17 @@
 #
 # Table name: reservations
 #
-#  id                  :bigint           not null, primary key
-#  item_id             :integer
-#  user_id             :integer
-#  count               :integer
-#  brought_back        :integer
-#  created_at          :datetime
-#  updated_at          :datetime
-#  status              :integer          default("pending")
-#  disapproval_message :text(65535)
-#  picked_up_count     :integer          default(0)
-#  brought_back_count  :integer          default(0)
+#  id                    :bigint           not null, primary key
+#  item_id               :integer
+#  user_id               :integer
+#  count                 :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  status                :integer          default("pending")
+#  disapproval_message   :text(65535)
+#  picked_up_count       :integer          default(0)
+#  returned_unused_count :integer          default(0)
+#  returned_used_count   :integer          default(0)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

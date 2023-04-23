@@ -4,13 +4,12 @@
     <% if button_name == 'Save' %>
       <%= object.item.name %>
     <% else %>
-      <%= f.collection_select :item_id, Item.where(category: category), :id, :name_with_descr_price, {}, class: 'form-control' %>
+      <%= f.collection_select :item_id, Item.where(category: category), :id, :to_s, {}, class: 'form-control' %>
     <% end %>
   </span>
-  <span class="td"></span>
   <span class="td"><%= f.number_field :count, size: 4, class: 'form-control' %></span>
   <span class="td"></span>
   <span class="td"></span>
   <span class="td"></span>
-  <span class="td"><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></td>
+  <span class="td"><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></span>
 <% end %>

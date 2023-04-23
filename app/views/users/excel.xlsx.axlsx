@@ -1,11 +1,10 @@
 wb = xlsx_package.workbook
 @reservations.each do |partner, reservations|
   wb.add_worksheet(name: partner.name.truncate(25)) do |sheet|
-    sheet.add_row ["Item","Price","Verbruikt", "Gereserveerd", "Totale prijs"]
+    sheet.add_row ["Item", "Price", "Waarborg", "Gereserveerd", "Verbruikt", "Niet teruggebracht", "Totale prijs"]
 
     reservations.each do |r|
-      used = r.picked_up_count - r.brought_back_count
-      sheet.add_row [r.item.name, euro(r.item.price), used, r.count, euro(r.item.price * used) ]
+      sheet.add_row [r.item.name, euro(r.item.price), euro(r.item.deposit), r.count, r.used_count, r.missing_count, euro((r.item.price * r.used_count) + (r.item.deposit * r.missing_count))]
     end
   end
 end

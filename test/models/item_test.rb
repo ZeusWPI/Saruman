@@ -16,6 +16,7 @@
 #  barcode_img_file_size    :bigint
 #  barcode_img_updated_at   :datetime
 #  category                 :integer
+#  deposit                  :integer
 #
 
 require 'test_helper'
@@ -24,11 +25,7 @@ class ItemTest < ActiveSupport::TestCase
   verify_fixtures Item
 
   test "should generate barcode" do
-    i = Item.new
-    i.name = "Ding"
-    i.category = "materiaal"
-    i.price = 0
-    i.save!
+    i = Item.create!(name: 'Ding', category: :materiaal, price: 0, deposit: 0)
 
     assert_not_nil i.barcode
     assert_not_nil i.barcode_data
