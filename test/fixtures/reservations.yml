@@ -2,15 +2,15 @@
 #
 # Table name: reservations
 #
-#  id                  :integer          not null, primary key
+#  id                  :bigint           not null, primary key
 #  item_id             :integer
 #  user_id             :integer
 #  count               :integer
 #  brought_back        :integer
 #  created_at          :datetime
 #  updated_at          :datetime
-#  status              :integer          default(1)
-#  disapproval_message :text
+#  status              :integer          default("pending")
+#  disapproval_message :text(65535)
 #  picked_up_count     :integer          default(0)
 #  brought_back_count  :integer          default(0)
 #
