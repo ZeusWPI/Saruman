@@ -2,13 +2,13 @@
 #
 # Table name: settings
 #
-#  id                :integer          not null, primary key
+#  id                :bigint           not null, primary key
 #  created_at        :datetime
 #  updated_at        :datetime
-#  email             :string
+#  email             :string(255)
 #  deadline          :datetime
-#  event_name        :string
-#  organisation_name :string           default(""), not null
+#  event_name        :string(255)
+#  organisation_name :string(255)      default(""), not null
 #
 
 instance:
