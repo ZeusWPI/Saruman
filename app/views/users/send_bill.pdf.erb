@@ -7,62 +7,59 @@
   </head>
   <body id="pdf">
     <div class="container">
-    <div id="header">
-      <div id="header-left">
-        <%= wicked_pdf_image_tag 'Logo.jpg' %>
+      <div id="header">
+        <div id="header-left">
+          <%= wicked_pdf_image_tag 'Logo.jpg' %>
+        </div>
+        <div id="header-right">
+            <span>
+              <b><%= Settings.instance.organisation_name %></b>
+            </span>
+          <span>Hoveniersberg 24, 9000 Gent</span>
+          <span><%= mail_to "info@12urenloop.be" %></span>
+        </div>
       </div>
-      <div id="header-right">
-        <span>
-          <b>12urenloopcomité 2016</b>
-        </span>
-        <span>Hoveniersberg 24, 9000 Gent</span>
-        <span><%= mail_to "info@12urenloop.be" %></span>
-      </div>
-    </div>
-    <div>
-      <h2>
-        Factuur voor <%= @partner.name %>
-      </h2>
+      <div>
+        <h2>
+          Factuur voor <%= @partner.name %>
+        </h2>
 
-      Naar aanleiding van de <%= Settings.instance.event_name %> hebben jullie 
-      verschillende items bij ons gereserveerd en afgehaald.
-      Hieronder vindt u hiervoor de rekening.
+        Naar aanleiding van <%= Settings.instance.event_name %> hebben jullie
+        verschillende items bij ons gereserveerd en afgehaald.
+        Hieronder vindt u hiervoor de rekening.
 
-      <h3>Details</h3>
-      <table class="table table-striped">
-        <thead>
+        <h3>Details</h3>
+        <table class="table table-striped">
+          <thead>
           <tr>
             <th>Item</th>
-            <th>Amount</th>
-            <th class="price">Price per item</th>
-            <th class="price">Total</th>
+            <th>Aantal</th>
+            <th class="price">Prijs per item</th>
+            <th>Niet teruggebracht</th>
+            <th class="price">Waarborg per item</th>
+            <th class="price">Totaal</th>
           </tr>
-        </thead>
-        <% Item.categories.each do |k,c| %>
-          <thead>
+          </thead>
+          <% Item.categories.each do |k, c| %>
+            <thead>
             <tr>
-              <th colspan=4>
-                <%= content_tag :h5, k %>
+              <th colspan="6">
+                <%= content_tag :h5, k.capitalize %>
               </th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <% @reservations.category(c).each do |res| %>
-              <% picked_up = res.picked_up_count - res.brought_back_count %>
               <tr>
                 <td>
                   <span class="item-name"><%= res.item.name %></span>
                   <span class="item-description"><%= res.item.description %></span>
                 </td>
-                <td>
-                  <%= picked_up %>
-                </td>
-                <td class="price">
-                  <%= euro res.item.price %>
-                </td>
-                <td class="price">
-                  <%= euro picked_up * res.item.price %>
-                </td>
+                <td><%= res.used_count %></td>
+                <td class="price"><%= euro res.item.price %></td>
+                <td><%= res.missing_count %></td>
+                <td class="price"><%= euro res.item.deposit %></td>
+                <td class="price"><%= euro res.used_count * res.item.price + res.missing_count * res.item.deposit %></td>
               </tr>
             <% end %>
           </tbody>
@@ -75,15 +72,15 @@
           <table class="table">
             <% Item.categories.each do |k,c| %>
               <tr>
-                <td><%= k %></td>
-                <td class="price"><%= euro @reservations.category(c).sum_of_picked_up %></td>
+                <td><%= k.capitalize %></td>
+                <td class="price"><%= euro @reservations.category(c).price %></td>
               </tr>
             <% end %>
           </table>
         </div>
 
         <div id="total-price" class="col-md-3 col-md-offset-6">
-          <h3>Total: <%= euro @reservations.sum_of_picked_up %></h3>
+          <h3>Total: <%= euro @reservations.price %></h3>
         </div>
       </div>
     </div>

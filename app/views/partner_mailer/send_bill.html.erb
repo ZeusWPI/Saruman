@@ -11,6 +11,6 @@
 
      <p>Als u vragen hierover heeft, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email || "fillmein@noreply.com" %>.</p>
 
-     <p>Met vriendelijke groet,<br />De <%= Settings.instance.organisation_name || "fillmein" %></p>
+     <p>Met vriendelijke groet,<br /><%= Settings.instance.organisation_name || "fillmein" %></p>
   </body>
 </html>

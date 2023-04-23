@@ -1,15 +1,11 @@
 <div class="tr" id="<%= dom_id(item) %>">
   <span class="td"><%= item.name %></span>
   <span class="td"><%= item.description %></span>
-  <span class="td"><%= number_with_precision item.price, precision: 2 %></span>
-  <% if defined? picked_up %>
-    <span class="td"><%= picked_up %>/<%= reserved %></span>
-    <span class="td"><%= number_with_precision picked_up*item.price, precision: 2 %></span>
-  <% else %>
-    <span class="td">
-      <div class="nowrap">
-        <%= render "items/actions", item: item %>
-      </div>
-    </span>
-  <% end %>
+  <span class="td"><%= euro item.price %></span>
+  <span class="td"><%= euro item.deposit %></span>
+  <span class="td">
+    <div class="nowrap">
+      <%= render "items/actions", item: item %>
+    </div>
+  </span>
 </div>

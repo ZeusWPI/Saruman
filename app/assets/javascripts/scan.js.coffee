@@ -4,7 +4,7 @@
 
 ready = ->
   $(".btn-action").click (e) ->
-    $(".btn-action").removeClass("btn-primary").addClass("btn-default")
+    $(".btn-action").removeClass("btn-primary").removeClass("active").addClass("btn-default")
     $(this).addClass("btn-primary")
     window.history.replaceState(null, null, "?option=" + $(this).attr('id'))
 

@@ -9,12 +9,7 @@ class ReservationsController < ApplicationController
 
   def index
     authorize! :manage, Reservation
-    @reservations   = Reservation.approved.group(:item)
-    @total_quantity = Reservation.approved
-
-    @total_reservations = Reservation.approved.count
-    @per_partner        = Reservation.approved.joins(:item).joins(:user).group(:user).sum("items.price*(reservations.picked_up_count - reservations.brought_back_count)/100.0")
-    @per_partner.merge!(Reservation.approved.joins(:user).group(:user).count) { |k, nv, ov| [nv, ov] }
+    @approved_reservations = Reservation.approved
   end
 
   def show

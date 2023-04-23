@@ -108,7 +108,7 @@ class UsersController < ApplicationController
   alias_method :user_params, :partner_params
 
   def scan_params
-    params.require(:scan).permit(scan_items_attributes: [ :reservation, :pick_up, :bring_back ]).merge({ partner: @partner })
+    params.require(:scan).permit(scan_items_attributes: [ :reservation, :pick_up, :return_used, :return_unused ]).merge({ partner: @partner })
   end
 
   def set_partner
