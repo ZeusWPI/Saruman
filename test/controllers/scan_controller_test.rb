@@ -65,14 +65,14 @@ class ScanControllerTest < ActionController::TestCase
   end
 
   test "checking in items from existing reservations should work" do
-    post :check, params: { scan: { partner: format(users(:vtk)), item: format(items(:stoel)), count: '1', options: 'in' } }
+    post :check, params: { scan: { partner: format(users(:vtk)), item: format(items(:stoel)), count: '1', options: 'return_unused' } }
     assert_response :redirect
     assert_not_nil flash[:notice]
     assert(flash[:notice].include? "#{users(:vtk).name} brought back")
   end
 
   test "checking in items from non existing reservations should display a warning" do
-    post :check, params: { scan: { partner: format(users(:vlak)), item: format(items(:stoel)), count: '1', options: 'in' } }
+    post :check, params: { scan: { partner: format(users(:vlak)), item: format(items(:stoel)), count: '1', options: 'return_unused' } }
     assert_response :redirect
     assert_not_nil flash[:warning]
     assert(flash[:warning].include? "#{users(:vlak).name} does not has a reservation for this item")

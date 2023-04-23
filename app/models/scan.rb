@@ -27,10 +27,13 @@ class Scan
   def save
     return false unless valid?
 
-    scan_items.each do |res|
-      res.reservation.increment :picked_up_count,    res.pick_up.to_i
-      res.reservation.increment :brought_back_count, res.bring_back.to_i
-      res.reservation.save
+    scan_items.each do |scan_item|
+      reservation = scan_item.reservation
+
+      reservation.increment :picked_up_count,       scan_item.pick_up.to_i
+      reservation.increment :returned_used_count,   scan_item.return_used.to_i
+      reservation.increment :returned_unused_count, scan_item.return_unused.to_i
+      reservation.save!
     end
 
     true
@@ -43,7 +46,8 @@ class Scan
   def notification
     helpers = [
       notification_helper("picked up", :pick_up),
-      notification_helper("brought back", :bring_back)
+      notification_helper("returned used", :return_used),
+      notification_helper("returned unused", :return_unused)
     ].compact
 
     if helpers.empty?
@@ -70,23 +74,29 @@ class ScanItem
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :pick_up, :bring_back, :reservation
+  attr_accessor :pick_up, :return_used, :return_unused, :reservation
 
-  validates :pick_up,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :bring_back, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :pick_up,       numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :return_used,   numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :return_unused, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def initialize attr = {}
     super attr
-    @pick_up    ||= 0
-    @bring_back ||= 0
+    @pick_up       ||= 0
+    @return_used   ||= 0
+    @return_unused ||= 0
   end
 
-  def pick_up= i
-    @pick_up = i.to_i
+  def pick_up= amount
+    @pick_up = amount.to_i
   end
 
-  def bring_back= i
-    @bring_back = i.to_i
+  def return_used= amount
+    @return_used = amount.to_i
+  end
+
+  def return_unused= amount
+    @return_unused = amount.to_i
   end
 
   def reservation= id

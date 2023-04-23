@@ -4,7 +4,7 @@ module ReservationsHelper
     # Are we after the deadline?
     if not Settings.instance.deadline.nil? and Settings.instance.deadline < DateTime.now
       if r.approved?
-        if (r.picked_up_count <= r.brought_back_count)
+        if r.picked_up_count <= r.returned_count
           'success'
         else
           'danger'
@@ -46,8 +46,10 @@ module ReservationsHelper
       end
     when 'picked_up_count'
       "Picked up #{change[1] - change[0]}"
-    when 'brought_back_count'
-      "Brought #{change[1] - change[0]} back"
+    when 'returned_used_count'
+      "Returned #{change[1] - change[0]} used"
+    when 'returned_unused_count'
+      "Returned #{change[1] - change[0]} unused"
     end
   end
 

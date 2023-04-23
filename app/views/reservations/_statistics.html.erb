@@ -1,24 +1,43 @@
 <div id="price-statistics">
-  <h3>Price statistics</h3>
+  <h3>Price summary</h3>
+  <p>
+    This does not include items that have been brought back full. Your invoice will take those into account.
+  </p>
   <table class="table table-striped table-hover table-nonfluid">
     <thead>
       <tr>
-        <th>Category</th>
-        <th>Total price</th>
+        <th></th>
+        <th>Price</th>
+        <th>Deposit</th>
       </tr>
     </thead>
     <tbody>
       <tr class="success">
         <th>Approved:</th>
-        <td><%= number_with_precision @partner.reservations.approved.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+        <td>
+          <%= euro @partner.reservations.approved.joins(:item).sum("reservations.count*items.price/100.0") %>
+        </td>
+        <td>
+          <%= euro @partner.reservations.approved.joins(:item).sum("reservations.count*items.deposit/100.0") %>
+        </td>
       </tr>
       <tr class="warning">
-        <th>Unapproved:</th>
-        <td><%= number_with_precision @partner.reservations.disapproved.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+        <th>Pending:</th>
+        <td>
+          <%= euro @partner.reservations.pending.joins(:item).sum("reservations.count*items.price/100.0") %>
+        </td>
+        <td>
+          <%= euro @partner.reservations.pending.joins(:item).sum("reservations.count*items.deposit/100.0") %>
+        </td>
       </tr>
       <tr>
         <th>Total:</th>
-        <td><%= number_with_precision @partner.reservations.joins(:item).sum("reservations.count*items.price/100.0"), precision: 2 %></td>
+        <td>
+          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).sum("reservations.count*items.price/100.0") %>
+        </td>
+        <td>
+          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).sum("reservations.count*items.deposit/100.0") %>
+        </td>
       </tr>
     </tbody>
   </table>

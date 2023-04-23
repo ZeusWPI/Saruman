@@ -13,8 +13,10 @@
                 <span class="th">Item description</span>
                 <span class="th">Picked up/Reserved</span>
                 <span class="th">Pick up</span>
-                <span class="th">Bring back</span>
-                <span class="th">Brought back</span>
+                <span class="th">Returned used</span>
+                <span class="th">Return used</span>
+                <span class="th">Returned unused</span>
+                <span class="th">Return unused</span>
               </div>
             </div>
             <div class="tbody">
@@ -26,17 +28,25 @@
                     <%= ff.hidden_field :leftover, value: reservation.count - reservation.picked_up_count, class: "leftover" %>
                     <span class="td"><%= reservation.item.name %></span>
                     <span class="td"><%= reservation.item.description %></span>
+
+                    <div class="td td-btn-group">
+                      <%= render 'increment_buttons', field: :pick_up, f: ff, warning: true %>
+                    </div>
                     <span class="td">
                       <%= reservation.picked_up_count %>/<%= reservation.count %>
                       <span class="glyphicon glyphicon-exclamation-sign"></span>
                     </span>
+
                     <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :pick_up, f: ff, warning: true %>
+                      <%= render 'increment_buttons', field: :return_used, f: ff, warning: false %>
                     </div>
+                    <span class="td"><%= reservation.returned_used_count %></span>
+
                     <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :bring_back, f: ff, warning: false %>
+
+                      <%= render 'increment_buttons', field: :return_unused, f: ff, warning: false %>
                     </div>
-                    <span class="td"><%= reservation.brought_back_count %></span>
+                    <span class="td"><%= reservation.returned_unused_count %></span>
                   </div>
                 <% end %>
               <% end %>

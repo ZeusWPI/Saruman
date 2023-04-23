@@ -2,11 +2,10 @@
   <div class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
     <div class="thead">
       <div class="tr">
-      <span class="th">Item</span>
-      <span class="th">Item description</span>
+      <span class="th">Item - description - price - (deposit)</span>
       <span class="th">Count</span>
       <span class="th">Picked up</span>
-      <span class="th">Brought back</span>
+      <span class="th">Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></span>
       <span class="th">Status</span>
       <span class="th" width="210">Actions <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."></span></span>
       </div>

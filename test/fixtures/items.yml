@@ -16,6 +16,7 @@
 #  barcode_img_file_size    :bigint
 #  barcode_img_updated_at   :datetime
 #  category                 :integer
+#  deposit                  :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -25,6 +26,7 @@ tent:
   category: materiaal
   description: Tentjeuhs
   price: 100
+  deposit: 0
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 vat:
@@ -32,6 +34,7 @@ vat:
   category: drank
   description: 2 miljard lieter
   price: 10
+  deposit: 0
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 stoel:
@@ -39,10 +42,12 @@ stoel:
   category: materiaal
   description: Om op te zitten!
   price: 0
+  deposit: 0
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
 
 brood:
   name: Brood
   category: drank
   price: 2
+  deposit: 0
   barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>

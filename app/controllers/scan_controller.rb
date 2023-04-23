@@ -82,24 +82,31 @@ class ScanController < ApplicationController
   def process_check
     @count = params.require(:scan)[:count].to_i
 
-    if @option == :in
+    if @option == :out
+      check_out params.require(:scan)
+    else
       check_in params.require(:scan)
       redirect_to action: :scan, option: @option
-    else
-      check_out params.require(:scan)
     end
   end
 
   def check_in(params)
     # Get the reservation, if any
     reservation = @partner.reservations.approved.find_by(item_id: @item.id)
+
     if reservation
-      # If there is a reservation: increase the brought_back_count
-      reservation.brought_back_count += @count
-      reservation.save
+      if @option == :return_unused
+        reservation.returned_unused_count += @count
+      elsif @option == :return_used
+        reservation.returned_used_count += @count
+      else
+        raise "Option #{@option} not supported."
+      end
+
+      reservation.save!
 
       # Notice the partner how many items he has left
-      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. They have #{reservation.picked_up_count - reservation.brought_back_count}x #{@item.name} remaining in their possession. #{view_context.link_to 'Revert this checkin', revert_user_reservation_path(@partner, reservation, option: @option)}."
+      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. They have #{reservation.picked_up_count - reservation.returned_count}x #{@item.name} remaining in their possession. #{view_context.link_to 'Revert this checkin', revert_user_reservation_path(@partner, reservation, option: @option)}."
     else
       # No reservations: display a warning
       flash[:warning] = "#{@partner.name} does not has a reservation for this item."
