@@ -66,7 +66,7 @@ Rails.application.configure do
   # Mail settings
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "mailserver.example.com",
+    address: "smtprelay.ugent.be",
     port: 25,
     enable_starttls_auto: false
   }
