@@ -9,12 +9,12 @@
     <div class="container">
       <div id="header">
         <div id="header-left">
-          <%= wicked_pdf_image_tag 'Logo.jpg' %>
+          <%= image_tag wicked_pdf_asset_base64 'Logo.jpg' %>
         </div>
         <div id="header-right">
-            <span>
-              <b><%= Settings.instance.organisation_name %></b>
-            </span>
+                <span>
+                  <b><%= Settings.instance.organisation_name %></b>
+                </span>
           <span>Hoveniersberg 24, 9000 Gent</span>
           <span><%= mail_to "info@12urenloop.be" %></span>
         </div>
@@ -78,28 +78,28 @@
               <td class="price"><%= euro reservations.ordered_by_item_name.category(c).deposit_cost %></td>
               <th class="price"><%= euro reservations.ordered_by_item_name.category(c).total_cost %></th>
             </tr>
-          </tbody>
-        <% end %>
-      </table>
+            </tbody>
+          <% end %>
+        </table>
 
-      <div class="row">
-        <div id="total-per-cat" class="col-md-3">
-          <h3>Per categorie</h3>
-          <table class="table">
-            <% Item.categories.each do |k,c| %>
-              <tr>
-                <td><%= k.capitalize %></td>
-                <td class="price"><%= euro reservations.category(c).total_cost %></td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
+        <div class="row">
+          <div id="total-per-cat" class="col-md-3">
+            <h3>Per categorie</h3>
+            <table class="table">
+              <% Item.categories.each do |k,c| %>
+                <tr>
+                  <td><%= k.capitalize %></td>
+                  <td class="price"><%= euro reservations.category(c).total_cost %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
 
-        <div id="total-price" class="col-md-3 col-md-offset-6">
-          <h3>Total: <%= euro reservations.total_cost %></h3>
+          <div id="total-price" class="col-md-3 col-md-offset-6">
+            <h3>Total: <%= euro reservations.total_cost %></h3>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </body>
 </html>
