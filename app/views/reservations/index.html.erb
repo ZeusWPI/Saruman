@@ -88,7 +88,7 @@
               </tr>
             </thead>
             <tbody>
-            <% User.unscoped.partners.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
+            <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
               users.*,
               SUM(reservations.count) as reserved,
               SUM(reservations.count * items.price / 100) as total_reserved_price,
@@ -115,7 +115,7 @@
       </div>
 
       <div class="tab-pane" id="partner_barcodes">
-        <%= render partial: 'barcode_overview', locals: { model: User.partners } %>
+        <%= render partial: 'barcode_overview', locals: { model: User.partners.ordered_by_name } %>
       </div>
 
       <div class="tab-pane" id="item_barcodes">
