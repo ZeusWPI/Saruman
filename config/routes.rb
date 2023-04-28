@@ -15,7 +15,10 @@ Rails.application.routes.draw do
       get :resend
       get :send_barcode
       get :get_barcode
+
+      get :download_bill
       get :send_bill
+
       get :scan, as: :scan
       post :process_scan
     end

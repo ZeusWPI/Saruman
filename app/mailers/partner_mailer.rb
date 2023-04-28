@@ -1,6 +1,5 @@
 class PartnerMailer < ActionMailer::Base
   default from: "noreply@zeus.ugent.be"
-  helper ApplicationHelper
 
   def send_token(partner)
     @partner = partner
@@ -18,10 +17,9 @@ class PartnerMailer < ActionMailer::Base
 
   def send_bill partner
     @partner = partner
-    @reservations = @partner.reservations.approved
 
-    pdf = WickedPdf.new.pdf_from_string(render_to_string pdf: 'bill.pdf', template: 'users/send_bill.pdf.erb', layout: false)
-    attachments['bill.pdf'] = pdf
+    pdf = GenerateBillingProposal.new(partner).call
+    attachments['billing_proposal.pdf'] = pdf
 
     mail to: "#{partner.name} <#{partner.email}>", subject: "Bill for #{partner.name}"
   end
