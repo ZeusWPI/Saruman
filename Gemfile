@@ -9,7 +9,7 @@ gem 'dotenv-rails'
 gem 'bundler', '>= 2.4.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.8.1'
+gem 'rails', '6.0.6.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -84,7 +84,7 @@ group :development do
 
   # Mails
   gem 'letter_opener'
-  gem 'web-console', '~> 3.0'
+  gem 'web-console', '~> 4.2'
 
   # Rails 5 goodies
   gem 'listen'
