@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   acts_as_token_authenticatable
 
-  default_scope { order "name ASC" }
+  scope :ordered_by_name, -> { order(name: :asc) }
   scope :admins, -> { where(role: 'admin') }
   scope :partners, -> { where(role: 'partner') }
 

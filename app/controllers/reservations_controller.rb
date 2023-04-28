@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
 
   def index
     authorize! :manage, Reservation
-    @approved_reservations = Reservation.approved
+    @approved_reservations = Reservation.ordered_by_item_name.approved
   end
 
   def show

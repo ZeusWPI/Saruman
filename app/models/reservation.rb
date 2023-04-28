@@ -28,6 +28,8 @@ class Reservation < ApplicationRecord
 
   before_save :change_status
 
+  scope :ordered_by_item_name, -> { joins(:item).order('items.name': :asc) }
+
   class << self
     def category(c)
       joins(:item).where("items.category = ?", c)
