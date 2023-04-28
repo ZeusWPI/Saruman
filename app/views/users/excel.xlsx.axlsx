@@ -4,7 +4,7 @@ wb = xlsx_package.workbook
     sheet.add_row ["Item", "Price", "Waarborg", "Gereserveerd", "Verbruikt", "Niet teruggebracht", "Totale prijs"]
 
     reservations.each do |r|
-      sheet.add_row [r.item.name, euro(r.item.price), euro(r.item.deposit), r.count, r.used_count, r.missing_count, euro((r.item.price * r.used_count) + (r.item.deposit * r.missing_count))]
+      sheet.add_row [r.item.name, euro(r.item.price), euro(r.item.deposit), r.count, r.used_count, r.missing_count, euro(r.total_cost)]
     end
   end
 end
