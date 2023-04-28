@@ -35,21 +35,23 @@
             <th>Item</th>
             <th>Aantal</th>
             <th class="price">Prijs per item</th>
+            <th class="price">Prijs (verbruik)</th>
             <th>Niet teruggebracht</th>
             <th class="price">Waarborg per item</th>
+            <th class="price">Prijs (waarborg)</th>
             <th class="price">Totaal</th>
           </tr>
           </thead>
           <% Item.categories.each do |k, c| %>
             <thead>
             <tr>
-              <th colspan="6">
+              <th colspan="8">
                 <%= content_tag :h5, k.capitalize %>
               </th>
             </tr>
             </thead>
             <tbody>
-            <% reservations.category(c).each do |res| %>
+            <% reservations.ordered_by_item_name.category(c).each do |res| %>
               <tr>
                 <td>
                   <span class="item-name"><%= res.item.name %></span>
@@ -57,11 +59,25 @@
                 </td>
                 <td><%= res.used_count %></td>
                 <td class="price"><%= euro res.item.price %></td>
-                <td><%= res.missing_count %></td>
-                <td class="price"><%= euro res.item.deposit %></td>
-                <td class="price"><%= euro res.used_count * res.item.price + res.missing_count * res.item.deposit %></td>
+                <td class="price"><%= euro res.usage_cost %></td>
+                <td class="<%= 'text-muted' unless res.missing? %>"><%= res.missing_count %></td>
+                <td class="price <%= 'text-muted' unless res.missing? %>"><%= euro res.item.deposit %></td>
+                <td class="price <%= 'text-muted' unless res.missing? %>"><%= euro res.deposit_cost %></td>
+                <th class="price"><%= euro res.total_cost %></th>
               </tr>
             <% end %>
+            <tr>
+              <th>
+                <span class="item-name">Totaal categorie</span>
+              </th>
+              <td></td>
+              <td class="price"></td>
+              <td class="price"><%= euro reservations.ordered_by_item_name.category(c).usage_cost %></td>
+              <td></td>
+              <td></td>
+              <td class="price"><%= euro reservations.ordered_by_item_name.category(c).deposit_cost %></td>
+              <th class="price"><%= euro reservations.ordered_by_item_name.category(c).total_cost %></th>
+            </tr>
           </tbody>
         <% end %>
       </table>
@@ -73,14 +89,14 @@
             <% Item.categories.each do |k,c| %>
               <tr>
                 <td><%= k.capitalize %></td>
-                <td class="price"><%= euro reservations.category(c).price %></td>
+                <td class="price"><%= euro reservations.category(c).total_cost %></td>
               </tr>
             <% end %>
           </table>
         </div>
 
         <div id="total-price" class="col-md-3 col-md-offset-6">
-          <h3>Total: <%= euro reservations.price %></h3>
+          <h3>Total: <%= euro reservations.total_cost %></h3>
         </div>
       </div>
     </div>

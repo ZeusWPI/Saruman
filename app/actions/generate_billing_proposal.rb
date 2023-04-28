@@ -23,7 +23,7 @@ class GenerateBillingProposal
   def rendered_view
     @view.render(
       pdf: 'bill.pdf',
-      template: 'users/send_bill.pdf.erb',
+      template: 'billing/billing_proposal.pdf.erb',
       layout: false,
       locals: { partner: @partner, reservations: @reservations }
     )

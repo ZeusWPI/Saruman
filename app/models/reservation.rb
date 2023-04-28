@@ -35,7 +35,21 @@ class Reservation < ApplicationRecord
       joins(:item).where("items.category = ?", c)
     end
 
-    def price
+    def usage_cost
+      joins(:item).pluck(:picked_up_count, :returned_unused_count, :'items.price')
+        .sum do |picked_up_count, returned_unused_count, price|
+        ((picked_up_count - returned_unused_count) * price)
+      end / 100.0
+    end
+
+    def deposit_cost
+      joins(:item).pluck(:picked_up_count, :returned_used_count, :returned_unused_count, :'items.deposit')
+        .sum do |picked_up_count, returned_used_count, returned_unused_count, deposit|
+          ((picked_up_count - returned_unused_count - returned_used_count) * deposit)
+      end / 100.0
+    end
+
+    def total_cost
       # Take 5 picked up kegs at 10 euro, deposit of 5 euro.
       # 3 are returned empty (used), 1 is returned full (unused), 1 got lost
       # - 75: picking up 5 kegs (5 x 10 price) + (5 x 5 deposit)
@@ -66,6 +80,22 @@ class Reservation < ApplicationRecord
 
   def missing_count
     picked_up_count - returned_used_count - returned_unused_count
+  end
+
+  def missing?
+    missing_count > 0
+  end
+
+  def usage_cost
+    used_count * item.price
+  end
+
+  def deposit_cost
+    missing_count * item.deposit
+  end
+
+  def total_cost
+    usage_cost + deposit_cost
   end
 
   def approve
