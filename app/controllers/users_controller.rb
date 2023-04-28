@@ -113,6 +113,10 @@ class UsersController < ApplicationController
   def excel
     authorize! :manage, Reservation
     @reservations = Reservation.joins(:item).joins(:user).group_by(&:user)
+
+    respond_to do |format|
+      format.xlsx
+    end
   end
 
   rescue_from Settings::SettingsNotCompleteError do
