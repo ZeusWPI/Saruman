@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   before_action :set_partner, only: [:edit, :update, :destroy,
                                      :resend, :send_barcode,
-                                     :get_barcode, :send_bill,
+                                     :get_barcode, :download_bill, :send_bill,
                                      :scan, :process_scan]
 
   def index
@@ -71,6 +71,13 @@ class UsersController < ApplicationController
     barcode_pdf = Barcodes::Renderer::Pdf.new(barcode).render
 
     send_data barcode_pdf, filename: "barcode.pdf", type: "application/pdf"
+  end
+
+  def download_bill
+    authorize! :read, :partner
+
+    pdf = GenerateBillingProposal.new(@partner).call
+    send_data pdf, filename: 'billing_proposal.pdf', type: 'application/pdf'
   end
 
   def send_bill
