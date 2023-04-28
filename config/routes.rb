@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
 
     collection do
-      post :excel
+      get :excel
     end
 
     resources :reservations do

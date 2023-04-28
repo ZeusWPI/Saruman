@@ -71,6 +71,10 @@ gem 'mysql2'
 # Inline svgs
 gem 'inline_svg'
 
+# Excel exports
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
 group :production, :deployment do
   gem 'puma'
 end
