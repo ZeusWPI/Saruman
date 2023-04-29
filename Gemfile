@@ -9,7 +9,7 @@ gem 'dotenv-rails'
 gem 'bundler', '>= 2.4.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.8.1'
+gem 'rails', '7.0.4.3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
