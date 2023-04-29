@@ -1,0 +1,54 @@
+<h3>Partner</h3>
+<p>
+  A summary of total price per partner. Only approved items are taken into account! Click on the name of the partner to see their individual reservations.
+</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+
+    <th class="border-start">Reserved</th>
+    <th>Reserved price</th>
+
+    <th class="border-start">Picked up</th>
+    <th>Returned</th>
+    <th>Usage cost</th>
+
+    <th class="border-start">Missing</th>
+    <th>Deposit cost</th>
+
+    <th class="border-start border-2">Total cost</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
+                users.*,
+                SUM(reservations.count) as reserved,
+                SUM(reservations.count * items.price / 100) as total_reserved_price,
+                SUM(reservations.picked_up_count) as picked_up,
+                SUM(reservations.returned_unused_count) AS returned_unused,
+                SUM((reservations.picked_up_count - reservations.returned_unused_count) * items.price / 100) as used_price,
+                SUM(reservations.returned_used_count) AS returned_used,
+                SUM((reservations.picked_up_count - reservations.returned_unused_count - reservations.returned_used_count) * items.deposit / 100) as outstanding_deposit
+              ').each do |partner| %>
+    <tr>
+      <td><%= link_to partner.name, user_path(partner) %></td>
+
+      <td class="border-start text-end"><%= partner.reserved %></td>
+      <td class="text-end"><%= euro(partner.total_reserved_price) %></td>
+
+      <td class="border-start text-end"><%= partner.picked_up %></td>
+      <td><%= partner.returned_unused + partner.returned_used %> (<%= partner.returned_used %> used, <%= partner.returned_unused %> unused)</td>
+      <td class="text-end"><%= euro(partner.used_price) %></td>
+
+      <td class="border-start text-end"><%= partner.picked_up - partner.returned_unused - partner.returned_used %></td>
+      <td class="text-end"><%= euro(partner.outstanding_deposit) %></td>
+
+      <td class="border-start border-2 text-end"><%= euro(partner.used_price + partner.outstanding_deposit) %></td>
+    </tr>
+  <% end %>
+  <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
+  </tbody>
+</table>
+

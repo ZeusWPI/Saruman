@@ -1,0 +1,3 @@
+<h4>Edit reservation</h4>
+<%= form_errors(@reservation) %>
+<%= render partial: "reservations/form", locals: { object: @reservation, button_name: "Edit reservation", category: @reservation.item.category } %>

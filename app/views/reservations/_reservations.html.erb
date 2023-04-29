@@ -1,24 +1,28 @@
 <h4><%= Item.categories.key(category).humanize %></h4>
 
-<% if can? :create, Reservation %>
-  <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
-<% else %>
-  <div class="alert alert-warning" role="alert">
-    The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
-    Contact <%= mail_to (Settings.instance.deadline.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
-  </div>
-<% end %>
-
 <div class="table-responsive">
   <table class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
     <thead>
       <tr>
         <th>Item</th>
-        <th>Count</th>
-        <th>Picked up</th>
-        <th>Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></th>
-        <th>Status</th>
-        <th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Deposit</th>
+
+        <th class="border-start"># Reserved</th>
+        <th>Reserved price</th>
+        <th>Approval Status</th>
+
+        <th class="border-start"># Picked up</th>
+        <th># Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></th>
+        <th>Usage cost</th>
+
+        <th class="border-start">Missing</th>
+        <th>Deposit cost</th>
+
+        <th class="border-start border-2">Total cost</th>
+
+        <th class="border-start border-2">
           Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."><i class="bi bi-question-circle"></i></a>
         </th>
       </tr>
@@ -28,5 +32,14 @@
     </tbody>
   </table>
 </div>
+
+<% if can? :create, Reservation %>
+  <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
+<% else %>
+  <div class="alert alert-warning" role="alert">
+    The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
+    Contact <%= mail_to(Settings.instance.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
+  </div>
+<% end %>
 
 <hr>

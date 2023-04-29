@@ -24,22 +24,31 @@
   <div class="col-sm-6">
     <%= form_tag check_path, url: check_path, remote: false do %>
       <label for="options">
-        Action:
+        Action
         <span id="actions-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" data-html="true" title="Pick up: give item to club<br />Return unused: club will receive price and deposit back<br />Return used: club will receive only deposit back"></span>
       </label>
 
-      <div class="form-group btn-toolbar">
-        <div class="btn-group" data-toggle="buttons">
-          <label id="out" class="btn btn-lg btn-action <% if @option == :out || @option.nil? %>active btn-primary<% else %>btn-default<% end %>">
-            <input type="radio" name="scan[options]" id="options" value="out" <% if @option == :out || @option.nil? %>checked<% end %>><span class="glyphicon glyphicon-log-out"></span> Pick up
+      <div class="mb-3">
+        <div class="form-group btn-toolbar" role="toolbar">
+          <input type="radio" id="out" class="btn-check" name="scan[options]" value="out"
+                 <% if @option == :out || @option.nil? %>checked<% end %>
+          >
+          <label id="out" for="out" class="btn btn-lg btn-outline-primary me-2">
+            <span class="bi bi-box-arrow-up"></span> Pick up
           </label>
-        </div>
-        <div class="btn-group" data-toggle="buttons">
-          <label id="return_unused" class="btn btn-lg btn-action <% if @option == :return_unused %>active btn-primary<% else %>btn-default<% end %>">
-            <input type="radio" name="scan[options]" id="options" value="return_unused" <% if @option == :return_unused %>checked<% end %>><span class="glyphicon glyphicon-log-in"></span> Return unused
+
+          <input type="radio" id="return_unused" class="btn-check" name="scan[options]" value="return_unused"
+                 <% if @option == :return_unused %>checked<% end %>
+          >
+          <label id="return_unused" for="return_unused" class="btn btn-lg btn-outline-primary me-2">
+            <span class="bi bi-box-arrow-in-down"></span> <span class="bi bi-battery-full"></span> Return unused
           </label>
-          <label id="return_used" class="btn btn-lg btn-action <% if @option == :return_used %>active btn-primary<% else %>btn-default<% end %>">
-            <input type="radio" name="scan[options]" id="options" value="return_used" <% if @option == :return_used %>checked<% end %>><span class="glyphicon glyphicon-log-in"></span> Return used
+
+          <input type="radio" id="return_used" class="btn-check" name="scan[options]" value="return_used"
+                 <% if @option == :return_used %>checked<% end %>
+          >
+          <label id="return_used" for="return_used" class="btn btn-lg btn-outline-primary me-2">
+            <span class="bi bi-box-arrow-in-down"></span> <span class="bi bi-battery"></span> Return used
           </label>
         </div>
       </div>

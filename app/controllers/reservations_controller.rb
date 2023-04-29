@@ -5,13 +5,6 @@ class ReservationsController < ApplicationController
   # whodunnit set
   before_action :set_paper_trail_whodunnit
 
-  respond_to :html, :js
-
-  def index
-    authorize! :manage, Reservation
-    @approved_reservations = Reservation.ordered_by_item_name.approved
-  end
-
   def show
     @partner = User.partners.find params.require(:user_id)
     @reservation = @partner.reservations.find params.require(:id)
@@ -38,7 +31,6 @@ class ReservationsController < ApplicationController
 
     @reservation = @partner.reservations.find params.require(:id)
     authorize! :update, @reservation
-    respond_with @reservation
   end
 
   def update

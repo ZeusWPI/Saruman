@@ -86,6 +86,10 @@ class Reservation < ApplicationRecord
     missing_count > 0
   end
 
+  def reservation_cost
+    count * item.price
+  end
+
   def usage_cost
     used_count * item.price
   end

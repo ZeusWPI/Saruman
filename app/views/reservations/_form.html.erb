@@ -1,14 +1,10 @@
-<%= form_for object do |f| %>
-  <span class="td">
+<%= form_for [@partner, object] do |f| %>
     <% if button_name == 'Save' %>
       <%= object.item.name %>
     <% else %>
       <%= f.collection_select :item_id, Item.where(category: category), :id, :to_s, {}, class: 'form-control', min: 1 %>
     <% end %>
   </span>
-  <span class="td"><%= f.number_field :count, size: 4, class: 'form-control' %></span>
-  <span class="td"></span>
-  <span class="td"></span>
-  <span class="td"></span>
-  <span class="td"><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></span>
+  <%= f.number_field :count, class: 'form-control' %>
+  <%= f.submit button_name, class: 'btn btn-sm btn-primary' %>
 <% end %>

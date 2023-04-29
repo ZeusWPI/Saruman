@@ -1,0 +1,18 @@
+<tr class="<%= row_colour_class %>">
+  <th><%= category %></th>
+  <td class="border-start text-end">
+    <%= euro reservations.sum("reservations.count*items.price/100.0") %>
+  </td>
+  <td class="text-end">
+    <%= euro reservations.sum("reservations.count*items.deposit/100.0") %>
+  </td>
+  <td class="border-start text-end">
+    <%= euro reservations.usage_cost %>
+  </td>
+  <td class="text-end">
+    <%= euro reservations.deposit_cost %>
+  </td>
+  <td class="border-start text-end">
+    <%= euro reservations.total_cost %>
+  </td>
+</tr>

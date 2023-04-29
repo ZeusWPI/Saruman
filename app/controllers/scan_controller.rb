@@ -18,11 +18,8 @@ class ScanController < ApplicationController
       return
     end
 
-    partner_barcode = params.require(:scan)[:partner].rstrip.split.last
-    item_barcode = params.require(:scan)[:item].rstrip.split.last
-
-    @partner = User.partners.find_by(barcode: partner_barcode)
-    @item = Item.find_by(barcode: item_barcode)
+    @partner = User.partners.find_by(id: params.require(:scan)[:partner])
+    @item = Item.find_by(id: params.require(:scan)[:item])
 
     if @partner and @item
       process_check
@@ -98,8 +95,6 @@ class ScanController < ApplicationController
       # No reservations: display a warning
       flash[:warning] = "#{@partner.name} does not has a reservation for this item."
     end
-
-    redirect_to action: :scan
   end
 
   def check_out(params)
