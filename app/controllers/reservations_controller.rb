@@ -5,6 +5,8 @@ class ReservationsController < ApplicationController
   # whodunnit set
   before_action :set_paper_trail_whodunnit
 
+  respond_to :html, :js
+
   def show
     @partner = User.partners.find params.require(:user_id)
     @reservation = @partner.reservations.find params.require(:id)

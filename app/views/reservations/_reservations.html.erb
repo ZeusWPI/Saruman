@@ -1,45 +1,43 @@
 <h4><%= Item.categories.key(category).humanize %></h4>
 
-<div class="table-responsive">
-  <table class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Deposit</th>
+<span class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
+  <span class="thead">
+    <span class="tr">
+      <span class="th">Item</span>
+      <span class="th">Description</span>
+      <span class="th">Price</span>
+      <span class="th">Deposit</span>
 
-        <th class="border-start"># Reserved</th>
-        <th>Reserved price</th>
-        <th>Approval Status</th>
+      <span class="th border-start"># Reserved</span>
+      <span class="th">Reserved price</span>
+      <span class="th">Approval Status</span>
 
-        <th class="border-start"># Picked up</th>
-        <th># Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></th>
-        <th>Usage cost</th>
+      <span class="th border-start"># Picked up</span>
+      <span class="th"># Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></span>
+      <span class="th">Usage cost</span>
 
-        <th class="border-start">Missing</th>
-        <th>Deposit cost</th>
+      <span class="th border-start">Missing</span>
+      <span class="th">Deposit cost</span>
 
-        <th class="border-start border-2">Total cost</th>
+      <span class="th border-start border-2">Total cost</span>
 
-        <th class="border-start border-2">
-          Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."><i class="bi bi-question-circle"></i></a>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render reservations %>
-    </tbody>
-  </table>
-</div>
+      <span class="th">
+        Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."><i class="bi bi-question-circle"></i></a>
+      </span>
+    </span>
+  </span>
+  <span class="tbody">
+    <%= render reservations %>
 
-<% if can? :create, Reservation %>
-  <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
-<% else %>
-  <div class="alert alert-warning" role="alert">
-    The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
-    Contact <%= mail_to(Settings.instance.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
-  </div>
-<% end %>
+    <% if can? :create, Reservation %>
+      <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
+    <% else %>
+      <div class="alert alert-warning" role="alert">
+        The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
+        Contact <%= mail_to(Settings.instance.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
+      </div>
+    <% end %>
+  </span>
+</span>
 
 <hr>

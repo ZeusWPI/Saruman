@@ -1,0 +1,12 @@
+<html>
+<head>
+  <%= yield :head %>
+</head>
+<body>
+<%= turbo_stream.replace "flash-alerts" do %>
+  <%= render partial: "flash" %>
+<% end %>
+
+<%= yield %>
+</body>
+</html>

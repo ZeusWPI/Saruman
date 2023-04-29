@@ -1,31 +1,31 @@
-<tr class="<%= row_colour(reservation) %>">
-  <td><%= reservation.item.name %></td>
-  <td><%= reservation.item.description %></td>
-  <td class="text-end"><%= euro(reservation.item.price) %></td>
-  <td class="text-end"><%= euro(reservation.item.deposit) %></td>
+<span id="<%= dom_id(reservation) %>" class="tr">
+  <span class="td"><%= reservation.item.name %></span>
+  <span class="td"><%= reservation.item.description %></span>
+  <span class="td text-end"><%= euro(reservation.item.price) %></span>
+  <span class="td text-end"><%= euro(reservation.item.deposit) %></span>
 
-  <td class="border-start text-end"><%= reservation.count %></td>
-  <td class="text-end"><%= euro(reservation.reservation_cost) %></td>
-  <td>
+  <span class="td border-start text-end"><%= reservation.count %></span>
+  <span class="td text-end"><%= euro(reservation.reservation_cost) %></span>
+  <span class="td <%= status_colour(reservation) %>">
     <%= raw(status(reservation)) %>
     <% if reservation.disapproved? %>
       <span class="glyphicon glyphicon-question-sign reservation-disapprove-tooltip" data-toggle="tooltip" data-placement="top" title="<%= reservation.disapproval_message %>"></span>
     <% end %>
-  </td>
+  </span>
 
-  <td class="border-start text-end"><%= reservation.picked_up_count %></td>
-  <td><%= reservation.returned_count %> (<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</td>
-  <td class="text-end"><%= euro(reservation.usage_cost) %></td>
+  <span class="td border-start text-end"><%= reservation.picked_up_count %></span>
+  <span class="td <%= returned_colour(reservation) %>"><%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span></span>
+  <span class="td text-end"><%= euro(reservation.usage_cost) %></span>
 
 
-  <td class="border-start text-end"><%= reservation.missing_count %></td>
-  <td class="text-end"><%= euro(reservation.deposit_cost) %></td>
+  <span class="td border-start text-end"><%= reservation.missing_count %></span>
+  <span class="td text-end"><%= euro(reservation.deposit_cost) %></span>
 
-  <td class="border-start border-2 text-end"><%= euro(reservation.total_cost) %></td>
+  <span class="td border-start border-2 text-end"><%= euro(reservation.total_cost) %></span>
 
-  <td class="border-start border-2">
-    <div class="nowrap">
+  <span class="td border-start border-2">
+    <span class="nowrap">
       <%= render "reservations/actions", reservation: reservation %>
-    </div>
-  </td>
-</tr>
+    </span>
+  </span>
+</span>

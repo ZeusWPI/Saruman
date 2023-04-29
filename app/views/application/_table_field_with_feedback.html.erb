@@ -1,0 +1,10 @@
+<%= f.send(
+      field_type,
+      field,
+      class: "form-control #{(object.errors[field].any? ? 'is-invalid' : 'is-valid') if @show_validations}")
+%>
+<% if @show_validations %>
+<span class="invalid-feedback">
+  <%= object.errors.full_messages_for(field).join(', ') %>
+</span>
+<% end %>

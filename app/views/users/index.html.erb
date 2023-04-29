@@ -1,23 +1,21 @@
 <h3>Partners</h3>
 
-<%= link_to new_user_path, class: 'btn btn-primary me-2' do %>
-  <i class="bi bi-person-add"></i> Add Partner
-<% end %>
 <%= link_to excel_users_path(format: :xlsx), class: 'btn btn-light' do %>
   <i class="bi bi-file-earmark-excel"></i> Export to Excel
 <% end %>
 
-<div class="table-responsive">
-  <table class="table" id="table-partners">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-    <tbody>
-      <%= render @partners %>
-    </tbody>
-  </table>
-</div>
+<span class="table">
+  <span class="thead">
+    <span class="tr">
+      <span class="th">Name</span>
+      <span class="th">Email</span>
+      <span class="th">Actions</span>
+    </span>
+  </span>
+  <span id="partners" class="tbody">
+    <%= render @partners %>
+  </span>
+  <span class="tfoot">
+    <%= render partial: 'new_partner', locals: {object: User.partners.build} %>
+  </span>
+</span>
