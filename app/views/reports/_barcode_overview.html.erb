@@ -1,0 +1,12 @@
+<h3><%= model.name %> barcodes</h3>
+<div class="container">
+  <div class="row row-cols-3">
+    <% model.each do |m| %>
+      <div class="col">
+        <h4><%= m.name %></h4>
+        <%= image_tag m.barcode_img.url %><br />
+        <strong><tt><%= m.barcode %></tt></strong>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -26,11 +26,11 @@ module ReservationsHelper
 
   def status(r)
     if r.approved?
-      '<span class="glyphicon glyphicon-ok" title="Approved"></span>'
+      '<i class="bi bi-check-lg"></i>'
     elsif r.pending?
-      '<span class="glyphicon glyphicon-refresh" title="Pending"></span>'
+      '<i class="bi bi-question-lg"></i>'
     else
-      '<span class="glyphicon glyphicon-remove" title="Disapproved"></span>'
+      '<i class="bi bi-x-lg"></i>'
     end
   end
 

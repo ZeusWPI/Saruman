@@ -1,0 +1,70 @@
+<h3>Items</h3>
+<p>
+  In the underlying list, a summary can be found of all the reserved approved items.
+</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+
+    <th class="border-start">Reserved</th>
+    <th>Reserved price</th>
+
+    <th class="border-start">Picked up</th>
+    <th>Returned</th>
+    <th>Usage cost</th>
+
+    <th class="border-start">Missing</th>
+    <th>Deposit cost</th>
+
+    <th class="border-start border-2">Total cost</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% Item.categories.each do |k, c| %>
+    <%- @category_reservations = @approved_reservations.category(c) %>
+
+    <tr>
+      <th colspan="9" class="center">
+        <h4><%= k.capitalize %></h4>
+      </th>
+    </tr>
+
+    <% @category_reservations.joins(:item).select("
+                  reservations.item_id,
+                  SUM(reservations.count) AS reserved,
+                  SUM(reservations.picked_up_count) AS picked_up,
+                  SUM(reservations.returned_unused_count) AS returned_unused,
+                  SUM(reservations.returned_used_count) AS returned_used
+                ").group(:item_id).each do |res| %>
+      <tr>
+        <td><%= res.item %></td>
+
+        <td class="border-start text-end"><%= res.reserved %></td>
+        <td class="text-end"><%= euro(res.reserved * res.item.price) %></td>
+
+        <td class="border-start text-end"><%= res.picked_up %></td>
+        <td><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
+        <td class="text-end"><%= euro((res.picked_up - res.returned_unused) * res.item.price) %></td>
+
+        <td class="border-start text-end"><%= res.picked_up - res.returned_unused - res.returned_used %></td>
+        <td class="text-end"><%= euro((res.picked_up - res.returned_unused - res.returned_used) * res.item.deposit) %></td>
+
+        <td class="border-start border-2 text-end"><%= euro ((res.picked_up - res.returned_unused) * res.item.price) + ((res.picked_up - res.returned_unused - res.returned_used) * res.item.deposit) %></td>
+      </tr>
+    <% end %>
+    <%= render partial: 'totals', locals: { reservations: @category_reservations } %>
+  <% end %>
+
+  <tr>
+    <th colspan="8">
+      <h4>Total</h4>
+    </th>
+  </tr>
+  <%= render partial: 'totals', locals: { reservations: @approved_reservations } %>
+
+  </tbody>
+</table>
+

@@ -1,27 +1,29 @@
-<div class="p-5 mb-4 bg-body-tertiary rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Saruman</h1>
-    <p class="col-md-8 fs-4">
-      Welcome to Saruman, an event material management service for the 12urenloop, brought to you by <a href="https://zeus.ugent.be/" target="_blank" class="link-secondary">Zeus WPI</a>,
-      <a href="https://12urenloop.be" target="_blank" class="link-secondary">12urenloop</a> and <a href="https://www.fkgent.be/" target="_blank" class="link-secondary">FaculteitenKonvent Gent</a>.</p>
-  </div>
-</div>
-
-<div class="row align-items-md-stretch">
-  <div class="col-md-6">
-    <div class="h-100 p-5 text-bg-dark rounded-3">
-      <h2>Partners</h2>
-      <p>Partners can log in using the unique link sent to their e-mail address.</p>
+<div class="container">
+  <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Saruman</h1>
+      <p class="col-md-8 fs-4">
+        Welcome to Saruman, an event material management service for the 12urenloop, brought to you by <a href="https://zeus.ugent.be/" target="_blank" class="link-secondary">Zeus WPI</a>,
+        <a href="https://12urenloop.be" target="_blank" class="link-secondary">12urenloop</a> and <a href="https://www.fkgent.be/" target="_blank" class="link-secondary">FaculteitenKonvent Gent</a>.</p>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-      <h2>Admins</h2>
-      <p>
-        Admins can add partners and items. They can also approve or disapprove requests partners make.
-        Admins can log in with their given credentials.
-      </p>
-      <%= button_to "Admin sign in", new_user_session_path, class: "btn btn-outline-secondary" %>
+
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <div class="h-100 p-5 text-bg-dark rounded-3">
+        <h2>Partners</h2>
+        <p>Partners can log in using the unique link sent to their e-mail address.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+        <h2>Admins</h2>
+        <p>
+          Admins can add partners and items. They can also approve or disapprove requests partners make.
+          Admins can log in with their given credentials.
+        </p>
+        <%= button_to "Admin sign in", new_user_session_path, class: "btn btn-outline-secondary" %>
+      </div>
     </div>
   </div>
 </div>

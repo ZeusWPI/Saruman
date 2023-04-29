@@ -4,74 +4,26 @@
     <thead>
       <tr>
         <th></th>
-        <th colspan="2">Reserved</th>
-        <th colspan="2">Picked up</th>
-        <th colspan="2">Total</th>
+        <th colspan="2" class="border-start">Reserved</th>
+        <th colspan="2" class="border-start">Picked up</th>
+        <th colspan="2" class="border-start border-2">Total</th>
       </tr>
       <tr>
         <th></th>
-        <th>Cost</th>
+
+        <th class="border-start">Cost</th>
         <th>Deposit</th>
-        <th>Cost</th>
+
+        <th class="border-start">Cost</th>
         <th>Deposit</th>
-        <th>Cost</th>
+
+        <th class="border-start border-2">Cost</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="success">
-        <th>Approved:</th>
-        <td>
-          <%= euro @partner.reservations.approved.joins(:item).sum("reservations.count*items.price/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.joins(:item).sum("reservations.count*items.deposit/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.joins(:item).usage_cost %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.joins(:item).deposit_cost %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.joins(:item).total_cost %>
-        </td>
-      </tr>
-      <tr class="warning">
-        <th>Pending:</th>
-        <td>
-          <%= euro @partner.reservations.pending.joins(:item).sum("reservations.count*items.price/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.pending.joins(:item).sum("reservations.count*items.deposit/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.pending.joins(:item).usage_cost %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.pending.joins(:item).deposit_cost %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.pending.joins(:item).total_cost %>
-        </td>
-      </tr>
-      <tr>
-        <th>Total:</th>
-        <td>
-          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).sum("reservations.count*items.price/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).sum("reservations.count*items.deposit/100.0") %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).usage_cost %>
-        </td>
-        <td>
-          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).deposit_cost %>
-        </td>
-        <th>
-          <%= euro @partner.reservations.approved.or(@partner.reservations.pending).joins(:item).total_cost %>
-        </th>
-      </tr>
+      <%= render partial: 'reservations/statistics_row', locals: { row_colour_class: 'success', category: 'Approved', reservations: @partner.reservations.approved.joins(:item) } %>
+      <%= render partial: 'reservations/statistics_row', locals: { row_colour_class: 'warning', category: 'Pending', reservations: @partner.reservations.pending.joins(:item) } %>
+      <%= render partial: 'reservations/statistics_row', locals: { row_colour_class: '', category: 'Total', reservations: @partner.reservations.approved.or(@partner.reservations.pending).joins(:item) } %>
     </tbody>
   </table>
 </div>

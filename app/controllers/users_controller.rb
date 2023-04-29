@@ -52,19 +52,31 @@ class UsersController < ApplicationController
   def destroy
     authorize! :destroy, @partner
 
+    flash[:success] = "Partner #{@partner.name} is removed!"
+
     @partner.destroy
+
+    redirect_to action: :index
   end
 
   def resend
     authorize! :read, @partner
 
     @partner.send_token
+
+    flash[:success] = "Sign in link sent to #{@partner.name} (#{@partner.email})"
+
+    redirect_to action: :index
   end
 
   def send_barcode
     authorize! :read, @partner
 
+    flash[:success] = "Barcode sent to #{@partner.name} (#{@partner.email})"
+
     @partner.send_barcode
+
+    redirect_to action: :index
   end
 
   def get_barcode

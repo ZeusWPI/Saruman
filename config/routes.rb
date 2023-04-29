@@ -51,5 +51,12 @@ Rails.application.routes.draw do
     post 'force', to: 'scan#force'
   end
 
-  get 'reservations', to: 'reservations#index'
+  resources :reports do
+    collection do
+      get :items
+      get :partners
+      get :item_barcodes
+      get :partner_barcodes
+    end
+  end
 end
