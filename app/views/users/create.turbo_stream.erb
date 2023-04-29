@@ -1,0 +1,5 @@
+<%= turbo_stream.append("partners", @partner) %>
+
+<%= turbo_stream.replace "new_partner" do %>
+  <%= render partial: "new_partner", locals: { object: User.partners.build, button_name: 'Add partner' } %>
+<% end %>

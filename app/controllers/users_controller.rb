@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
   def new
     @partner = User.partners.build
-    authorize! :new, @partner
   end
 
   def create
@@ -27,9 +26,9 @@ class UsersController < ApplicationController
     @partner.password = (0...8).map { (65 + rand(26)).chr }.join
 
     if @partner.save
-      flash[:success] = "Partner #{@partner.name} created!"
-      redirect_to action: :index
+      flash.now[:success] = "Partner #{@partner.name} created!"
     else
+      @show_validations = true
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,9 +41,9 @@ class UsersController < ApplicationController
     authorize! :update, @partner
 
     if @partner.update(partner_params)
-      flash[:success] = "Partner #{@partner.name} updated!"
-      redirect_to action: :index
+      flash.now[:success] = "Partner #{@partner.name} updated!"
     else
+      @show_validations = true
       render :edit, status: :unprocessable_entity
     end
   end
@@ -52,11 +51,9 @@ class UsersController < ApplicationController
   def destroy
     authorize! :destroy, @partner
 
-    flash[:success] = "Partner #{@partner.name} is removed!"
+    flash.now[:success] = "Partner #{@partner.name} is removed!"
 
     @partner.destroy
-
-    redirect_to action: :index
   end
 
   def resend

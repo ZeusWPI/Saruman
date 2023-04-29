@@ -1,5 +1,1 @@
-<h4>Add Partner</h4>
-
-<%= form_errors(@partner) %>
-
-<%= render "users/form", object: @partner, button_name: "Add Partner" %>
+<%= render partial: 'new_partner', locals: { object: @partner, button_name: 'Add partner' } %>

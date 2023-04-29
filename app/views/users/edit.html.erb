@@ -1,3 +1,3 @@
-<h4>Edit Partner</h4>
-<%= form_errors(@partner) %>
-<%= render "users/form", object: @partner, button_name: "Edit Partner" %>
+<%= turbo_frame_tag(@partner, class: 'tr') do %>
+  <%= render partial: "form", locals: { object: @partner, button_name: "Save" } %>
+<% end %>

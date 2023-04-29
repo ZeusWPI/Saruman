@@ -18,5 +18,8 @@ module Saruman
     #
     config.time_zone = 'Brussels'
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Bootstrap patch so `is-invalid` is added alongside field_with_errors so bootstrap validations are shown
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| content_tag :div, html_tag, class: "field_with_errors is-invalid" }
   end
 end

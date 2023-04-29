@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   after_action :store_location
 
+  layout -> { "turbo_rails/frame" if turbo_frame_request? }
+
   def store_location
     # store last url as long as it isn't a /users path
     session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/

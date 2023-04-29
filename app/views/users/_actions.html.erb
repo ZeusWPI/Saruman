@@ -1,9 +1,9 @@
-<%= link_to scan_user_path(user), class: "btn btn-light btn-sm" do %>
+<%= link_to scan_user_path(user), target: '_top', class: "btn btn-light btn-sm" do %>
   <i class="bi bi-upc-scan"></i> Scan
 <% end %>
 
 <% if user.sent %>
-  <%= link_to  resend_user_path(user), class: 'btn btn-light btn-sm' do %>
+  <%= link_to resend_user_path(user), class: 'btn btn-light btn-sm' do %>
     <i class="bi bi-repeat"></i> Resend login link
   <% end %>
 <% else %>
