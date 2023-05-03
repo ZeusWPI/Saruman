@@ -1,8 +1,26 @@
-<%= form_for [object] do |f| %>
-  <%= form_text_field f, :name %>
-  <%= form_text_field f, :description %>
-  <%= form_price_field f, :price, value: number_with_precision(f.object.price, precision: 2) %>
-  <%= form_price_field f, :deposit, value: number_with_precision(f.object.deposit, precision: 2) %>
-  <%= f.hidden_field :category, value: category %>
-  <%= f.button button_name(object, category), class: 'btn btn-primary' %>
+<%= form_for [object], html: { style: 'display: contents'} do |f| %>
+  <span class="td">
+    <%= render partial: 'table_field_with_feedback', locals: {
+      f: f, field: :name, field_type: :text_field
+    } %>
+  </span>
+  <span class="td">
+    <%= render partial: 'table_field_with_feedback', locals: {
+      f: f, field: :description, field_type: :text_field
+    } %>
+  </span>
+  <span class="td">
+    <%= render partial: 'table_field_with_feedback', locals: {
+      f: f, field: :price, field_type: :price_field
+    } %>
+  </span>
+  <span class="td">
+    <%= render partial: 'table_field_with_feedback', locals: {
+      f: f, field: :deposit, field_type: :price_field
+    } %>
+  </span>
+  <span class="td">
+    <%= f.hidden_field :category, value: f.object.category %>
+    <%= f.button button_name(object, f.object.category), class: 'btn btn-primary' %>
+  </span>
 <% end %>

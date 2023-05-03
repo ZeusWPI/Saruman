@@ -1,12 +1,12 @@
 <%= form_with model: object, html: { style: 'display: contents' } do |f| %>
   <span class="td">
     <%= render partial: 'table_field_with_feedback', locals: {
-      f: f, object: object, field: :name, field_type: :text_field
+      f: f, field: :name, field_type: :text_field
     } %>
   </span>
   <span class="td">
     <%= render partial: 'table_field_with_feedback', locals: {
-      f: f, object: object, field: :email, field_type: :email_field
+      f: f, field: :email, field_type: :email_field
     } %>
   </span>
   <span class="td">

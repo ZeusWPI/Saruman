@@ -1,0 +1,3 @@
+<%= turbo_frame_tag(@item, class: 'tr') do %>
+  <%= render partial: "form", locals: { object: @item, button_name: "Save" } %>
+<% end %>

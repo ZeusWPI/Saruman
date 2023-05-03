@@ -1,20 +1,21 @@
 <h4><%= category.humanize %></h4>
 
-<%= render "items/form", object: Item.new, category: category %>
-
 <div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Deposit</th>
-        <th>Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Reserved items can not be deleted. Remove the reservations first."><i class="bi bi-question-circle"></i></a></th>
-      </tr>
-    </thead>
-    <tbody>
+  <span class="table table-striped">
+    <span class="thead">
+      <span class="tr">
+        <span class="th">Name</span>
+        <span class="th">Description</span>
+        <span class="th">Price</span>
+        <span class="th">Deposit</span>
+        <span class="th">Action <a href="#" data-bs-toggle="tooltip" data-bs-title="Reserved items can not be deleted. Remove the reservations first."><i class="bi bi-question-circle"></i></a></span>
+      </span>
+    </span>
+    <span id="items-<%= category %>" class="tbody">
       <%= render items %>
-    </tbody>
-  </table>
+    </span>
+    <span class="tfoot">
+      <%= render partial: "new_item", locals: {object: Item.send(category).build} %>
+    </span>
+  </span>
 </div>

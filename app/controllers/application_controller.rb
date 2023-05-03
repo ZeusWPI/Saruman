@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   after_action :store_location
 
+  # Allows us to always replace the flash turbo frame when flashes are triggered
   layout -> { "turbo_rails/frame" if turbo_frame_request? }
 
   def store_location

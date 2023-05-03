@@ -3,9 +3,13 @@
   <%= yield :head %>
 </head>
 <body>
+<%# Edit to the default included layouts/turbo_rails/frame.turbo_stream.erb to allow us to always
+    rerender the flash parts of the page
+%>
 <%= turbo_stream.replace "flash-alerts" do %>
   <%= render partial: "flash" %>
 <% end %>
+<%# Ends here %>
 
 <%= yield %>
 </body>
