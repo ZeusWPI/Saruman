@@ -1,0 +1,5 @@
+<%= turbo_stream.append("items-#{@item.category}", @item) %>
+
+<%= turbo_stream.replace "new_item_#{@item.category}" do %>
+  <%= render partial: "new_item", locals: { object: Item.send(@item.category).build, button_name: 'Add item' } %>
+<% end %>

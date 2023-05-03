@@ -1,31 +1,7 @@
 <div id="flash-alerts">
-  <% if flash[:error] %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Error!</strong> <%= flash[:error].html_safe %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-  <% if flash[:alert] %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Error!</strong> <%= flash[:alert].html_safe %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-  <% if flash[:success] %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>Success!</strong> <%= flash[:success].html_safe %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-  <% if flash[:notice] %>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-      <strong>Notice!</strong> <%= flash[:notice].html_safe %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-  <% if flash[:warning] %>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Warning!</strong> <%= flash[:warning].html_safe %>
+  <% flash.each do |key, msg| %>
+    <div class="alert <%= key_to_flash_class(key) %> alert-dismissible fade show" role="alert">
+      <strong><%= key.capitalize %>!</strong> <%= msg.html_safe %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>

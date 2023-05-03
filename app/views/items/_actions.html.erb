@@ -1,4 +1,9 @@
-<%= link_to raw('<i class="bi bi-pencil"></i> Edit'), edit_item_path(item), class: "btn btn-light btn-sm", remote: true %>
+<%= link_to edit_item_path(item), class: "btn btn-light btn-sm" do %>
+  <i class="bi bi-pencil"></i> Edit
+<% end %>
+
 <% unless item.reservations.any? %>
-  <%= link_to raw('<i class="bi bi-trash"></i> Delete'), item_path(item), class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+  <%= link_to item_path(item), class: 'btn btn-danger btn-sm', data: {'turbo-confirm': 'Are you sure?', 'turbo-method': :delete} do %>
+    <i class="bi bi-trash"></i> Delete
+  <% end %>
 <% end %>

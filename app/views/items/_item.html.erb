@@ -1,9 +1,9 @@
-<tr>
-  <td><%= item.name %></td>
-  <td><%= item.description %></td>
-  <td><%= euro item.price %></td>
-  <td><%= euro item.deposit %></td>
-  <td>
+<%= turbo_frame_tag item, class: 'tr' do %>
+  <span class="td"><%= item.name %></span>
+  <span class="td"><%= item.description %></span>
+  <span class="td"><%= euro item.price %></span>
+  <span class="td"><%= euro item.deposit %></span>
+  <span class="td">
     <%= render "items/actions", item: item %>
-  </td>
-</tr>
+  </span>
+<% end %>

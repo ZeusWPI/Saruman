@@ -13,7 +13,13 @@ class ItemsController < ApplicationController
 
   def create
     @item.save
-    respond_with @item
+
+    if @item.save
+      flash.now[:success] = "Item #{@item.name} created!"
+    else
+      @show_validations = true
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -21,12 +27,18 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update item_params
-    respond_with @item
+    if @item.update(item_params)
+      flash.now[:success] = "Item #{@item.name} updated!"
+    else
+      @show_validations = true
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @item.destroy unless @item.reservations.any?
+
+    flash.now[:success] = "Item #{@item.name} is removed!"
   end
 
   private

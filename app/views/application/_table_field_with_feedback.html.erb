@@ -1,10 +1,16 @@
-<%= f.send(
-      field_type,
-      field,
-      class: "form-control #{(object.errors[field].any? ? 'is-invalid' : 'is-valid') if @show_validations}")
-%>
+<%- kwargs = {} %>
+<%- kwargs[:class] = "form-control #{(f.object.errors[field].any? ? 'is-invalid' : 'is-valid') if @show_validations}" %>
+
+<%- if field_type == :price_field %>
+  <%- field_type = :number_field %>
+  <%- kwargs[:value] = number_with_precision(f.object.send(field), precision: 2) %>
+  <%- kwargs[:min] = 0 %>
+  <%- kwargs[:placeholder] = "0.00" %>
+<%- end %>
+
+<%= f.send(field_type, field, **kwargs) %>
 <% if @show_validations %>
 <span class="invalid-feedback">
-  <%= object.errors.full_messages_for(field).join(', ') %>
+  <%= f.object.errors.full_messages_for(field).join(', ') %>
 </span>
 <% end %>
