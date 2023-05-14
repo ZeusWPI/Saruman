@@ -122,6 +122,9 @@ GEM
       caxlsx (>= 3.0)
     chunky_png (1.4.0)
     climate_control (0.2.0)
+    combine_pdf (1.0.23)
+      matrix
+      ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -141,6 +144,9 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    grover (1.1.5)
+      combine_pdf (~> 1.0)
+      nokogiri (~> 1.0)
     htmlentities (4.3.4)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
@@ -299,6 +305,7 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    ruby-rc4 (0.1.5)
     rubyzip (2.3.2)
     sdoc (2.6.1)
       rdoc (>= 5.0)
@@ -346,9 +353,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.6.3)
-      activesupport
-    wkhtmltopdf-binary (0.12.6.6)
     zeitwerk (2.6.8)
 
 PLATFORMS
@@ -373,6 +377,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1)
   devise
   dotenv-rails
+  grover
   httparty
   importmap-rails
   inline_svg
@@ -395,8 +400,6 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   web-console
-  wicked_pdf
-  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.2.2p53
