@@ -17,7 +17,6 @@
   <span class="td <%= returned_colour(reservation) %>"><%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span></span>
   <span class="td text-end"><%= euro(reservation.usage_cost) %></span>
 
-
   <span class="td border-start text-end"><%= reservation.missing_count %></span>
   <span class="td text-end"><%= euro(reservation.deposit_cost) %></span>
 

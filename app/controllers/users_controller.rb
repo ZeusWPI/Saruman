@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   load_and_authorize_resource only: [:index, :create]
 
   before_action :set_partner, only: [:edit, :update, :destroy,
-                                     :resend, :send_barcode,
-                                     :get_barcode, :download_bill, :send_bill,
+                                     :resend, :send_barcode, :get_barcode,
+                                     :billing, :download_bill, :send_bill,
                                      :scan, :process_scan]
 
   def index
@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   def show
     @partner = User.partners.includes(reservations: :item).find params.require(:id)
     authorize! :show, @partner
+
+    redirect_to user_reservations_path(@partner)
   end
 
   def new
@@ -54,6 +56,10 @@ class UsersController < ApplicationController
     flash.now[:success] = "Partner #{@partner.name} is removed!"
 
     @partner.destroy
+  end
+
+  def billing
+    authorize! :read, @partner
   end
 
   def resend
@@ -101,10 +107,15 @@ class UsersController < ApplicationController
     authorize! :read, :partner
 
     PartnerMailer.send_bill(@partner).deliver_now
-    redirect_to @partner, notice: "Bill sent"
+
+    flash[:notice] = "Billing proposal sent!"
+
+    redirect_to action: :billing
   end
 
   def scan
+    authorize! :manage, :partner
+
     @scan = Scan.new partner: @partner
     @scan.fill_scan_items
   end

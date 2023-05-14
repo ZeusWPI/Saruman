@@ -7,6 +7,11 @@ class ReservationsController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @partner = User.partners.includes(reservations: :item).find params.require(:user_id)
+    authorize! :show, @partner
+  end
+
   def show
     @partner = User.partners.find params.require(:user_id)
     @reservation = @partner.reservations.find params.require(:id)
@@ -53,6 +58,11 @@ class ReservationsController < ApplicationController
 
     authorize! :destroy, @reservation
     @reservation.destroy
+  end
+
+  def summary
+    @partner = User.partners.includes(reservations: :item).find params.require(:user_id)
+    authorize! :show, @partner
   end
 
   def approve

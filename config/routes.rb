@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get :send_barcode
       get :get_barcode
 
+      get :billing
       get :download_bill
       get :send_bill
 
@@ -32,7 +33,10 @@ Rails.application.routes.draw do
         get :approve
         get :revert
       end
+
       collection do
+        get :summary
+
         post :disapprove
         post :approve_all
       end

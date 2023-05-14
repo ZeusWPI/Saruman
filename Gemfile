@@ -64,6 +64,7 @@ gem 'simple_token_authentication'
 
 # Send bills
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Database
 gem 'mysql2'
