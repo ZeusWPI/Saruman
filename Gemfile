@@ -62,9 +62,8 @@ gem 'sentry-rails'
 # Token authentication for the partners
 gem 'simple_token_authentication'
 
-# Send bills
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+# PDF goodies
+gem 'grover'
 
 # Database
 gem 'mysql2'

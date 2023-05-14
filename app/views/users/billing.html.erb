@@ -5,7 +5,7 @@
 <h4>Download</h4>
 <p>
   <%= link_to download_bill_user_path(@partner, format: :pdf), class: 'btn btn-lg btn-primary' do %>
-    <span class="bi bi-download"></span> Download Bill
+    <span class="bi bi-download"></span> Download bill
   <% end %>
 </p>
 
@@ -15,6 +15,6 @@
 </p>
 <p>
   <%= link_to send_bill_user_path(@partner), class: 'btn btn-lg btn-primary', data: { 'turbo-confirm': 'This will send a bill to the club. Send bill?' } do %>
-    <span class="bi bi-cart4"></span> Send Bill
+    <span class="bi bi-cart4"></span> Send bill
   <% end %>
 </p>

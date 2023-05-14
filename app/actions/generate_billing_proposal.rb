@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GenerateBillingProposal
-  include WickedPdf::PdfHelper
-
   def initialize(partner)
     @partner = partner
   end
@@ -10,7 +8,7 @@ class GenerateBillingProposal
   def call
     @reservations = @partner.reservations.approved
 
-    rendered_view
+    Grover.new(rendered_view, format: 'A4').to_pdf
   end
 
   private
