@@ -2,19 +2,19 @@
 <html>
   <head>
     <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "application" %>
     <%= wicked_pdf_stylesheet_link_tag "pdf" %>
-    <%= wicked_pdf_stylesheet_link_tag "bootstrap.min" %>
   </head>
   <body id="pdf">
     <div class="container">
       <div id="header">
         <div id="header-left">
-          <%= image_tag wicked_pdf_asset_base64 'Logo.jpg' %>
+          <%= image_tag wicked_pdf_asset_base64 'logo.jpg' %>
         </div>
         <div id="header-right">
-                <span>
-                  <b><%= Settings.instance.organisation_name %></b>
-                </span>
+          <span>
+            <b><%= Settings.instance.organisation_name %></b>
+          </span>
           <span>Hoveniersberg 24, 9000 Gent</span>
           <span><%= mail_to "info@12urenloop.be" %></span>
         </div>

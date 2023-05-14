@@ -169,9 +169,9 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.20.0)
+    loofah (2.21.2)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -201,9 +201,9 @@ GEM
       net-protocol
     net-ssh (7.1.0)
     nio4r (2.5.9)
-    nokogiri (1.14.3-arm64-darwin)
+    nokogiri (1.14.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.14.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     paper_trail (14.0.0)
@@ -272,7 +272,7 @@ GEM
     rexml (3.2.5)
     rmagick (5.2.0)
       pkg-config (~> 1.4)
-    rubocop (1.50.2)
+    rubocop (1.51.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
@@ -282,19 +282,22 @@ GEM
       rubocop-ast (>= 1.28.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.28.0)
+    rubocop-ast (1.28.1)
       parser (>= 3.2.1.0)
     rubocop-capybara (2.18.0)
       rubocop (~> 1.41)
-    rubocop-minitest (0.30.0)
+    rubocop-factory_bot (2.22.0)
+      rubocop (~> 1.33)
+    rubocop-minitest (0.31.0)
       rubocop (>= 1.39, < 2.0)
     rubocop-rails (2.19.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.20.0)
+    rubocop-rspec (2.22.0)
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
+      rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sdoc (2.6.1)
@@ -323,7 +326,7 @@ GEM
     stringio (3.0.6)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    thor (1.2.1)
+    thor (1.2.2)
     timeout (0.3.2)
     ttfunk (1.7.0)
     turbo-rails (1.4.0)
@@ -345,6 +348,7 @@ GEM
     websocket-extensions (0.1.5)
     wicked_pdf (2.6.3)
       activesupport
+    wkhtmltopdf-binary (0.12.6.6)
     zeitwerk (2.6.8)
 
 PLATFORMS
@@ -392,6 +396,7 @@ DEPENDENCIES
   turbo-rails
   web-console
   wicked_pdf
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.2.2p53
