@@ -81,7 +81,7 @@ end
 
 group :development do
   # Deployment
-  gem "capistrano", "~> 3.11", require: false
+  gem "capistrano", "~> 3.17", require: false
   gem "capistrano-rails", "~> 1.4", require: false
   gem 'capistrano-rbenv'
   gem 'capistrano-rvm'
