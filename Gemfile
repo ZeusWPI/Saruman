@@ -15,7 +15,7 @@ gem 'rails', '7.0.4.3'
 gem 'bootsnap'
 
 # Frontend stuff
-gem "cssbundling-rails", "~> 1.1"
+gem "cssbundling-rails", "~> 1.2"
 gem "jsbundling-rails"
 
 # Tubro-rails makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
