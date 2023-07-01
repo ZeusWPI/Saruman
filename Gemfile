@@ -9,7 +9,7 @@ gem 'dotenv-rails'
 gem 'bundler', '>= 2.4.11'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.0.4.3'
+gem 'rails', '7.0.6'
 
 # Bootsnap makes booting snappy
 gem 'bootsnap'
