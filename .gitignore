@@ -43,3 +43,5 @@ yarn-debug.log*
 
 .capistrano
 /app/assets/builds/
+
+.irb_history

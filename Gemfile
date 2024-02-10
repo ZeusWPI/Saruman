@@ -75,6 +75,9 @@ gem 'inline_svg'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
+# Rainbow for console colours
+gem 'rainbow', require: false
+
 group :production, :deployment do
   gem 'puma'
 end

@@ -408,6 +408,7 @@ DEPENDENCIES
   rails (= 7.0.4.3)
   rails-controller-testing
   rails_style!
+  rainbow
   rubocop-minitest
   sdoc
   sentry-rails
