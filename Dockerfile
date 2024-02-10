@@ -1,4 +1,4 @@
-FROM ruby:2.7.8
+FROM ruby:3.3.0
 
 ENV RAILS_ENV=production
 WORKDIR /app

@@ -1,16 +1,17 @@
 version: '3'
 services:
-  mysql:
-    image: mariadb:10
-    volumes:
-      - ./data/mysql:/var/lib/mysql
-    restart: always
+  db:
+    image: postgres:16
     environment:
-      MYSQL_DATABASE: saruman
-      MYSQL_USER: saruman
-      MYSQL_PASSWORD: password
-      MYSQL_RANDOM_ROOT_PASSWORD: "true"
-  saruman:
+      POSTGRES_DB: saruman
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - saruman_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
     build:
       context: .
       dockerfile: Dockerfile
@@ -18,12 +19,12 @@ services:
     volumes:
       - ./public/system:/app/public/system
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
       RAILS_SERVE_STATIC_FILES: "true"
       RAILS_LOG_TO_STDOUT: "true"
-      DATABASE_URL: mysql2://saruman:password@mysql/saruman
     depends_on:
-      - mysql
-    links:
-      - mysql:mysql
+      - db
+
+volumes:
+  saruman_data:
