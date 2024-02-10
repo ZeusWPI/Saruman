@@ -22,7 +22,7 @@
   </tr>
   </thead>
   <tbody>
-  <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group(:user_id).select('
+  <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group('users.id').select('
                 users.*,
                 SUM(reservations.count) as reserved,
                 SUM(reservations.count * items.price / 100) as total_reserved_price,

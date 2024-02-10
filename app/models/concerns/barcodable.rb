@@ -2,7 +2,6 @@ require 'barby'
 require 'barby/barcode/ean_13'
 require 'barby/outputter/png_outputter'
 
-
 module Barcodable
   require 'tempfile'
 
@@ -11,11 +10,7 @@ module Barcodable
   def self.included(base)
     base.before_create :generate_barcode
 
-    base.has_attached_file :barcode_img, {
-      # url: '/system/:hash.:extension',
-      hash_secret: Rails.application.secrets.paperclip_secret
-    }
-    base.validates_attachment_content_type :barcode_img, content_type: /\Aimage\/.*\Z/
+    base.has_one_attached :barcode_img
   end
 
   def generate_barcode
@@ -24,16 +19,7 @@ module Barcodable
     calculated_barcode = Barby::EAN13.new(self.barcode_data)
     self.barcode = calculated_barcode.data_with_checksum
 
-    # Paperclip it
-    tmpfile = Tempfile.new(%w(barcode .png))
-    File.open(tmpfile.path, 'wb') do |f|
-      f.write calculated_barcode.to_png(xdim: 3)
-    end
-
-    self.barcode_img = tmpfile
-
-    tmpfile.close
-    tmpfile.unlink
+    # Attach it
+    self.barcode_img.attach(io: StringIO.new(calculated_barcode.to_png(xdim: 3)), filename: "#{self.barcode}.png")
   end
-
 end

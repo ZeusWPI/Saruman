@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  include ActiveStorage::SetCurrent
+
   layout 'reports'
 
   before_action :authenticate_user!

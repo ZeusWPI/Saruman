@@ -38,7 +38,7 @@
                   SUM(reservations.picked_up_count) AS picked_up,
                   SUM(reservations.returned_unused_count) AS returned_unused,
                   SUM(reservations.returned_used_count) AS returned_used
-                ").group(:item_id).each do |res| %>
+                ").group(:item_id, :name).each do |res| %>
       <tr>
         <td><%= res.item %></td>
 
@@ -59,7 +59,7 @@
   <% end %>
 
   <tr>
-    <th colspan="8">
+    <th colspan="9">
       <h4>Total</h4>
     </th>
   </tr>
