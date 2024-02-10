@@ -1,8 +1,7 @@
 <h3>Scan</h3>
 
 <% if @display_force %>
-  <div class="alert alert-warning alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Warning!</strong>
     <% if @reservation %>
       <%= @partner.name %> <strong>already picked up</strong> <%= @reservation.picked_up_count %>x <%= @item.name %> and has only reserved <%= @reservation.count %>. This reservation can be force added, which can result in extra costs.
@@ -17,12 +16,14 @@
       <%= hidden_field_tag 'force[option]', @option %>
       <%= submit_tag "Force add this pick up", class: 'btn btn-warning' %>
     <% end %>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
 
 <div class="row">
   <div class="col-sm-6">
-    <%= form_tag check_path, url: check_path, remote: false do %>
+    <%= form_tag check_path, url: check_path, local: true, data: { turbo: false } do %>
       <label for="options">
         Action
         <span id="actions-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" data-html="true" title="Pick up: give item to club<br />Return unused: club will receive price and deposit back<br />Return used: club will receive only deposit back"></span>
