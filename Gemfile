@@ -53,9 +53,6 @@ gem 'devise'
 # Paper trail is supercool
 gem 'paper_trail'
 
-# Paperclip for barcode attachments
-gem 'kt-paperclip'
-
 # Sentry (actually glitchtip)
 gem 'sentry-rails'
 
