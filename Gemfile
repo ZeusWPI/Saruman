@@ -66,7 +66,7 @@ gem 'simple_token_authentication'
 gem 'grover'
 
 # Database
-gem 'mysql2'
+gem 'pg'
 
 # Inline svgs
 gem 'inline_svg'

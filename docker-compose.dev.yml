@@ -2,31 +2,27 @@ version: '3.3'
 
 services:
   db:
-    image: mariadb:10.8
-    volumes:
-      - db_data:/var/lib/mysql
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    image: postgres:16
     environment:
-      MYSQL_ROOT_PASSWORD: strong-password
-      MYSQL_DATABASE: saruman
-      MYSQL_USER: saruman
-      MYSQL_PASSWORD: password
+      POSTGRES_DB: saruman
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - saruman_data:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"
 
   db-test:
-    image: mariadb:10.8
-    volumes:
-      - db-test_data:/var/lib/mysql
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    image: postgres:16
     environment:
-      MYSQL_ROOT_PASSWORD: strong-password
-      MYSQL_DATABASE: saruman-test
-      MYSQL_USER: saruman
-      MYSQL_PASSWORD: password
+      POSTGRES_DB: saruman-test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - saruman_test_data:/var/lib/postgresql/data
     ports:
-      - "3307:3306"
+      - "5433:5432"
 
 volumes:
-  db_data:
-  db-test_data:
+  saruman_data:
+  saruman_test_data:
