@@ -5,14 +5,12 @@ class ReservationsController < ApplicationController
   # whodunnit set
   before_action :set_paper_trail_whodunnit
 
-  respond_to :html, :js
-
   def index
     @partner = User.partners.includes(reservations: :item).find params.require(:user_id)
     authorize! :show, @partner
   end
 
-  def show
+  def history
     @partner = User.partners.find params.require(:user_id)
     @reservation = @partner.reservations.find params.require(:id)
 
@@ -28,9 +26,11 @@ class ReservationsController < ApplicationController
 
     @reservation = @partner.reservations.new reservation_params
     @reservation.item = item
-    @reservation.save
 
-    respond_with @reservation
+    unless @reservation.save
+      @show_validations = true
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -47,8 +47,10 @@ class ReservationsController < ApplicationController
     @reservation = @partner.reservations.find params.require(:id)
     authorize! :update, @reservation
 
-    @reservation.update reservation_params
-    respond_with @reservation
+    unless @reservation.update(reservation_params)
+      @show_validations = true
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -72,7 +74,7 @@ class ReservationsController < ApplicationController
     authorize! :change_status, @reservation
 
     # If there already is an approved item with the same id; merge these
-    @duplicate = @partner.reservations.approved.find_by_item_id @reservation.item_id
+    @duplicate = @partner.reservations.approved.find_by(item_id: @reservation.item_id)
     if @duplicate.nil?
       @reservation.disapproval_message = nil
       @reservation.status = :approved
@@ -103,9 +105,17 @@ class ReservationsController < ApplicationController
     authorize! :show, @partner
     @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
     authorize! :change_status, Reservation
+  end
+
+  def disapproved
+    @partner = User.partners.find params.require(:user_id)
+    authorize! :show, @partner
+    @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
+    authorize! :change_status, Reservation
 
     if params.require(:disapprove)[:reason].blank?
-      flash.now[:error] = "Please enter a reason."
+      flash[:error] = "Please enter a reason for disapproval."
+      render :new, status: :unprocessable_entity
     else
       @reservation.status = :disapproved
       @reservation.disapproval_message = params.require(:disapprove).require(:reason)

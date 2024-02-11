@@ -1,0 +1,10 @@
+<% if @duplicate %>
+  <%= turbo_stream.replace(@duplicate) do %>
+    <%= render "reservation", reservation: @duplicate %>
+  <% end %>
+  <%= turbo_stream.remove dom_id(@reservation) %>
+<% else %>
+  <%= turbo_stream.replace(@reservation) do %>
+    <%= render "reservation", reservation: @reservation %>
+  <% end %>
+<% end %>

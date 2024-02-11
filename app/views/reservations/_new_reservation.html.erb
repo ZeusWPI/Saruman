@@ -1,0 +1,3 @@
+<%= turbo_frame_tag("new-reservation-#{category}", class: 'tr') do %>
+  <%= render partial: 'form', locals: {object: object, category: category, button_name: 'Add reservation'} %>
+<% end %>

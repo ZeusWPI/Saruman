@@ -30,14 +30,17 @@ Rails.application.routes.draw do
 
     resources :reservations do
       member do
-        get :approve
+        post :approve
         get :revert
+        get :history
+
+        get :dissaprove
+        post :disapproved
       end
 
       collection do
         get :summary
 
-        post :disapprove
         post :approve_all
       end
     end

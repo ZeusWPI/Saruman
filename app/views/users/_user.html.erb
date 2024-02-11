@@ -1,5 +1,5 @@
 <%= turbo_frame_tag user, class: 'tr' do %>
-  <span class="td"><%= link_to user.name, user_path(user), target: '_top' %></span>
+  <span class="td"><%= link_to user.name, user_reservations_path(user), target: '_top' %></span>
   <span class="td"><%= mail_to user.email %></span>
   <span class="td">
     <%= render "users/actions", user: user %>
