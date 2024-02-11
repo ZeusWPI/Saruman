@@ -1,6 +1,9 @@
-<%= turbo_stream.replace(@reservation) do %>
-  <%= render "reservation", reservation: @reservation %>
+<%= turbo_stream.replace('disapprove-modal-body') do %>
+  <div id="disapprove-modal-body">
+    <%= render 'disapprove_form' %>
+  </div>
 <% end %>
 
-<%= turbo_stream_action_tag(:dispatch_event, name: 'modalClose') %>
-
+<% unless @reason_error %>
+  <%= turbo_stream_action_tag(:dispatch_event, name: 'disapproveModalOpen') %>
+<% end %>

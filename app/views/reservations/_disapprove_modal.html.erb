@@ -1,25 +1,11 @@
-<div class="modal" id="disapprove-modal" data-controller="disapprove-modal" data-action="modalClose@window->disapprove-modal#close" tabindex="-1">
+<div class="modal" id="disapprove-modal" data-controller="disapprove-modal" data-action="disapproveModalOpen@window->disapprove-modal#open disapproveModalClose@window->disapprove-modal#close" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Disapprove reservation</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <%= form_tag disapproved_user_reservation_path(@partner, @reservation) do %>
-          <div class="modal-body">
-            <div id="flash-modal"></div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="disapprove[reason]" id="disapprove-reason" placeholder="Reason">
-            </div>
-            <input type="hidden" class="form-control" name="disapprove[id]" id="disapprove-id">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Disapprove</button>
-          </div>
-        <% end %>
-      </div>
+      <div id="disapprove-modal-body"></div>
     </div>
   </div>
 </div>

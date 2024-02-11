@@ -9,7 +9,9 @@
   <span class="td <%= status_colour(reservation) %>">
     <%= raw(status(reservation)) %>
     <% if reservation.disapproved? %>
-      <span class="glyphicon glyphicon-question-sign reservation-disapprove-tooltip" data-toggle="tooltip" data-placement="top" title="<%= reservation.disapproval_message %>"></span>
+      <a href="#" data-bs-toggle="tooltip" data-placement="top" data-bs-title="<%= reservation.disapproval_message %>">
+        <i class="bi bi-question-circle"></i>
+      </a>
     <% end %>
   </span>
 

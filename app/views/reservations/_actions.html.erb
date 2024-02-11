@@ -22,7 +22,7 @@
   <% end %>
   <% unless reservation.disapproved? %>
     <span data-controller="disapprove-modal">
-      <%= link_to '#', { class: 'btn btn-sm btn-danger btn-disapprove', data: { action: 'click->disapprove-modal#open', 'disapprove-modal-reservation-id-param': reservation.id } } do %>
+      <%= link_to disapprove_user_reservation_path(@partner, reservation), { class: 'btn btn-sm btn-danger btn-disapprove', data: {'turbo-stream': true} } do %>
         <i class="bi bi-x-lg"></i>
       <% end %>
     </span>

@@ -1,0 +1,6 @@
+<%= turbo_stream.replace(@reservation) do %>
+  <%= render "reservation", reservation: @reservation %>
+<% end %>
+
+<%= turbo_stream_action_tag(:dispatch_event, name: 'disapproveModalClose') %>
+
