@@ -1,0 +1,16 @@
+<%= form_tag disapproved_user_reservation_path(@partner, @reservation) do %>
+  <div class="modal-body">
+    <div class="form-group">
+      <input type="text" class="form-control <%= 'is-invalid' if @reason_error %>" name="disapprove[reason]" id="disapprove-reason" placeholder="Reason">
+      <% if @reason_error.present? %>
+        <span class="invalid-feedback">
+          <%= @reason_error %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-danger">Disapprove</button>
+  </div>
+<% end %>

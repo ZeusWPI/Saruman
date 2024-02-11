@@ -103,19 +103,19 @@ class ReservationsController < ApplicationController
   def disapprove
     @partner = User.partners.find params.require(:user_id)
     authorize! :show, @partner
-    @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
+    @reservation = @partner.reservations.find params.require(:id)
     authorize! :change_status, Reservation
   end
 
   def disapproved
     @partner = User.partners.find params.require(:user_id)
     authorize! :show, @partner
-    @reservation = @partner.reservations.find params.require(:disapprove).require(:id)
+    @reservation = @partner.reservations.find params.require(:id)
     authorize! :change_status, Reservation
 
     if params.require(:disapprove)[:reason].blank?
-      flash[:error] = "Please enter a reason for disapproval."
-      render :new, status: :unprocessable_entity
+      @reason_error = "can't be blank"
+      render :disapprove, status: :unprocessable_entity
     else
       @reservation.status = :disapproved
       @reservation.disapproval_message = params.require(:disapprove).require(:reason)

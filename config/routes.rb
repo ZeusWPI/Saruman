@@ -34,7 +34,7 @@ Rails.application.routes.draw do
         get :revert
         get :history
 
-        get :dissaprove
+        get :disapprove
         post :disapproved
       end
 
