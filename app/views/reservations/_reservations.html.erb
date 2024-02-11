@@ -1,7 +1,7 @@
-<h4><%= Item.categories.key(category).humanize %></h4>
+<h4><%= category.humanize %></h4>
 
 <div class="table-responsive">
-  <span class="table table-striped" id="table-reservations-<%= Item.categories.key category %>">
+  <span class="table table-striped" id="table-reservations-<%= category %>">
     <span class="thead">
       <span class="tr">
         <span class="th">Item</span>
@@ -27,11 +27,13 @@
         </span>
       </span>
     </span>
-    <span class="tbody">
+    <span id="reservations-<%= category %>" class="tbody">
       <%= render reservations %>
+    </span>
 
+    <span class="tfoot">
       <% if can? :create, Reservation %>
-        <%= render "reservations/form", object: @partner.reservations.new, category: category, button_name: "Add reservation" %>
+        <%= render partial: 'new_reservation', locals: {object: @partner.reservations.new, category: category, button_name: "Add reservation"} %>
       <% else %>
         <div class="alert alert-warning" role="alert">
           The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.

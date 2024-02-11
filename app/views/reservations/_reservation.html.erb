@@ -1,4 +1,4 @@
-<span id="<%= dom_id(reservation) %>" class="tr">
+<%= turbo_frame_tag reservation, class: 'tr' do %>
   <span class="td"><%= reservation.item.name %></span>
   <span class="td"><%= reservation.item.description %></span>
   <span class="td text-end"><%= euro(reservation.item.price) %></span>
@@ -27,4 +27,4 @@
       <%= render "reservations/actions", reservation: reservation %>
     </span>
   </span>
-</span>
+<% end %>

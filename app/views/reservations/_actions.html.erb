@@ -1,14 +1,14 @@
 <% if can? :change_status, reservation %>
-  <%= link_to user_reservation_path(reservation.user, reservation), class: 'btn btn-sm btn-light', remote: true do %>
+  <%= link_to history_user_reservation_path(reservation.user, reservation), class: 'btn btn-sm btn-light', data: {'turbo-stream': true} do %>
     <i class="bi bi-clock-history"></i>
   <% end %>
 <% end %>
 <% if can? :update, reservation and can? :destroy, reservation %>
   <% unless reservation.approved? %>
-    <%= link_to edit_user_reservation_path(@partner, reservation), class: "btn btn-light btn-sm", remote: true do %>
+    <%= link_to edit_user_reservation_path(@partner, reservation), class: "btn btn-light btn-sm" do %>
       <i class="bi bi-pencil"></i>
     <% end %>
-    <%= link_to user_reservation_path(@partner, reservation), class: 'btn btn-sm btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete do %>
+    <%= link_to user_reservation_path(@partner, reservation), class: 'btn btn-sm btn-danger', data: {'turbo-confirm': 'Are you sure?', 'turbo-method': :delete} do %>
       <i class="bi bi-trash"></i>
     <% end %>
   <% end %>
@@ -16,14 +16,16 @@
 <% if can? :change_status, reservation %>
   |
   <% unless reservation.approved? %>
-    <%= link_to approve_user_reservation_path(@partner, reservation), class: "btn btn-success btn-sm", remote: true do %>
+    <%= link_to approve_user_reservation_path(@partner, reservation), class: "btn btn-success btn-sm", data: {'turbo-method': :post} do %>
       <i class="bi bi-check-lg"></i>
     <% end %>
   <% end %>
   <% unless reservation.disapproved? %>
-    <%= link_to '#disapprove-modal', { class: 'btn btn-sm btn-danger btn-disapprove', data: { id: reservation.id } } do %>
-      <i class="bi bi-x-lg"></i>
-    <% end %>
+    <span data-controller="disapprove-modal">
+      <%= link_to '#', { class: 'btn btn-sm btn-danger btn-disapprove', data: { action: 'click->disapprove-modal#open', 'disapprove-modal-reservation-id-param': reservation.id } } do %>
+        <i class="bi bi-x-lg"></i>
+      <% end %>
+    </span>
   <% end %>
 <% end %>
 

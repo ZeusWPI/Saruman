@@ -11,13 +11,6 @@ class UsersController < ApplicationController
     @partners = @users.partners.ordered_by_name
   end
 
-  def show
-    @partner = User.partners.includes(reservations: :item).find params.require(:id)
-    authorize! :show, @partner
-
-    redirect_to user_reservations_path(@partner)
-  end
-
   def new
     @partner = User.partners.build
   end

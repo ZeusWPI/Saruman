@@ -1,0 +1,6 @@
+<%= turbo_stream.replace('history-modal-body') do %>
+  <%= render 'history_modal_content' %>
+<% end %>
+
+<%= turbo_stream_action_tag(:dispatch_event, name: 'modalOpen') %>
+

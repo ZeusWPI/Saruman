@@ -1,0 +1,5 @@
+<%= turbo_stream.append("reservations-#{@reservation.item.category}", @reservation) %>
+
+<%= turbo_stream.replace "new-reservation-#{@reservation.item.category}" do %>
+  <%= render partial: "new_reservation", locals: { object: @partner.reservations.new, category: @reservation.item.category, button_name: 'Add partner' } %>
+<% end %>

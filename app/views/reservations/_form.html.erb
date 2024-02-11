@@ -1,4 +1,4 @@
-<%= form_for [@partner, object], html: { class: 'tr new_reservation' } do |f| %>
+<%= form_for [@partner, object], html: { style: 'display: contents' } do |f| %>
   <span class="td">
       <% if button_name == 'Save' %>
         <%= object.item.name %>
@@ -9,7 +9,11 @@
   <span class="td"></span>
   <span class="td"></span>
   <span class="td"></span>
-  <span class="td border-start"><%= f.number_field :count, size: 4, class: 'form-control' %></span>
+  <span class="td border-start">
+    <%= render partial: 'table_field_with_feedback',  locals: {
+      f: f, field: :count, field_type: :number_field
+    } %>
+  </span>
   <span class="td"></span>
   <span class="td"></span>
   <span class="td border-start"></span>
