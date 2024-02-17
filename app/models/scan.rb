@@ -76,9 +76,9 @@ class ScanItem
 
   attr_accessor :pick_up, :return_used, :return_unused, :reservation
 
-  validates :pick_up,       numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :return_used,   numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :return_unused, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :pick_up, numericality: { only_integer: true }
+  validates :return_used, numericality: { only_integer: true }
+  validates :return_unused, numericality: { only_integer: true }
 
   def initialize(attr = {})
     super(attr)

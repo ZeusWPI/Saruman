@@ -1,8 +1,9 @@
-<div class="input-group input-group-sm" data-controller="increment-buttons" data-increment-buttons-invalid-when-exceeds-value="<%= invalid_when_exceeds %>">
+<div class="input-group input-group" data-controller="increment-buttons">
   <button type="button" class="btn btn-primary btn-number" data-action="increment-buttons#decrement" >
     <i class="bi bi-dash-lg"></i>
   </button>
-  <%= f.number_field field, class: "form-control input-number", min: 0, data: { 'increment-buttons-target': 'valueField' } %>
+  <%= yield if block_given? %>
+  <%= f.number_field field, class: "form-control input-number", data: { 'scan-reservation-target': field.to_s.camelize(:lower), 'action': "scan-reservation#updateWarnings", 'increment-buttons-target': 'valueField' } %>
   <button type="button" class="btn btn-primary btn-number" data-action="increment-buttons#increment" >
     <i class="bi bi-plus-lg"></i>
   </button>

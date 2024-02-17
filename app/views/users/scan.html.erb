@@ -16,11 +16,10 @@
           <span class="tr">
             <span class="th">Item</span>
             <span class="th border-start">Pick up</span>
-            <span class="th"></span>
+            <span class="th">Picked up/reserved</span>
             <span class="th border-start">Return used</span>
-            <span class="th">Returned used</span>
             <span class="th">Return unused</span>
-            <span class="th">Returned unused</span>
+            <span class="th">Returned</span>
           </span>
         </span>
         <span class="tbody">
@@ -28,7 +27,14 @@
             <% reservation = ff.object.reservation %>
             <% if reservation.item.category == category %>
               <%= ff.hidden_field :reservation, value: reservation.id %>
-              <span class="tr">
+              <span
+                class="tr"
+                data-controller="scan-reservation"
+                data-scan-reservation-count-value="<%= reservation.count %>"
+                data-scan-reservation-picked-up-value="<%= reservation.picked_up_count %>"
+                data-scan-reservation-returned-used-value="<%= reservation.returned_used_count %>"
+                data-scan-reservation-returned-unused-value="<%= reservation.returned_unused_count %>"
+              >
                 <span class="td"><%= reservation.item.name %></span>
 
                 <span class="td border-start">
@@ -36,19 +42,29 @@
                 </span>
                 <span class="td">
                   <%= reservation.picked_up_count %>/<%= reservation.count %>
-                  <i class="bi bi-exclamation-triangle" <%= "hidden" if reservation.picked_up_count <= reservation.count %>></i>
+
+                  <a href="#" class="link-danger" data-scan-reservation-target="pickedUpWarning" data-bs-toggle="tooltip" data-bs-title="Amount of items picked up is bigger than reserved">
+                    <i class="bi bi-exclamation-circle"></i>
+                  </a>
                 </span>
 
                 <span class="td border-start">
-                  <%= render 'increment_buttons', field: :return_used, f: ff, invalid_when_exceeds: reservation.missing_count %>
+                  <%= render 'increment_buttons', field: :return_used, f: ff, invalid_when_exceeds: reservation.missing_count do %>
+                    <div class="input-group-text"><i class="bi bi-battery"></i></div>
+                  <% end %>
                 </span>
-                <span class="td"><%= reservation.returned_used_count %></span>
 
                 <span class="td">
-                  <%= render 'increment_buttons', field: :return_unused, f: ff, invalid_when_exceeds: reservation.missing_count %>
+                  <%= render 'increment_buttons', field: :return_unused, f: ff, invalid_when_exceeds: reservation.missing_count do %>
+                    <div class="input-group-text"><i class="bi bi-battery-full"></i></div>
+                  <% end %>
                 </span>
-
-                <span class="td"><%= reservation.returned_unused_count %></span>
+                <span class="td">
+                  <%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span>
+                  <a href="#" class="link-danger" data-scan-reservation-target="returnedWarning" data-bs-toggle="tooltip" data-bs-title="Amount of items returned is bigger than picked up">
+                    <i class="bi bi-exclamation-circle"></i>
+                  </a>
+                </span>
               </span>
             <% end %>
           <% end %>
