@@ -7,9 +7,45 @@
   Alle prijzen zijn steeds <strong>exclusief</strong> btw!
 </div>
 
-<% Item.categories.keys.each do |category| %>
-  <%= render "reservations/reservations", reservations: @partner.reservations.ordered_by_item_name.joins(:item).where(items: { category: category }), category: category %>
-<% end %>
+
+<div class="table-responsive">
+  <span class="table table-striped">
+    <% Item.categories.keys.each do |category| %>
+      <span class="thead">
+        <span class="tr">
+          <h4><%= category.capitalize %></h4>
+        </span>
+      </span>
+
+      <span class="thead">
+        <span class="tr">
+          <span class="th">Item</span>
+          <span class="th">Description</span>
+          <span class="th">Price</span>
+          <span class="th">Deposit</span>
+
+          <span class="th border-start"># Reserved</span>
+          <span class="th">Reserved price</span>
+          <span class="th">Approved?</span>
+
+          <span class="th border-start"># Picked up</span>
+          <span class="th"># Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></span>
+          <span class="th">Usage cost</span>
+
+          <span class="th border-start">Missing</span>
+          <span class="th">Deposit cost</span>
+
+          <span class="th border-start border-2">Total cost</span>
+
+          <span class="th border-start border-2">
+            Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."><i class="bi bi-question-circle"></i></a>
+          </span>
+        </span>
+      </span>
+      <%= render "reservations/reservations", reservations: @partner.reservations.ordered_by_item_name.joins(:item).where(items: { category: category }), category: category %>
+    <% end %>
+  </span>
+</div>
 
 <% if can? :manage, :all %>
   <%= button_to approve_all_user_reservations_path(@partner),

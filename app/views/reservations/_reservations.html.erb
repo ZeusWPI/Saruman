@@ -1,47 +1,14 @@
-<h4><%= category.humanize %></h4>
+<span id="reservations-<%= category %>" class="tbody"  id="table-reservations-<%= category %>">
+  <%= render reservations %>
+</span>
 
-<div class="table-responsive">
-  <span class="table table-striped" id="table-reservations-<%= category %>">
-    <span class="thead">
-      <span class="tr">
-        <span class="th">Item</span>
-        <span class="th">Description</span>
-        <span class="th">Price</span>
-        <span class="th">Deposit</span>
-
-        <span class="th border-start"># Reserved</span>
-        <span class="th">Reserved price</span>
-        <span class="th">Approval Status</span>
-
-        <span class="th border-start"># Picked up</span>
-        <span class="th"># Returned <span id="item-edit-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-html="true" title="<u>Used:</u> For these, you'll get only your deposit back.<br /><u>Unused:</u> For these, you'll get your cost + deposit back"></span></span>
-        <span class="th">Usage cost</span>
-
-        <span class="th border-start">Missing</span>
-        <span class="th">Deposit cost</span>
-
-        <span class="th border-start border-2">Total cost</span>
-
-        <span class="th">
-          Actions <a href="#" data-bs-toggle="tooltip" data-bs-title="Approved items can not be edited or deleted. Please contact an admin to edit these. Only the amount of unapproved items can be changed."><i class="bi bi-question-circle"></i></a>
-        </span>
-      </span>
-    </span>
-    <span id="reservations-<%= category %>" class="tbody">
-      <%= render reservations %>
-    </span>
-
-    <span class="tfoot">
-      <% if can? :create, Reservation %>
-        <%= render partial: 'new_reservation', locals: {object: @partner.reservations.new, category: category, button_name: "Add reservation"} %>
-      <% else %>
-        <div class="alert alert-warning" role="alert">
-          The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
-          Contact <%= mail_to(Settings.instance.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
-        </div>
-      <% end %>
-    </span>
-  </span>
-</div>
-
-<hr>
+<span class="tbody">
+  <% if can? :create, Reservation %>
+    <%= render partial: 'new_reservation', locals: {object: @partner.reservations.new, category: category, button_name: "Add reservation"} %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      The deadline for reservations (<%= nice_time Settings.instance.deadline %>) has passed.
+      Contact <%= mail_to(Settings.instance.email.present? ? mail_to(Settings.instance.email) : "us") %> to alter or add reservations.
+    </div>
+  <% end %>
+</span>

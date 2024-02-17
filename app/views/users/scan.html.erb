@@ -1,61 +1,60 @@
 <% render partial: 'shared/users_subnav' %>
 
-<div class="row">
-  <div class="col-sm-12">
-    <h2><%= @partner.name %></h2>
-    <h3>Manage reservations</h3>
-    <%= form_for @scan, url: process_scan_user_path(@partner) do |f| %>
-      <%= f.submit "Confirm", class: "btn btn-default btn-lg" %>
-      <% Item.categories.each do |k, c| %>
-        <div class="table-responsive">
-          <div class="table table-striped" id="table-reservations-<%= Item.categories.key c %>">
-            <div class="thead">
-              <div class="tr">
-                <span class="th">Item</span>
-                <span class="th">Item description</span>
-                <span class="th">Pick up</span>
-                <span class="th">Picked up/Reserved</span>
-                <span class="th">Returned used</span>
-                <span class="th">Return used</span>
-                <span class="th">Returned unused</span>
-                <span class="th">Return unused</span>
-              </div>
-            </div>
-            <div class="tbody">
-              <%= f.fields_for :scan_items, @scan.scan_items do |ff| %>
-                <% reservation = ff.object.reservation %>
-                <% if reservation.item.category == k %>
-                  <%= ff.hidden_field :reservation, value: reservation.id %>
-                  <tr>
-                    <%= ff.hidden_field :leftover, value: reservation.count - reservation.picked_up_count, class: "leftover" %>
-                    <span class="td"><%= reservation.item.name %></span>
-                    <span class="td"><%= reservation.item.description %></span>
+<h2><%= @partner.name %></h2>
+<h3>Scan</h3>
 
-                    <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :pick_up, f: ff, warning: true %>
-                    </div>
-                    <span class="td">
-                      <%= reservation.picked_up_count %>/<%= reservation.count %>
-                      <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    </span>
+<%= form_for @scan, url: process_scan_user_path(@partner) do |f| %>
+  <div class="table-responsive">
+    <span class="table table-striped">
+      <% Item.categories.keys.each do |category| %>
+        <span class="thead">
+          <span class="tr">
+            <h4><%= category.capitalize %></h4>
+          </span>
+        </span>
+        <span class="thead">
+          <span class="tr">
+            <span class="th">Item</span>
+            <span class="th border-start">Pick up</span>
+            <span class="th"></span>
+            <span class="th border-start">Return used</span>
+            <span class="th">Returned used</span>
+            <span class="th">Return unused</span>
+            <span class="th">Returned unused</span>
+          </span>
+        </span>
+        <span class="tbody">
+          <%= f.fields_for :scan_items, @scan.scan_items do |ff| %>
+            <% reservation = ff.object.reservation %>
+            <% if reservation.item.category == category %>
+              <%= ff.hidden_field :reservation, value: reservation.id %>
+              <span class="tr">
+                <span class="td"><%= reservation.item.name %></span>
 
-                    <div class="td td-btn-group">
-                      <%= render 'increment_buttons', field: :return_used, f: ff, warning: false %>
-                    </div>
-                    <span class="td"><%= reservation.returned_used_count %></span>
+                <span class="td border-start">
+                  <%= render 'increment_buttons', field: :pick_up, f: ff, invalid_when_exceeds: (reservation.count - reservation.picked_up_count) %>
+                </span>
+                <span class="td">
+                  <%= reservation.picked_up_count %>/<%= reservation.count %>
+                  <i class="bi bi-exclamation-triangle" <%= "hidden" if reservation.picked_up_count <= reservation.count %>></i>
+                </span>
 
-                    <div class="td td-btn-group">
+                <span class="td border-start">
+                  <%= render 'increment_buttons', field: :return_used, f: ff, invalid_when_exceeds: reservation.missing_count %>
+                </span>
+                <span class="td"><%= reservation.returned_used_count %></span>
 
-                      <%= render 'increment_buttons', field: :return_unused, f: ff, warning: false %>
-                    </div>
-                    <span class="td"><%= reservation.returned_unused_count %></span>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+                <span class="td">
+                  <%= render 'increment_buttons', field: :return_unused, f: ff, invalid_when_exceeds: reservation.missing_count %>
+                </span>
+
+                <span class="td"><%= reservation.returned_unused_count %></span>
+              </span>
+            <% end %>
+          <% end %>
+        </span>
       <% end %>
-    <% end %>
+    </span>
   </div>
-</div>
+  <%= f.submit "Confirm", class: "btn btn-primary btn-lg" %>
+<% end %>
