@@ -40,6 +40,10 @@
 
   .th, .td {
     display: table-cell;
+
+    .input-number {
+      width: 80px;
+    }
   }
 }
 

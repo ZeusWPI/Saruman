@@ -1,13 +1,9 @@
-<div class="input-group">
-  <span class="input-group-btn">
-    <button type="button" class="btn btn-default btn-number" data-increment="-1" >
-      <span class="glyphicon glyphicon-minus"></span>
-    </button>
-  </span>
-  <%= f.number_field field, class: %w[form-control input-number], min: 0, data: { warning: warning } %>
-  <span class="input-group-btn">
-    <button type="button" class="btn btn-default btn-number" data-increment="1" >
-      <span class="glyphicon glyphicon-plus"></span>
-    </button>
-  </span>
+<div class="input-group input-group-sm" data-controller="increment-buttons" data-increment-buttons-invalid-when-exceeds-value="<%= invalid_when_exceeds %>">
+  <button type="button" class="btn btn-primary btn-number" data-action="increment-buttons#decrement" >
+    <i class="bi bi-dash-lg"></i>
+  </button>
+  <%= f.number_field field, class: "form-control input-number", min: 0, data: { 'increment-buttons-target': 'valueField' } %>
+  <button type="button" class="btn btn-primary btn-number" data-action="increment-buttons#increment" >
+    <i class="bi bi-plus-lg"></i>
+  </button>
 </div>
