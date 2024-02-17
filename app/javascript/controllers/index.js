@@ -11,3 +11,6 @@ application.register('history-modal', HistoryModal)
 
 import IncrementButtons from './increment_buttons_controller'
 application.register('increment-buttons', IncrementButtons)
+
+import ScanReservation from './scan_reservation_controller'
+application.register('scan-reservation', ScanReservation)
