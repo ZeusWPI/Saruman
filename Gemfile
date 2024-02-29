@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 ruby "3.3.0"
 
+gem 'dotenv-rails'
+
 gem 'bundler', '>= 2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -79,7 +81,9 @@ end
 group :development do
   # Deployment
   gem "capistrano", "~> 3.11", require: false
-  gem "capistrano-rails", "~> 1.4", require: false
+  gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
+  gem 'ed25519', require: false
+  gem 'bcrypt_pbkdf', require: false
 
   # Mails
   gem 'letter_opener'

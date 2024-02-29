@@ -26,7 +26,7 @@ set :deploy_to, '/root/Saruman'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/secrets.yml}
+# set :linked_files, %w{config/database.yml config/secrets.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -36,3 +36,12 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# capistrano-docker specific
+set :docker_command, "docker"
+set :docker_copy_data, %w{.env config/database.yml}
+
+set :docker_compose, true
+set :docker_compose_path, "docker-compose.prod.yml"
+set :docker_compose_command, "podman-compose"
+set :docker_compose_project_name, "gandalf"
