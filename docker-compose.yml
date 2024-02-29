@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./public/system:/app/public/system
+      - saruman_barcode_data:/app/storage
     ports:
       - "7730:3000"
     environment:
@@ -30,3 +30,4 @@ services:
 
 volumes:
   saruman_data:
+  saruman_barcode_data:
