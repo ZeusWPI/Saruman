@@ -3,16 +3,16 @@
 <% end %>
 
 <% if user.sent %>
-  <%= link_to resend_user_path(user), class: 'btn btn-light btn-sm' do %>
+  <%= link_to resend_user_path(user), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
     <i class="bi bi-repeat"></i> Resend login link
   <% end %>
 <% else %>
-  <%= link_to resend_user_path(user), class: 'btn btn-warning btn-sm' do %>
+  <%= link_to resend_user_path(user), class: 'btn btn-warning btn-sm', data: { 'turbo-method': :post } do %>
     <i class="bi bi-envelope"></i> Send login link
   <% end %>
 <% end %>
 
-<%= link_to send_barcode_user_path(user), class: 'btn btn-light btn-sm' do %>
+<%= link_to send_barcode_user_path(user), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
   <i class="bi bi-upc"></i> Send barcode
 <% end %>
 

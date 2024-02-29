@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   resources :users do # Admin resources to display partners
     member do
       get 'sign_in', to: 'sign_in#sign_in_partner'
-      get :resend
-      get :send_barcode
+      post :resend
+      post :send_barcode
       get :get_barcode
 
       get :billing

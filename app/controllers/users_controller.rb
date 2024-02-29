@@ -60,19 +60,15 @@ class UsersController < ApplicationController
 
     @partner.send_token
 
-    flash[:success] = "Sign in link sent to #{@partner.name} (#{@partner.email})"
-
-    redirect_to action: :index
+    flash.now[:success] = "Sign in link sent to #{@partner.name} (#{@partner.email})"
   end
 
   def send_barcode
     authorize! :read, @partner
 
-    flash[:success] = "Barcode sent to #{@partner.name} (#{@partner.email})"
-
     @partner.send_barcode
 
-    redirect_to action: :index
+    flash.now[:success] = "Barcode sent to #{@partner.name} (#{@partner.email})"
   end
 
   def get_barcode
