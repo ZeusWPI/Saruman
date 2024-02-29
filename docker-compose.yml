@@ -24,6 +24,7 @@ services:
       DATABASE_URL: postgresql://postgres:password@db/saruman
       RAILS_SERVE_STATIC_FILES: "true"
       RAILS_LOG_TO_STDOUT: "true"
+      GROVER_NO_SANDBOX: "true"
     depends_on:
       - db
 
