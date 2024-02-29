@@ -6,7 +6,7 @@ ruby "3.3.0"
 gem 'bundler', '>= 2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.0.4.3'
+gem 'rails', '~> 7.1'
 
 # Bootsnap makes booting snappy
 gem 'bootsnap'
