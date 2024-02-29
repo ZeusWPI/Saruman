@@ -43,7 +43,7 @@
                 <span class="td">
                   <%= reservation.picked_up_count %>/<%= reservation.count %>
 
-                  <a href="#" class="link-danger" data-scan-reservation-target="pickedUpWarning" data-bs-toggle="tooltip" data-bs-title="Amount of items picked up is bigger than reserved">
+                  <a href="#" class="link-danger" data-scan-reservation-target="pickedUpWarning" data-bs-toggle="tooltip" data-bs-title=" ">
                     <i class="bi bi-exclamation-circle"></i>
                   </a>
                 </span>
@@ -60,8 +60,8 @@
                   <% end %>
                 </span>
                 <span class="td">
-                  <%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span>
-                  <a href="#" class="link-danger" data-scan-reservation-target="returnedWarning" data-bs-toggle="tooltip" data-bs-title="Amount of items returned is bigger than picked up">
+                  <%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused, <%=  reservation.missing_count %> missing)</span>
+                  <a href="#" class="link-danger" data-scan-reservation-target="returnedWarning" data-bs-toggle="tooltip" data-bs-title=" ">
                     <i class="bi bi-exclamation-circle"></i>
                   </a>
                 </span>
