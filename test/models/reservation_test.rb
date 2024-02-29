@@ -2,17 +2,22 @@
 #
 # Table name: reservations
 #
-#  id                    :bigint           not null, primary key
-#  item_id               :integer
-#  user_id               :integer
+#  id                    :integer          not null, primary key
 #  count                 :integer
-#  created_at            :datetime
-#  updated_at            :datetime
-#  status                :integer          default("pending")
-#  disapproval_message   :text(65535)
+#  disapproval_message   :text
 #  picked_up_count       :integer          default(0)
 #  returned_unused_count :integer          default(0)
 #  returned_used_count   :integer          default(0)
+#  status                :integer          default("pending")
+#  created_at            :datetime
+#  updated_at            :datetime
+#  item_id               :integer
+#  user_id               :integer
+#
+# Indexes
+#
+#  index_reservations_on_item_id  (item_id)
+#  index_reservations_on_user_id  (user_id)
 #
 
 require 'test_helper'

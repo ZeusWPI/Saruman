@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: settings
-#
-#  id                :bigint           not null, primary key
-#  created_at        :datetime
-#  updated_at        :datetime
-#  email             :string(255)
-#  deadline          :datetime
-#  event_name        :string(255)
-#  organisation_name :string(255)      default(""), not null
-#
-
 class Settings < ApplicationRecord
   acts_as_singleton
 
@@ -28,3 +15,18 @@ class Settings < ApplicationRecord
     email.present? && event_name.present? && organisation_name.present?
   end
 end
+
+# == Schema Information
+#
+# Table name: settings
+#
+#  id                                  :integer          not null, primary key
+#  deadline                            :datetime
+#  email                               :string
+#  event_date                          :date             default(Thu, 29 Feb 2024), not null
+#  event_name                          :string
+#  organisation_name                   :string           default(""), not null
+#  show_pickup_columns_in_reservations :boolean          default(FALSE), not null
+#  created_at                          :datetime
+#  updated_at                          :datetime
+#
