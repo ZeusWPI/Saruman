@@ -34,12 +34,7 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ### Deploy update to server
 * Push the updates to master
-* SSH into the server
-* `cd` into the `Saruman` directory
-* Stash current changes (`git stash`)
-* Pull master: `git pull`
-* Unstash current changes (`git stash pop`)
-* Run `docker-compose down && docker-compose up -d --build`
+* On your own machine, in the repository, run `bundle exec cap production deploy`
 
 ### Debug on the server
 * SSH into the server

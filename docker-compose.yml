@@ -9,7 +9,7 @@ services:
     volumes:
       - saruman_data:/var/lib/postgresql/data
     ports:
-      - "7730:5432"
+      - "5432:5432"
 
   web:
     build:
@@ -19,7 +19,7 @@ services:
     volumes:
       - ./public/system:/app/public/system
     ports:
-      - "3000:3000"
+      - "7730:3000"
     environment:
       RAILS_SERVE_STATIC_FILES: "true"
       RAILS_LOG_TO_STDOUT: "true"
