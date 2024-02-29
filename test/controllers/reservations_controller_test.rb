@@ -11,13 +11,36 @@ class ReservationsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index, params: { user_id: users(:vtk) }
 
+    assert_response :success
+    assert_not_nil assigns(:partner)
+  end
+
+  test "shouldnt show other user for partners" do
+    get :index, params: { user_id: users(:hilok) }
     assert_response :redirect
   end
 
-  test "should show reservation" do
-    get :show, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+  test "should show warning for partners after deadline" do
+    Settings.instance.update! deadline: DateTime.now - 1
 
+    get :index, params: { user_id: users(:vtk) }
     assert_response :success
+    assert_not_nil assigns(:partner)
+    assert_match(/The deadline for reservations/, response.body)
+    assert_select "table-responsive form", false
+  end
+
+  test "dont show warning for admins after deadline" do
+    Settings.instance.update! deadline: DateTime.now - 1
+
+    sign_out users(:vtk)
+    sign_in users(:tom)
+
+    get :index, params: { user_id: users(:vtk) }
+    assert_response :success
+    assert_not_nil assigns(:partner)
+    assert_no_match(/The deadline for reservations/, response.body)
+    assert_select "form"
   end
 
   test "should create reservation" do
@@ -29,13 +52,13 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "shouldnt create reservation after deadline" do
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
+    Settings.instance.update! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +0 do
       post :create, xhr: true, params: { user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 } }
     end
 
-    assert_response :success
+    assert_response :found
 
     ability = Ability.new(users :vtk)
     assert ability.cannot? :create, Reservation
@@ -45,7 +68,7 @@ class ReservationsControllerTest < ActionController::TestCase
     sign_out users(:vtk)
     sign_in users(:tom)
 
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
+    Settings.instance.update! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +1 do
       post :create, xhr: true, params: { user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 } }
@@ -72,14 +95,14 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "shouldnt update reservation after deadline" do
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
+    Settings.instance.update! deadline: DateTime.now - 1
 
     ability = Ability.new(users :vtk)
     assert ability.cannot? :update, @reservation
 
     patch :update, xhr: true, params: { user_id: users(:vtk), id: @reservation, reservation: { count: 10 } }
 
-    assert_response :success
+    assert_response :found
     @reservation.reload
     assert_equal @reservation.count, 1
   end
@@ -93,7 +116,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "shouldnt destroy reservation after deadline" do
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
+    Settings.instance.update!(deadline: DateTime.now - 1)
 
     ability = Ability.new(users :vtk)
     assert ability.cannot? :destroy, @reservation
@@ -116,7 +139,7 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
     assert @reservation.approved?
 
-    post :disapprove, xhr: true, params: { user_id: users(:vtk), disapprove: { id: @reservation.id, reason: "Too many items" } }
+    post :disapproved, xhr: true, params: { user_id: users(:vtk), id: @reservation.id, disapprove: { reason: "Too many items" } }
     @reservation.reload
     assert_response :success
     assert @reservation.disapproved?
@@ -125,7 +148,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test "partners can't approve_all" do
     post :approve_all, xhr: true, params: { user_id: users(:vtk) }
-    assert_response :success
+    assert_response :found
     assert_not_equal Reservation.where(user_id: users(:vtk)).pending.size, 0
   end
 
@@ -134,7 +157,7 @@ class ReservationsControllerTest < ActionController::TestCase
     sign_in users(:tom)
 
     post :approve_all, xhr: true, params: { user_id: users(:vtk) }
-    assert_response :success
+    assert_response :found
   end
 
   test "approve_all reservations should approve them" do
