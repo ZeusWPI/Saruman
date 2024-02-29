@@ -41,18 +41,33 @@
           <% if user_signed_in? %>
             <% if can? :crud, User %>
               <li>
-                <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fs-5 bi bi-person-circle"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small">
-                  <li><%= link_to "Edit password", edit_user_registration_path, class: "dropdown-item" %></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-                </ul>
+                <span class="nav-link px-2">
+                  <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small">
+                    <li><%= link_to "Edit password", edit_user_registration_path, class: "dropdown-item" %></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item", data: { 'turbo-method': :delete } %></li>
+                  </ul>
+                  </span>
               </li>
             <% else %>
-              <%= current_user.name %> (<%= current_user.email %>)
-              <i class="fs-5 bi bi-person-circle"></i>
+              <li>
+                <span class="nav-link px-2">
+                  <%= current_user.name %> (<%= current_user.email %>)
+                </span>
+              </li>
+              <li>
+                <span class="nav-link px-2">
+                  <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small">
+                    <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item", data: { 'turbo-method': :delete } %></li>
+                  </ul>
+                  </span>
+              </li>
             <% end %>
           <% end %>
         </ul>

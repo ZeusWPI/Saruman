@@ -8,17 +8,17 @@
   <tr>
     <th>Name</th>
 
-    <th class="border-start">Reserved</th>
-    <th>Reserved price</th>
+    <th class="border-start text-end">Reserved</th>
+    <th class="text-end">Reserved price</th>
 
-    <th class="border-start">Picked up</th>
-    <th>Returned</th>
-    <th>Usage cost</th>
+    <th class="border-start text-end">Picked up</th>
+    <th class="text-end">Returned</th>
+    <th class="text-end">Usage cost</th>
 
-    <th class="border-start">Missing</th>
-    <th>Deposit cost</th>
+    <th class="border-start text-end">Missing</th>
+    <th class="text-end">Deposit cost</th>
 
-    <th class="border-start border-2">Total cost</th>
+    <th class="border-start text-end">Total cost</th>
   </tr>
   </thead>
 
@@ -46,13 +46,13 @@
         <td class="text-end"><%= euro(res.reserved * res.item.price) %></td>
 
         <td class="border-start text-end"><%= res.picked_up %></td>
-        <td><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
+        <td class="text-end"><%= res.returned_unused + res.returned_used %> (<%= res.returned_used %> used, <%= res.returned_unused %> unused)</td>
         <td class="text-end"><%= euro((res.picked_up - res.returned_unused) * res.item.price) %></td>
 
         <td class="border-start text-end"><%= res.picked_up - res.returned_unused - res.returned_used %></td>
         <td class="text-end"><%= euro((res.picked_up - res.returned_unused - res.returned_used) * res.item.deposit) %></td>
 
-        <td class="border-start border-2 text-end"><%= euro ((res.picked_up - res.returned_unused) * res.item.price) + ((res.picked_up - res.returned_unused - res.returned_used) * res.item.deposit) %></td>
+        <td class="border-start text-end"><%= euro ((res.picked_up - res.returned_unused) * res.item.price) + ((res.picked_up - res.returned_unused - res.returned_used) * res.item.deposit) %></td>
       </tr>
     <% end %>
     <%= render partial: 'totals', locals: { reservations: @category_reservations } %>

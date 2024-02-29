@@ -17,16 +17,16 @@
 
   <% if show_pickup_columns? %>
     <span class="td border-start text-end"><%= reservation.picked_up_count %></span>
-    <span class="td <%= returned_colour(reservation) %>"><%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span></span>
+    <span class="td text-end <%= returned_colour(reservation) %>"><%= reservation.returned_count %> <span class="text-muted">(<%= reservation.returned_used_count %> used, <%= reservation.returned_unused_count %> unused)</span></span>
     <span class="td text-end"><%= euro(reservation.usage_cost) %></span>
 
     <span class="td border-start text-end"><%= reservation.missing_count %></span>
     <span class="td text-end"><%= euro(reservation.deposit_cost) %></span>
 
-    <span class="td border-start border-2 text-end"><%= euro(reservation.total_cost) %></span>
+    <span class="td border-start text-end"><%= euro(reservation.total_cost) %></span>
   <% end %>
 
-  <span class="td border-start border-2">
+  <span class="td border-start">
     <span class="nowrap">
       <%= render "reservations/actions", reservation: reservation %>
     </span>
