@@ -2,29 +2,31 @@
 #
 # Table name: users
 #
-#  id                       :bigint           not null, primary key
-#  email                    :string(255)      default(""), not null
-#  encrypted_password       :string(255)      default(""), not null
-#  reset_password_token     :string(255)
-#  reset_password_sent_at   :datetime
-#  remember_created_at      :datetime
-#  sign_in_count            :integer          default(0), not null
-#  current_sign_in_at       :datetime
-#  last_sign_in_at          :datetime
-#  current_sign_in_ip       :string(255)
-#  last_sign_in_ip          :string(255)
-#  created_at               :datetime
-#  updated_at               :datetime
-#  authentication_token     :string(255)
-#  role                     :string(255)      default("partner")
-#  name                     :string(255)
-#  sent                     :boolean          default(TRUE)
-#  barcode                  :string(255)
-#  barcode_data             :string(255)
-#  barcode_img_file_name    :string(255)
-#  barcode_img_content_type :string(255)
-#  barcode_img_file_size    :bigint
-#  barcode_img_updated_at   :datetime
+#  id                     :integer          not null, primary key
+#  authentication_token   :string
+#  barcode                :string
+#  barcode_data           :string
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string
+#  name                   :string
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  role                   :string           default("partner")
+#  sent                   :boolean          default(TRUE)
+#  sign_in_count          :integer          default(0), not null
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+# Indexes
+#
+#  index_users_on_authentication_token  (authentication_token)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 require 'test_helper'

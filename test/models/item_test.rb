@@ -2,21 +2,17 @@
 #
 # Table name: items
 #
-#  id                       :bigint           not null, primary key
-#  name                     :string(255)
-#  description              :string(255)
-#  price                    :integer
-#  created_at               :datetime
-#  updated_at               :datetime
-#  quantity                 :integer
-#  barcode                  :string(255)
-#  barcode_data             :string(255)
-#  barcode_img_file_name    :string(255)
-#  barcode_img_content_type :string(255)
-#  barcode_img_file_size    :bigint
-#  barcode_img_updated_at   :datetime
-#  category                 :integer
-#  deposit                  :integer
+#  id           :integer          not null, primary key
+#  barcode      :string
+#  barcode_data :string
+#  category     :integer
+#  deposit      :integer          default(0)
+#  description  :string
+#  name         :string
+#  price        :integer
+#  quantity     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 
 require 'test_helper'
