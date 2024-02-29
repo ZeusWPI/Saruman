@@ -1,5 +1,4 @@
 module ReservationsHelper
-
   def status_colour(r)
     if r.approved?
       'success'
@@ -47,4 +46,10 @@ module ReservationsHelper
     end
   end
 
+  def show_pickup_columns?
+    return true if Date.current + 5.days > Settings.instance.event_date
+    return true if Settings.instance.show_pickup_columns_in_reservations
+
+    false
+  end
 end
