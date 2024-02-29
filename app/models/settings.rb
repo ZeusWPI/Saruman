@@ -21,7 +21,7 @@ class Settings < ApplicationRecord
   class SettingsNotCompleteError < StandardError; end
 
   def expired?
-    !deadline.blank? && deadline < DateTime.now
+    deadline.present? && deadline < DateTime.current
   end
 
   def complete?

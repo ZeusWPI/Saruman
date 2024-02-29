@@ -32,7 +32,7 @@
             <li><%= link_to "Report", reports_path, class: "nav-link px-2 text-white" %></li>
             <li><%= link_to "Application settings", setting_path, class: "nav-link px-2 text-white" %></li>
           <% elsif current_user %>
-            <li><%= link_to "Reservations", user_path(current_user), class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Reservations", user_reservations_path(current_user), class: "nav-link px-2 text-white" %></li>
           <% end %>
         </ul>
 

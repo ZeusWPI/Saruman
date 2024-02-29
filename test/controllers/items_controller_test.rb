@@ -35,9 +35,9 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should update item" do
-    patch :update, params: { id: @item, item: { description: @item.description, name: @item.name, price: @item.price } }
+    put :update, xhr: true, params: { id: @item, item: { description: @item.description, name: @item.name, price: @item.price } }
 
-    assert_redirected_to item_path(assigns(:item))
+    assert_response :success
   end
 
   test "should destroy item" do
