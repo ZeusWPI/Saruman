@@ -16,11 +16,13 @@
   </span>
   <span class="td"></span>
   <span class="td"></span>
-  <span class="td border-start"></span>
-  <span class="td"></span>
-  <span class="td"></span>
-  <span class="td border-start"></span>
-  <span class="td"></span>
-  <span class="td"></span>
+  <% if show_pickup_columns? %>
+    <span class="td border-start"></span>
+    <span class="td"></span>
+    <span class="td"></span>
+    <span class="td border-start"></span>
+    <span class="td"></span>
+    <span class="td"></span>
+  <% end %>
   <span class="td border-start border-2"><%= f.submit button_name, class: 'btn btn-sm btn-primary' %></span>
 <% end %>

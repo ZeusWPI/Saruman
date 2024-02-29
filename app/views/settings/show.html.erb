@@ -7,6 +7,9 @@
   <%= form_text_field f, :event_name %>
   <%= form_email_field f, :email %>
   <%= form_date_field f, :deadline %>
+  <%= form_date_field f, :event_date %>
+  <%= form_check_box f, :show_pickup_columns_in_reservations %>
+  <%=  %>
 
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
