@@ -15,4 +15,6 @@ install_plugin Capistrano::SCM::Git
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
 require 'capistrano/docker'
+require 'capistrano/docker/compose/logs'
+require 'capistrano/docker/compose/migration'
 
