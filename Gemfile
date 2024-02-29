@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 
 ruby "3.3.0"
 
-# Dotenv, first
-gem 'dotenv-rails'
-
 gem 'bundler', '>= 2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
