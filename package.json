@@ -8,7 +8,7 @@
     "bootstrap-icons": "^1.10.4",
     "esbuild": "^0.15.12",
     "jquery": "^3.6.4",
-    "puppeteer": "^20.2.0",
+    "puppeteer": "^22.3.0",
     "sass": "^1.61.0",
     "tom-select": "^2.2.2"
   },
