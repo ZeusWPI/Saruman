@@ -21,7 +21,7 @@ services:
     ports:
       - "7730:3000"
     environment:
-      DATABASE_URL: postgresql://saruman:password@db/saruman
+      DATABASE_URL: postgresql://postgres:password@db/saruman
       RAILS_SERVE_STATIC_FILES: "true"
       RAILS_LOG_TO_STDOUT: "true"
     depends_on:
