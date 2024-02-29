@@ -5,7 +5,7 @@ set :application, 'Saruman'
 set :repo_url, 'git@github.com:ZeusWPI/Saruman.git'
 
 set :branch, 'master'
-set :deploy_to, '/home/saruman/production'
+set :deploy_to, '/root/Saruman'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -36,16 +36,3 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-namespace :passenger do
-  desc "Restart Application"
-  task :restart do
-    on roles(:app) do
-      with rails_env: fetch(:rails_env) do
-        execute "touch #{current_path}/tmp/restart.txt"
-      end
-    end
-  end
-end
-
-after :deploy, "passenger:restart"
