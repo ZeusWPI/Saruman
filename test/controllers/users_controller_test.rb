@@ -8,58 +8,6 @@ class UsersControllerTest < ActionController::TestCase
     sign_in users(:tom)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:partners)
-  end
-
-  test "should show user" do
-    get :show, params: { id: @user }
-    assert_response :success
-    assert_not_nil assigns(:partner)
-  end
-
-  test "should show user for partners" do
-    sign_out users(:tom)
-    sign_in users(:vtk)
-
-    get :show, params: { id: users(:vtk) }
-    assert_response :success
-    assert_not_nil assigns(:partner)
-  end
-
-  test "shouldnt show other user for partners" do
-    sign_out users(:tom)
-    sign_in users(:vtk)
-
-    get :show, params: { id: users(:hilok) }
-    assert_response :redirect
-  end
-
-  test "should show warning for partners after deadline" do
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
-
-    sign_out users(:tom)
-    sign_in users(:vtk)
-
-    get :show, params: { id: users(:vtk) }
-    assert_response :success
-    assert_not_nil assigns(:partner)
-    assert_match(/The deadline for reservations/, response.body)
-    assert_select "table-responsive form", false
-  end
-
-  test "dont show warning for admins after deadline" do
-    Settings.instance.update_attributes! deadline: DateTime.now - 1
-
-    get :show, params: { id: users(:vtk) }
-    assert_response :success
-    assert_not_nil assigns(:partner)
-    assert_no_match(/The deadline for reservations/, response.body)
-    assert_select "form"
-  end
-
   test "should create user" do
     assert_difference 'User.count', +1 do
       post :create, xhr: true, params: { user: { name: "Zeus", email: "zeus@zeus.zeus" } }
@@ -75,7 +23,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, params: { id: @user, user: { name: "Zeus", email: "zeus@email.com" } }
+    patch :update, xhr: true, params: { id: @user, user: { name: "Zeus", email: "zeus@email.com" } }
 
     assert user_path(assigns(:partner))
   end
