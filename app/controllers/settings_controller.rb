@@ -17,6 +17,6 @@ class SettingsController < ApplicationController
   private
 
   def settings_params
-    params.require(:settings).permit(:organisation_name, :event_name, :email, :deadline, :event_date, :show_pickup_columns_in_reservations)
+    params.require(:settings).permit(:organisation_name, :address, :event_name, :email, :special_requests_email, :deadline, :event_date, :show_pickup_columns_in_reservations)
   end
 end

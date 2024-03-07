@@ -15,8 +15,8 @@
           <span>
             <b><%= Settings.instance.organisation_name %></b>
           </span>
-          <span>Hoveniersberg 24, 9000 Gent</span>
-          <span><%= mail_to "info@12urenloop.be" %></span>
+          <span><%= Settings.instance.address %></span>
+          <span><%= mail_to Settings.instance.email %></span>
         </div>
       </div>
       <div>

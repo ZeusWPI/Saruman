@@ -10,14 +10,15 @@
      <% if Settings.instance.deadline.present? %>
        De deadline hiervoor ligt op <%= I18n.l Settings.instance.deadline, format: "%A %d %B %Y om %Hu%M", locale: :nl %>.
      <% end %>
-     Houd deze pagina zeker in het oog om op de hoogte te blijven van nieuwe items en aanvaarde bestellingen.</p>
+     Houd deze pagina zeker in het oog om op de hoogte te blijven van nieuwe items en goedgekeurde bestellingen.</p>
 
      <% sign_in_url = sign_in_user_url(@partner, user_email: @partner.email, user_token: @partner.authentication_token) %>
      <p><%= link_to sign_in_url, sign_in_url %></p>
 
-     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to Settings.instance.email %>.</p>
+     <p>Als je vragen hebt over ons aanbod of speciale verzoeken hebt, kun je deze doorsturen naar <%= mail_to Settings.instance.special_requests_email.presence || Settings.instance.email %>.</p>
+
+     <p>Mocht je tegen problemen aanlopen, aarzel dan niet om contact met ons op te nemen via e-mail: <%= mail_to Settings.instance.email %>.</p>
 
      <p>Met vriendelijke groet,<br /><%= Settings.instance.organisation_name %></p>
-
   </body>
 </html>

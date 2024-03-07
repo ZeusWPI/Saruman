@@ -3,19 +3,23 @@
 # Table name: settings
 #
 #  id                                  :integer          not null, primary key
+#  address                             :string
 #  deadline                            :datetime
 #  email                               :string
 #  event_date                          :date             default(Thu, 29 Feb 2024), not null
 #  event_name                          :string
 #  organisation_name                   :string           default(""), not null
 #  show_pickup_columns_in_reservations :boolean          default(FALSE), not null
+#  special_requests_email              :string
 #  created_at                          :datetime
 #  updated_at                          :datetime
 #
 
 instance:
   organisation_name: Student Kick-Off
+  address: Predikherenlei 2, 9000 Gent
   event_name: Student Kick-Off
   email: info@12urenloop.be
+  special_requests_email: beverages@12urenloop.be
   deadline: <%= DateTime.now + 1 %>
   event_date: <%= Date.new(2024, 2, 29) %>

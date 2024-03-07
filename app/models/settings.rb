@@ -21,12 +21,14 @@ end
 # Table name: settings
 #
 #  id                                  :integer          not null, primary key
+#  address                             :string
 #  deadline                            :datetime
 #  email                               :string
 #  event_date                          :date             default(Thu, 29 Feb 2024), not null
 #  event_name                          :string
 #  organisation_name                   :string           default(""), not null
 #  show_pickup_columns_in_reservations :boolean          default(FALSE), not null
+#  special_requests_email              :string
 #  created_at                          :datetime
 #  updated_at                          :datetime
 #

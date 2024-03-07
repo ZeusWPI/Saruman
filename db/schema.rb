@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_29_184840) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_203458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,6 +101,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_29_184840) do
     t.string "organisation_name", default: "", null: false
     t.boolean "show_pickup_columns_in_reservations", default: false, null: false
     t.date "event_date", default: "2024-02-29", null: false
+    t.string "special_requests_email"
+    t.string "address"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

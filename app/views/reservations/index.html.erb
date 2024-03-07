@@ -64,7 +64,7 @@
 <% end %>
 <hr>
 <% if Settings.instance.complete? %>
-  Special requests? <%= mail_to Settings.instance.email, "Let us know" %>!
+  Special requests? <%= mail_to (Settings.instance.special_requests_email.presence || Settings.instance.email), "Let us know" %>!
 <% end %>
 
 <%= render partial: 'disapprove_modal' %>

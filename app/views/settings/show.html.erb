@@ -4,8 +4,10 @@
 
 <%= form_with model: @settings, url: setting_path, method: :put do |f| %>
   <%= form_text_field f, :organisation_name %>
+  <%= form_text_field f, :address %>
   <%= form_text_field f, :event_name %>
   <%= form_email_field f, :email %>
+  <%= form_email_field f, :special_requests_email %>
   <%= form_date_field f, :deadline %>
   <%= form_date_field f, :event_date %>
   <%= form_check_box f, :show_pickup_columns_in_reservations %>
