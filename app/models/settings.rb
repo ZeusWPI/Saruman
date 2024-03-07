@@ -21,7 +21,7 @@ end
 # Table name: settings
 #
 #  id                                  :integer          not null, primary key
-#  address                             :string
+#  address                             :string           not null
 #  deadline                            :datetime
 #  email                               :string
 #  event_date                          :date             default(Thu, 29 Feb 2024), not null
