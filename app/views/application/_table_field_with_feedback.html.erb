@@ -5,6 +5,7 @@
   <%- field_type = :number_field %>
   <%- kwargs[:value] = number_with_precision(f.object.send(field), precision: 2) %>
   <%- kwargs[:min] = 0 %>
+  <%- kwargs[:step] = 0.01 %>
   <%- kwargs[:placeholder] = "0.00" %>
 <%- end %>
 
