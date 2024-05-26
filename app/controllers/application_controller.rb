@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  include SentryUserContext
+
   after_action :store_location
 
   # Allows us to always replace the flash turbo frame when flashes are triggered
