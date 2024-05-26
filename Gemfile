@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby "3.3.0"
+ruby "3.3.1"
 
 gem 'dotenv-rails'
 
@@ -53,6 +53,7 @@ gem 'devise'
 gem 'paper_trail'
 
 # Sentry (actually glitchtip)
+gem 'stackprof'
 gem 'sentry-rails'
 
 # Token authentication for the partners
