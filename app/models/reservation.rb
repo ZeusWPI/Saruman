@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
   belongs_to :item
   belongs_to :user
 
-  enum status: %w(disapproved pending approved)
+  enum :status, %w(disapproved pending approved)
 
   validates :item, presence: true
   validates :count, numericality: { only_integer: true, greater_than: 0 }

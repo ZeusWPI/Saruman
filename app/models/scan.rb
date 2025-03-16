@@ -81,7 +81,7 @@ class ScanItem
   validates :return_unused, numericality: { only_integer: true }
 
   def initialize(attr = {})
-    super(attr)
+    super
     @pick_up ||= 0
     @return_used ||= 0
     @return_unused ||= 0

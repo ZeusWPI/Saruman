@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby "3.3.1"
+ruby "3.4.2"
 
 gem 'dotenv-rails'
 
-gem 'bundler', '>= 2.5.3'
+gem 'bundler', '>= 2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 7.1.5'
 
 # Bootsnap makes booting snappy
 gem 'bootsnap'
@@ -40,11 +40,8 @@ gem 'httparty'
 gem 'acts_as_singleton'
 
 # Barcodes
-#gem 'barcodes', git: 'git://github.com/nudded/barcodes'
-gem 'barcodes'
-gem 'chunky_png'
 gem 'barby'
-gem 'matrix'
+gem 'chunky_png'
 
 # Authentication
 gem 'devise'
