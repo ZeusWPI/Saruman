@@ -18,7 +18,7 @@ class ScanController < ApplicationController
       return
     end
 
-    @partner = User.partners.find_by(id: params.require(:scan)[:partner])
+    @partner = Partner.find_by(id: params.require(:scan)[:partner])
     @item = Item.find_by(id: params.require(:scan)[:item])
 
     if @partner and @item
@@ -32,7 +32,7 @@ class ScanController < ApplicationController
   def force
     authorize! :manage, :all
 
-    @partner = User.partners.find_by(id: params.require(:force)[:partner_id])
+    @partner = Partner.find_by(id: params.require(:force)[:partner_id])
     @item = Item.find_by(id: params.require(:force)[:item_id])
     @count = params.require(:force)[:count].to_i
     @option = params.require(:force)[:options]&.to_sym || :out
@@ -41,7 +41,7 @@ class ScanController < ApplicationController
     @reservation = @partner.reservations.approved.find_by(item_id: @item.id)
     if @reservation
       # Item found: increase and picked up count
-      flash[:notice] = "Increased the existing reservation with #{@reservation.picked_up_count + @count - @reservation.count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_user_reservation_path(@partner, @reservation, option: @option)}."
+      flash[:notice] = "Increased the existing reservation with #{@reservation.picked_up_count + @count - @reservation.count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_partner_reservation_path(@partner, @reservation, option: @option)}."
 
       @reservation.count = @reservation.picked_up_count + @count
       @reservation.picked_up_count = @reservation.picked_up_count + @count
@@ -55,7 +55,7 @@ class ScanController < ApplicationController
       @reservation.save
 
       # No approved reservation for this item: add a new one
-      flash[:notice] = "Created a new reservation for #{@count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_user_reservation_path(@partner, @reservation, option: @option)}."
+      flash[:notice] = "Created a new reservation for #{@count}x #{@item.name}. #{view_context.link_to 'Revert this', revert_partner_reservation_path(@partner, @reservation, option: @option)}."
     end
 
     redirect_to action: :scan, option: @option
@@ -90,7 +90,7 @@ class ScanController < ApplicationController
       reservation.save!
 
       # Notice the partner how many items he has left
-      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. They have #{reservation.picked_up_count - reservation.returned_count}x #{@item.name} remaining in their possession. #{view_context.link_to 'Revert this checkin', revert_user_reservation_path(@partner, reservation, option: @option)}."
+      flash[:notice] = "#{@partner.name} brought back #{@count}x #{@item.name}. They have #{reservation.picked_up_count - reservation.returned_count}x #{@item.name} remaining in their possession. #{view_context.link_to 'Revert this checkin', revert_partner_reservation_path(@partner, reservation, option: @option)}."
     else
       # No reservations: display a warning
       flash[:warning] = "#{@partner.name} does not has a reservation for this item."
@@ -114,7 +114,7 @@ class ScanController < ApplicationController
         @reservation.save
 
         # Notice the partner how many items he is allowed to pick up
-        flash[:success] = "#{@partner.name} picked up #{@count}x #{@item.name}. They have still #{@reservation.count - @reservation.picked_up_count}x #{@item.name} remaining to pick up. #{view_context.link_to 'Revert this checkout', revert_user_reservation_path(@partner, @reservation, option: @option)}."
+        flash[:success] = "#{@partner.name} picked up #{@count}x #{@item.name}. They have still #{@reservation.count - @reservation.picked_up_count}x #{@item.name} remaining to pick up. #{view_context.link_to 'Revert this checkout', revert_partner_reservation_path(@partner, @reservation, option: @option)}."
         redirect_to action: :scan
       end
     else

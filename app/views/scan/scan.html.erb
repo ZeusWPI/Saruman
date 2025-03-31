@@ -57,7 +57,7 @@
       <div class="mb-3">
         <label for="partner">Partner</label>
         <%= select_tag 'scan[partner]',
-          options_for_select(User.partners.all.order(:name).map { |u| ["#{u.name} (#{u.barcode})", u.id] }),
+          options_for_select(Partner.ordered_by_name.map { |p| ["#{p.name} (#{p.barcode})", p.id] }),
           include_blank: true,
           class: "form-control",
           data: { controller: 'select', placeholder: "Start searching by entering a name or barcode" } %>

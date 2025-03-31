@@ -38,7 +38,7 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ### Debug on the server
 * SSH into the server
-* run `docker exec -it saruman_saruman_1 /bin/bash`
+* run `docker exec -it saruman-web-1 /bin/bash`
 * run `RAILS_ENV=production bundle exec rails console`
 
 ### Snippets

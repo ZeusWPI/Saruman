@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_31_161856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,31 +55,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
     t.integer "deposit", default: 0
   end
 
-  create_table "partners", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "barcode_data"
-    t.string "email"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "authentication_token"
-    t.boolean "sent"
-    t.index ["authentication_token"], name: "index_partners_on_authentication_token"
-    t.index ["email"], name: "index_partners_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
+  create_table "partners", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.string "barcode", null: false
+    t.string "barcode_data", null: false
+    t.index ["name"], name: "index_partners_on_name", unique: true
   end
 
   create_table "reservations", id: :serial, force: :cascade do |t|
     t.integer "item_id"
-    t.integer "user_id"
     t.integer "count"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -88,8 +74,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
     t.integer "picked_up_count", default: 0
     t.integer "returned_unused_count", default: 0
     t.integer "returned_used_count", default: 0
+    t.bigint "partner_id"
     t.index ["item_id"], name: "index_reservations_on_item_id"
-    t.index ["user_id"], name: "index_reservations_on_user_id"
+    t.index ["partner_id"], name: "index_reservations_on_partner_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -100,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
     t.string "event_name"
     t.string "organisation_name", default: "", null: false
     t.boolean "show_pickup_columns_in_reservations", default: false, null: false
-    t.date "event_date", default: "2024-02-29", null: false
+    t.date "event_date", default: "2025-03-31", null: false
     t.string "special_requests_email"
     t.string "address", null: false
   end
@@ -121,11 +108,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
     t.string "authentication_token"
     t.string "role", default: "partner"
     t.string "name"
-    t.boolean "sent", default: true
-    t.string "barcode"
-    t.string "barcode_data"
+    t.boolean "sent", default: false
+    t.bigint "partner_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["partner_id"], name: "index_users_on_partner_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -142,4 +129,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_204622) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reservations", "partners"
+  add_foreign_key "users", "partners"
 end

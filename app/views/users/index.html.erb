@@ -1,8 +1,7 @@
-<h3>Partners</h3>
+<% render partial: 'shared/partners_subnav' %>
 
-<%= link_to excel_users_path(format: :xlsx), class: 'btn btn-light' do %>
-  <i class="bi bi-file-earmark-excel"></i> Export to Excel
-<% end %>
+<h2><%= @partner.name %></h2>
+<h3>Manage users</h3>
 
 <span class="table">
   <span class="thead">
@@ -12,10 +11,10 @@
       <span class="th">Actions</span>
     </span>
   </span>
-  <span id="partners" class="tbody">
-    <%= render @partners %>
+  <span id="users" class="tbody">
+    <%= render @users %>
   </span>
   <span class="tfoot">
-    <%= render partial: 'new_partner', locals: {object: User.partners.build} %>
+    <%= render partial: 'new_user', locals: {object: @partner.users.build} %>
   </span>
 </span>

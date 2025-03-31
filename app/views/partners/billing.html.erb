@@ -1,0 +1,21 @@
+<% render partial: 'shared/partners_subnav' %>
+
+<h2><%= @partner.name %></h2>
+<h3>Billing</h3>
+
+<h4>Download</h4>
+<p>
+  <%= link_to download_bill_partner_path(@partner, format: :pdf), class: 'btn btn-lg btn-primary' do %>
+    <span class="bi bi-download"></span> Download bill
+  <% end %>
+</p>
+
+<h4>Send bill</h4>
+<p>
+  This will send an email with details about their bill.
+</p>
+<p>
+  <%= link_to send_bill_partner_path(@partner), class: 'btn btn-lg btn-primary', data: { 'turbo-confirm': 'This will send a bill to the club. Send bill?' } do %>
+    <span class="bi bi-cart4"></span> Send bill
+  <% end %>
+</p>

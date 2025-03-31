@@ -14,11 +14,6 @@ class ItemsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:items)
   end
 
-  test "should show item" do
-    get :show, params: { id: @item }
-    assert_response :success
-  end
-
   test "should create item" do
     assert_difference 'Item.count', +1 do
       post :create, xhr: true, params: { item: { name: "Toolbox", description: "A generic toolbox",

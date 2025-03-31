@@ -1,0 +1,6 @@
+<%= turbo_frame_tag partner, class: 'tr' do %>
+  <span class="td"><%= link_to partner.name, partner_reservations_path(partner), target: '_top' %></span>
+  <span class="td">
+    <%= render "partners/actions", partner: partner %>
+  </span>
+<% end %>

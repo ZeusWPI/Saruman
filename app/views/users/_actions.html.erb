@@ -1,25 +1,17 @@
-<%= link_to scan_user_path(user), target: '_top', class: "btn btn-light btn-sm" do %>
-  <i class="bi bi-upc-scan"></i> Scan
-<% end %>
-
 <% if user.sent %>
-  <%= link_to resend_user_path(user), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
+  <%= link_to resend_partner_user_path(user.partner, user), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
     <i class="bi bi-repeat"></i> Resend login link
   <% end %>
 <% else %>
-  <%= link_to resend_user_path(user), class: 'btn btn-warning btn-sm', data: { 'turbo-method': :post } do %>
+  <%= link_to resend_partner_user_path(user.partner, user), class: 'btn btn-warning btn-sm', data: { 'turbo-method': :post } do %>
     <i class="bi bi-envelope"></i> Send login link
   <% end %>
 <% end %>
 
-<%= link_to send_barcode_user_path(user), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
-  <i class="bi bi-upc"></i> Send barcode
-<% end %>
-
-<%= link_to edit_user_path(user), class: "btn btn-secondary btn-sm" do %>
+<%= link_to edit_partner_user_path(user.partner, user), class: "btn btn-secondary btn-sm" do %>
   <i class="bi bi-pencil"></i> Edit
 <% end %>
 
-<%= link_to user_path(user), class: 'btn btn-danger btn-sm', data: {'turbo-confirm': 'Are you sure?', 'turbo-method': :delete} do %>
+<%= link_to partner_user_path(user.partner, user), class: 'btn btn-danger btn-sm', data: {'turbo-confirm': 'Are you sure?', 'turbo-method': :delete} do %>
   <i class="bi bi-trash"></i> Delete
 <% end %>

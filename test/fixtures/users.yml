@@ -4,8 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  authentication_token   :string
-#  barcode                :string
-#  barcode_data           :string
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
@@ -17,16 +15,22 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :string           default("partner")
-#  sent                   :boolean          default(TRUE)
+#  sent                   :boolean          default(FALSE)
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime
 #  updated_at             :datetime
+#  partner_id             :bigint
 #
 # Indexes
 #
 #  index_users_on_authentication_token  (authentication_token)
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_partner_id            (partner_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (partner_id => partners.id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -36,23 +40,23 @@ tom:
   email: silox@zeus.com
   role: admin
 
-vtk:
-  name: VTK
+vtk_user:
+  name: VTK User
   email: vtk@iets.com
   authentication_token: blargh
   role: partner
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  partner: vtk
 
-hilok:
-  name: HILOK
+hilok_user:
+  name: HILOK User
   email: hilok@nogwat.com
   authentication_token: blargh2
   role: partner
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  partner: hilok
 
-vlak:
-  name: VLAK
+vlak_user:
+  name: VLAK User
   email: VLAK@VLAK.VLAK
   authentication_token: sup
   role: partner
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  partner: vlak

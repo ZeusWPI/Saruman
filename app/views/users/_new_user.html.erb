@@ -1,0 +1,3 @@
+<%= turbo_frame_tag("new_user", class: 'tr') do %>
+  <%= render partial: 'form', locals: {object: object, button_name: 'Add user'} %>
+<% end %>
