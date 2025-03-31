@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  include Barcodable
-
   ROLES = %w[admin partner]
 
   acts_as_token_authenticatable
+
+  belongs_to :partner, optional: true
 
   scope :ordered_by_name, -> { order(name: :asc) }
   scope :admins, -> { where(role: 'admin') }
@@ -15,9 +15,7 @@ class User < ApplicationRecord
          :rememberable, :trackable, :validatable,
          :registerable
 
-  has_many :reservations, dependent: :destroy
-
-  validates :name, uniqueness: true, presence: true
+  validates :name, presence: true
 
   before_save do
     self.sent = false if email_changed?
@@ -25,12 +23,8 @@ class User < ApplicationRecord
   end
 
   def send_token
-    PartnerMailer.send_token(self).deliver_now
+    UserMailer.send_token(self).deliver_now
     self.update!(sent: true)
-  end
-
-  def send_barcode
-    PartnerMailer.send_barcode(self).deliver_now
   end
 end
 
@@ -40,8 +34,6 @@ end
 #
 #  id                     :integer          not null, primary key
 #  authentication_token   :string
-#  barcode                :string
-#  barcode_data           :string
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
@@ -53,14 +45,20 @@ end
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :string           default("partner")
-#  sent                   :boolean          default(TRUE)
+#  sent                   :boolean          default(FALSE)
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime
 #  updated_at             :datetime
+#  partner_id             :bigint
 #
 # Indexes
 #
 #  index_users_on_authentication_token  (authentication_token)
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_partner_id            (partner_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (partner_id => partners.id)
 #

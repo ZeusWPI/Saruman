@@ -8,9 +8,6 @@ class ItemsController < ApplicationController
     @items = @items.includes(:reservations)
   end
 
-  def show
-  end
-
   def create
     @item.save
 

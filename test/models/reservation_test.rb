@@ -12,12 +12,16 @@
 #  created_at            :datetime
 #  updated_at            :datetime
 #  item_id               :integer
-#  user_id               :integer
+#  partner_id            :bigint
 #
 # Indexes
 #
-#  index_reservations_on_item_id  (item_id)
-#  index_reservations_on_user_id  (user_id)
+#  index_reservations_on_item_id     (item_id)
+#  index_reservations_on_partner_id  (partner_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (partner_id => partners.id)
 #
 
 require 'test_helper'

@@ -1,9 +1,9 @@
-<% render partial: 'shared/users_subnav' %>
+<% render partial: 'shared/partners_subnav' %>
 
 <h2><%= @partner.name %></h2>
 <h3>Scan</h3>
 
-<%= form_for @scan, url: process_scan_user_path(@partner) do |f| %>
+<%= form_for @scan, url: process_scan_partner_path(@partner) do |f| %>
   <div class="table-responsive">
     <span class="table table-striped">
       <% Item.categories.keys.each do |category| %>

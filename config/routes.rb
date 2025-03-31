@@ -9,12 +9,16 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :users do # Admin resources to display partners
+  resources :users do
     member do
       get 'sign_in', to: 'sign_in#sign_in_partner'
-      post :resend
+    end
+  end
+
+  resources :partners do # Admin resources to display partners
+    member do
+      post :send_unsent_tokens
       post :send_barcode
-      get :get_barcode
 
       get :billing
       get :download_bill
@@ -26,6 +30,12 @@ Rails.application.routes.draw do
 
     collection do
       get :excel
+    end
+
+    resources :users do
+      member do
+        post :resend
+      end
     end
 
     resources :reservations do

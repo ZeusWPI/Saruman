@@ -1,0 +1,12 @@
+<% content_for :subnav do %>
+  <div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+      <%= link_to "Reservations", partner_reservations_path(@partner), class: "nav-link p-3" %>
+      <%= link_to "Users", partner_users_path(@partner), class: "nav-link p-3" if can? :crud, User %>
+      <%= link_to "Scan", scan_partner_path(@partner), class: "nav-link p-3" if can? :manage, Partner %>
+      <%= link_to "Order summary", summary_partner_reservations_path(@partner), class: "nav-link p-3" %>
+      <%= link_to "Billing", billing_partner_path(@partner), class: "nav-link p-3" if can? :manage, Partner %>
+    </nav>
+  </div>
+<% end %>
+

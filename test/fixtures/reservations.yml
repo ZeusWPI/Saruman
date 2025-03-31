@@ -12,54 +12,58 @@
 #  created_at            :datetime
 #  updated_at            :datetime
 #  item_id               :integer
-#  user_id               :integer
+#  partner_id            :bigint
 #
 # Indexes
 #
-#  index_reservations_on_item_id  (item_id)
-#  index_reservations_on_user_id  (user_id)
+#  index_reservations_on_item_id     (item_id)
+#  index_reservations_on_partner_id  (partner_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (partner_id => partners.id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 vtk_tent:
   item: tent
-  user: vtk
+  partner: vtk
   count: 1
 
 vtk_tent_unapproved:
   item: tent
-  user: vtk
+  partner: vtk
   count: 1
   status: 0
 
 hilok_tent:
   item: vat
-  user: hilok
+  partner: hilok
   count: 5
   status: 1
 
 vlak_stoel_pending:
   item: stoel
-  user: vlak
+  partner: vlak
   count: 1
   status: 1
 
 vtk_stoel_approved:
   item: stoel
-  user: vtk
+  partner: vtk
   count: 4
   status: 2
 
 vtk_stoel_unapproved:
   item: stoel
-  user: vtk
+  partner: vtk
   count: 4
   status: 0
 
 vtk_vat_approved_picked_up:
   item: vat
-  user: vtk
+  partner: vtk
   count: 4
   picked_up_count: 2
   status: 2

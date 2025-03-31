@@ -1,4 +1,4 @@
-<%= form_tag disapproved_user_reservation_path(@partner, @reservation) do %>
+<%= form_tag disapproved_partner_reservation_path(@partner, @reservation) do %>
   <div class="modal-body">
     <div class="form-group">
       <input type="text" class="form-control <%= 'is-invalid' if @reason_error %>" name="disapprove[reason]" id="disapprove-reason" placeholder="Reason">

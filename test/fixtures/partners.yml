@@ -1,0 +1,27 @@
+vtk:
+  name: VTK
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+
+hilok:
+  name: HILOK
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+
+vlak:
+  name: VLAK
+  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+
+# == Schema Information
+#
+# Table name: partners
+#
+#  id           :bigint           not null, primary key
+#  barcode      :string           not null
+#  barcode_data :string           not null
+#  name         :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_partners_on_name  (name) UNIQUE
+#

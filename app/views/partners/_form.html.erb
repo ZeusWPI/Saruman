@@ -1,0 +1,10 @@
+<%= form_with model: object, html: { style: 'display: contents' } do |f| %>
+  <span class="td">
+    <%= render partial: 'table_field_with_feedback', locals: {
+      f: f, field: :name, field_type: :text_field
+    } %>
+  </span>
+  <span class="td">
+    <%= f.submit button_name, class: 'btn btn-primary' %>
+  </span>
+<% end %>

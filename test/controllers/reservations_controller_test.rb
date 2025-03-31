@@ -5,25 +5,25 @@ class ReservationsControllerTest < ActionController::TestCase
 
   setup do
     @reservation = reservations(:vtk_tent)
-    sign_in users(:vtk)
+    sign_in users(:vtk_user)
   end
 
   test "should get index" do
-    get :index, params: { user_id: users(:vtk) }
+    get :index, params: { partner_id: partners(:vtk) }
 
     assert_response :success
     assert_not_nil assigns(:partner)
   end
 
-  test "shouldnt show other user for partners" do
-    get :index, params: { user_id: users(:hilok) }
+  test "should not show other user for partners" do
+    get :index, params: { partner_id: partners(:hilok) }
     assert_response :redirect
   end
 
   test "should show warning for partners after deadline" do
     Settings.instance.update! deadline: DateTime.now - 1
 
-    get :index, params: { user_id: users(:vtk) }
+    get :index, params: { partner_id: partners(:vtk) }
     assert_response :success
     assert_not_nil assigns(:partner)
     assert_match(/The deadline for reservations/, response.body)
@@ -33,10 +33,10 @@ class ReservationsControllerTest < ActionController::TestCase
   test "dont show warning for admins after deadline" do
     Settings.instance.update! deadline: DateTime.now - 1
 
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
-    get :index, params: { user_id: users(:vtk) }
+    get :index, params: { partner_id: partners(:vtk) }
     assert_response :success
     assert_not_nil assigns(:partner)
     assert_no_match(/The deadline for reservations/, response.body)
@@ -45,7 +45,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test "should create reservation" do
     assert_difference 'Reservation.count', +1 do
-      post :create, xhr: true, params: { user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 } }
+      post :create, xhr: true, params: { partner_id: partners(:vtk), reservation: { item_id: items(:vat), count: 5 } }
     end
 
     assert_response :success
@@ -55,39 +55,39 @@ class ReservationsControllerTest < ActionController::TestCase
     Settings.instance.update! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +0 do
-      post :create, xhr: true, params: { user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 } }
+      post :create, xhr: true, params: { partner_id: partners(:vtk), reservation: { item_id: items(:vat), count: 5 } }
     end
 
     assert_response :found
 
-    ability = Ability.new(users :vtk)
+    ability = Ability.new(users(:vtk_user))
     assert ability.cannot? :create, Reservation
   end
 
   test "admins can edit reservations after deadline" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     Settings.instance.update! deadline: DateTime.now - 1
 
     assert_difference 'Reservation.count', +1 do
-      post :create, xhr: true, params: { user_id: users(:vtk), reservation: { item_id: items(:vat), count: 5 } }
+      post :create, xhr: true, params: { partner_id: partners(:vtk), reservation: { item_id: items(:vat), count: 5 } }
     end
 
     assert_response :success
 
-    ability = Ability.new(users :tom)
+    ability = Ability.new(users(:tom))
     assert ability.can? :create, Reservation
   end
 
   test "should get edit" do
-    get :edit, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+    get :edit, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
 
     assert_response :success
   end
 
   test "should update reservation" do
-    patch :update, xhr: true, params: { user_id: users(:vtk), id: @reservation, reservation: { count: 10 } }
+    patch :update, xhr: true, params: { partner_id: partners(:vtk), id: @reservation, reservation: { count: 10 } }
 
     assert_response :success
     @reservation.reload
@@ -97,10 +97,10 @@ class ReservationsControllerTest < ActionController::TestCase
   test "shouldnt update reservation after deadline" do
     Settings.instance.update! deadline: DateTime.now - 1
 
-    ability = Ability.new(users :vtk)
+    ability = Ability.new(users(:vtk_user))
     assert ability.cannot? :update, @reservation
 
-    patch :update, xhr: true, params: { user_id: users(:vtk), id: @reservation, reservation: { count: 10 } }
+    patch :update, xhr: true, params: { partner_id: partners(:vtk), id: @reservation, reservation: { count: 10 } }
 
     assert_response :found
     @reservation.reload
@@ -109,7 +109,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test "should destroy reservation" do
     assert_difference 'Reservation.count', -1 do
-      get :destroy, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+      get :destroy, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
     end
 
     assert_response :success
@@ -118,28 +118,28 @@ class ReservationsControllerTest < ActionController::TestCase
   test "shouldnt destroy reservation after deadline" do
     Settings.instance.update!(deadline: DateTime.now - 1)
 
-    ability = Ability.new(users :vtk)
+    ability = Ability.new(users(:vtk_user))
     assert ability.cannot? :destroy, @reservation
 
     assert_difference 'Reservation.count', 0 do
-      get :destroy, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+      get :destroy, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
     end
 
     assert_response :redirect
   end
 
   test "should change status" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     assert @reservation.pending?
 
-    get :approve, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+    get :approve, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
     @reservation.reload
     assert_response :success
     assert @reservation.approved?
 
-    post :disapproved, xhr: true, params: { user_id: users(:vtk), id: @reservation.id, disapprove: { reason: "Too many items" } }
+    post :disapproved, xhr: true, params: { partner_id: partners(:vtk), id: @reservation.id, disapprove: { reason: "Too many items" } }
     @reservation.reload
     assert_response :success
     assert @reservation.disapproved?
@@ -147,57 +147,57 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "partners can't approve_all" do
-    post :approve_all, xhr: true, params: { user_id: users(:vtk) }
+    post :approve_all, xhr: true, params: { partner_id: partners(:vtk) }
     assert_response :found
-    assert_not_equal Reservation.where(user_id: users(:vtk)).pending.size, 0
+    assert_not_equal Reservation.where(partner_id: partners(:vtk)).pending.size, 0
   end
 
   test "only admins can approve_all" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
-    post :approve_all, xhr: true, params: { user_id: users(:vtk) }
+    post :approve_all, xhr: true, params: { partner_id: partners(:vtk) }
     assert_response :found
   end
 
   test "approve_all reservations should approve them" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
-    post :approve_all, xhr: true, params: { user_id: users(:vtk) }
-    assert_equal Reservation.where(user_id: users(:vtk)).pending.size, 0
+    post :approve_all, xhr: true, params: { partner_id: partners(:vtk) }
+    assert_equal Reservation.where(partner_id: partners(:vtk)).pending.size, 0
   end
 
   test "partners can't change status" do
-    get :approve, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+    get :approve, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
     assert_response :redirect
   end
 
   test "only admins can change status" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
-    get :approve, xhr: true, params: { user_id: users(:vtk), id: @reservation }
+    get :approve, xhr: true, params: { partner_id: partners(:vtk), id: @reservation }
     assert_response :success
   end
 
   test "add newly approved items to already approved matches" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
-    get :approve, xhr: true, params: { user_id: users(:vtk), id: reservations(:vtk_stoel_unapproved) }
+    get :approve, xhr: true, params: { partner_id: partners(:vtk), id: reservations(:vtk_stoel_unapproved) }
     assert_response :success
     assert_not Reservation.exists? reservations(:vtk_stoel_unapproved).id
     assert_equal reservations(:vtk_stoel_approved).count, 8
   end
 
   test "don't add newly approved items to unapproved matches" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @pending = reservations(:vtk_tent)
     @unapproved = reservations(:vtk_tent_unapproved)
-    get :approve, xhr: true, params: { user_id: users(:vtk), id: @unapproved }
+    get :approve, xhr: true, params: { partner_id: partners(:vtk), id: @unapproved }
     assert_response :success
 
     # Tent remained the same
@@ -213,12 +213,12 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "don't add newly approved items to approved matches from other partners" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_stoel_approved)
     @pending_vlak = reservations(:vlak_stoel_pending)
-    get :approve, xhr: true, params: { user_id: users(:vlak), id: @pending_vlak }
+    get :approve, xhr: true, params: { partner_id: partners(:vlak), id: @pending_vlak }
     assert_response :success
 
     # Tent remained the same
@@ -235,7 +235,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should be able to revert normal pick up" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_stoel_approved)
@@ -246,7 +246,7 @@ class ReservationsControllerTest < ActionController::TestCase
     assert @approved_vtk.picked_up_count == 4
     assert @approved_vtk.count == 4
 
-    get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+    get :revert, params: { partner_id: partners(:vtk), id: @approved_vtk }
     assert_response :redirect
 
     @approved_vtk.reload
@@ -254,7 +254,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should be able to revert forced increasing pick up" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_stoel_approved)
@@ -266,7 +266,7 @@ class ReservationsControllerTest < ActionController::TestCase
     assert @approved_vtk.picked_up_count == 6
     assert @approved_vtk.count == 6
 
-    get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+    get :revert, params: { partner_id: partners(:vtk), id: @approved_vtk }
     assert_response :redirect
 
     @approved_vtk.reload
@@ -275,20 +275,20 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should be able to revert forced new pick up" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_stoel_approved)
 
     assert_difference 'Reservation.count', -1, 'A Reservation should be destroyed' do
-      get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+      get :revert, params: { partner_id: partners(:vtk), id: @approved_vtk }
     end
 
     assert_response :redirect
   end
 
   test "should be able to revert unused return" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_vat_approved_picked_up)
@@ -298,7 +298,7 @@ class ReservationsControllerTest < ActionController::TestCase
     @approved_vtk.reload
     assert @approved_vtk.returned_unused_count == 2
 
-    get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+    get :revert, params: { partner_id: partners(:vtk), id: @approved_vtk }
     assert_response :redirect
 
     @approved_vtk.reload
@@ -306,7 +306,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should be able to revert used return" do
-    sign_out users(:vtk)
+    sign_out users(:vtk_user)
     sign_in users(:tom)
 
     @approved_vtk = reservations(:vtk_vat_approved_picked_up)
@@ -316,7 +316,7 @@ class ReservationsControllerTest < ActionController::TestCase
     @approved_vtk.reload
     assert @approved_vtk.returned_used_count == 2
 
-    get :revert, params: { user_id: users(:vtk), id: @approved_vtk }
+    get :revert, params: { partner_id: partners(:vtk), id: @approved_vtk }
     assert_response :redirect
 
     @approved_vtk.reload

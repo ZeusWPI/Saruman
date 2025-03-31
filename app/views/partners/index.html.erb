@@ -1,0 +1,20 @@
+<h3>Partners</h3>
+
+<%= link_to excel_partners_path(format: :xlsx), class: 'btn btn-light' do %>
+  <i class="bi bi-file-earmark-excel"></i> Export to Excel
+<% end %>
+
+<span class="table">
+  <span class="thead">
+    <span class="tr">
+      <span class="th">Name</span>
+      <span class="th">Actions</span>
+    </span>
+  </span>
+  <span id="partners" class="tbody">
+    <%= render @partners %>
+  </span>
+</span>
+
+<h4>New partner</h4>
+<%= render partial: 'new_partner', locals: {object: Partner.build} %>

@@ -1,4 +1,4 @@
-<% render partial: 'shared/users_subnav' %>
+<% render partial: 'shared/partners_subnav' %>
 
 <h2><%= @partner.name %></h2>
 <h3>Manage reservations</h3>
@@ -6,7 +6,6 @@
 <div class="alert alert-info" role="alert">
   Alle prijzen zijn steeds <strong>exclusief</strong> btw!
 </div>
-
 
 <div class="table-responsive">
   <span class="table table-striped">
@@ -57,8 +56,8 @@
 </div>
 
 <% if can? :manage, :all %>
-  <%= button_to approve_all_user_reservations_path(@partner),
-    class: "btn btn-primary", data: { confirm: "This will approve all pending reservations for this user." }  do %>
+  <%= button_to approve_all_partner_reservations_path(@partner),
+    class: "btn btn-primary", data: { confirm: "This will approve all pending reservations for this partner." }  do %>
     <i class="bi bi-check2-all"></i> Approve all
   <% end %>
 <% end %>

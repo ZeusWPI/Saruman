@@ -22,8 +22,8 @@
   </tr>
   </thead>
   <tbody>
-  <% User.partners.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group('users.id').select('
-                users.*,
+  <% Partner.ordered_by_name.joins(reservations: :item).where(reservations: {status: :approved}).group('partners.id').select('
+                partners.*,
                 SUM(reservations.count) as reserved,
                 SUM(reservations.count * items.price / 100) as total_reserved_price,
                 SUM(reservations.picked_up_count) as picked_up,
@@ -33,7 +33,7 @@
                 SUM((reservations.picked_up_count - reservations.returned_unused_count - reservations.returned_used_count) * items.deposit / 100) as outstanding_deposit
               ').each do |partner| %>
     <tr>
-      <td><%= link_to partner.name, user_reservations_path(partner) %></td>
+      <td><%= link_to partner.name, partner_reservations_path(partner) %></td>
 
       <td class="border-start text-end"><%= partner.reserved %></td>
       <td class="text-end"><%= euro(partner.total_reserved_price) %></td>

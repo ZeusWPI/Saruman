@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
   has_paper_trail only: [:count, :status, :picked_up_count, :returned_unused_count, :returned_used_count]
 
   belongs_to :item
-  belongs_to :user
+  belongs_to :partner
 
   enum :status, %w(disapproved pending approved)
 
@@ -86,7 +86,7 @@ class Reservation < ApplicationRecord
   end
 
   def approve
-    duplicate = self.user.reservations.approved.find_by(item_id: self.item_id)
+    duplicate = self.partner.reservations.approved.find_by(item_id: self.item_id)
     if duplicate.nil?
       self.disapproval_message = nil
       self.status = :approved
@@ -113,10 +113,14 @@ end
 #  created_at            :datetime
 #  updated_at            :datetime
 #  item_id               :integer
-#  user_id               :integer
+#  partner_id            :bigint
 #
 # Indexes
 #
-#  index_reservations_on_item_id  (item_id)
-#  index_reservations_on_user_id  (user_id)
+#  index_reservations_on_item_id     (item_id)
+#  index_reservations_on_partner_id  (partner_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (partner_id => partners.id)
 #

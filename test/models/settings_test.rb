@@ -6,7 +6,7 @@
 #  address                             :string           not null
 #  deadline                            :datetime
 #  email                               :string
-#  event_date                          :date             default(Thu, 29 Feb 2024), not null
+#  event_date                          :date             default(Mon, 31 Mar 2025), not null
 #  event_name                          :string
 #  organisation_name                   :string           default(""), not null
 #  show_pickup_columns_in_reservations :boolean          default(FALSE), not null

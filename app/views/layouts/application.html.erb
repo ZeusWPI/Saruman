@@ -26,13 +26,13 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <% if can? :manage, :all %>
-            <li><%= link_to "Partners", users_path, class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Partners", partners_path, class: "nav-link px-2 text-white" %></li>
             <li><%= link_to "Items", items_path, class: "nav-link px-2 text-white" %></li>
             <li><%= link_to "Scan", scan_path, class: "nav-link px-2 text-white" %></li>
             <li><%= link_to "Report", reports_path, class: "nav-link px-2 text-white" %></li>
             <li><%= link_to "Application settings", setting_path, class: "nav-link px-2 text-white" %></li>
           <% elsif current_user %>
-            <li><%= link_to "Reservations", user_reservations_path(current_user), class: "nav-link px-2 text-white" %></li>
+            <li><%= link_to "Reservations", partner_reservations_path(current_user.partner), class: "nav-link px-2 text-white" %></li>
           <% end %>
         </ul>
 

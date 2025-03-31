@@ -1,0 +1,25 @@
+<%= link_to scan_partner_path(partner), target: '_top', class: "btn btn-light btn-sm" do %>
+  <i class="bi bi-upc-scan"></i> Scan
+<% end %>
+
+<% if partner.all_tokens_sent? %>
+  <%= link_to '#', class: "btn btn-sm btn-light" do %>
+    <i class="bi bi-envelope"></i> All login links sent
+  <% end %>
+<% else %>
+  <%= link_to send_unsent_tokens_partner_path(partner), class: "btn btn-sm btn-warning", data: { 'turbo-method': :post } do %>
+    <i class="bi bi-envelope"></i> Send unsent login links
+  <% end %>
+<% end %>
+
+<%= link_to send_barcode_partner_path(partner), class: 'btn btn-light btn-sm', data: { 'turbo-method': :post } do %>
+  <i class="bi bi-upc"></i> Send barcode
+<% end %>
+
+<%= link_to edit_partner_path(partner), class: "btn btn-secondary btn-sm" do %>
+  <i class="bi bi-pencil"></i> Edit
+<% end %>
+
+<%= link_to partner_path(partner), class: 'btn btn-danger btn-sm', data: {'turbo-confirm': 'Are you sure?', 'turbo-method': :delete} do %>
+  <i class="bi bi-trash"></i> Delete
+<% end %>
