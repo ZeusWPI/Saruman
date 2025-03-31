@@ -38,8 +38,15 @@ At an event, they can pick up the items at a pit by scanning their own barcode w
 
 ### Debug on the server
 * SSH into the server
-* run `docker exec -it saruman-web-1 /bin/bash`
+* run `docker exec -it saruman_web_1 /bin/bash`
 * run `RAILS_ENV=production bundle exec rails console`
+
+### Database backup
+* SSH into the server
+* Exec into the docker container: run `docker exec -it saruman_db_1 /bin/bash`
+* Dump the database: run `pg_dump -U postgres saruman > backup.sql`
+* exit the container: `exit`
+* Copy the file locally: run `docker cp saruman_db_1:/backup.sql backup.sql`
 
 ### Snippets
 
