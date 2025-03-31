@@ -114,6 +114,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    brakeman (7.0.0)
+      racc
     builder (3.3.0)
     cancancan (3.6.1)
     capistrano (3.19.2)
@@ -243,7 +245,7 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
-    puma (6.4.2)
+    puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.12)
@@ -395,6 +397,7 @@ DEPENDENCIES
   barby
   bcrypt_pbkdf
   bootsnap
+  brakeman
   bundler (>= 2.6.6)
   cancancan
   capistrano (~> 3.11)
