@@ -1,14 +1,17 @@
 vtk:
   name: VTK
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode_data: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode: <%= 13.times.map { SecureRandom.random_number(10) }.join %>
 
 hilok:
   name: HILOK
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode_data: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode: <%= 13.times.map { SecureRandom.random_number(10) }.join %>
 
 vlak:
   name: VLAK
-  barcode: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode_data: <%= 12.times.map { SecureRandom.random_number(10) }.join %>
+  barcode: <%= 13.times.map { SecureRandom.random_number(10) }.join %>
 
 # == Schema Information
 #

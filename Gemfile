@@ -89,6 +89,9 @@ group :development do
 
   # Rails 5 goodies
   gem 'listen'
+
+  # Sekjoerity yup yup yup
+  gem 'brakeman', require: false
 end
 
 group :development, :test do
