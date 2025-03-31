@@ -92,6 +92,9 @@ group :development do
 
   # Sekjoerity yup yup yup
   gem 'brakeman', require: false
+
+  # Debug
+  gem 'debug', require: false
 end
 
 group :development, :test do

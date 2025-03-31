@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_31_161856) do
     t.string "event_name"
     t.string "organisation_name", default: "", null: false
     t.boolean "show_pickup_columns_in_reservations", default: false, null: false
-    t.date "event_date", default: "2025-03-31", null: false
+    t.date "event_date", default: "2024-02-29", null: false
     t.string "special_requests_email"
     t.string "address", null: false
   end

@@ -141,6 +141,9 @@ GEM
       railties (>= 6.0.0)
     csv (3.3.2)
     date (3.4.1)
+    debug (1.10.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -406,6 +409,7 @@ DEPENDENCIES
   caxlsx_rails
   chunky_png
   cssbundling-rails (~> 1.1)
+  debug
   devise
   dotenv-rails
   ed25519
