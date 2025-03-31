@@ -14,8 +14,9 @@ class CreateTablePartners < ActiveRecord::Migration[7.1]
     # Add column "partner_id" to users
     add_reference :users, :partner, foreign_key: true, null: true
 
-    # Create a partner for each partner user
-    User.partners.find_each do |user|
+    # Create a partner for each user with reservations
+    # Should be `User.partners`, but for some reason beverages@12urenloop.be has reservations :<
+    User.joins('INNER JOIN reservations ON reservations.user_id = users.id').distinct.find_each do |user|
       partner = Partner.create!(
         name: user.name,
         barcode: user.barcode,
@@ -30,7 +31,7 @@ class CreateTablePartners < ActiveRecord::Migration[7.1]
 
     # Set all reservations to the partner of the user
     Reservation.all.find_each do |reservation|
-      reservation.update!(partner: reservation.user.partner)
+      reservation.update!(partner: User.find(reservation.user_id).partner)
     end
 
     # Remove columns "barcode" and "barcode_data" from users
