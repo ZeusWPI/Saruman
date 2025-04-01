@@ -59,7 +59,7 @@ Rails.application.configure do
   # Mail settings
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtprelay.ugent.be',
+    address: 'king.ugent.be',
     open_timeout: 5,
     read_timeout: 5
   }
