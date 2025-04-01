@@ -59,9 +59,9 @@ Rails.application.configure do
   # Mail settings
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtprelay.ugent.be",
-    port: 25,
-    enable_starttls_auto: false
+    address: 'smtprelay.ugent.be',
+    open_timeout: 5,
+    read_timeout: 5
   }
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'materiaal.12urenloop.be' }
