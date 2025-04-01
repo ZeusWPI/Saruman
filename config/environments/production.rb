@@ -61,7 +61,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'king.ugent.be',
     open_timeout: 5,
-    read_timeout: 5
+    read_timeout: 5,
+    enable_starttls: false,
   }
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'materiaal.12urenloop.be' }
